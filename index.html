@@ -79,13 +79,17 @@
 
 
 
+<meta name="description" content="Gary&apos;s blog,记录_从今天开始">
+<meta name="keywords" content="hexo,hexo-cli,hexo博客,hexo博客个人网站">
 <meta property="og:type" content="website">
 <meta property="og:title" content="yinwk_Gary Blog">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="Gary&apos;s blog,记录_从今天开始">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yinwk_Gary Blog">
+<meta name="twitter:description" content="Gary&apos;s blog,记录_从今天开始">
 
 
 
@@ -385,11 +389,112 @@
 <pre><code>hexo server
 hexo server -p 9977
 </code></pre><blockquote>
-<p>默认的主题风格theme是landscape,假如你想更换,可以通过<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a>进行筛选,筛选之后进行配置,主题配置见下文。</p>
+<p>默认的主题风格theme是landscape,假如你想更换,可以通过<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a>进行筛选,筛选之后进行配置,主题配置见下文</p>
 </blockquote>
-<h1 id="hexo配置"><a href="#hexo配置" class="headerlink" title="hexo配置"></a>hexo配置</h1><blockquote>
+<h1 id="hexo配置"><a href="#hexo配置" class="headerlink" title="hexo配置"></a>hexo配置</h1><ul>
+<li><h4 id="hexo-git配置"><a href="#hexo-git配置" class="headerlink" title="hexo git配置"></a>hexo git配置</h4></li>
+</ul>
+<blockquote>
+<p>要想部署到自己搭建的个人网站github库里面,就要在你自己的本地hexo博客的项目里面,更改根目录底下的_config.yml文件,全局搜索git,更改deploy配置</p>
 </blockquote>
-
+<pre><code>deploy:
+    type: git
+    repo: git@github.com:dreamthen/dreamthen.github.io.git(你的个人网站github库的链接地址,最好使用git:开头的,https:开头的会报错)
+    branch: master(分支名)
+</code></pre><ul>
+<li><h4 id="hexo-theme主题配置"><a href="#hexo-theme主题配置" class="headerlink" title="hexo theme主题配置"></a>hexo theme主题配置</h4></li>
+</ul>
+<blockquote>
+<p>筛选好自己选中的主题之后,就需要在项目里面进行配置更换。首先需要下载远程github库里面的主题项目到项目根目录里面的themes文件夹底下,比如本人用的是next主题的hexo</p>
+</blockquote>
+<pre><code>git clone https://github.com/iissnan/hexo-theme-next.git themes/next
+</code></pre><blockquote>
+<p>随后更改根目录里面的_config.yml文件,全局搜索theme,更改theme配置</p>
+</blockquote>
+<pre><code>theme: next
+</code></pre><blockquote>
+<p>接着选择主题展示的方式,需要在主题的项目目录下,更改_config.yml文件,全局搜索Scheme,更改Scheme配置,比如next主题底下的Scheme配置</p>
+</blockquote>
+<pre><code>scheme:
+    #scheme: Muse
+    scheme: Mist
+    #scheme: Pisces
+    #scheme: Gemini
+</code></pre><ul>
+<li><h4 id="hexo-language语言配置"><a href="#hexo-language语言配置" class="headerlink" title="hexo language语言配置"></a>hexo language语言配置</h4></li>
+</ul>
+<blockquote>
+<p>每个主题的语言都是根据作者的母语来配置的,要想配置开发者自己国家的语言,还是更改项目根目录底下的_config.yml文件,全局搜索language,更改language配置</p>
+</blockquote>
+<pre><code>language: zh-CN
+</code></pre><ul>
+<li><h4 id="hexo-page-页面配置"><a href="#hexo-page-页面配置" class="headerlink" title="hexo page 页面配置"></a>hexo page 页面配置</h4></li>
+</ul>
+<blockquote>
+<p>hexo提供了几个可供筛选的页面,常用的有这么几个：home(首页)、tags(标签)、about(关于我)、archives(档案)和categories(分类),首先要创建页面</p>
+</blockquote>
+<pre><code>hexo new page tags
+hexo new page about
+hexo new page categories
+</code></pre><blockquote>
+<p>接着在主题项目目录下,更改_config.yml文件,全局搜索menu,更改menu配置,当然每个主题的配置不尽相同</p>
+</blockquote>
+<pre><code>menu:
+    home: / || home
+    about: /about/ || user
+    tags: /tags/ || tags
+    categories: /categories/ || th
+    archives: /archives/ || archive
+</code></pre><blockquote>
+<p>随后更改source目录底下创建的页面,以tags为例</p>
+</blockquote>
+<pre><code>----------------------------
+    title: about
+    date: 2018-04-24 17:57:26
+    type: &quot;tags&quot;
+    comments: false
+----------------------------
+</code></pre><ul>
+<li><h4 id="hexo-avatar-头像配置"><a href="#hexo-avatar-头像配置" class="headerlink" title="hexo avatar 头像配置"></a>hexo avatar 头像配置</h4></li>
+</ul>
+<blockquote>
+<p>配置自己个人博客网站的头像,需要更改hexo博客项目底下的_config.yml文件,添加avatar配置</p>
+</blockquote>
+<pre><code>avatar: https://avatars1.githubusercontent.com/u/13704681?s=400&amp;u=bfc4636397a7c4384f63d4836a33d1797cd2c660&amp;v=4(头像url链接)
+</code></pre><ul>
+<li><h4 id="hexo-search-全站搜索配置"><a href="#hexo-search-全站搜索配置" class="headerlink" title="hexo search 全站搜索配置"></a>hexo search 全站搜索配置</h4></li>
+</ul>
+<blockquote>
+<p>假如想要配置自己hexo个人博客网站的全站搜索配置,首先要下载hexo search外部依赖包</p>
+</blockquote>
+<pre><code>npm install hexo-generator-search --save
+npm install hexo-generator-searchdb --save
+</code></pre><blockquote>
+<p>更改hexo博客项目根目录底下的_config.yml文件,添加search配置</p>
+</blockquote>
+<pre><code>search:
+    path: search.xml
+    field: post
+    format: html
+    limit: 10000
+</code></pre><ul>
+<li><h4 id="hexo-new-post-name配置"><a href="#hexo-new-post-name配置" class="headerlink" title="hexo new_post_name配置"></a>hexo new_post_name配置</h4></li>
+</ul>
+<blockquote>
+<p>假如想要更改每一篇博客的文件名称,不再是默认的:title.md的文件名,需要更改hexo博客项目根目录底下的_config.yml文件,更改new_post_name配置</p>
+</blockquote>
+<pre><code>new_post_name: :year-:month-:day-:title.md
+</code></pre><ul>
+<li><h4 id="hexo-其他配置"><a href="#hexo-其他配置" class="headerlink" title="hexo 其他配置"></a>hexo 其他配置</h4></li>
+</ul>
+<blockquote>
+<p>更改hexo博客项目根目录底下的_config.yml文件,更改网站title(标题)、author(作者)、keywords(关键字)、description(描述)配置,比如本人的配置</p>
+</blockquote>
+<pre><code>title: yinwk_Gary Blog
+author: yinwk_Gary
+keywords: hexo,hexo-cli,hexo博客,hexo博客个人网站
+description: Gary&apos;s blog,记录_从今天开始        
+</code></pre>
           
         
       
@@ -464,7 +569,7 @@ hexo server -p 9977
                 alt="yinwk_Gary" />
             
               <p class="site-author-name" itemprop="name">yinwk_Gary</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -487,7 +592,7 @@ hexo server -p 9977
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
