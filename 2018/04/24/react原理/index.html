@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Gary&apos;s blog,记录_从今天开始">
+<meta name="description" content="React原理 React的主体思想:数据驱动。React根据数据的变化,使得View视图rerender,也就是重新渲染。React使用的是jsx(js + xml)语法和虚拟DOM,React引入虚拟DOM,是一件很革新的事情,在React之前,DOM操作十分昂贵,大量的DOM操作耗费了web网站大量的时间,性能比较低。React使用Javascript模拟DOM,使得View进行渲染,当虚拟">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2018-04-24 react原理">
 <meta property="og:url" content="http://yoursite.com/2018/04/24/react原理/index.html">
 <meta property="og:site_name" content="yinwk_Gary Blog">
-<meta property="og:description" content="Gary&apos;s blog,记录_从今天开始">
+<meta property="og:description" content="React原理 React的主体思想:数据驱动。React根据数据的变化,使得View视图rerender,也就是重新渲染。React使用的是jsx(js + xml)语法和虚拟DOM,React引入虚拟DOM,是一件很革新的事情,在React之前,DOM操作十分昂贵,大量的DOM操作耗费了web网站大量的时间,性能比较低。React使用Javascript模拟DOM,使得View进行渲染,当虚拟">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-24T14:55:40.284Z">
+<meta property="og:updated_time" content="2018-04-24T16:26:56.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018-04-24 react原理">
-<meta name="twitter:description" content="Gary&apos;s blog,记录_从今天开始">
+<meta name="twitter:description" content="React原理 React的主体思想:数据驱动。React根据数据的变化,使得View视图rerender,也就是重新渲染。React使用的是jsx(js + xml)语法和虚拟DOM,React引入虚拟DOM,是一件很革新的事情,在React之前,DOM操作十分昂贵,大量的DOM操作耗费了web网站大量的时间,性能比较低。React使用Javascript模拟DOM,使得View进行渲染,当虚拟">
 
 
 
@@ -386,7 +386,10 @@
       
 
       
-        
+        <h1 id="React原理"><a href="#React原理" class="headerlink" title="React原理"></a>React原理</h1><blockquote>
+<p>React的主体思想:数据驱动。React根据数据的变化,使得View视图rerender,也就是重新渲染。React使用的是jsx(js + xml)语法和虚拟DOM,React引入虚拟DOM,是一件很革新的事情,在React之前,DOM操作十分昂贵,大量的DOM操作耗费了web网站大量的时间,性能比较低。React使用Javascript模拟DOM,使得View进行渲染,当虚拟DOM节点发生修改时,React使用diff算法进行比对,一旦发现不同,React虚拟DOM就会从根节点进行rerender,而浏览器实际的DOM操作仅仅是diff部分,尽管每次的虚拟DOM都是从根节点进行刷新,但由于是内存数据,性能很高,而浏览器实际的DOM操作仅仅是diff部分,从而很大程度上提高了web网站的性能。</p>
+</blockquote>
+
       
     </div>
     
@@ -476,8 +479,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -541,6 +553,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React原理"><span class="nav-number">1.</span> <span class="nav-text">React原理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
