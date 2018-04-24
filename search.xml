@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[hexo记录]]></title>
+    <title><![CDATA[2018-04-24 hexo搭建自己的博客]]></title>
     <url>%2F2018%2F04%2F24%2Fhexo%E8%AE%B0%E5%BD%95%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[git建库 首先要先建立一个以dreamthen(我的用户名).github.io结尾的repository,作为hexo托管代码的库,github默认.github.io结尾作为用户的网站二级域名。所以github用户搭建自己的个人网站很容易。 hexo安装 首先要用npm外部依赖包管理工具安装全局命令hexo-cli npm install hexo-cli -g 然后使用hexo初始化博客文件夹,比如blog文件夹 hexo init blog 之后,进入生成的blog文件夹,下载外部依赖包 npm i/npm install 最后启动hexo自身搭建的服务,生成本地的博客网站,默认端口在本地ip地址下的4000端口,假如你不想启动在4000端口,也可使用-p 其他端口号进行配置,比如-p 9977 hexo server hexo server -p 9977 默认的主题风格theme是landscape,假如你想更换,可以通过https://hexo.io/themes/进行筛选,筛选之后进行配置,主题配置见下文。 hexo配置]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
 </search>

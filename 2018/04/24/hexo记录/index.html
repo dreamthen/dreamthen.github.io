@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="hexo," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="git建库 首先要先建立一个以dreamthen(我的用户名).github.io结尾的repository,作为hexo托管代码的库,github默认.github.io结尾作为用户的网站二级域名。所以github用户搭建自己的个人网站很容易。  hexo安装 首先要用npm外部依赖包管理工具安装全局命令hexo-cli  npm install hexo-cli -g  然后使用hexo初始化">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo记录">
+<meta property="og:title" content="2018-04-24 hexo搭建自己的博客">
 <meta property="og:url" content="http://yoursite.com/2018/04/24/hexo记录/index.html">
 <meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="git建库 首先要先建立一个以dreamthen(我的用户名).github.io结尾的repository,作为hexo托管代码的库,github默认.github.io结尾作为用户的网站二级域名。所以github用户搭建自己的个人网站很容易。  hexo安装 首先要用npm外部依赖包管理工具安装全局命令hexo-cli  npm install hexo-cli -g  然后使用hexo初始化">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-24T07:39:58.256Z">
+<meta property="og:updated_time" content="2018-04-24T08:58:02.528Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo记录">
+<meta name="twitter:title" content="2018-04-24 hexo搭建自己的博客">
+<meta name="twitter:description" content="git建库 首先要先建立一个以dreamthen(我的用户名).github.io结尾的repository,作为hexo托管代码的库,github默认.github.io结尾作为用户的网站二级域名。所以github用户搭建自己的个人网站很容易。  hexo安装 首先要用npm外部依赖包管理工具安装全局命令hexo-cli  npm install hexo-cli -g  然后使用hexo初始化">
 
 
 
@@ -122,7 +126,7 @@
 
 
 
-  <title>hexo记录 | yinwk_Gary Blog</title>
+  <title>2018-04-24 hexo搭建自己的博客 | yinwk_Gary Blog</title>
   
 
 
@@ -310,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo记录</h1>
+          <h1 class="post-title" itemprop="name headline">2018-04-24 hexo搭建自己的博客</h1>
         
 
         <div class="post-meta">
@@ -360,7 +364,32 @@
       
 
       
-        
+        <h1 id="git建库"><a href="#git建库" class="headerlink" title="git建库"></a>git建库</h1><blockquote>
+<p>首先要先建立一个以dreamthen(我的用户名).github.io结尾的repository,作为hexo托管代码的库,github默认.github.io结尾作为用户的网站二级域名。所以github用户搭建自己的个人网站很容易。</p>
+</blockquote>
+<h1 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h1><blockquote>
+<p>首先要用npm外部依赖包管理工具安装全局命令hexo-cli</p>
+</blockquote>
+<pre><code>npm install hexo-cli -g
+</code></pre><blockquote>
+<p>然后使用hexo初始化博客文件夹,比如blog文件夹</p>
+</blockquote>
+<pre><code>hexo init blog
+</code></pre><blockquote>
+<p>之后,进入生成的blog文件夹,下载外部依赖包</p>
+</blockquote>
+<pre><code>npm i/npm install
+</code></pre><blockquote>
+<p>最后启动hexo自身搭建的服务,生成本地的博客网站,默认端口在本地ip地址下的4000端口,假如你不想启动在4000端口,也可使用-p 其他端口号进行配置,比如-p 9977   </p>
+</blockquote>
+<pre><code>hexo server
+hexo server -p 9977
+</code></pre><blockquote>
+<p>默认的主题风格theme是landscape,假如你想更换,可以通过<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a>进行筛选,筛选之后进行配置,主题配置见下文。</p>
+</blockquote>
+<h1 id="hexo配置"><a href="#hexo配置" class="headerlink" title="hexo配置"></a>hexo配置</h1><blockquote>
+</blockquote>
+
       
     </div>
     
@@ -374,6 +403,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+        </div>
       
 
       
@@ -428,8 +463,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -457,6 +501,15 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
 
           </nav>
 
@@ -475,6 +528,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git建库"><span class="nav-number">1.</span> <span class="nav-text">git建库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo安装"><span class="nav-number">2.</span> <span class="nav-text">hexo安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo配置"><span class="nav-number">3.</span> <span class="nav-text">hexo配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
