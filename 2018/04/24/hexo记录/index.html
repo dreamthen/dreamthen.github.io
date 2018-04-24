@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="yinwk_Gary Blog">
 <meta property="og:description" content="git建库 首先要先建立一个以dreamthen(我的用户名).github.io结尾的repository,作为hexo托管代码的库,github默认.github.io结尾作为用户的网站二级域名。所以github用户搭建自己的个人网站很容易。  hexo安装 首先要用npm外部依赖包管理工具安装全局命令hexo-cli  npm install hexo-cli -g  然后使用hexo初始化">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-24T10:28:42.203Z">
+<meta property="og:updated_time" content="2018-04-24T12:43:59.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018-04-24 hexo搭建自己的博客">
 <meta name="twitter:description" content="git建库 首先要先建立一个以dreamthen(我的用户名).github.io结尾的repository,作为hexo托管代码的库,github默认.github.io结尾作为用户的网站二级域名。所以github用户搭建自己的个人网站很容易。  hexo安装 首先要用npm外部依赖包管理工具安装全局命令hexo-cli  npm install hexo-cli -g  然后使用hexo初始化">
@@ -490,7 +490,34 @@ npm install hexo-generator-searchdb --save
 author: yinwk_Gary
 keywords: hexo,hexo-cli,hexo博客,hexo博客个人网站
 description: Gary&apos;s blog,记录_从今天开始        
-</code></pre>
+</code></pre><p>#hexo命令</p>
+<blockquote>
+<p>首先建立一篇名为hexo配置的博客</p>
+</blockquote>
+<pre><code>hexo new hexo配置
+</code></pre><blockquote>
+<p>在hexo博客项目source目录底下的_post目录下找到名为hexo配置的博客文件,在里面用markdown进行记录自己的博客,当然可以在hexo server自带的服务器运行监听的情况下,进行添加和修改自己的博客。之后，进行生成静态文件</p>
+</blockquote>
+<pre><code>hexo generate
+</code></pre><blockquote>
+<p>生成静态文件之后,进行部署</p>
+</blockquote>
+<pre><code>hexo deploy
+</code></pre><blockquote>
+<p>生成静态文件和部署可以使用一句命令执行</p>
+</blockquote>
+<pre><code>hexo generate -deploy
+hexo deploy -generate
+</code></pre><blockquote>
+<p>为了防止存在静态文件和缓存,造成没有重新渲染页面的问题,在每一次部署之前,要运行一下清理静态文件和缓存的命令</p>
+</blockquote>
+<pre><code>hexo clean
+hexo generate
+hexo deploy
+</code></pre><blockquote>
+<p>hexo deploy部署之后,根据hexo博客项目根目录底下_config.yml配置文件的deploy git配置,会提交到远程github repository库                     </p>
+</blockquote>
+
       
     </div>
     
