@@ -814,6 +814,355 @@ categories: Javascript数据结构和算法
                 }
             }
         })();
+        
+        //声明一个队列Queue类实例
+        let queue = new Queue();
+        //这里判断队列是否为空
+        //在这里打印:
+        //true
+        console.log(queue.isEmpty());
+        //向队列中添加元素
+        queue.enqueue("Gary");
+        queue.enqueue("Lily");
+        queue.enqueue("Simon");
+        queue.enqueue("Aaron");
+        //这里打印队列添加元素的返回值
+        //在这里打印队列中元素的个数:
+        //5
+        console.log(queue.enqueue("Frank"));
+        //这里判断队列是否为空
+        //在这里打印:
+        //false
+        console.log(queue.isEmpty());
+        //这里打印队列中元素的个数
+        //在这里打印:
+        //5
+        console.log(queue.size());
+        //这里打印队列中列头的元素
+        //在这里打印:
+        //"Gary"
+        console.log(queue.front());
+        //这里打印队列中所有的元素
+        //在这里打印:
+        //Gary,Lily,Simon,Aaron,Frank
+        console.log(queue.print());
+        //这里将队列列头的元素删除
+        //在这里打印列头的元素:
+        //"Gary"
+        console.log(queue.dequeue());
+        queue.dequeue();
+        queue.dequeue();
+        //这里打印队列中元素的个数
+        //在这里打印:
+        //2
+        console.log(queue.size());
+        //这里打印队列中列头的元素
+        //在这里打印:
+        //"Aaron"
+        console.log(queue.front());
+        //将队列清空
+        queue.clear();
+        //这里判断队列是否为空
+        //在这里打印:
+        //true
+        console.log(queue.isEmpty());
+        //这里打印队列中元素的个数
+        //在这里打印:
+        //0
+        console.log(queue.size());
+        
+## 优先队列
+> 队列有时需要根据某些参数进行优先级处理,比如我们乘坐飞机,购买飞机票,分为头等舱、商务舱和经济舱,头等舱的优先级最高,经济舱的优先级最低,所以在进行队列处理时,需要根据优先级进行排列
+    
+    let Queue = (function () {
+        //声明一个可公用的WeakMap的集合变量: queue_mock
+        //为了避免此变量在全局中可以轻易拿到并进行随意修改,在外包一层自执行函数表达式,用函数作用域来保证它在全局中拿不到,且也修改不了
+        let queue_mock = new WeakMap();
+        //声明一个队列优先级类函数
+        //生成队列元素优先级实例
+        class Queue_Prior {
+            constructor(element, prior) {
+                this.element = element;
+                this.prior = prior;
+            }
+        }
+        //声明一个类函数,这里当作队列Queue的类
+        class Queue {
+            constructor() {
+                //在类函数内部通过WeakMap集合变量设置本类,并初始化为空数组
+                queue_mock.set(this, []);
+            }
+            //根据优先级向队列中添加优先级实例元素
+            enqueue(element, prior) {
+                //生成队列优先级实例元素
+                let queue_prior = new Queue_Prior(element, prior),
+                    //获取现状态的队列
+                    queue_arr = queue_mock.get(this),
+                    len = queue_arr.length,
+                    index = 0;
+                //循环现状态的队列,假如队列中存在元素优先级比实例优先级小的,就插入到小优先级队列元素之前
+                while(index < len) {
+                    if(queue_arr[index]["prior"] > queue_prior["prior"]) {
+                        queue_arr.splice(index, 0, queue_prior);
+                        queue_mock.set(this, queue_arr);
+                        return index + 1;
+                    }
+                    index++;
+                }
+                //假如不存在,就直接添加到队列列尾
+                index = queue_arr.push(queue_prior);
+                queue_mock.set(this, queue_arr);
+                return index;   
+            }
+            
+            //对队列列头的元素进行删除
+            dequeue() {
+                let queue_arr = queue_mock.get(this);
+                let queue_index = queue_arr.shift();
+                queue_mock.set(this, queue_arr);
+                return queue_index;
+            }
+            
+            //判断队列是否为空
+            isEmpty() {
+                return queue_mock.get(this).length === 0;
+            }
+            
+            //获取队列中的元素个数
+            size() {
+                return queue_mock.get(this).length;
+            }
+            
+            //对队列进行清空
+            clear() {
+                queue_mock.set(this, []);
+            }
+            
+            //获取队列列头的元素
+            front() {
+                return queue_mock.get(this)[0];
+            }
+            
+            //对队列中的所有的元素进行打印
+            print() {
+                let queue_arr = queue_mock.get(this);
+                let len = queue_arr.length;
+                let queue_toString_arr = [];
+                for(let i = 0; i < len; i++) {
+                    queue_toString_arr.push(queue_arr[i]["element"]);
+                }
+                return queue_toString_arr.toString();
+            }
+        }
+        //返回队列Queue队列
+        return Queue;   
+    })();
+    
+    //声明一个优先队列Queue类实例
+    let queue = new Queue();
+    //这里判断优先队列是否为空
+    //在这里打印:
+    //true
+    console.log(queue.isEmpty());
+    //向优先队列中添加元素
+    queue.enqueue("Gary", 1);
+    queue.enqueue("Lily", 2);
+    queue.enqueue("Simon", 1);
+    queue.enqueue("Aaron", 3);
+    //这里打印优先队列添加元素的返回值
+    //在这里打印优先队列添加元素的位置:
+    //4
+    console.log(queue.enqueue("Frank", 2));
+    //这里判断优先队列是否为空
+    //在这里打印:
+    //false
+    console.log(queue.isEmpty());
+    //这里打印优先队列中元素的个数
+    //在这里打印:
+    //5
+    console.log(queue.size());
+    //这里打印优先队列中列头的元素
+    //在这里打印:
+    //{element: "Gary", prior: 1}
+    console.log(queue.front());
+    //这里打印优先队列中所有的元素
+    //在这里打印:
+    //Gary,Simon,Lily,Frank,Aaron
+    console.log(queue.print());
+    //这里将优先队列列头的元素删除
+    //在这里打印列头的元素:
+    //{element: "Gary", prior: 1}
+    console.log(queue.dequeue());
+    queue.dequeue();
+    queue.dequeue();
+    //这里打印优先队列中元素的个数
+    //在这里打印:
+    //2
+    console.log(queue.size());
+    //这里打印优先队列中列头的元素
+    //在这里打印:
+    //{element: "Frank", prior: 2}
+    console.log(queue.front());
+    //将优先队列清空
+    queue.clear();
+    //这里判断优先队列是否为空
+    //在这里打印:
+    //true
+    console.log(queue.isEmpty());
+    //这里打印优先队列中元素的个数
+    //在这里打印:
+    //0
+    console.log(queue.size());
+
+## 循环队列
+### 使用循环队列解决计算机经典算法 - 击鼓传花
+> 用队列来实现击鼓传花,再合适不过了,给定一个数组以及传递的次数作为函数的参数
+    
+    let Queue = (function () {
+        //声明一个可公用的WeakMap的集合变量: queue_mock
+        //为了避免此变量在全局中可以轻易拿到并进行随意修改,在外包一层自执行函数表达式,用函数作用域来保证它在全局中拿不到,且也修改不了
+        let queue_mock = new WeakMap();
+        //声明一个类函数,这里当作队列Queue的类
+        class Queue {
+            constructor() {
+                //在类函数内部通过WeakMap集合变量设置本类,并初始化为空数组
+                queue_mock.set(this, []);
+            }
+            
+            //向队列末尾中添加新的元素
+            enqueue(element) {
+                let queue_arr = queue_mock.get(this);
+                let queue_index = queue_arr.push(element);
+                queue_mock.set(this, queue_arr);
+                return queue_index;
+            }
+            
+            //将队列列头的元素删除掉
+            dequeue() {
+                let queue_arr = queue_mock.get(this);
+                let queue_item = queue_arr.shift();
+                queue_mock.set(this, queue_arr);
+                return queue_item;
+            }
+            
+            //检测队列是否为空
+            isEmpty() {
+                return queue_mock.get(this).length === 0;
+            }
+            
+            //获取队列中的元素个数
+            size() {
+                return queue_mock.get(this).length;
+            }
+            
+            //对队列进行清空
+            clear() {
+                queue_mock.set(this, []);
+            }
+            
+            //对队列中的所有的元素进行打印
+            print() {
+                return queue_mock.get(this).toString();
+            }
+            
+            //对队列中的所有的元素进行打印
+            front() {
+                return queue_mock.get(this)[0];
+            }
+        }
+        return Queue;
+    })();
+    
+    //击鼓传花函数
+    //@params queueList 数组
+    //@params count 传递的次数
+    function passThePaperFlower(queueList, count) {
+        //声明一个循环队列Queue类的实例
+        let queue = new Queue();
+        //遍历数组,将数组元素添加到队列中
+        for(let i = 0; i < queueList.length; i++) {
+            queue.enqueue(queueList[i]);
+        }
+        //只要队列中的元素大于1,就继续循环
+        while(queue.size() > 1) {
+            //遍历传递的次数,将队列列头的元素(就是击鼓传花中要淘汰的人)删除掉,再添加到队列的列尾
+            for(let j = 0; j < count; j++) {
+                queue.enqueue(queue.dequeue());
+            }
+            //获取到传递完之后,队列列头的元素
+            let queueItem = queue.dequeue();
+            console.log(`${queueItem}被淘汰~`);
+        }
+        //返回队列中仅剩的最后的击鼓传花大赢家
+        return queue.front();
+    }
+    //给定的进行击鼓传花的人
+    let paperFlowerParticipant = ["Gary", "Lily", "Aaron", "Alice", "Simon", "Frank"];
+    //队列中仅剩的最后的击鼓传花大赢家
+    let finallyGet = passThePaperFlower(paperFlowerParticipant, 10);
+    //对最后的击鼓传花大赢家进行打印
+    console.log("最后的赢家是:" + finallyGet);
+    
+# 链表 LinkList
+
+> 前面说了栈和队列简单的顺序数据结构,下面介绍一下最后的顺序数据结构: 链表 LinkList,链表相比于栈和队列的优点在于: 栈和队列会直接对内部元素进行添加、修改以及删除的操作,使得其他内存元素的位置发生改变(其他元素前移或者后移),大量的消耗内存,而链表不会破坏内存元素的位置,假如进行添加、修改以及删除的操作,直接断开中间的一个环节,将这个环节的前一个环节以及后一个环节重连就可以了,生活中也有很多链表的例子: 比如说火车,火车的车厢都是一环连着一环的,和链表差不多
+    
+    let linkList = (function() {
+        
+        let head = null,
+            length = 0;
+        
+        class Node {
+            constructor(element) {
+                this.element = element;
+                this.next = null;
+            }
+        }
+        
+        class LinkList {
+            constructor() {
+                   
+            }
+            
+            insert(element) {
+                let current = head,
+                    node = new Node(element);
+                if(!head) {
+                    head = node;
+                } else {
+                    while(current.next) {
+                        current = current.next;
+                    }
+                    current.next = node;                        
+                }
+                length++;
+                return length;
+            }
+            
+            insertAt(element, index) {
+                
+            }
+            
+            remove(element) {
+                
+            }
+            
+            removeAt(element, index) {
+                
+            }
+            
+            indexOf(element) {
+                
+            }
+        }
+        
+        return LinkList;
+    })();
+
+    
+    
+    
+    
     
     
     
