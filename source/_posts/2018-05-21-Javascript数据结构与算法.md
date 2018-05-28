@@ -1108,10 +1108,12 @@ categories: Javascript数据结构和算法
 > 前面说了栈和队列简单的顺序数据结构,下面介绍一下最后的顺序数据结构: 链表 LinkList,链表相比于栈和队列的优点在于: 栈和队列会直接对内部元素进行添加、修改以及删除的操作,使得其他内存元素的位置发生改变(其他元素前移或者后移),大量的消耗内存,而链表不会破坏内存元素的位置,假如进行添加、修改以及删除的操作,直接断开中间的一个环节,将这个环节的前一个环节以及后一个环节重连就可以了,生活中也有很多链表的例子: 比如说火车,火车的车厢都是一环连着一环的,和链表差不多
     
     let linkList = (function() {
-        
+        //定义链表头部的对象为null
+        //定义链表的长度为0
         let head = null,
             length = 0;
         
+        //声明链表元素Node对象的类函数
         class Node {
             constructor(element) {
                 this.element = element;
@@ -1119,11 +1121,13 @@ categories: Javascript数据结构和算法
             }
         }
         
+        //声明链表LinkList对象的类函数
         class LinkList {
             constructor() {
                    
             }
             
+            //向链表中添加链表元素
             insert(element) {
                 let current = head,
                     node = new Node(element);
@@ -1139,23 +1143,98 @@ categories: Javascript数据结构和算法
                 return length;
             }
             
-            insertAt(element, index) {
-                
+            //向链表的指定位置添加链表元素
+            insertAt(element, position) {
+                let current = head,
+                    node = new Node(element),
+                    previous,
+                    index = 0;
+                if(position === 0) {
+                    node.next = current;   
+                    head = node;     
+                } else {
+                    while(index++ < position) {
+                        previous = current;
+                        current = current.next;
+                    }
+                    previous.next = node;
+                    node.next = current;
+                }
+                length++;
+                return position;
             }
             
+            //删除链表中的指定链表元素
             remove(element) {
-                
+                let {indexOf, removeAt} = this;
+                let index = indexOf(element);
+                return removeAt(index);        
             }
             
-            removeAt(element, index) {
-                
+            //删除链表中指定位置的链表元素
+            removeAt(position) {
+                let current = head,
+                    index = 0,
+                    previous;
+                if(position === 0) {
+                    head = current.next;
+                } else {
+                    while(index++ < position) {
+                        previous = current;
+                        current = current.next;
+                    }
+                    previous.next = current.next;
+                }
+                length--;
+                return position;
             }
             
+            //获取链表指定的元素位置
             indexOf(element) {
-                
+                let current = head,
+                    index = 0;
+                while(index++ < length) {
+                    if(current.element === element) {
+                        break;
+                    }
+                    current = current.next;      
+                }
+                return index - 1;
+            }
+            
+            //获取链表的长度
+            size() {
+                return length;
+            }
+            
+            //判断链表是否为空链表
+            isEmpty() {
+                return length === 0;
+            }
+            
+            //打印链表中所有的链表元素
+            toString() {
+                let current = head,
+                    index = 0;
+                while(index++ < length) {
+                    console.log(current.element);
+                    current = current.next;
+                }
+            }
+            
+            //获取链表的头部链表元素
+            headNode() {
+                return head.element;
+            }
+            
+            //将链表清空
+            clear() {
+                head = null;
+                length = 0;
             }
         }
         
+        //返回链表LinkList类函数
         return LinkList;
     })();
 
