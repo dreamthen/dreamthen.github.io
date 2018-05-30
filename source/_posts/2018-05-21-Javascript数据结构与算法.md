@@ -1107,13 +1107,16 @@ categories: Javascript数据结构和算法
 
 > 前面说了栈和队列简单的顺序数据结构,下面介绍一下最后的顺序数据结构: 链表 LinkList,链表相比于栈和队列的优点在于: 栈和队列会直接对内部元素进行添加、修改以及删除的操作,使得其他内存元素的位置发生改变(其他元素前移或者后移),大量的消耗内存,而链表不会破坏内存元素的位置,假如进行添加、修改以及删除的操作,直接断开中间的一个环节,将这个环节的前一个环节以及后一个环节重连就可以了,生活中也有很多链表的例子: 比如说火车,火车的车厢都是一环连着一环的,和链表差不多
     
-    let linkList = (function() {
-        //定义链表头部的对象为null
+    let LinkList = (function() {
+        //定义链表头部的链表元素为null
         //定义链表的长度为0
         let head = null,
             length = 0;
         
         //声明链表元素Node对象的类函数
+        //初始化有两个参数
+        //@param element 现链表元素的值
+        //@param next 用来链接下一个链表元素
         class Node {
             constructor(element) {
                 this.element = element;
@@ -1149,19 +1152,23 @@ categories: Javascript数据结构和算法
                     node = new Node(element),
                     previous,
                     index = 0;
-                if(position === 0) {
-                    node.next = current;   
-                    head = node;     
-                } else {
-                    while(index++ < position) {
-                        previous = current;
-                        current = current.next;
+                if(position >= 0 && position < length) {
+                    if(position === 0) {
+                        node.next = current;   
+                        head = node;     
+                    } else {
+                        while(index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        previous.next = node;
+                        node.next = current;
                     }
-                    previous.next = node;
-                    node.next = current;
+                    length++;
+                    return position;
+                } else {
+                    return false;
                 }
-                length++;
-                return position;
             }
             
             //删除链表中的指定链表元素
@@ -1176,17 +1183,21 @@ categories: Javascript数据结构和算法
                 let current = head,
                     index = 0,
                     previous;
-                if(position === 0) {
-                    head = current.next;
-                } else {
-                    while(index++ < position) {
-                        previous = current;
-                        current = current.next;
+                if(position >= 0 && position < length) {
+                    if(position === 0) {
+                        head = current.next;
+                    } else {
+                        while(index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        previous.next = current.next;
                     }
-                    previous.next = current.next;
+                    length--;
+                    return position;
+                } else {
+                    return false;
                 }
-                length--;
-                return position;
             }
             
             //获取链表指定的元素位置
@@ -1222,9 +1233,18 @@ categories: Javascript数据结构和算法
                 }
             }
             
+            //获取链表中所有的链表结构
+            valueOf() {
+                if(head) {
+                    return head;
+                } else {
+                    return null;
+                }
+            }
+            
             //获取链表的头部链表元素
             headNode() {
-                return head.element;
+                return head ? head.element : null;
             }
             
             //将链表清空
@@ -1237,7 +1257,380 @@ categories: Javascript数据结构和算法
         //返回链表LinkList类函数
         return LinkList;
     })();
+    
+    //声明链表类函数的实例
+    let link_list = new LinkList();
+    //这里判断链表是否是空链表
+    //在这里打印:
+    //true
+    console.log(link_list.isEmpty());
+    //这里获取链表的长度
+    //在这里打印:
+    //0
+    console.log(link_list.size());
+    //这里打印链表元素的数量:
+    //在这里打印:
+    //1
+    console.log(link_list.insert(104));
+    link_list.insert(99);
+    link_list.insert(155);
+    link_list.insert(34);
+    link_list.insert(16);
+    //这里判断链表是否是空链表
+    //在这里打印:
+    //false
+    console.log(link_list.isEmpty());
+    //这里获取链表的长度
+    //在这里打印:
+    //5
+    console.log(link_list.size());
+    //这里打印链表中所有的链表元素
+    //在这里打印:
+    //104
+    //99
+    //155
+    //34
+    //16
+    link_list.toString();
+    //这里获取链表的头部链表元素
+    //在这里打印:
+    //104
+    console.log(link_list.headNode());
+    //这里在链表下标为2处插入链表元素
+    //在这里打印:
+    //2
+    console.log(link_list.insert(88, 2));
+    //这里打印链表中所有的链表元素
+    //在这里打印:
+    //104
+    //99
+    //88
+    //155
+    //34
+    //16
+    link_list.toString();
+    //这里打印链表中所有的链表结构
+    //在这里打印:
+    //{element: 104, next: {element: 99, next: {element: 88, next: {element: 155, next: {element: 34, next: {element: 16, next: null}}}}}}
+    console.log(link_list.valueOf());
+    //这里删除链表下标为3处的链表元素
+    //在这里打印:
+    //3
+    console.log(link_list.removeAt(3));
+    link_list.removeAt(4);
+    //这里打印链表中所有的链表元素
+    //在这里打印:
+    //104
+    //99
+    //88
+    //34
+    link_list.toString();
+    //这里删除链表中链表元素为88的链表元素
+    //在这里打印:
+    //2
+    console.log(link_list.remove(88));
+    //这里打印链表中所有的链表元素
+    //在这里打印:
+    //104
+    //99
+    //34
+    link_list.toString();
+    //这里打印链表中的头部链表元素
+    //在这里打印:
+    //104
+    console.log(link_list.headNode());
+    link_list.clear();
+    //这里判断链表是否是空链表
+    //在这里打印:
+    //true
+    console.log(link_list.isEmpty());
+    //这里获取链表的长度
+    //在这里打印:
+    //0
+    console.log(link_list.size());
+    
+## 双向链表 DoublyLinkList
 
+> 双向链表和单向链表的模式,唯一的区别: 双向链表多出了一个尾部链表元素,且链表元素类实例不仅仅有next属性,还有prev属性,next指向下一个链表元素,prev指向上一个链表元素
+
+    let DoublyLinkList = (function () {
+        //定义链表头部的链表元素为null
+        //定义链表尾部的链表元素为null
+        //定义链表的长度为0
+        let head = null,
+            tail = null,
+            length = 0;
+        
+        //声明链表元素Node对象的类函数
+        //初始化有三个参数
+        //@param element 现链表元素的值
+        //@param next 用来链接下一个链表元素
+        //@param prev 用来链接上一个链表元素
+        class Node {
+            constructor(element) {
+                this.element = element;
+                this.next = null;
+                this.prev = null;
+            }
+        }
+        
+        //声明双向链表DoublyLinkList对象的类函数
+        class DoublyLinkList {
+            constructor() {
+                
+            }
+            
+            //向链表中添加链表元素
+            insert(element) {
+                let current = head,
+                    node = new Node(element);
+                if(!head) {
+                    head = node;
+                    tail = node;        
+                } else {
+                    while(current.next) {
+                        current = current.next;
+                    }
+                    current.next = node;
+                    node.prev = current;
+                    tail = node;
+                }
+                length++;
+                return length;
+            }
+            
+            //向链表的指定位置添加链表元素
+            insertAt(element, position) {
+                let current = head,
+                    previous,
+                    index = 0,
+                    node = new Node(element);
+                if(position >= 0 && position < length) {
+                    if(position === 0) {
+                        if(!head) {
+                            head = node;
+                            tail = node;
+                        } else {
+                            head = node;
+                            head.next = current;
+                            current.prev = head;
+                        }
+                    } else if(position === length - 1) {
+                        current = tail;
+                        tail = node;
+                        tail.prev = current;
+                        current.next = tail; 
+                    } else {
+                        while(index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        previous.next = node;
+                        node.prev = previous;
+                        node.next = current;
+                        current.prev = node;
+                    }
+                } else {
+                    return false;
+                }
+                length++;
+                return position;
+            }
+            
+            //删除链表中指定位置的链表元素
+            removeAt(position) {
+                let current = head,
+                    previous,
+                    index = 0;
+                if(position >= 0 && position < length) {
+                    if(position === 0) {
+                         if(length === 1) {
+                            head = null;
+                            tail = null;
+                         } else {
+                            head = current.next;
+                            head.prev = null;
+                         }
+                    } else if(position === length - 1) {
+                         current = tail;
+                         tail = current.prev;
+                         tail.next = null;
+                    } else {
+                         while(index++ < position) {
+                            previous = current;
+                            current = current.next;
+                         }
+                         previous.next = current.next;
+                         current.next.prev = previous;
+                    }
+                } else {
+                    return false;
+                }
+                length--;
+                return position;
+            }
+            
+            //获取链表指定的元素位置
+            indexOf(element) {
+                let current = head,
+                    index = 0;
+                while(index++ < length) {
+                    if(current.element === element) {
+                        break;
+                    }
+                    current = current.next;
+                }
+                return index - 1;
+            }
+            
+            //删除链表中的指定链表元素
+            remove(element) {
+                let {indexOf, removeAt} = this;
+                let index = indexOf(element);
+                return removeAt(index);
+            }
+            
+            //获取链表的长度
+            size() {
+                return length;
+            }
+            
+            //判断链表是否为空数组
+            isEmpty() {
+                return length === 0;
+            }
+            
+            //打印链表中所有的链表元素
+            toString() {
+                let current = head,
+                    index = 0,
+                    result_str = "";
+                while(index++ < length) {
+                    result_str += `${current.element}~|`;
+                    current = current.next;
+                }
+                return result_str;
+            }
+            
+            //获取链表中所有的链表结构
+            valueOf() {
+                if(head) {
+                    return head; 
+                } else {
+                    return null;
+                }
+            }
+            
+            //将链表清空
+            clear() {
+                head = null;
+                tail = null;
+                length = 0;
+            }
+            
+            //获取链表的头部链表元素
+            headNode() {
+                return head ? head.element : null;
+            }
+            
+            //获取链表的尾部链表元素
+            tailNode() {
+                return tail ? tail.element : null;
+            }
+        }
+        
+        //返回双向链表DoublyLinkList类函数
+        return DoublyLinkList;
+    })();
+    
+    let doubly_link = new DoublyLinkList();
+    //这里打印链表是否为空链表
+    //在这里打印:
+    //true
+    console.log(doubly_link.isEmpty());
+    //这里打印链表的长度
+    //在这里打印:
+    //0
+    console.log(doubly_link.size());
+    //这里打印插入新的链表元素后链表的长度
+    //在这里打印:
+    //1
+    console.log(doubly_link.insert(111));
+    doubly_link.insert(88);
+    doubly_link.insert(99);
+    doubly_link.insert(77);
+    doubly_link.insert(222);
+    //这里打印链表是否为空链表
+    //在这里打印:
+    //false
+    console.log(doubly_link.isEmpty());
+    //这里打印链表的长度
+    //在这里打印:
+    //5
+    console.log(doubly_link.size());
+    //这里打印链表的头部链表元素
+    //在这里打印:
+    //111
+    console.log(doubly_link.headNode());
+    //这里打印链表的尾部链表元素
+    //在这里打印:
+    //222
+    console.log(doubly_link.tailNode());
+    //这里打印链表的所有链表元素
+    //在这里打印:
+    //111~|88~|99~|77~|222~|
+    console.log(doubly_link.toString());
+    //这里打印链表的所有链表结构
+    //在这里打印:
+    //{prev: null, element: 111, next: {prev: {//上一个链表元素 ...}, element: 88, next: {prev: {//上一个链表元素 ...}, element: 99, next: {prev: {//上一个链表元素 ...}, element: 77, next: {//上一个链表元素 ...}, element: 222, next: null}}}}}
+    console.log(doubly_link.valueOf());
+    //这里打印插入到3号位置的新的链表元素的下标位置
+    //在这里打印:
+    //3
+    console.log(doubly_link.insertAt(66, 3));
+    //这里打印链表的所有链表元素
+    //在这里打印:
+    //111~|88~|99~|66~|77~|222~|
+    console.log(doubly_link.toString());
+    //这里打印链表的所有链表结构
+    //在这里打印:
+    //{prev: null, element: 111, next: {prev: {//上一个链表元素 ...}, element: 88, next: {prev: {//上一个链表元素 ...}, element: 99, next: {prev: {//上一个链表元素 ...}, element: 66, next: {prev: {//上一个链表元素 ...}, element: 77, next: {//上一个链表元素 ...}, element: 222, next: null}}}}}}
+    console.log(doubly_link.valueOf());
+    //这里打印删除4号位置的链表元素的下标位置
+    //在这里打印:
+    //4
+    console.log(doubly_link.removeAt(4));
+    doubly_link.removeAt(0);
+    //这里打印删除指定的链表元素的下标位置
+    //在这里打印:
+    //2
+    doubly_link.remove(66);
+    //这里打印链表的所有链表元素
+    //在这里打印:
+    //88~|99~|222~|
+    console.log(doubly_link.toString());
+    //这里打印链表的所有链表结构
+    //在这里打印:
+    //{prev: null, element: 88, next: {prev: {//上一个链表元素 ...}, element: 99, next: {prev: {//上一个链表元素 ...}, element: 222, next: null}}}
+    console.log(doubly_link.valueOf());
+    //这里打印链表的头部链表元素
+    //在这里打印:
+    //88
+    console.log(doubly_link.headNode());
+    //这里打印链表的尾部链表元素
+    //在这里打印:
+    //222
+    console.log(doubly_link.tailNode());
+    doubly_link.clear();
+    //这里打印链表是否为空链表
+    //在这里打印:
+    //true
+    console.log(doubly_link.isEmpty());
+    //这里打印链表的长度
+    //在这里打印:
+    //0
+    console.log(doubly_link.size());
+    
     
     
     
