@@ -2168,7 +2168,7 @@ categories: Javascript数据结构和算法
                 let hash_key = 13,
                     result_index = 0;
                 for(let i = 0; i < key.length; i++) {
-                    result_index += i * hash_key + key.charCodeAt(key[i]);
+                    result_index += i * hash_key + key.charCodeAt(i);
                 }
                 return result_index % 37;
             }
@@ -2247,19 +2247,19 @@ categories: Javascript数据结构和算法
     hash_table.put("Martin", "martin@gmail.com");
     //这里获取散列表指定的散列表项
     //在这里打印:
-    //aaron@gmail.com
+    //tommy@gmail.com
     console.log(hash_table.get("Aaron"));
     //这里获取散列表指定的散列表项
     //在这里打印:
-    //tommy@gmail.com
+    //tom@gmail.com
     console.log(hash_table.get("Tom"));
     //这里获取散列表拥有值的字符串项
     //在这里打印:
-    //helen@gmail.com -> aaron@gmail.com -> lily@gmail.com -> betty@gmail.com -> simon@gmail.com -> martin@gmail.com -> gary@gmail.com -> tommy@gmail.com -> frank@gmail.com -> 
+    //martin@gmail.com -> lily@gmail.com -> tom@gmail.com -> alice@gmail.com -> simon@gmail.com -> betty@gmail.com -> helen@gmail.com -> tommy@gmail.com -> frank@gmail.com -> 
     console.log(hash_table.toString());
     //这里获取散列表的具体结构
     //在这里打印:
-    //[empty × 9, "helen@gmail.com", empty, "aaron@gmail.com", "lily@gmail.com", empty × 3, "betty@gmail.com", empty × 10, "simon@gmail.com", "martin@gmail.com", "gary@gmail.com", empty × 2, "tommy@gmail.com", empty × 3, "frank@gmail.com"]
+    //["martin@gmail.com", empty × 6, "lily@gmail.com", empty × 2, "tom@gmail.com", empty × 5, "alice@gmail.com", empty × 2, "simon@gmail.com", empty, "betty@gmail.com", empty × 8, "helen@gmail.com", empty × 4, "tommy@gmail.com", "frank@gmail.com"]
     console.log(hash_table.valueOf());
     //这里删除散列表中指定的散列表项
     //在这里打印:
@@ -2272,14 +2272,14 @@ categories: Javascript数据结构和算法
     console.log(hash_table.get("Tom"));
     //这里获取散列表拥有值的字符串项
     //在这里打印:
-    //helen@gmail.com -> lily@gmail.com -> betty@gmail.com -> simon@gmail.com -> martin@gmail.com -> gary@gmail.com -> frank@gmail.com ->
+    //martin@gmail.com -> lily@gmail.com -> alice@gmail.com -> simon@gmail.com -> betty@gmail.com -> helen@gmail.com -> frank@gmail.com -> 
     console.log(hash_table.toString());
     //这里获取散列表的具体结构
     //在这里打印:
-    //[empty × 9, "helen@gmail.com", empty, undefined, "lily@gmail.com", empty × 3, "betty@gmail.com", empty × 10, "simon@gmail.com", "martin@gmail.com", "gary@gmail.com", empty × 2, undefined, empty × 3, "frank@gmail.com"]
+    //["martin@gmail.com", empty × 6, "lily@gmail.com", empty × 2, undefined, empty × 5, "alice@gmail.com", empty × 2, "simon@gmail.com", empty, "betty@gmail.com", empty × 8, "helen@gmail.com", empty × 4, undefined, "frank@gmail.com"]
     console.log(hash_table.valueOf());
 
-> 不知道你们注意到了没,有一些散列表项被覆盖了,比如说key属性为Tom的散列表项的value属性值竟然是tommy@gmail.com,再比如说我将key属性为Tom的散列表项删除掉,key属性为Tommy的散列表项也消失了,变为了undefined,说明key属性为Tommy和key属性为Tom的散列表项经过loseLose算法解析散列表项后是同一个散列表项,所以散列表项被覆盖了,所以用单纯的用HashTable是不适当的,要解决这个比较显著的问题,有两种解决方式:链表查询以及散列表巡航迭代
+> 不知道你们注意到了没,有一些散列表项被覆盖了,比如说key属性为Aaron的散列表项的value属性值竟然是tommy@gmail.com,再比如说我将key属性为Aaron的散列表项删除掉,key属性为Tommy的散列表项也消失了,变为了undefined,说明key属性为Tommy和key属性为Aaron的散列表项经过loseLose算法解析散列表项后是同一个散列表项,所以散列表项被覆盖了,所以用单纯的用HashTable是不适当的,要解决这个比较显著的问题,有两种解决方式:链表查询以及散列表巡航迭代
 
 ## 链表查询
 > 链表查询就是用链表来作为散列表项,假如已经存在loseLose算法解析散列表项后的散列表项,就添加到此位置链表的最后,这样的话就不会发生覆盖的事情了,下面我们就用链表查询来解决散列表项覆盖的问题吧
@@ -2554,7 +2554,7 @@ categories: Javascript数据结构和算法
                 let hash_key = 13,
                     index = 0;
                 for(let i = 0; i < key.length; i++) {
-                    index += i * hash_key + key.charCodeAt(key[i]);
+                    index += i * hash_key + key.charCodeAt(i);
                 }
                 return index % 37;
             }
@@ -2673,11 +2673,11 @@ categories: Javascript数据结构和算法
     console.log(hash_table.get("Tom"));
     //这里获取散列表链表查询拥有值的字符串项
     //在这里打印:
-    //{key: Helen, value: helen@gmail.com} =>  -> {key: Alice, value: alice@gmail.com} => {key: Aaron, value: aaron@gmail.com} =>  -> {key: Lily, value: lily@gmail.com} =>  -> {key: Betty, value: betty@gmail.com} =>  -> {key: Simon, value: simon@gmail.com} =>  -> {key: Martin, value: martin@gmail.com} =>  -> {key: Gary, value: gary@gmail.com} =>  -> {key: Tom, value: tom@gmail.com} => {key: Tommy, value: tommy@gmail.com} =>  -> {key: Frank, value: frank@gmail.com} =>  -> 
+    //{key: Gary, value: gary@gmail.com} => {key: Martin, value: martin@gmail.com} =>  -> {key: Lily, value: lily@gmail.com} =>  -> {key: Tom, value: tom@gmail.com} =>  -> {key: Alice, value: alice@gmail.com} =>  -> {key: Simon, value: simon@gmail.com} =>  -> {key: Betty, value: betty@gmail.com} =>  -> {key: Helen, value: helen@gmail.com} =>  -> {key: Aaron, value: aaron@gmail.com} => {key: Tommy, value: tommy@gmail.com} =>  -> {key: Frank, value: frank@gmail.com} =>  -> 
     console.log(hash_table.toString());
     //这里获取散列表链表查询的具体结构
     //在这里打印:
-    //[empty × 9, LinkList, empty, LinkList, LinkList, empty × 3, LinkList, empty × 10, LinkList, LinkList, LinkList, empty × 2, LinkList, empty × 3, LinkList]
+    //[LinkList, empty × 6, LinkList, empty × 2, LinkList, empty × 5, LinkList, empty × 2, LinkList, empty, LinkList, empty × 8, LinkList, empty × 4, LinkList, LinkList]
     console.log(hash_table.valueOf());
     //这里删除散列表中指定的散列表链表查询项
     //在这里打印:
@@ -2691,11 +2691,11 @@ categories: Javascript数据结构和算法
     console.log(hash_table.get("Tom"));
     //这里获取散列表链表查询拥有值的字符串项
     //在这里打印:
-    //{key: Helen, value: helen@gmail.com} =>  -> {key: Alice, value: alice@gmail.com} =>  -> {key: Lily, value: lily@gmail.com} =>  -> {key: Betty, value: betty@gmail.com} =>  -> {key: Simon, value: simon@gmail.com} =>  -> {key: Martin, value: martin@gmail.com} =>  -> {key: Gary, value: gary@gmail.com} =>  -> {key: Frank, value: frank@gmail.com} =>  -> 
+    //{key: Gary, value: gary@gmail.com} => {key: Martin, value: martin@gmail.com} =>  -> {key: Lily, value: lily@gmail.com} =>  -> {key: Alice, value: alice@gmail.com} =>  -> {key: Simon, value: simon@gmail.com} =>  -> {key: Betty, value: betty@gmail.com} =>  -> {key: Helen, value: helen@gmail.com} =>  -> {key: Frank, value: frank@gmail.com} =>  ->
     console.log(hash_table.toString());
     //这里获取散列表链表查询的具体结构
     //在这里打印:
-    //[empty × 9, LinkList, empty, LinkList, LinkList, empty × 3, LinkList, empty × 10, LinkList, LinkList, LinkList, empty × 2, undefined, empty × 3, LinkList]
+    //[LinkList, empty × 6, LinkList, empty × 2, undefined, empty × 5, LinkList, empty × 2, LinkList, empty, LinkList, empty × 8, LinkList, empty × 4, undefined, LinkList]
     console.log(hash_table.valueOf());
 
 ## 散列表巡航迭代
@@ -2729,7 +2729,7 @@ categories: Javascript数据结构和算法
                 let hash_key = 13,
                     index = 0;
                 for(let i = 0; i < key.length; i++) {
-                    index += i * hash_key + key.charCodeAt(key[i]);
+                    index += i * hash_key + key.charCodeAt(i);
                 }
                 return index % 37;
             }
@@ -2842,11 +2842,11 @@ categories: Javascript数据结构和算法
     console.log(hash_table.get("Tom"));
     //这里获取散列表巡航迭代拥有值的字符串项
     //在这里打印:
-    //{key: Helen, value: helen@gmail.com} -> {key: Alice, value: alice@gmail.com} -> {key: Lily, value: lily@gmail.com} -> {key: Aaron, value: aaron@gmail.com} -> {key: Betty, value: betty@gmail.com} -> {key: Simon, value: simon@gmail.com} -> {key: Martin, value: martin@gmail.com} -> {key: Gary, value: gary@gmail.com} -> {key: Tom, value: tom@gmail.com} -> {key: Tommy, value: tommy@gmail.com} -> {key: Frank, value: frank@gmail.com} ->
+    //{key: Gary, value: gary@gmail.com} -> {key: Martin, value: martin@gmail.com} -> {key: Lily, value: lily@gmail.com} -> {key: Tom, value: tom@gmail.com} -> {key: Alice, value: alice@gmail.com} -> {key: Simon, value: simon@gmail.com} -> {key: Betty, value: betty@gmail.com} -> {key: Helen, value: helen@gmail.com} -> {key: Aaron, value: aaron@gmail.com} -> {key: Tommy, value: tommy@gmail.com} -> {key: Frank, value: frank@gmail.com} -> 
     console.log(hash_table.toString());
     //这里获取散列表巡航迭代的具体结构
     //在这里打印:
-    //[empty × 9, Node, empty, Node, Node, Node, empty × 2, Node, empty × 10, Node, Node, Node, empty × 2, Node, Node, empty × 2, Node]
+    //[Node, Node, empty × 5, Node, empty × 2, Node, empty × 5, Node, empty × 2, Node, empty, Node, empty × 8, Node, empty × 4, Node, Node, Node]
     console.log(hash_table.valueOf());
     //这里删除散列表中指定的散列表巡航迭代项
     //在这里打印:
@@ -2859,12 +2859,814 @@ categories: Javascript数据结构和算法
     console.log(hash_table.get("Tom"));
     //这里获取散列表巡航迭代拥有值的字符串项
     //在这里打印:
-    //{key: Helen, value: helen@gmail.com} -> {key: Alice, value: alice@gmail.com} -> {key: Lily, value: lily@gmail.com} -> {key: Betty, value: betty@gmail.com} -> {key: Simon, value: simon@gmail.com} -> {key: Martin, value: martin@gmail.com} -> {key: Gary, value: gary@gmail.com} -> {key: Tommy, value: tommy@gmail.com} -> {key: Frank, value: frank@gmail.com} -> 
+    //{key: Gary, value: gary@gmail.com} -> {key: Martin, value: martin@gmail.com} -> {key: Lily, value: lily@gmail.com} -> {key: Alice, value: alice@gmail.com} -> {key: Simon, value: simon@gmail.com} -> {key: Betty, value: betty@gmail.com} -> {key: Helen, value: helen@gmail.com} -> {key: Tommy, value: tommy@gmail.com} -> {key: Frank, value: frank@gmail.com} -> 
     console.log(hash_table.toString());
     //这里获取散列表巡航迭代的具体结构
     //在这里打印:
-    //[empty × 9, Node, empty, Node, Node, undefined, empty × 2, Node, empty × 10, Node, Node, Node, empty × 2, undefined, Node, empty × 2, Node]
+    //[Node, Node, empty × 5, Node, empty × 2, undefined, empty × 5, Node, empty × 2, Node, empty, Node, empty × 8, Node, empty × 4, undefined, Node, Node]
     console.log(hash_table.valueOf());
+
+ ## djb2算法解决一切问题
+ > 还有一种既不使用链表查询,也不使用巡航迭代的方法,那就是展示散列表更广的djb2算法,使用djb2算法就可以直接解决loseLose算法解析后散列表项覆盖的问题,下面我们就用djb2算法来解决散列表项覆盖的问题吧
+
+    let HashTable = (function() {
+        //设置散列表的容器,并初始化为空数组[]
+        let hash_table = new WeakMap();
+
+        //设置散列表类
+        class HashTable {
+            constructor() {
+                hash_table.set(this, []);
+            }
+
+            //定义设计散列表的算法为djb2算法
+            //djb2算法和loseLose算法相近,都是定义一个质数(数值比较大的质数)乘以属性的每一个字符所在的位置,再加上属性每一个字符所对应的ASCII码值
+            //然后对任何一个质数(数值比较大的质数)取余
+            //最后再返回
+            djb2HashTable(key) {
+                let hash_key = 5381,
+                    index = 0;
+                for(let i = 0; i < key.length; i++) {
+                    index += i * hash_key + key.charCodeAt(i);
+                }
+                return index % 1013;    
+            }
+
+            //在散列表中添加散列表项
+            put(key, value) {
+                const {djb2HashTable} = this;
+                let hashTable = hash_table.get(this),
+                    hash_key = djb2HashTable.bind(this)(key);
+                if(hashTable[hash_key] !== undefined) {
+                    return false;
+                }
+                hashTable[hash_key] = value;
+                return true;
+            }
+
+            //获取散列表指定的散列表项
+            get(key) {
+                const {djb2HashTable} = this;
+                let hashTable = hash_table.get(this),
+                    hash_key = djb2HashTable.bind(this)(key);
+                if(hashTable[hash_key] === undefined) {
+                    return false;
+                }    
+                return hashTable[hash_key];
+            }
+
+            //删除散列表中指定的散列表项
+            remove(key) {
+                const {djb2HashTable} = this;
+                let hashTable = hash_table.get(this),
+                    hash_key = djb2HashTable.bind(this)(key);
+                if(hashTable[hash_key] === undefined) {
+                    return false;
+                }
+                hashTable[hash_key] = undefined;
+                return true;
+            }
+
+            //获取散列表拥有值的字符串项
+            toString() {
+                let hashTable = hash_table.get(this),
+                    result_str = ``;
+                for(let [key, value] of hashTable.entries()) {
+                    if(value !== undefined) {
+                        result_str = `${result_str}${value} -> `;
+                    }
+                }
+                return result_str;
+            }
+
+            //获取散列表的具体结构
+            valueOf() {
+                return hash_table.get(this);
+            }
+        }
+
+        //返回散列表类
+        return HashTable;
+    })();
+
+    let hash_table = new HashTable();
+    //这里在散列表中添加散列表项
+    //在这里打印:
+    //true
+    console.log(hash_table.put("Gary", "gary@gmail.com"));
+    hash_table.put("Helen", "helen@gmail.com");
+    hash_table.put("Lily", "lily@gmail.com");
+    hash_table.put("Alice", "alice@gmail.com");
+    hash_table.put("Simon", "simon@gmail.com");
+    hash_table.put("Aaron", "aaron@gmail.com");
+    hash_table.put("Tom", "tom@gmail.com");
+    hash_table.put("Tommy", "tommy@gmail.com");
+    hash_table.put("Betty", "betty@gmail.com");
+    hash_table.put("Frank", "frank@gmail.com");
+    hash_table.put("Martin", "martin@gmail.com");
+    //这里获取散列表中指定的散列表项
+    //在这里打印:
+    //aaron@gmail.com
+    console.log(hash_table.get("Aaron"));
+    //这里获取散列表中指定的散列表项
+    //在这里打印:
+    //tom@gmail.com
+    console.log(hash_table.get("Tom"));
+    //这里获取散列表拥有值的字符串项
+    //在这里打印:
+    //tom@gmail.com -> gary@gmail.com -> lily@gmail.com -> martin@gmail.com -> alice@gmail.com -> helen@gmail.com -> aaron@gmail.com -> frank@gmail.com -> simon@gmail.com -> betty@gmail.com -> tommy@gmail.com -> 
+    console.log(hash_table.toString());
+    //这里获取散列表的具体结构
+    //在这里打印:
+    //[empty × 239, "tom@gmail.com", empty × 33, "gary@gmail.com", empty × 6, "lily@gmail.com", empty × 13, "martin@gmail.com", empty × 304, "alice@gmail.com", empty × 13, "helen@gmail.com", empty × 4, "aaron@gmail.com", "frank@gmail.com", empty × 19, "simon@gmail.com", empty, "betty@gmail.com", empty × 13, "tommy@gmail.com"]
+    console.log(hash_table.valueOf());
+    //这里删除散列表中指定的散列表项
+    //在这里打印:
+    //true
+    console.log(hash_table.remove("Aaron"));
+    hash_table.remove("Tom");
+    //这里获取散列表中指定的散列表项
+    //在这里打印:
+    //false
+    console.log(hash_table.get("Tom"));
+    //这里获取散列表拥有值的字符串项
+    //在这里打印:
+    //gary@gmail.com -> lily@gmail.com -> martin@gmail.com -> alice@gmail.com -> helen@gmail.com -> frank@gmail.com -> simon@gmail.com -> betty@gmail.com -> tommy@gmail.com -> 
+    console.log(hash_table.toString());
+    //这里获取散列表的具体结构
+    //在这里打印:
+    //[empty × 239, undefined, empty × 33, "gary@gmail.com", empty × 6, "lily@gmail.com", empty × 13, "martin@gmail.com", empty × 304, "alice@gmail.com", empty × 13, "helen@gmail.com", empty × 4, undefined, "frank@gmail.com", empty × 19, "simon@gmail.com", empty, "betty@gmail.com", empty × 13, "tommy@gmail.com"]
+    console.log(hash_table.valueOf());
+
+# 二叉树
+> 这是我们学习的第一种非线性非顺序的数据结构 —— <b>树</b>,后面还会学到更多,比如说<b>图</b>。树只有一个根节点,每一个节点都可能有一个或者多个子节点 —— <b>子叶</b>,今天我们实现的二叉树,每个节点最多只能有两个子叶,left的子叶比其父节点数值小,right的子叶比其父节点数值大,下面我们来介绍一下二叉树
+
+    let Tree = (function () {
+        //设置二叉树的容器,并初始化为null
+        let head = new WeakMap();
+
+        //定义二叉树子叶节点类
+        //@params node
+        //@params left
+        //@params right
+        class Node {
+            constructor(node) {
+                this.node = node;
+                this.left = null;
+                this.right = null;
+            }
+        }
+
+        //定义二叉树类
+        class Tree {
+            constructor() {
+                head.set(this, null);
+            }
+
+            //在二叉树中添加子叶节点
+            insert(node) {
+                const {insertNode} = this;
+                let head_tree = head.get(this);
+                head_tree = insertNode.bind(this)(head_tree, node);
+                head.set(this, head_tree);
+                return true;
+            }
+
+            //二叉树中添加子叶节点执行方法
+            //利用当前的子叶节点和添加的子叶节点数值进行比较
+            //假如小于添加的子叶节点数值,就查询当前子叶节点的右子叶节点
+            //假如大于添加的子叶节点数值,就查询当前子叶节点的左子叶节点
+            //直到查询到节点为null为止,然后添加新的子叶节点
+            insertNode(node, node_key) {
+                const {insertNode} = this;
+                if(!node) {
+                    node = new Node(node_key);
+                } else if(node.node > node_key) {
+                    node.left = insertNode.bind(this)(node.left, node_key);
+                } else {
+                    node.right = insertNode.bind(this)(node.right, node_key);
+                }
+                return node;
+            }
+
+            //在二叉树中删除指定的子叶节点
+            remove(node) {
+                const {removeNode} = this;
+                let head_tree = head.get(this);
+                if(!head_tree) {
+                    return false;
+                }
+                head_tree = removeNode.bind(this)(head_tree, node);
+                head.set(this, head_tree);
+                return true;
+            }
+
+            //二叉树中删除指定的子叶节点执行方法
+            //利用当前的子叶节点和删除的子叶节点数值进行比较
+            //假如小于删除的子叶节点,就查询当前子叶节点的右子叶节点
+            //假如大于删除的子叶节点,就查询当前子叶节点的左子叶节点
+            //直到等于删除的子叶节点数值,分为三种情况
+            //第一种,删除的子叶节点底下没有其左右子叶节点,就直接将删除的子叶节点置为null
+            //第二种,删除的子叶节点底下的左右子叶节点有一边为null,就直接将删除的子叶节点置为左右子叶节点不为null的一边
+            //第三种,删除的子叶节点底下其左右子叶节点都不为null,就直接去查询删除的子叶节点其右子叶节点底下的最小的子叶节点,并将删除的子叶节点的数值置为这个最小的子叶节点的数值,再将删除的子叶节点其右子叶节点底下的最小的子叶节点删除
+            removeNode(node, node_key) {
+                const {removeNode, findTheLeftNode} = this;
+                if(node.node > node_key) {
+                    node.left = removeNode.bind(this)(node.left, node_key);
+                } else if(node.node < node_key){
+                    node.right = removeNode.bind(this)(node.right, node_key);
+                } else {
+                    if(!node.left && !node.right) {
+                        node = null;
+                    } else if (!node.left) {
+                        node = node.right;
+                    } else if (!node.right) {
+                        node = node.left;
+                    } else {
+                        let aux = findTheLeftNode.bind(this)(node.right);
+                        node.node = aux.node;
+                        node.right = removeNode.bind(this)(node.right, aux.node);
+                    }
+                }
+                return node;
+            }
+            
+            //查询子叶节点底下的最小的(最左边的)子叶节点
+            findTheLeftNode(node) {
+                const {findTheLeftNode} = this;
+                if(node.left) {
+                    return findTheLeftNode.bind(this)(node.left);
+                }
+                return node;
+            }
+
+            //在二叉树中获取最小的(最左边的)子叶节点数值
+            min() {
+                const {minNode} = this;
+                let head_tree = head.get(this);
+                console.log("最小的子叶:");
+                return minNode.bind(this)(head_tree).node;
+            }
+
+            //二叉树中获取最小的(最左边的)子叶节点执行方法
+            minNode(node) {
+                const {minNode} = this;
+                if(node.left) {
+                    return minNode.bind(this)(node.left);
+                }
+                return node;
+            }
+
+            //在二叉树中获取最大的(最右边的)子叶节点数值
+            max() {
+                const {maxNode} = this;
+                let head_tree = head.get(this);
+                console.log("最大的子叶:");
+                return maxNode.bind(this)(head_tree).node;
+            }
+
+            //二叉树中获取最大的(最右边的)子叶节点执行方法
+            maxNode(node) {
+                const {maxNode} = this;
+                if(node.right) {
+                    return maxNode.bind(this)(node.right);
+                }
+                return node;
+            }
+
+            //在二叉树获取先序遍历
+            preorderTraversal(method) {
+                const {preorderTraversalNode} = this;
+                let head_tree = head.get(this);
+                console.log("先序遍历:");
+                preorderTraversalNode.bind(this)(head_tree, method);
+            }
+
+            //二叉树先序遍历执行方法
+            preorderTraversalNode(node, method) {
+                const {preorderTraversalNode} = this;
+                if(node) {
+                    method.bind(this)(node);
+                    preorderTraversalNode.bind(this)(node.left, method);
+                    preorderTraversalNode.bind(this)(node.right, method);
+                }
+            }
+
+            //在二叉树中获取中序遍历
+            inorderTraversal(method) {
+                const {inorderTraversalNode} = this;
+                let head_tree = head.get(this);
+                console.log("中序遍历:");
+                inorderTraversalNode.bind(this)(head_tree, method);
+            }
+
+            //二叉树中序遍历执行方法
+            inorderTraversalNode(node, method) {
+                const {inorderTraversalNode} = this;
+                if(node) {
+                    inorderTraversalNode.bind(this)(node.left, method);
+                    method.bind(this)(node);
+                    inorderTraversalNode.bind(this)(node.right, method);
+                }
+            }
+
+            //在二叉树中获取后序遍历
+            postorderTraversal(method) {
+                const {postorderTraversalNode} = this;
+                let head_tree = head.get(this);
+                console.log("后序遍历:");
+                postorderTraversalNode.bind(this)(head_tree, method);
+            }
+
+            //二叉树后序遍历执行方法
+            postorderTraversalNode(node, method) {
+                const {postorderTraversalNode} = this;
+                if(node) {
+                    postorderTraversalNode.bind(this)(node.left, method);
+                    postorderTraversalNode.bind(this)(node.right, method);
+                    method.bind(this)(node);
+                }
+            }
+
+            //在二叉树中获取二叉树的具体结构
+            valueOf() {
+                let head_tree = head.get(this);
+                return head_tree;
+            }
+        }
+
+        //返回二叉树类
+        return Tree;
+    })();
+
+    let tree = new Tree();
+    //这里在二叉树中添加子节点
+    //在这里打印:
+    //true
+    console.log(tree.insert(15));
+    tree.insert(10);
+    tree.insert(18);
+    tree.insert(20);
+    tree.insert(17);
+    tree.insert(16);
+    tree.insert(25);
+    tree.insert(5);
+    tree.insert(8);
+    tree.insert(55);
+    tree.insert(30);
+    tree.insert(35);
+    tree.insert(40);
+    tree.insert(45);
+    tree.insert(50);
+    //这里在二叉树中获取最小的(最左边的)子叶节点数值
+    //在这里打印:
+    //最小的子叶:
+    //5
+    console.log(tree.min());
+    //这里在二叉树中获取最大的(最右边的)子叶节点数值
+    //在这里打印:
+    //最大的子叶:
+    //55
+    console.log(tree.max());
+    //这里在二叉树中获取中序遍历
+    //在这里打印:
+    //中序遍历:
+    //5
+    //8
+    //10
+    //15
+    //16
+    //17
+    //18
+    //20
+    //25
+    //30
+    //35
+    //40
+    //45
+    //50
+    //55
+    tree.inorderTraversal((node)=>{
+        console.log(node.node);
+    });
+    //这里在二叉树中获取先序遍历
+    //在这里打印:
+    //先序遍历:
+    //15
+    //10
+    //5
+    //8
+    //18
+    //17
+    //16
+    //20
+    //25
+    //55
+    //30
+    //35
+    //40
+    //45
+    //50
+    tree.preorderTraversal((node)=>{
+        console.log(node.node);
+    });
+    //这里在二叉树中获取后序遍历
+    //在这里打印:
+    //后序遍历:
+    //8
+    //5
+    //10
+    //16
+    //17
+    //50
+    //45
+    //40
+    //35
+    //30
+    //55
+    //25
+    //20
+    //18
+    //15
+    tree.postorderTraversal((node)=>{
+        console.log(node.node);
+    });
+    //这里在二叉树中获取二叉树的具体结构
+    //在这里打印:
+    //Node {node: 15, left: Node, right: Node}
+    console.log(tree.valueOf());
+    //这里在二叉树中删除指定的子叶节点
+    //在这里打印:
+    //true
+    console.log(tree.remove(50));
+    tree.remove(40);
+    tree.remove(15);
+    //这里在二叉树中获取二叉树的具体结构
+    //在这里打印:
+    //Node {node: 16, left: Node, right: Node}
+    console.log(tree.valueOf());
+
+## 平衡二叉树
+> 介绍并封装完了二叉树之后,我们来介绍一下平衡二叉树,其实平衡二叉树就是每一个二叉树上面的节点的平衡因子的绝对值不可以超过1,也就是说-1 <= 平衡因子 <= 1,所谓的平衡因子就是二叉树节点子树节点级数,-1 <= 左子树级数 - 右子树级数 <= 1,下面就让我们来介绍一下平衡二叉树吧
+
+    let AVLTree = (function () {
+        //设置平衡二叉树的容器,并初始化为null
+        let head = new WeakMap();
+
+        //定义平衡二叉树子叶节点类
+        //@params node
+        //@params left
+        //@params right
+        class Node {
+            constructor(node) {
+                this.node = node;
+                this.left = null;
+                this.right = null;
+            }
+        }
+
+        //定义平衡二叉树类
+        class AVLTree {
+            constructor() {
+                head.set(this, null);
+            }
+
+            //在平衡二叉树中添加子叶节点
+            insert(node) {
+                const {insertNode} = this;
+                let head_tree = head.get(this);
+                head_tree = insertNode.bind(this)(head_tree, node);
+                head.set(this, head_tree);
+                return true;
+            }
+
+            //平衡二叉树中添加子叶节点执行方法
+            //利用当前的子叶节点和添加的子叶节点数值进行比较
+            //假如小于添加的子叶节点数值,就查询当前子叶节点的右子叶节点
+            //假如大于添加的子叶节点数值,就查询当前子叶节点的左子叶节点
+            //直到查询到节点为null为止,然后添加新的子叶节点
+            insertNode(node, node_key) {
+                const {insertNode, findBalanceFactor, LLBalanceNode, LRBalanceNode, RRBalanceNode, RLBalanceNode} = this;
+                if(!node) {
+                    node = new Node(node_key);
+                } else if(node.node > node_key) {
+                    node.left = insertNode.bind(this)(node.left, node_key);
+                    if(findBalanceFactor.bind(this)(node.left) - findBalanceFactor.bind(this)(node.right) > 1) {
+                        if(node_key < node.left.node) {
+                            node = LLBalanceNode.bind(this)(node);
+                        } else {
+                            node = LRBalanceNode.bind(this)(node);
+                        }
+                    }
+                } else {
+                    node.right = insertNode.bind(this)(node.right, node_key);
+                    if(findBalanceFactor.bind(this)(node.right) - findBalanceFactor.bind(this)(node.left) > 1) {
+                        if(node_key > node.right.node) {
+                            node = RRBalanceNode.bind(this)(node);
+                        } else {
+                            node = RLBalanceNode.bind(this)(node);
+                        }
+                    }
+                }
+                return node;
+            }
+
+            //平衡二叉树使用LL算法来解决添加的新的子叶节点数值小于其父子叶节点(左边父子叶节点)的数值的平衡问题
+            LLBalanceNode(node) {
+                let target = node.left;
+                node.left = target.right;
+                target.right = node;
+                return target;
+            }
+
+            //平衡二叉树使用LL算法来解决添加的新的子叶节点数值大于其父子叶节点(左边父子叶节点)的数值的平衡问题
+            LRBalanceNode(node) {
+                const {RRBalanceNode, LLBalanceNode} = this;
+                node.left = RRBalanceNode.bind(this)(node.left);
+                return LLBalanceNode.bind(this)(node);
+            }
+
+            //平衡二叉树使用RR算法来解决添加的新的子叶节点数值大于其父子叶节点(右边父子叶节点)的数值的平衡问题
+            RRBalanceNode(node) {
+                let target = node.right;
+                node.right = target.left;
+                target.left = node;
+                return target;
+            }
+
+            //平衡二叉树使用RR算法来解决添加的新的子叶节点数值小于其父子叶节点(右边父子叶节点)的数值的平衡问题
+            RLBalanceNode(node) {
+                const {RRBalanceNode, LLBalanceNode} = this;
+                node.right = LLBalanceNode.bind(this)(node.right);
+                return RRBalanceNode.bind(this)(node);
+            }
+            
+            //获取每个平衡二叉树节点的平衡因子
+            findBalanceFactor(node) {
+                const {findBalanceFactor} = this;
+                if(!node) {
+                    return -1;
+                } else {
+                    return Math.max(findBalanceFactor.bind(this)(node.left), findBalanceFactor.bind(this)(node.right)) + 1;
+                }
+            }
+
+            //在平衡二叉树中删除指定的子叶节点
+            remove(node) {
+                const {removeNode} = this;
+                let head_tree = head.get(this);
+                if(!head_tree) {
+                    return false;
+                }
+                head_tree = removeNode.bind(this)(head_tree, node);
+                head.set(this, head_tree);
+                return true;
+            }
+
+            //平衡二叉树中删除指定的子叶节点执行方法
+            //利用当前的子叶节点和删除的子叶节点数值进行比较
+            //假如小于删除的子叶节点,就查询当前子叶节点的右子叶节点
+            //假如大于删除的子叶节点,就查询当前子叶节点的左子叶节点
+            //直到等于删除的子叶节点数值,分为三种情况
+            //第一种,删除的子叶节点底下没有其左右子叶节点,就直接将删除的子叶节点置为null
+            //第二种,删除的子叶节点底下的左右子叶节点有一边为null,就直接将删除的子叶节点置为左右子叶节点不为null的一边
+            //第三种,删除的子叶节点底下其左右子叶节点都不为null,就直接去查询删除的子叶节点其右子叶节点底下的最小的子叶节点,并将删除的子叶节点的数值置为这个最小的子叶节点的数值,再将删除的子叶节点其右子叶节点底下的最小的子叶节点删除
+            removeNode(node, node_key) {
+                const {removeNode, findTheLeftNode} = this;
+                if(node.node > node_key) {
+                    node.left = removeNode.bind(this)(node.left, node_key);
+                } else if(node.node < node_key){
+                    node.right = removeNode.bind(this)(node.right, node_key);
+                } else {
+                    if(!node.left && !node.right) {
+                        node = null;
+                    } else if (!node.left) {
+                        node = node.right;
+                    } else if (!node.right) {
+                        node = node.left;
+                    } else {
+                        let aux = findTheLeftNode.bind(this)(node.right);
+                        node.node = aux.node;
+                        node.right = removeNode.bind(this)(node.right, aux.node);
+                    }
+                }
+                return node;
+            }
+            
+            //查询子叶节点底下的最小的(最左边的)子叶节点
+            findTheLeftNode(node) {
+                const {findTheLeftNode} = this;
+                if(node.left) {
+                    return findTheLeftNode.bind(this)(node.left);
+                }
+                return node;
+            }
+
+            //在平衡二叉树中获取最小的(最左边的)子叶节点数值
+            min() {
+                const {minNode} = this;
+                let head_tree = head.get(this);
+                console.log("最小的子叶:");
+                return minNode.bind(this)(head_tree).node;
+            }
+
+            //平衡二叉树中获取最小的(最左边的)子叶节点执行方法
+            minNode(node) {
+                const {minNode} = this;
+                if(node.left) {
+                    return minNode.bind(this)(node.left);
+                }
+                return node;
+            }
+
+            //在平衡二叉树中获取最大的(最右边的)子叶节点数值
+            max() {
+                const {maxNode} = this;
+                let head_tree = head.get(this);
+                console.log("最大的子叶:");
+                return maxNode.bind(this)(head_tree).node;
+            }
+
+            //平衡二叉树中获取最大的(最右边的)子叶节点执行方法
+            maxNode(node) {
+                const {maxNode} = this;
+                if(node.right) {
+                    return maxNode.bind(this)(node.right);
+                }
+                return node;
+            }
+
+            //在平衡二叉树获取先序遍历
+            preorderTraversal(method) {
+                const {preorderTraversalNode} = this;
+                let head_tree = head.get(this);
+                console.log("先序遍历:");
+                preorderTraversalNode.bind(this)(head_tree, method);
+            }
+
+            //平衡二叉树先序遍历执行方法
+            preorderTraversalNode(node, method) {
+                const {preorderTraversalNode} = this;
+                if(node) {
+                    method.bind(this)(node);
+                    preorderTraversalNode.bind(this)(node.left, method);
+                    preorderTraversalNode.bind(this)(node.right, method);
+                }
+            }
+
+            //在平衡二叉树中获取中序遍历
+            inorderTraversal(method) {
+                const {inorderTraversalNode} = this;
+                let head_tree = head.get(this);
+                console.log("中序遍历:");
+                inorderTraversalNode.bind(this)(head_tree, method);
+            }
+
+            //平衡二叉树中序遍历执行方法
+            inorderTraversalNode(node, method) {
+                const {inorderTraversalNode} = this;
+                if(node) {
+                    inorderTraversalNode.bind(this)(node.left, method);
+                    method.bind(this)(node);
+                    inorderTraversalNode.bind(this)(node.right, method);
+                }
+            }
+
+            //在平衡二叉树中获取后序遍历
+            postorderTraversal(method) {
+                const {postorderTraversalNode} = this;
+                let head_tree = head.get(this);
+                console.log("后序遍历:");
+                postorderTraversalNode.bind(this)(head_tree, method);
+            }
+
+            //平衡二叉树后序遍历执行方法
+            postorderTraversalNode(node, method) {
+                const {postorderTraversalNode} = this;
+                if(node) {
+                    postorderTraversalNode.bind(this)(node.left, method);
+                    postorderTraversalNode.bind(this)(node.right, method);
+                    method.bind(this)(node);
+                }
+            }
+
+            //在平衡二叉树中获取二叉树的具体结构
+            valueOf() {
+                let head_tree = head.get(this);
+                return head_tree;
+            }
+        }
+
+        //返回平衡二叉树类
+        return AVLTree;
+    })();
+
+    let tree = new AVLTree();
+    //这里在平衡二叉树中添加子节点
+    //在这里打印:
+    //true
+    console.log(tree.insert(15));
+    tree.insert(10);
+    tree.insert(18);
+    tree.insert(20);
+    tree.insert(17);
+    tree.insert(16);
+    tree.insert(25);
+    tree.insert(5);
+    tree.insert(8);
+    tree.insert(55);
+    tree.insert(30);
+    tree.insert(35);
+    tree.insert(40);
+    tree.insert(45);
+    tree.insert(50);
+    //这里在平衡二叉树中获取最小的(最左边的)子叶节点数值
+    //在这里打印:
+    //最小的子叶:
+    //5
+    console.log(tree.min());
+    //这里在平衡二叉树中获取最大的(最右边的)子叶节点数值
+    //在这里打印:
+    //最大的子叶:
+    //55
+    console.log(tree.max());
+    //这里在平衡二叉树中获取中序遍历
+    //在这里打印:
+    //中序遍历:
+    //5
+    //8
+    //10
+    //15
+    //16
+    //17
+    //18
+    //20
+    //25
+    //30
+    //35
+    //40
+    //45
+    //50
+    //55
+    tree.inorderTraversal((node)=>{
+        console.log(node.node);
+    });
+    //这里在平衡二叉树中获取先序遍历
+    //在这里打印:
+    //先序遍历:
+    //17
+    //15
+    //8
+    //5
+    //10
+    //16
+    //30
+    //20
+    //18
+    //25
+    //40
+    //35
+    //50
+    //45
+    //55
+    tree.preorderTraversal((node)=>{
+        console.log(node.node);
+    });
+    //这里在平衡二叉树中获取后序遍历
+    //在这里打印:
+    //后序遍历:
+    //5
+    //10
+    //8
+    //16
+    //15
+    //18
+    //25
+    //20
+    //35
+    //45
+    //55
+    //50
+    //40
+    //30
+    //17
+    tree.postorderTraversal((node)=>{
+        console.log(node.node);
+    });
+    //这里在平衡二叉树中获取二叉树的具体结构
+    //在这里打印:
+    //Node {node: 17, left: Node, right: Node}
+    console.log(tree.valueOf());
+    //这里在平衡二叉树中删除指定的子叶节点
+    //在这里打印:
+    //true
+    console.log(tree.remove(50));
+    tree.remove(40);
+    tree.remove(15);
+    //这里在平衡二叉树中获取二叉树的具体结构
+    //在这里打印:
+    //Node {node: 17, left: Node, right: Node}
+    console.log(tree.valueOf());
 
 
 
