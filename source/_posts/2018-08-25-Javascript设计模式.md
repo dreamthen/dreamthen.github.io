@@ -286,7 +286,301 @@ categories: Javascript设计模式
     render();
     render();
     render();
+    
+# 策略模式
+> 策略模式的主要条件有三个: 可扩展、可复用和可替换,就让我们先演示一个非策略模式下的例子,我们要计算年终奖,首先要知晓月薪基数,然后再知道奖励倍数,就可以计算出最后的年终奖,一般我们会这么写
 
+    function getPerformance(performance, salary) {
+        if(performance === "S") {
+            return salary * 4;
+        }
+        if(performance === "A") {
+            return salary * 3;
+        }
+        if(performance === "B") {
+            return salary * 2;
+        }
+    }
+    
+    //在这里打印:
+    //80000
+    console.log(getPerformance("S", 20000));
+    //在这里打印:
+    //120000
+    console.log(getPerformance("A", 40000));
+    
+> 非策略模式的例子,存在很多缺点,首先,策略对象不可复用,策略对象逻辑全都写在一个函数对象里面,并不能拿出进行复用,其次,扩展很不方便,每一次扩展都必须去改变策略对象所处的逻辑函数对象,最后新的策略对象不可替换新的策略对象,接下来我们用传统的策略模式进行解决,首先将策略对象抽取到外面,形成一个抽象的对象
+
+    function PerformanceS() {
+        
+    }
+    
+    PerformanceS.prototype.getSalary = function(salary) {
+        return salary * 4;
+    };
+    
+    function PerformanceA() {
+        
+    }
+    
+    PerformanceA.prototype.getSalary = function(salary) {
+        return salary * 3;
+    };
+    
+    function PerformanceB() {
+    
+    }
+    
+    PerformanceB.prototype.getSalary = function(salary) {
+        return salary * 2;
+    };
+    
+    function GetPerformanceSalary() {
+        this.performance = null;
+        this.salary = null;
+    }
+    
+    GetPerformanceSalary.prototype.setPerformance = function(performance) {
+        this.performance = performance;
+    };
+    
+    GetPerformanceSalary.prototype.setSalary = function(salary) {
+        this.salary = salary;
+    };
+    
+    GetPerformanceSalary.prototype.getBonus = function() {
+        return this.performance.getSalary(this.salary);  
+    };
+    
+    let getPerformanceSalary = new GetPerformanceSalary();
+    getPerformanceSalary.setSalary(20000);
+    getPerformanceSalary.setPerformance(new PerformanceS());
+    //在这里打印:
+    //80000
+    console.log(getPerformanceSalary.getBonus());
+    getPerformanceSalary.setSalary(40000);
+    getPerformanceSalary.setPerformance(new PerformanceA());
+    //在这里打印:
+    //120000
+    console.log(getPerformanceSalary.getBonus());
+    
+> 策略模式下的策略对象,复用性、扩展性和替换性都很强,策略对象现在是以抽象函数的形式进行的定义,可以直接拿原有的抽象函数对象进行复用,也可以定义新的抽象函数对象进行扩展,在替换性方面,薪酬基数和策略对象模式都可根据set...方法的方式进行替换,并且得到不同的结果
+
+## Javascript策略模式
+
+    let categories = {
+        S(salary) {
+            return salary * 4;
+        },
+        A(salary) {
+            return salary * 3;
+        },
+        B(salary) {
+            return salary * 2;
+        }
+    };
+    
+    function getPerformance(performance, salary) {
+        return categories[performance](salary);
+    }
+    
+    //在这里打印:
+    //80000
+    console.log(getPerformance("S", 20000));
+    //在这里打印:
+    //120000
+    console.log(getPerformance("A", 40000));
+    
+## 策略模式 —— 表单验证
+> 使用策略模式来进行表单验证,也是一种很好的做法,首先我们先不使用策略模式来编写表单验证
+
+    function validate() {
+        let userAgent = document.getElementById("user-agent");
+        if(userAgent.username.value === "") {
+            return "用户名不可为空";
+        }
+        if(userAgent.password.value.length !== 6) {
+            return "密码长度必须为6位";
+        }
+        if(!/^1(3|5|8)[\d]{9}$/.test(userAgent.phone.value)) {
+            return "手机号码不符合规范";
+        }
+    }
+    
+    let userAgent = document.getElementById("user-agent");
+    userAgent.onsubmit = function(e) {
+        let errMsg = validate();
+        if(errMsg) {
+            console.log(errMsg);
+        }
+        //取消冒泡事件
+        e.stopImmediatePropagation();
+        //取消默认事件
+        e.preventDefault();
+    };
+    
+> 策略对象不可复用,全都处在validate函数作用域下,且不可扩展,扩展必须去更改validate源代码,不符合开放封闭原则,更不能替换在任何的表单校验上面,只能针对特定的表单(name为username,password,phone的表单)进行校验,所以不使用策略模式,效果极差,下面我们就使用策略模式来进行表单校验
+
+    let categories = {
+        isNonUsername(value, errMsg) {
+            if(value === "") {
+                return errMsg;
+            }
+        },
+        minLength(value, length, errMsg) {
+            if(value.length !== parseInt(length)) {
+                return errMsg;
+            }
+        },
+        isMobile(value, errMsg) {
+            if(!/^1(3|5|8)[\d]{9}$/.test(value)) {
+                return errMsg;
+            }
+        }
+    };
+    
+    function Validate() {
+        this.cache = [];
+    }
+    
+    Validate.prototype.add = function(dom, condition, errMsg) {
+        this.cache.push(function() {
+            let parts = condition.split(":");
+            let categories_condition = parts.shift();
+            parts.unshift(dom.value);
+            parts = [...parts, errMsg];
+            return categories[categories_condition].apply(dom, parts);
+        });
+    };
+    
+    Validate.prototype.start = function() {
+        for(let [key, value] of this.cache.entries()) {
+            let validateFunc = value;
+            let errMsg = validateFunc();
+            if(errMsg) {
+                return errMsg;
+            }
+        }  
+    };
+    
+    function validate() {
+        let userAgent = document.getElementById("user-agent"),
+            new_validate = new Validate();
+        new_validate.add(userAgent.username, "isNonUsername", "用户名不可为空");
+        new_validate.add(userAgent.password, "minLength:6", "密码长度必须为6位");
+        new_validate.add(userAgent.phone, "isMobile", "手机号码不符合规范");
+        let errMsg = new_validate.start();
+        if(errMsg) {
+            return errMsg;
+        }    
+    }
+    
+    let userAgent = document.getElementById("user-agent");
+    userAgent.onsubmit = function(e) {
+        let errMsg = validate();
+        if(errMsg) {
+            console.log(errMsg);
+        }
+        //取消冒泡事件
+        e.stopImmediatePropagation();
+        //取消默认事件
+        e.preventDefault();
+    };
+    
+> 这样就利用策略模式的复用性、扩展性以及替换性完美的解决了表单验证,你这时可能会有疑问,假如表单里面一个表单项有多个验证条件怎么办,这套策略模式的方式不就不好使了嘛,别急,只要修改一下Validate.prototype.add函数方法,就可以既兼容一个还兼容多个验证条件
+
+    let categories = {
+        isNonUsername(value, errMsg) {
+            if(value === "") {
+                return errMsg;
+            }
+        },
+        minLength(value, length, errMsg) {
+            if(value.length !== parseInt(length)) {
+                return errMsg;
+            }
+        },
+        isMobile(value, errMsg) {
+            if(!/^1(3|5|8)[\d]{9}$/.test(value)) {
+                return errMsg;
+            }
+        }
+    };
+    
+    function Validate() {
+        this.cache = [];
+    }
+    
+    Validate.prototype.add = function(dom, rules) {
+        for(let [key, value] of rules.entries()) {
+            this.cache.push((function() {
+                let condition = value["condition"],
+                    errMsg = value["errMsg"];
+                return function() {
+                    let parts = condition.split(":");
+                    let categories_condition = parts.shift();
+                    parts.unshift(dom.value);
+                    parts = [...parts, errMsg];
+                    return categories[categories_condition].apply(dom, parts);
+                }    
+            })());
+        }
+    };
+    
+    Validate.prototype.start = function() {
+        for(let [key, value] of this.cache.entries()) {
+            let validateFunc = value;
+            let errMsg = validateFunc();
+            if(errMsg) {
+                return errMsg;
+            }
+        }
+    };
+    
+    function validate() {
+        let userAgent = document.getElementById("user-agent"),
+            new_validate = new Validate();
+         new_validate.add(userAgent.username, [{
+            condition: "isNonUsername",
+            errMsg: "用户名不可为空"
+         }, {
+            condition: "minLength:10",
+            errMsg: "用户名长度必须为10位"
+         }]);
+         new_validate.add(userAgent.password, [{
+            condition: "minLength:6",
+            errMsg: "密码长度必须为6位"
+         }]);
+         new_validate.add(userAgent.phone, [{
+            condition: "isMobile",
+            errMsg: "手机号码不和规范"
+         }]);
+         
+         let errMsg = new_validate.start();
+         if(errMsg) {
+            return errMsg;
+         }
+    }
+    
+    let userAgent = document.getElementById("user-agent");
+    userAgent.onsubmit = function(e) {
+        let errMsg = validate();
+        if(errMsg) {
+            console.log(errMsg);
+        }
+        //取消冒泡事件
+        e.stopImmediatePropagation();
+        //取消默认事件
+        e.preventDefault();
+    };
+    
+> 这样就完美解决了多个验证条件的问题,这种策略模式可复用,可扩展,可替换,十分完美    
+    
+    
+
+    
+
+    
     
 
     
