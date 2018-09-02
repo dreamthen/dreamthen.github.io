@@ -574,7 +574,252 @@ categories: Javascript设计模式
         e.preventDefault();
     };
     
-> 这样就完美解决了多个验证条件的问题,这种策略模式可复用,可扩展,可替换,十分完美    
+> 这样就完美解决了多个验证条件的问题,这种策略模式可复用,可扩展,可替换,十分完美
+
+# 代理模式
+> 下面我们要介绍的是代理模式,顾名思义,代理模式就是通过代理层去替代实体对象处理一些信息,其实就是在保护实体对象,减少实体对象的职责,在过滤、处理、整合信息之后再交给实体对象,这样会使得实体对象很轻便,对于实体对象的扩展性、维护性以及替换性有很大的帮助
+
+    function Flower() {
+    }
+    
+    let xiaoming = {
+        sendFlower(target) {
+            let flower = new Flower();
+            target.receiveFlower(flower);
+        }
+    };
+    
+    let A = {
+        receiveFlower(flower) {
+            console.log("已收到花朵: " + flower);
+        }
+    };
+    
+    let B = {
+        receiveFlower(flower) {
+            A.receiveFlower(flower);
+        }
+    };
+    
+    //在这里打印:
+    //已收到花朵: [object Object]
+    xiaoming.sendFlower(B);
+
+> 这样就形成了一个小明送给女神A花朵表达想和她恋爱的心意,又不太好意思亲自送,只好让他跟A共同的好友B来进行代理送,这就是一个典型的代理模式的例子,你可能会问,这样做有什么意义呢,只不过多了一层罢了,的确这样只是多添加了一层而已,但是假如我们再改编一下剧情,你就会感觉很有意义
+
+    function Flower() {
+    }
+    
+    let xiaoming = {
+        sendFlower(target) {
+            let flower = new Flower();
+            target.receiveFlower(flower);
+        }
+    };
+    
+    let A = {
+        receiveFlower(flower) {
+            console.log("已收到花朵: " + flower);
+        },
+        listenerBeHappy(func) {
+            let self = this;
+            setTimeout(function() {
+                func.apply(self);
+            }, 1000);
+        }
+    };
+    
+    let B = {
+        receiveFlower(flower) {
+            A.listenerBeHappy(function () {
+                this.receiveFlower(flower);
+            });
+        }
+    };
+    
+    //在这里打印:
+    //已收到花朵: [object Object]
+    xiaoming.sendFlower(B);
+    
+> 故事的剧情转变成了这样,小明送给女神A花朵表达想和她恋爱的心意,又不太好意思亲自送,只好让他跟A共同的好友B来进行代理送,B清楚A什么时间心情最好,什么时间可以接受别人对她的表白,所以B在A心情很好的时候将小明的花朵转交给女神A,虽然也不见得小明的追求会成功,但是B的代理工作充分表明了代理模式
+
+## 虚拟代理
+> 我们使用虚拟代理来写一个懒加载图片的例子,通常我们使用Js写加载图片时,一般会这么做
+
+    let loadImage = (function () {
+        let Image = document.createElement("img");
+        document.body.appendChild(Image);
+        return {
+            setSrc(src) {
+                Image.src = src;
+            }
+        }
+    })();
+    
+    loadImage.setSrc("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png");
+    
+> 但是这样做有一个用户体验的交互问题,图片还没有完全渲染的时候,图片区域是空白的,这时候我们需要使用代理来虚拟在图片还没有完全渲染完毕的时候,先在所在区域展示loading加载图,当图片完全渲染完毕之后,再将所在区域替换成图片
+
+    let loadImage = (function () {
+        let Image = document.createElement("img");
+        document.body.appendChild(Image);
+        return {
+            setSrc(src) {
+                Image.src = src;
+            }
+        }
+    })();
+    
+    let proxyLoadImage = (function () {
+        let img = new Image();
+        img.onload = function() {
+            loadImage.setSrc(this.src);
+        };
+        
+        return {
+            setSrc(src) {
+                loadImage.setSrc("../img/zy.jpeg");
+                img.src = src;
+            }
+        }
+    })();
+    
+    proxyLoadImage.setSrc("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png");
+    
+> 虚拟代理模式对于用户是无感的,用户不会知道你使用的是实体对象接口还是虚拟代理对象接口,且虚拟代理对象的复用性、扩展性以及可替换性都是很完美的,完全不会破坏原有的实体对象的代码结构,下面我们来写一个使用虚拟代理模式实现批量提交文件,节省浏览器和后台服务器资源的例子
+
+    function syncReadFile(id) {
+        console.log("开始上传文件: " + id);
+    }
+    
+    let checkbox = document.getElementsByName("checkbox");
+    for(let i = 0; i < checkbox.length; i ++) {
+        checkbox[i].onclick = function(e) {
+            if(this.checked) {
+                syncReadFile(this.id);
+            }
+            //取消冒泡事件
+            e.stopImmediatePropagation();
+        };
+    }
+    
+> 这个例子,我每点一次复选框,且复选框选中,就会上传文件,在短时间内选中多个复选框,会造成大量的上传请求发出,频繁的调用上传接口,会大量浪费浏览器和后台服务器资源,所以我们设置一个函数节流函数来模拟syncReadFile函数,相当于是一个虚拟代理模式的函数,节省浏览器和后台服务器资源
+
+    function syncReadFile(id) {
+        console.log("开始上传文件: " + id);
+    }
+    
+    let proxySyncReadFile = (function() {
+        let cache = [],
+            timer = null;
+        return function (id) {
+            let self = this;
+            cache = [...cache, id];
+            if(timer) {
+                return false;
+            }
+            timer = setTimeout(function () {
+                let id_transform = cache.join(",");
+                syncReadFile.call(self, id_transform);
+                clearTimeout(timer);
+                timer = null;
+                cache.length = 0;
+            }, 2000);
+        }    
+    })();
+    
+    let checkbox = document.getElementsByName("checkbox");
+    for(let i = 0; i < checkbox.length; i ++) {
+        checkbox[i].onclick = function (e) {
+            if(this.checked) {
+                proxySyncReadFile(this.id);
+            }
+            //取消冒泡事件
+            e.stopImmediatePropagation();
+        };
+    }
+    
+## 缓存代理
+> 我们先来写一个缓存代理计算乘积的例子,当传入的参数与上一次传入的参数相同时,就使用缓存中的乘积结果,不需要再次进行计算
+
+    function getMultiple() {
+        let cache = {};
+        function multiple() {
+            let a = 1;
+            for(let i = 0; i < arguments.length; i ++) {
+                a *= arguments[i];
+            }
+            return a;
+        }
+        return function() {
+            let cache_prototype = Array.prototype.join.call(arguments, "_");
+            if(cache[cache_prototype]) {
+                return cache[cache_prototype];
+            }
+            console.log("again");
+            return cache[cache_prototype] = multiple.apply(this, arguments);
+        }
+    }
+    
+    let multipleForReal = getMultiple();
+    //在这里打印:
+    //again
+    //168
+    console.log(multipleForReal(4, 6, 7));
+    //在这里打印:
+    //168
+    console.log(multipleForReal(4, 6, 7));
+    
+> 让我们将事情变得更有趣一些
+
+    function plus() {
+        let a = 0;
+        for(let i = 0; i < arguments.length; i ++) {
+            a += arguments[i];
+        }
+        return a;
+    }
+    
+    function multiple() {
+        let a = 1;
+        for(let i = 0; i < arguments.length; i ++) {
+            a *= arguments[i];
+        }
+        return a;
+    }
+    
+    function getMethod(func) {
+        let cache = {};
+        return function () {
+            let cache_prototype = Array.prototype.join.call(arguments, "_");
+            if(cache[cache_prototype]) {
+                return cache[cache_prototype];
+            }
+            console.log("again");
+            return cache[cache_prototype] = func.apply(this, arguments);
+        }
+    }
+    
+    let getMethodResult = getMethod(plus);
+    //在这里打印:
+    //again
+    //20
+    console.log(getMethodResult(4, 8, 8));
+    //在这里打印:
+    //20
+    console.log(getMethodResult(4, 8, 8));
+    let getMethodResult_multiple = getMethod(multiple);
+    //在这里打印:
+    //again
+    //256
+    console.log(getMethodResult_multiple(4, 8, 8));
+    //在这里打印:
+    //256
+    console.log(getMethodResult_multiple(4, 8, 8));
+    
+    
+    
+    
     
     
 
