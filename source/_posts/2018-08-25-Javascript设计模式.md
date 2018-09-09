@@ -817,6 +817,200 @@ categories: Javascript设计模式
     //256
     console.log(getMethodResult_multiple(4, 8, 8));
     
+# 迭代器模式
+> 除了某一些古代的语言,现代的程序语言都实现了内置迭代器,迭代器模式或许从来都没有被人所听说过,我们今天就用JavaScript来模拟迭代器模式
+
+    function each(arr, func) {
+        for(let [key, value] of arr.entries()) {
+            func.call(this, key, value);
+        }
+    }
+    
+    //在这里打印:
+    //0 2
+    //1 6
+    //2 8
+    each([2, 6, 8], function (index, item) {
+        console.log(index, item);
+    });
+    
+> 这只是内部迭代器模式,将迭代逻辑放在内部实现,但是这样做很不灵活,比如我要实现一个俩数组是否相等的函数compare,你会发现compare的实现方式并不美观,且很不灵活
+
+    function each(arr, func) {
+        for(let [key, value] of arr.entries()) {
+            func.call(this, key, value);
+        }
+    }
+    
+    function compare(arr, arrAno) {
+        if(arr.length !== arrAno.length) {
+            throw new Error("两个数组不相同");
+        }
+        each(arr, function (index, item) {
+            if(item !== arrAno[index]) {
+                throw new Error("两个数组不相同");
+            }
+        });
+        console.log("两个数组是相同的");
+    }
+    
+    //在这里打印:
+    //两个数组是相同的
+    compare([1, 2, 5], [1, 2, 5]);
+    //在这里报错:
+    //两个数组不相同
+    compare([1, 2, 8], [1, 3, 6]);
+    
+## 外部迭代模式
+> 后来出现了外部迭代模式,代码如下,这种迭代模式,灵活的解决了外部传入迭代器时,一些比较复杂的需求,维护性、扩展性、灵活性都很高,且针对对象和数组,只要拥有length属性的对象都可以进行迭代
+
+    function Iterator(obj) {
+        let index = 0,
+            length = obj.length;
+        function next() {
+            index++;
+        }    
+        function isDone() {
+            return index < length;
+        }
+        function getCurrentItem() {
+            return obj[index];
+        }
+        return {
+            length,
+            next,
+            isDone,
+            getCurrentItem
+        }
+    }
+    let iterator_arr = Iterator([55, 66, 99, 10, 1, 11, 28, 32]);
+    //在这里打印:
+    //55
+    //66
+    //99
+    //10
+    //1
+    //11
+    //28
+    //32
+    while(iterator_arr.isDone()) {
+        console.log(iterator_arr.getCurrentItem());
+        iterator_arr.next();
+    }
+    
+> 这样的话,我们来编写compare函数进行两个函数比对时,就会灵活,更可维护的多
+
+    function Iterator(obj) {
+        let index = 0,
+            length = obj.length;
+        
+        function next() {
+            index++;
+        }
+        
+        function getCurrentItem() {
+            return obj[index];
+        }
+        
+        function isDone() {
+            return index >= length;
+        }
+        
+        return {
+            length,
+            isDone,
+            getCurrentItem,
+            next
+        }; 
+    }
+    
+    function compare(arr, arrAno) {
+        if(arr.length !== arrAno.length) {
+            throw new Error("两个数组不相同");
+        }
+        while(!arr.isDone() && !arrAno.isDone()) {
+            if(arr.getCurrentItem() !== arrAno.getCurrentItem()) {
+                throw new Error("两个数组不相同");
+            }
+            arr.next();
+            arrAno.next();
+        }
+        console.log("两个数组是相同的");
+    }
+    
+    let iterator = Iterator([1, 6, 8, 10, 55, 25, 36, 96]);
+    let iterator_ano = Iterator([1, 6, 8, 10, 55, 25, 36, 96]);
+    let iterator_diff = Iterator([1, 6, 8, 10, 55, 25, 36, 96]);
+    let iterator_diff_ano = Iterator([1, 6, 8, 10, 55, 28, 36, 96]);
+    //在这里打印:
+    //两个数组是相同的
+    compare(iterator, iterator_ano);
+    //在这里报错:
+    //两个数组不相同
+    compare(iterator_diff, iterator_diff_ano);
+
+> jQuery中的each方法,就提供了迭代的功能,但是each方法不仅可以迭代数组,还可以迭代对象,我们来看一下each方法的源代码实现方式
+
+    $.each = function (obj, func) {
+        let value,
+            i = 0,
+            length = obj.length;
+        if(Object.prototype.toString.call(obj) === "[object Array]") {
+            for(; i < length; i++) {
+                value = func.call(this, i, obj[i]);
+                if(value === false) {
+                    break;
+                }
+            }
+        } else {
+            for(i in obj) {
+                value = func.call(this, i, obj[i]);
+                if(value === false) {
+                    break;
+                }
+            }
+        }
+    }
+    
+    //在这里打印:
+    //0 5
+    //1 8
+    //2 10
+    $.each([5, 8, 10, 3, 66], function (index, item) {
+        if(item === 3) {
+            return false;
+        }
+        console.log(index, item);
+    });
+    
+> 这期间还使用了中断迭代器模式的判断语句 if(value === false) break;当函数返回false的时候,就将迭代器终止掉,直接break出for循环,下面我们来介绍反向迭代函数,我们分分钟搞定
+
+    function reverseEach(obj, func) {
+        let value;
+        for(let l = obj.length - 1; l >=0; l--) {
+            value = func.call(this, l, obj[l]);
+            if(value === false) {
+                break;
+            }
+        }
+    }
+    
+    //在这里打印:
+    //4 101
+    //3 99
+    //2 66
+    reverseEach([10, 88, 66, 99, 101], function (index, item) {
+        if(item === 88) {
+            return false;
+        }
+        console.log(index, item);
+    });
+
+    
+
+        
+    
+    
     
     
     
