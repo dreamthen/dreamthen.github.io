@@ -1,5 +1,5 @@
 ---
-title: Javascript设计模式
+title: 2018-08-25 Javascript设计模式
 date: 2018-08-25 11:37:47
 tags: [Javascript, 设计模式]
 categories: Javascript设计模式
