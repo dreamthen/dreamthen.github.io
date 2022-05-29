@@ -157,7 +157,7 @@ categories: testing
 
       - 结论.
 
-        - API配置有好的介绍引导.
+        - API配置有可视化的介绍引导.
         - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
         - 做到了跨浏览器自动化测试比较完备且成熟的流程.
         - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
@@ -167,3 +167,20 @@ categories: testing
         - 只有API,没有产品文档,无法了解产品.
         - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
         - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
+
+    - saucelabs
+
+      <a href='https://github.com/saucelabs-training/demo-js/tree/main/webdriverio/appium-app/examples/simple-example'>WebDriverIO With Appium in saucelabs</a>.
+
+       - 结论.
+      
+         - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
+         - 做到了跨浏览器自动化测试比较完备且成熟的流程.
+         - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
+
+       - 问题.
+
+         - API无任何引导,且比较简陋.
+         - 只有API,没有产品文档,无法了解产品.
+         - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
+         - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
