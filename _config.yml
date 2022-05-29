@@ -91,3 +91,9 @@ search:
   field: post
   format: html
   limit: 10000
+
+#更改根目录底下的_config.yml文件,添加browsersync属性
+#设置监听watch属性为true就可以了!
+browsersync:
+  watch: true
+  logLevel: "warn"
