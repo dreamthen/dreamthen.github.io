@@ -7,3 +7,5 @@ node_modules/
 public/
 themes/
 .deploy*/
+yarn.lock
+package-lock.json
