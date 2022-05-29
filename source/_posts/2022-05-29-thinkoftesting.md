@@ -124,7 +124,7 @@ categories: testing
 
     - lambdaTest配合Appium.
 
-      <a href='https://www.lambdatest.com/support/docs/appium-nodejs-webdriverio/'>WebDriverIO With Appium</a>.
+      <a href='https://www.lambdatest.com/support/docs/appium-nodejs-webdriverio/'>WebDriverIO With Appium in lambdaTest</a>.
     
       - 结论.
       
@@ -142,12 +142,27 @@ categories: testing
       - 结论.
         
         - 集成Appium IDE于阿里云平台内部,做到可视化、自动化测试.
-        - 做到了跨浏览器自动化可视化测试比较完备且成熟的流程.
+        - 录制、编写测试用例二合一,做到了跨浏览器自动化可视化测试完备且成熟的流程.
         - 产品文档完备,可直观了解产品.
+        - 测试报告:截图、录屏、测试用例日志、Appium日志、移动设备日志、错误日志以及性能报告一应俱全.
       
       - 问题.
       
         - 只支持Python编写测试用例.
-        - 需要编辑测试用例,没有做到完全自动化可视化测试.
+        - 测试报告中有一些不完整,如网络日志.
       
     - browserstack
+    
+      <a href='https://www.browserstack.com/docs/app-automate/appium/getting-started/nodejs/webdriverio'>WebDriverIO With Appium in browserstack</a>.
+
+      - 结论.
+
+        - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
+        - 做到了跨浏览器自动化测试比较完备且成熟的流程.
+        - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
+
+      - 问题.
+        
+        - 只有API,没有产品文档,无法了解产品.
+        - 远端不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
+        - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
