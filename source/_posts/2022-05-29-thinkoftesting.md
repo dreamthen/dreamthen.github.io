@@ -83,7 +83,7 @@ categories: testing
 
     - Selenium IDE.
 
-      Selenium IDE能够以插件的形式被安装到测试者的浏览器中,从而方便地实现Web界面的测试.
+      Selenium IDE能够以插件的形式被安装到测试者的浏览器中,从而方便地实现Web界面的测试,是最为流行的一种可视化、自动化测试工具.
 
     - selenium-webdriver.
 
@@ -109,37 +109,50 @@ categories: testing
 > <a href='https://www.lambdatest.com/'>lambdaTest</a>
     
 - lambdaTest配合Selenium IDE.
-
+  
   <a href='https://www.lambdatest.com/support/docs/run-selenium-ide-tests-on-lambdatest-selenium-cloud-grid/'>Run Selenium IDE Tests with LambdaTest Selenium Grid</a>.
-
-  - 可根据selenium-webdriver事件步骤分帧在录屏中在线查看测试套件自动化测试的情况;
-  - 可在线查看在自动化测试过程当中网络资源接口的加载情况;
-  - 可下载自动化测试的录屏;
-  - 可将标记bug(将有问题的selenium事件步骤分帧上传到lambdaTest衍生的SLACK、JIRA和ASANA项目管理系统);
 
   - 结论.
 
-    - Selenium IDE是最为流行的一种可视化、自动化测试工具;
+    - API、技术文档完备,引导配置成熟.
     - 可视化编辑测试用例流畅并且效果顶级;
+    - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
     - 与lambdaTest配合相得益彰,做到了跨浏览器自动化可视化测试完备且成熟的流程.
     - 录制操作、编写测试用例二合一,既考虑了定制性、精确性,也考虑了自动化、可视化和灵活性.
+    - 测试报告: 截图、录屏、网络日志、Selenium日志、浏览器日志、浏览器参数以及终端日志俱有.
+  
+  - 问题.
+
+    - 无产品文档,无法直观具体了解产品.
     
 - selenium-webdriver、jest配合lambdaTest.
     
   <a href='https://www.lambdatest.com/support/docs/automation-testing-with-selenium-and-jest/'>Jest with Selenium: Tutorial to Run Your First Test on LambdaTest</a>.
+
+  - 结论.
+  
+    - API、技术文档完备,引导配置成熟.
+    - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
+    - 测试报告: 截图、录屏、网络日志、Selenium日志、浏览器日志、浏览器参数以及测试用例日志俱有.
+
+  - 问题.
+
+    - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
+    - 无产品文档,无法直观具体了解产品.
 
 - lambdaTest配合Appium.
 
   <a href='https://www.lambdatest.com/support/docs/appium-nodejs-webdriverio/'>WebDriverIO With Appium in lambdaTest</a>.
     
   - 结论.
-      
+
+    - API、技术文档完备,引导配置成熟.
     - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
 
   - 问题.
     
-    - 真机跨终端自动化测试需要付费,无法深层次体验产品.
-    - 只有API,没有产品文档,无法了解产品.
+    - 真机跨终端自动化测试需要付费,无法体验产品.
+    - 无产品文档,无法直观具体了解产品.
 
 > <a href='https://www.aliyun.com/product/mqc'>阿里云移动测试</a>
 
@@ -148,7 +161,8 @@ categories: testing
   <a href='https://help.aliyun.com/document_detail/175761.html'>阿里云移动测试产品文档</a>.
     
   - 结论.
-        
+
+    - API、技术文档完备,引导配置成熟.
     - 集成Appium IDE于阿里云平台内部,做到可视化、自动化测试.
     - 录制、编写测试用例二合一,做到了跨浏览器自动化可视化测试完备且成熟的流程.
     - 产品文档完备,可直观了解产品.
@@ -167,16 +181,16 @@ categories: testing
 
   - 结论.
 
-    - API配置有可视化的介绍引导.
+    - API、技术文档完备,引导配置成熟.
     - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
     - 做到了跨浏览器自动化测试比较完备且成熟的流程.
     - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
 
   - 问题.
-        
-    - 只有API,没有产品文档,无法了解产品.
+
     - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
     - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
+    - 产品文档有欠缺,急需补足.
 
 > <a href='https://saucelabs.com/'>sauceLabs</a>
 
@@ -191,7 +205,19 @@ categories: testing
    - 问题.
 
      - Simple Demo冗杂耦合在一起,下载很慢,且很乱.
-     - API无任何引导,且比较简陋.
-     - 只有API,没有产品文档,无法了解产品.
+     - API、技术文档无任何引导,且比较简陋.
+     - 无产品文档,无法直观具体了解产品.
      - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力不足.
      - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
+
+> <a href='https://www.aznfz.com/'>冰狐智能辅助</a>
+
+  <a href='https://www.aznfz.com/mobile-terminal/about'>冰狐智能辅助 - 移动端</a>.
+
+  - 问题.
+
+    - 只适用Android自动化测试.
+    - 需要开发者自己准备设备,无在线真机调试,没有做到在线跨终端测试.
+    - 只支持Javascript编写测试用例.
+    - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力非常欠缺.
+    - 无产品概念,无测试报告,只是单一的一种工具.
