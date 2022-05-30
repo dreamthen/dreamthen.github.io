@@ -15,21 +15,27 @@ categories: testing
 
 - 手动测试
 
-  - Browser Testing.
+  - <a href='https://app.lambdatest.com/console/realtime'>Browser Testing</a>.
 
     可在线在不同的浏览器种类、版本、操作系统以及分辨率对website进行实时交互式测试,每次真实浏览器sessions可测试10分钟.
 
-    - 可切换配置浏览器种类、版本、操作系统以及分辨率;
-    - 可录屏(录屏可下载);
-    - 可标记bug(编辑bug截图、下载bug截图以及上传到lambdaTest衍生的SLACK、JIRA和ASANA项目管理系统);
+    - 结论.
+    
+      - 可切换配置浏览器种类、版本、操作系统以及分辨率;
+      - 可在线录屏、截图(录屏、截图可下载);
+      - 可在线标记bug(编辑bug截图、下载bug截图以及上传到lambdaTest合作的SLACK、JIRA和ASANA项目管理系统);
 
-  - App Testing.
+  - <a href='https://app.lambdatest.com/console/realtime'>App Testing</a>.
 
     可在线自由搭配不同的品牌手机、版本设备对App包或者App Url进行实时交互式测试,每次真机测试sessions可测试10分钟.
 
-    - 可切换配置品牌手机以及版本设备;
-    - 可录屏(录屏可下载);
-    - 可标记bug(编辑bug截图、下载bug截图以及上传到lambdaTest衍生的SLACK、JIRA和ASANA项目管理系统);
+    - 结论.
+
+      - 可切换配置品牌手机以及版本设备;
+      - 可在线录屏、截图(录屏、截图可下载);
+      - 可在线标记bug(编辑bug截图、下载bug截图以及上传到lambdaTest合作的SLACK、JIRA和ASANA项目管理系统);
+      - 可下载新的上传的App、移除任意App.
+      - 可在线查看网络日志、App日志以及设备日志;
 
   - Browser Testing开发环境在线测试.
 
@@ -44,13 +50,64 @@ categories: testing
     - 简洁、易用且容易理解;
     - 功能完备,在线随时切换终端设备配置、录屏下载、Debug标记应有尽有;
     - 测试过程流畅、无障碍性困难;
-    - 其衍生生态成熟且完备,例如其衍生的一套项目管理系统SLACK、JIRA和ASANA;
+    - 其合作生态成熟且完备,例如其合作的一套项目管理系统SLACK、JIRA和ASANA;
     - 为测试人员大大提高了效率,节约了时间成本;
+    - 开放的终端设备可重复使用;
 
   - 问题.
 
     - 大部分终端设备不开放.
-    - 终端设备开放需要付费.
+    - 每个部分(Browser Testing or App Testing)体验时长不能超过30分钟.
+    - 终端设备开放、永久使用需要付费.
+
+> browserstack
+
+  - <a href='https://live.browserstack.com/dashboard#os=android&os_version=10.0&device=OnePlus+7T&device_browser=chrome&zoom_to_fit=true&full_screen=true&url=https%3A%2F%2Fwww.google.com%2F%3Fgws_rd%3Dssl&speed=1'>Browser Testing</a>.
+
+    可在线在不同的浏览器种类、版本、操作系统以及分辨率对website进行实时交互式测试,每次真实浏览器sessions可测试1分钟.
+
+    - 结论.
+
+      - 可切换配置浏览器种类、版本、操作系统以及分辨率;
+      - 可在线标记bug(编辑bug截图、下载bug截图以及上传到Email、Github、browserstack合作的SLACK、JIRA和TRELLO项目管理系统);
+
+  - <a href='https://app-live.browserstack.com/#os=iOS&os_version=14.0&zoom_to_fit=true&full_screen=true&speed=1'>App Testing</a>.
+
+    可在线自由搭配不同的品牌手机、版本设备对App包或者App Url进行实时交互式测试,每次真机测试sessions可测试无限制.
+
+    - 结论.
+
+      - 可切换配置品牌手机以及版本设备;
+      - 可在线录屏、截图(录屏、截图可下载);
+      - 可在线标记bug(编辑bug截图、下载bug截图以及上传到Email、Github、browserstack合作的SLACK、JIRA和TRELLO项目管理系统);
+      - 可下载新的上传的App、移除任意App.
+      - 可切换手机语言配置.
+      - 可在线查看网络日志、App日志以及设备日志;
+
+  - Browser Testing开发环境在线测试.
+
+    可配合browserstack桌面应用(BrowserStackLocal.exe or BrowserStackLocal.dmg)配合在线网站进行开发环境在线测试.
+
+    - 配置.
+
+      <a href='https://www.browserstack.com/docs/live/local-testing/test-using-local-testing'>Browser Testing开发环境在线测试视频</a>.
+
+  - 结论.
+
+    - 简洁、易用且容易理解;
+    - 功能比较完备,在线随时切换终端设备配置、Debug标记;
+    - 测试过程流畅、无障碍性困难;
+    - 其合作生态成熟且完备,例如Email、Github和browserstack合作的SLACK、JIRA和TRELLO项目管理系统;
+    - 为测试人员大大提高了效率,节约了时间成本;
+    - 大部分浏览器设备开放,可进行体验.
+
+  - 问题.
+
+    - 体验时间过短,每次真实浏览器sessions只能测试1分钟.
+    - App Testing体验时长不能超过30分钟.
+    - 终端设备开放、永久使用需要付费.
+    - 超过体验时间,不可重复体验开放的同一浏览器.
+
 
 ## 跨终端自动化测试
 
