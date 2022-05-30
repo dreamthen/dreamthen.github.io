@@ -342,6 +342,8 @@ categories: testing
 
 > <a href='https://crossbrowsertesting.com'>CrossBrowserTesting</a>
 
+- CrossBrowserTesting配合Appium.
+
   <a href='https://crossbrowsertesting.com/automated-testing/appium'>NodeJS With Appium in CrossBrowserTesting</a>.
 
   - 结论.
@@ -356,6 +358,23 @@ categories: testing
     - 无产品文档,无法直观具体了解产品.
     - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
     - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
+
+- Visual UI Testing.
+
+  <a href='https://support.smartbear.com/crossbrowsertesting/docs/visual-testing/visual-testing.html'>Visual UI Testing Screenshot</a>.
+
+    - 结论.
+
+        - 可进行多终端UI截图,进行对比.
+        - 可下载、分享截图或者截图列表压缩包.
+        - 根据账号保存每次截图列表历史.
+        - 可配置各终端的分辨率.
+
+    - 问题.
+
+        - 需要合作公司的有资质的账号进行注册才可实行多终端UI截图.
+        - 不可预定日程(每天、每个周、每个月)进行截图.
+        - 不可实行本地终端UI截图.
 
 > <a href='https://www.aznfz.com/'>冰狐智能辅助</a>
 
