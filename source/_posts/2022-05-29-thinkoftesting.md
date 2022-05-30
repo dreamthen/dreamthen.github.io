@@ -155,11 +155,26 @@ categories: testing
     - Appium.
 
       Appium是一个开源的,适用于原生或混合移动应用(hybrid mobile apps)的自动化测试工具.
-    - Appium支持多App平台(Android、iOS等);
-    - Appium支持多语言(python、java、ruby、js、c#等),Appium选择了Client/Server的设计模式,只要client能够发送http请求给server,那么client用什么语言来实现都是可以的,这就是如何做到支持多语言的原因;
-    - Appium是跨平台的,可以用在OSX，Windows以及Linux桌面系统上运行;
-    - Appium扩展了WebDriver的协议,这样的好处是以前的WebDriver API能够直接被继承过来,以前的WebDriver各种语言的binding都可以拿来就用,省去了为浏览器、App端各开发一个client的工作量;
-    - Appium开源免费;
+
+    - Appium特性.    
+
+      - Appium支持多App平台(Android、iOS等);
+      - Appium支持多语言(python、java、ruby、js、c#等),Appium选择了Client/Server的设计模式,只要client能够发送http请求给server,那么client用什么语言来实现都是可以的,这就是如何做到支持多语言的原因;
+      - Appium是跨平台的,可以用在OSX，Windows以及Linux桌面系统上运行;
+      - Appium扩展了WebDriver的协议,这样的好处是以前的WebDriver API能够直接被继承过来,以前的WebDriver各种语言的binding都可以拿来就用,省去了为浏览器、App端各开发一个client的工作量;
+      - Appium开源免费;
+    
+    - Appium框架组成.
+    
+      ![](https://image.white-than-wood.zone/appium/content.png)
+    
+    - Appium通信原理.
+
+      Client端运行Webdriver协议的机器发送自动化指令给Appium server,Appium Server接收到client发送的指令后,转换为移动端能够识别的指令,然后发送给移动端设备,并对移动端设备进行操作.
+    
+    - Appium整体流程.
+
+      ![](https://image.white-than-wood.zone/appium/tenet.png)
 
 ### 平台
 
