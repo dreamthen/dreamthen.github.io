@@ -274,7 +274,7 @@ categories: testing
       
      - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
      - 做到了跨浏览器自动化测试比较完备且成熟的流程.
-     - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
+     - 测试报告: 截图、录屏、网络日志、Appium日志以及移动设备日志俱有.
 
    - 问题.
 
@@ -283,6 +283,23 @@ categories: testing
      - 无产品文档,无法直观具体了解产品.
      - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力不足.
      - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
+
+> <a href='https://crossbrowsertesting.com'>CrossBrowserTesting</a>
+
+  <a href='https://crossbrowsertesting.com/automated-testing/appium'>NodeJS With Appium in CrossBrowserTesting</a>.
+
+  - 结论.
+
+    - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
+    - 做到了跨浏览器自动化测试比较完备且成熟的流程.
+    - 测试报告: 截图、录屏、网络日志、Appium日志以及移动设备日志俱有.
+
+  - 问题.
+
+    - API、技术文档无任何引导,且比较简陋.
+    - 无产品文档,无法直观具体了解产品.
+    - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
+    - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
 
 > <a href='https://www.aznfz.com/'>冰狐智能辅助</a>
 
