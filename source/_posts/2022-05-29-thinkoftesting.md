@@ -228,6 +228,22 @@ categories: testing
     - 真机跨终端自动化测试需要付费,无法体验产品.
     - 无产品文档,无法直观具体了解产品.
 
+- Visual UI Testing.
+
+  <a href='https://app.lambdatest.com/console/screenshot'>Visual UI Testing Screenshot</a>.
+
+    - 结论.
+
+      - 可实行多终端UI截图,并可实现对比.
+      - 可下载、分享截图或者截图列表压缩包.
+      - 可配置各终端的分辨率.
+      - 可预定日程(每天、每个周、每个月)进行截图.
+      - 根据账号保存每次截图列表历史.
+    
+    - 问题.
+  
+      - 不可实行本地终端UI截图.
+
 > <a href='https://www.aliyun.com/product/mqc'>阿里云移动测试</a>
 
 - 阿里云移动测试配合Appium.
@@ -246,6 +262,10 @@ categories: testing
       
     - 只支持Python编写测试用例.
     - 测试报告中有一些不完整,如网络日志.
+
+- Visual UI Testing.
+
+  无Visual UI Testing功能.
 
 > <a href='https://www.browserstack.com/'>browserstack</a>    
 
@@ -266,7 +286,26 @@ categories: testing
     - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
     - 产品文档有欠缺,急需补足.
 
+- Visual UI Testing.
+
+  <a href='https://www.browserstack.com/screenshots'>Visual UI Testing Screenshot</a>.
+
+    - 结论.
+
+      - 可进行多终端UI截图,进行对比.
+      - 可下载、分享截图或者截图列表压缩包.
+      - 根据账号保存每次截图列表历史.
+      - 可配置各终端的分辨率.
+      - 可实行本地终端UI截图
+    
+    - 问题.
+
+      - 配置各终端的分辨率需付费.
+      - 不可预定日程(每天、每个周、每个月)进行截图.
+
 > <a href='https://saucelabs.com/'>sauceLabs</a>
+
+- sauceLabs配合Appium.
 
   <a href='https://github.com/saucelabs-training/demo-js/tree/main/webdriverio/appium-app/examples/simple-example'>WebDriverIO With Appium in sauceLabs</a>.
 
@@ -283,6 +322,23 @@ categories: testing
      - 无产品文档,无法直观具体了解产品.
      - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力不足.
      - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
+   
+- Visual UI Testing.
+
+  <a href='https://screener.io/'>Visual UI Testing Screenshot</a>.
+
+    - 结论.
+
+      - 可进行多终端UI截图,进行对比.
+      - 可下载、分享截图或者截图列表压缩包.
+      - 根据账号保存每次截图列表历史.
+      - 可配置各终端的分辨率.
+
+    - 问题.
+
+      - 需要合作公司的有资质的账号进行注册才可实行多终端UI截图.
+      - 不可预定日程(每天、每个周、每个月)进行截图.
+      - 不可实行本地终端UI截图.
 
 > <a href='https://crossbrowsertesting.com'>CrossBrowserTesting</a>
 
@@ -303,6 +359,8 @@ categories: testing
 
 > <a href='https://www.aznfz.com/'>冰狐智能辅助</a>
 
+  不使用Appium,有自己开发的一套移动端自动化测试工具.
+
   <a href='https://www.aznfz.com/mobile-terminal/about'>冰狐智能辅助 - 移动端</a>.
 
   - 问题.
@@ -312,3 +370,8 @@ categories: testing
     - 只支持Javascript编写测试用例.
     - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力非常欠缺.
     - 无产品概念,无测试报告,只是单一的一种工具.
+
+
+  - Visual UI Testing.
+
+    无Visual UI Testing功能.
