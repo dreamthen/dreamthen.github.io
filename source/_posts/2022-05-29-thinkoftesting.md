@@ -7,7 +7,7 @@ categories: testing
 
 # 测试(testing)
 
-## 跨终端自动化测试
+## 跨终端手动测试
 
 ### 平台
 
@@ -37,10 +37,10 @@ categories: testing
 
     - 配置.
 
-      <a href='https://www.lambdatest.com/support/docs/testing-locally-hosted-pages/'>Browser Testing开发环境在线测试</a>. PS:注意看视频中的介绍步骤.
+      <a href='https://www.lambdatest.com/support/docs/testing-locally-hosted-pages/'>Browser Testing开发环境在线测试视频</a>.
 
   - 结论.
-  
+
     - 简洁、易用且容易理解;
     - 功能完备,在线随时切换终端设备配置、录屏下载、Debug标记应有尽有;
     - 测试过程流畅、无障碍性困难;
@@ -52,16 +52,18 @@ categories: testing
     - 大部分终端设备不开放.
     - 终端设备开放需要付费.
 
+## 跨终端自动化测试
+
 - 自动化测试
 
   - WebDriver.
 
     WebDriver是W3C的一个标准,是一个远程控制协议,提供操纵浏览器的方式,提供访问操作DOM的API.
-  
+
     - 工作过程.
-    
+
       <a href='https://blog.csdn.net/ant_ren/article/details/7970793'>WebDriver的工作过程</a>.
-    
+
     - 衍生.
 
       Selenium、Appium都是基于WebDriver协议并进行了扩展,属于WebDriver的衍生品.
@@ -82,33 +84,13 @@ categories: testing
     - Selenium IDE.
 
       Selenium IDE能够以插件的形式被安装到测试者的浏览器中,从而方便地实现Web界面的测试.
-    
-    - lambdaTest配合Selenium IDE.
-
-      <a href='https://www.lambdatest.com/support/docs/run-selenium-ide-tests-on-lambdatest-selenium-cloud-grid/'>Run Selenium IDE Tests with LambdaTest Selenium Grid</a>.
-
-      - 可根据selenium-webdriver事件步骤分帧在录屏中在线查看测试套件自动化测试的情况;
-      - 可在线查看在自动化测试过程当中网络资源接口的加载情况;
-      - 可下载自动化测试的录屏;
-      - 可将标记bug(将有问题的selenium事件步骤分帧上传到lambdaTest衍生的SLACK、JIRA和ASANA项目管理系统);
-
-      - 结论.
-
-        - Selenium IDE是最为流行的一种可视化、自动化测试工具;
-        - 无需编辑一行代码,凭借录制操作就可实现编辑测试用例,进而实现可视化、自动化测试;
-        - 可视化编辑测试用例流畅并且效果顶级;
-        - 与lambdaTest配合相得益彰,做到了跨浏览器自动化可视化测试完备且成熟的流程.
-
-      - 问题
-
-        - 定制性、精确性不足,不如使用Jest配合selenium-webdriver编辑测试用例.
 
     - selenium-webdriver.
 
       浏览器自动化库,提供了许多浏览器自动化接口,用于测试web应用.
-      
+
       - api.
-      
+
         <a href='https://www.selenium.dev/selenium/docs/api/javascript/'>selenium-webdriver</a>.
 
   - App自动化测试工具.
@@ -122,66 +104,94 @@ categories: testing
     - Appium扩展了WebDriver的协议,这样的好处是以前的WebDriver API能够直接被继承过来,以前的WebDriver各种语言的binding都可以拿来就用,省去了为浏览器、App端各开发一个client的工作量;
     - Appium开源免费;
 
-    - lambdaTest配合Appium.
+### 平台
 
-      <a href='https://www.lambdatest.com/support/docs/appium-nodejs-webdriverio/'>WebDriverIO With Appium in lambdaTest</a>.
+> <a href='https://www.lambdatest.com/'>lambdaTest</a>
     
-      - 结论.
+- lambdaTest配合Selenium IDE.
+
+  <a href='https://www.lambdatest.com/support/docs/run-selenium-ide-tests-on-lambdatest-selenium-cloud-grid/'>Run Selenium IDE Tests with LambdaTest Selenium Grid</a>.
+
+  - 可根据selenium-webdriver事件步骤分帧在录屏中在线查看测试套件自动化测试的情况;
+  - 可在线查看在自动化测试过程当中网络资源接口的加载情况;
+  - 可下载自动化测试的录屏;
+  - 可将标记bug(将有问题的selenium事件步骤分帧上传到lambdaTest衍生的SLACK、JIRA和ASANA项目管理系统);
+
+  - 结论.
+
+    - Selenium IDE是最为流行的一种可视化、自动化测试工具;
+    - 可视化编辑测试用例流畅并且效果顶级;
+    - 与lambdaTest配合相得益彰,做到了跨浏览器自动化可视化测试完备且成熟的流程.
+    - 录制操作、编写测试用例二合一,既考虑了定制性、精确性,也考虑了自动化、可视化和灵活性.
+    
+- selenium-webdriver、jest配合lambdaTest.
+    
+  <a href='https://www.lambdatest.com/support/docs/automation-testing-with-selenium-and-jest/'>Jest with Selenium: Tutorial to Run Your First Test on LambdaTest</a>.
+
+- lambdaTest配合Appium.
+
+  <a href='https://www.lambdatest.com/support/docs/appium-nodejs-webdriverio/'>WebDriverIO With Appium in lambdaTest</a>.
+    
+  - 结论.
       
-        - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
+    - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
 
-      - 问题.
+  - 问题.
     
-        - 真机跨终端自动化测试需要付费,无法深层次体验产品.
-        - 只有API,没有产品文档,无法了解产品.
-    
-    - 阿里云移动测试配合Appium.
+    - 真机跨终端自动化测试需要付费,无法深层次体验产品.
+    - 只有API,没有产品文档,无法了解产品.
 
-      <a href='https://help.aliyun.com/document_detail/175761.html'>阿里云移动测试</a>.
+> <a href='https://www.aliyun.com/product/mqc'>阿里云移动测试</a>
+
+- 阿里云移动测试配合Appium.
+
+  <a href='https://help.aliyun.com/document_detail/175761.html'>阿里云移动测试产品文档</a>.
     
-      - 结论.
+  - 结论.
         
-        - 集成Appium IDE于阿里云平台内部,做到可视化、自动化测试.
-        - 录制、编写测试用例二合一,做到了跨浏览器自动化可视化测试完备且成熟的流程.
-        - 产品文档完备,可直观了解产品.
-        - 测试报告:截图、录屏、测试用例日志、Appium日志、移动设备日志、错误日志以及性能报告一应俱全.
+    - 集成Appium IDE于阿里云平台内部,做到可视化、自动化测试.
+    - 录制、编写测试用例二合一,做到了跨浏览器自动化可视化测试完备且成熟的流程.
+    - 产品文档完备,可直观了解产品.
+    - 测试报告:截图、录屏、测试用例日志、Appium日志、移动设备日志、错误日志以及性能报告一应俱全.
       
-      - 问题.
+  - 问题.
       
-        - 只支持Python编写测试用例.
-        - 测试报告中有一些不完整,如网络日志.
-      
-    - browserstack
+    - 只支持Python编写测试用例.
+    - 测试报告中有一些不完整,如网络日志.
+
+> <a href='https://www.browserstack.com/'>browserstack</a>    
+
+- browserstack配合Appium.
     
-      <a href='https://www.browserstack.com/docs/app-automate/appium/getting-started/nodejs/webdriverio'>WebDriverIO With Appium in browserstack</a>.
+  <a href='https://www.browserstack.com/docs/app-automate/appium/getting-started/nodejs/webdriverio'>WebDriverIO With Appium in browserstack</a>.
 
-      - 结论.
+  - 结论.
 
-        - API配置有可视化的介绍引导.
-        - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
-        - 做到了跨浏览器自动化测试比较完备且成熟的流程.
-        - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
+    - API配置有可视化的介绍引导.
+    - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
+    - 做到了跨浏览器自动化测试比较完备且成熟的流程.
+    - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
 
-      - 问题.
+  - 问题.
         
-        - 只有API,没有产品文档,无法了解产品.
-        - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
-        - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
+    - 只有API,没有产品文档,无法了解产品.
+    - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.
+    - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
 
-    - saucelabs
+> <a href='https://saucelabs.com/'>sauceLabs</a>
 
-      <a href='https://github.com/saucelabs-training/demo-js/tree/main/webdriverio/appium-app/examples/simple-example'>WebDriverIO With Appium in saucelabs</a>.
+  <a href='https://github.com/saucelabs-training/demo-js/tree/main/webdriverio/appium-app/examples/simple-example'>WebDriverIO With Appium in sauceLabs</a>.
 
-       - 结论.
+   - 结论.
       
-         - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
-         - 做到了跨浏览器自动化测试比较完备且成熟的流程.
-         - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
+     - 支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).
+     - 做到了跨浏览器自动化测试比较完备且成熟的流程.
+     - 测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.
 
-       - 问题.
+   - 问题.
 
-         - Simple Demo冗杂耦合在一起,下载很慢,且很乱.
-         - API无任何引导,且比较简陋.
-         - 只有API,没有产品文档,无法了解产品.
-         - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力不足.
-         - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
+     - Simple Demo冗杂耦合在一起,下载很慢,且很乱.
+     - API无任何引导,且比较简陋.
+     - 只有API,没有产品文档,无法了解产品.
+     - 在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力不足.
+     - 测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.
