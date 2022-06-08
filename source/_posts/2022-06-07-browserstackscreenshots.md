@@ -103,7 +103,7 @@ categories: testing
   
       PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href='https://appium.io/docs/en/about-appium/appium-clients/index.html'> Appium 服务器的客户端程序库</a>，它是基于 WebDriver 协议: JSON Wire protocol 扩展实现了 <a href='https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md'>Mobile JSON Wire Protocol</a> 协议，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。
     
-      配置驱动，<a href='https://appium.io/docs/en/about-appium/getting-started/?lang=zh#driver-specific-setup'>Driver-Specific Setup</a>，实际上就是 PC 端配置 jdk、android sdk 环境(针对于 Android)，配置 ios 环境(针对于 IOS)。
+      配置驱动，<a href='https://appium.io/docs/en/about-appium/getting-started/?lang=zh#driver-specific-setup'>Driver-Specific Setup</a>。
     
       PS: 驱动是包含在 Appium server 的工作范围内的。
 
@@ -114,11 +114,11 @@ categories: testing
     - 深析 Appium 的工作原理
 
       1. 测试人员执行测试脚本(java,python等脚本)通过 Appium client 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。
-      2. 之后，Appium server 需要与移动端设备自带的自动化测试框架进行通信。
+      2. 之后，Appium server 需要与移动端 App 依赖的自动化测试框架进行通信。
          
          ![](/images/automate_test.png)
       
-         Appium server 会通过 TCP/IP 协议转发请求并转化成移动设备可以识别的命令（command）给不同设备的中间件，在转发请求的同时，会在PC端开启一个监听端口4724，来接收设备返回的结果。
+         Appium server 会通过 TCP/IP 协议转发请求并转化成移动设备可以识别的命令（command）给不同设备的中间件，在转发请求的同时，会在 PC 端开启一个监听端口 4724，来接收设备返回的结果。
       3. Appium server with Android
       
          以 UIAutomator 的自动化测试框架为例。
@@ -133,9 +133,15 @@ categories: testing
          ![](/images/appium_ios.png)
 
          命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过其解释，通过调用 IOS 设备的 XCUITest API 将它们转换为 IOS 设备可理解的格式，IOS 设备通过转换后的命令去做一些实际的操作；接着，IOS 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。
+    
+    - DesiredCapabilities
+
+      用于配置 Appium C/S 会话，告诉 Appium Server 您想要自动化的平台、应用程序等一系列信息。其是一组设置的键值对的集合，其中键对应设置的名称，而值对应设置的值。其通过 Mobile JSON Wire Protocol 协议以 JSON 格式发送测试设备信息给 Appium server。
 
     - 自动化截图
 
       可以通过 Appium Commands API 用于截取当前视口/窗口/页面的图片，会返回以 Base64 格式编码的 PNG 图片。
 
       <a href='https://appium.io/docs/en/commands/session/screenshot/#take-screenshot'>TakeScreenshot(屏幕截图)</a>
+
+    
