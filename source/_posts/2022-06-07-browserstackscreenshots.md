@@ -117,11 +117,11 @@ categories: testing
 
          ![](/images/appium_android.png)
 
-         命令（command）由中间件 bootstrap.jar 通过监听设备的4724端口来获得，经过解释，将它们转换为 Android 设备可理解的 UIAutomator 格式，Android 设备通过 UIAutomator 命令调用其提供的 API 去做一些实际的操作；接着，Android 设备通过 bootstrap.jar 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。
+         命令（command）由中间件 bootstrap.jar 通过监听设备的4724端口来获得，经过其解释，将它们转换为 Android 设备可理解的 UIAutomator 格式，Android 设备通过 UIAutomator 命令调用其提供的 API 去做一些实际的操作；接着，Android 设备通过 bootstrap.jar 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。
       4. Appium server with IOS
 
          以 XCUITest 的自动化测试框架为例。
 
          ![](/images/appium_ios.png)
 
-         命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过解释，通过调用 Apple 的 XCUITest API 将它们转换为 Apple 设备可理解的格式，Apple 设备通过转换后的命令去做一些实际的操作；接着，Apple 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。
+         命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过其解释，通过调用 Apple 的 XCUITest API 将它们转换为 Apple 设备可理解的格式，Apple 设备通过转换后的命令去做一些实际的操作；接着，Apple 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。
