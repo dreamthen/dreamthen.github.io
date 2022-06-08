@@ -102,6 +102,8 @@ categories: testing
       也可以通过 <a href='https://github.com/appium/appium-desktop/releases'>Appium Desktop</a> 桌面应用程序安装。
   
       PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href='https://appium.io/docs/en/about-appium/appium-clients/index.html'> Appium 服务器的客户端程序库</a>，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。
+    
+      配置驱动，<a href='https://appium.io/docs/en/about-appium/getting-started/?lang=zh#driver-specific-setup'>Driver-Specific Setup</a>，实际上就是 PC 端配置 jdk、android sdk 环境(针对于 Android)，配置 ios 环境(针对于 IOS)。
 
     - 深析 Appium 的工作原理
 
@@ -124,4 +126,4 @@ categories: testing
 
          ![](/images/appium_ios.png)
 
-         命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过其解释，通过调用 Apple 的 XCUITest API 将它们转换为 Apple 设备可理解的格式，Apple 设备通过转换后的命令去做一些实际的操作；接着，Apple 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。
+         命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过其解释，通过调用 IOS 设备的 XCUITest API 将它们转换为 IOS 设备可理解的格式，IOS 设备通过转换后的命令去做一些实际的操作；接着，IOS 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。
