@@ -87,7 +87,7 @@ categories: testing
 
     - Appium 是什么?
 
-      Appium 是一个开源的移动端自动化测试工具，用于自动化 iOS设备、 Android设备 和 Windows 桌面系统上的原生、移动 Web 和混合应用。
+      Appium 是一个开源的移动端自动化测试工具，用于自动化 iOS设备、 Android设备 和 Windows 桌面系统上的原生、移动 Web 和混合应用，通过 Node.js 编写，用于启动 Appium HTTP Server。
     
       - [原生应用]指那些用 iOS、 Android 或者 Windows SDKs 编写的应用。
       - [移动 Web 应用]是用移动端浏览器访问的应用(Appium 支持 iOS 上的 Safari、Chrome 和 Android 上的内置浏览器）。
@@ -101,15 +101,19 @@ categories: testing
 
       也可以通过 <a href='https://github.com/appium/appium-desktop/releases'>Appium Desktop</a> 桌面应用程序安装。
   
-      PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href='https://appium.io/docs/en/about-appium/appium-clients/index.html'> Appium 服务器的客户端程序库</a>，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。
+      PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href='https://appium.io/docs/en/about-appium/appium-clients/index.html'> Appium 服务器的客户端程序库</a>，它是基于 WebDriver 协议: JSON Wire protocol 扩展实现了 <a href='https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md'>Mobile JSON Wire Protocol</a> 协议，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。
     
       配置驱动，<a href='https://appium.io/docs/en/about-appium/getting-started/?lang=zh#driver-specific-setup'>Driver-Specific Setup</a>，实际上就是 PC 端配置 jdk、android sdk 环境(针对于 Android)，配置 ios 环境(针对于 IOS)。
     
       PS: 驱动是包含在 Appium server 的工作范围内的。
 
+    - Appium 的结构
+
+      典型的 C/S 结构，Appium client 相当于是客户端，Appium server 是服务器端。
+
     - 深析 Appium 的工作原理
 
-      1. 测试人员执行测试脚本（java,python等脚本）通过 Appium client(基于 WebDriver 协议: JSON Wire protocol 扩展实现了 <a href='https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md'>Mobile JSON Wire Protocol</a> 协议) 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。
+      1. 测试人员执行测试脚本（java,python等脚本）通过 Appium client 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。
       2. 之后，Appium server 需要与移动端设备自带的自动化测试框架进行通信。
          
          ![](/images/automate_test.png)
