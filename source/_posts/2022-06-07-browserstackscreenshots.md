@@ -103,7 +103,7 @@ categories: testing
   
       PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href='https://appium.io/docs/en/about-appium/appium-clients/index.html'> Appium 服务器的客户端程序库</a>，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。
 
-    - 深析 Selenium WebDriver 的工作原理
+    - 深析 Appium 的工作原理
 
       1. 测试人员执行测试脚本（java,python等脚本）通过 Appium client(基于 WebDriver 协议: JSON Wire protocol 扩展实现了 <a href='https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md'>Mobile JSON Wire Protocol</a> 协议) 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。
       2. 之后，Appium server 需要与移动端设备自带的自动化测试框架进行通信。
