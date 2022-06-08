@@ -104,6 +104,8 @@ categories: testing
       PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href='https://appium.io/docs/en/about-appium/appium-clients/index.html'> Appium 服务器的客户端程序库</a>，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。
     
       配置驱动，<a href='https://appium.io/docs/en/about-appium/getting-started/?lang=zh#driver-specific-setup'>Driver-Specific Setup</a>，实际上就是 PC 端配置 jdk、android sdk 环境(针对于 Android)，配置 ios 环境(针对于 IOS)。
+    
+      PS: 驱动是包含在 Appium server 的工作范围内的。
 
     - 深析 Appium 的工作原理
 
