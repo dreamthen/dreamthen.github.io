@@ -136,6 +136,6 @@ categories: testing
 
     - 自动化截图
 
-      可以通过 Appium Commands 用于截取当前视口/窗口/页面的图片，会返回以 Base64 格式编码的 PNG 图片。
+      可以通过 Appium Commands API 用于截取当前视口/窗口/页面的图片，会返回以 Base64 格式编码的 PNG 图片。
 
       <a href='https://appium.io/docs/en/commands/session/screenshot/#take-screenshot'>TakeScreenshot(屏幕截图)</a>
