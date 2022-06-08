@@ -74,11 +74,11 @@ categories: testing
     
     - 自动化截图
 
-      可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的屏幕截图，会返回以 Base64 格式编码的屏幕截图。
+      可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的屏幕截图，会返回以 Base64 格式编码的 PNG 图片。
     
       <a href='https://www.selenium.dev/documentation/webdriver/browser/windows/#takescreenshot'>TakeScreenshot(屏幕截图)</a>
 
-      也可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的元素内的屏幕截图，会返回以 Base64 格式编码的屏幕截图。
+      也可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的元素内的屏幕截图，会返回以 Base64 格式编码的 PNG 图片。
 
       <a href='https://www.selenium.dev/documentation/webdriver/browser/windows/#takeelementscreenshot'>TakeElementScreenshot(元素内屏幕截图)</a>
     
@@ -113,7 +113,7 @@ categories: testing
 
     - 深析 Appium 的工作原理
 
-      1. 测试人员执行测试脚本（java,python等脚本）通过 Appium client 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。
+      1. 测试人员执行测试脚本(java,python等脚本)通过 Appium client 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。
       2. 之后，Appium server 需要与移动端设备自带的自动化测试框架进行通信。
          
          ![](/images/automate_test.png)
@@ -133,3 +133,9 @@ categories: testing
          ![](/images/appium_ios.png)
 
          命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过其解释，通过调用 IOS 设备的 XCUITest API 将它们转换为 IOS 设备可理解的格式，IOS 设备通过转换后的命令去做一些实际的操作；接着，IOS 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。
+
+    - 自动化截图
+
+      可以通过 Appium Commands 用于截取当前视口/窗口/页面的图片，会返回以 Base64 格式编码的 PNG 图片。
+
+      <a href='https://appium.io/docs/en/commands/session/screenshot/#take-screenshot'>TakeScreenshot(屏幕截图)</a>
