@@ -112,20 +112,20 @@ DevTools Frontend 属于 Chromium 完全独立的一部分,代码托管在 Googl
 
   根据<a href='https://chromium.googlesource.com/devtools/devtools-frontend/+/HEAD/docs/workflows.md#Integrated-checkout'> Devtools Frontend Workflows </a>以及<a href='https://docs.google.com/document/d/1COgCBWWuTh2o-Zbp6h_z0h0LtlJaimaEDsION4RZPxc/edit#heading=h.406e03aq0xjm'> DevTools debugging workflow -> Existing workflows </a>可知,原有的基于 DevServer 运行 DevTools 方式(npm start)已经移除,Chromium 79版本之后统一使用 --custom-devtools-frontend 方式.
 
-  - 通过文件系统运行
-
-        <path-to-devtools-frontend>/third_party/chrome/chrome-<platform>/chrome --custom-devtools-frontend=file://$(realpath out/Default/gen/front_end)
-
-    Tips: file://...在 Mac 和 Linux 上,文件 url 必须以三个斜杠开头,$(realpath out/Default/gen/front_end)扩展的 Devtools Frontend 目录路径必须为绝对路径.
-    PS: 为了避免代价昂贵的 Chromium 构建,可以在预构建的 Chromium 中运行 DevTools Frontend.例如,可以使用最新版本的 Chrome Canary,或者使用 third_party/chrome 中下载的二进制文件.
-
-    - Chrome Canary
+  - Chrome Canary
 
       众所周知,Chrome = Chromium + Google产品集,那么Chrome Canary是什么呢? Chrome Canary 是更新速度最快的 Chrome 版本,几乎每天更新且支持自动更新,也是功能、代码最先进的 Chrome 版本,可独立安装、与其他版本的 Chrome 程序共存,适合进阶用户或开发者人员安装备用,尝鲜最新功能,由于是每日更新的 Chrome Dev 版本,极其不稳定.
 
       Chrome Dev 是 Chrome 的开发者版本,每个周更新 1-2 次,虽然该版本已经过测试,但仍可能存在一些问题,但比 Chrome Canary 更稳定.
 
       Chrome Beta 是 Chrome 的测试版本,每周更新一次,而每 4 周会进行一次重大的可纳入到稳定版本的更新.
+
+  - 通过文件系统运行
+
+        <path-to-devtools-frontend>/third_party/chrome/chrome-<platform>/chrome --custom-devtools-frontend=file://$(realpath out/Default/gen/front_end)
+
+    Tips: file://...在 Mac 和 Linux 上,文件 url 必须以三个斜杠开头,$(realpath out/Default/gen/front_end)扩展的 Devtools Frontend 目录路径必须为绝对路径.
+    PS: 为了避免代价昂贵的 Chromium 构建,可以在预构建的 Chromium 中运行 DevTools Frontend.例如,可以使用最新版本的 Chrome Canary,或者使用 third_party/chrome 中下载的二进制文件.
 
     - 实际演示
 
@@ -140,5 +140,50 @@ DevTools Frontend 属于 Chromium 完全独立的一部分,代码托管在 Googl
       终端显示:
 
       ![](https://image.white-than-wood.zone/devtools_frontend/fileSystem.png)
+    
+  - 通过Server运行
 
+    将 out/Default/gen/front_end 的内容放入本地服务器,比如运行:
+
+        python -m http.server
+
+    这里用的是http-server.
+
+        cd out/Default/gen/front_end
+        http-server -p 8000
+
+    ![](https://image.white-than-wood.zone/devtools_frontend/remoteUrl.png)
+
+    - 实际演示
+
+      运行以下命令:
+
+            ./third_party/chrome/chrome-mac/Chromium.app/Contents/MacOS/Chromium --custom-devtools-frontend=http://localhost:8000/
+
+      <video muted controls="controls" autoplay="autoplay" loop="loop" style="width:100%;">
+        <source src="https://image.white-than-wood.zone/devtools_frontend/remoteUrl.mp4" type="video/mp4" />
+      </video>
+
+      终端显示:
+
+      ![](https://image.white-than-wood.zone/devtools_frontend/remoteUrlShow.png)
+
+  - 通过远程连接运行
+
+    将 out/Default/gen/front_end 的内容放入本地服务器,比如运行:
+
+        python -m http.server
+
+    这里用的是http-server.
+
+        cd out/Default/gen/front_end
+        http-server -p 8000
         
+    ![](https://image.white-than-wood.zone/devtools_frontend/remoteUrl.png)
+
+    - 实际演示
+
+      运行以下命令:
+
+            # 设置远程调试接口为 9222
+            ./third_party/chrome/chrome-mac/Chromium.app/Contents/MacOS/Chromium --custom-devtools-frontend=http://localhost:8000/ --remote-debugging-port=9222
