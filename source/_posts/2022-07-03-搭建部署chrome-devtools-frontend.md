@@ -187,3 +187,13 @@ DevTools Frontend 属于 Chromium 完全独立的一部分,代码托管在 Googl
 
             # 设置远程调试接口为 9222
             ./third_party/chrome/chrome-mac/Chromium.app/Contents/MacOS/Chromium --custom-devtools-frontend=http://localhost:8000/ --remote-debugging-port=9222
+      
+      <video muted controls="controls" autoplay="autoplay" loop="loop" style="width:100%;">
+        <source src="https://image.white-than-wood.zone/devtools_frontend/hostedMode.mp4" type="video/mp4" />
+      </video>
+
+      终端显示:
+
+      ![](https://image.white-than-wood.zone/devtools_frontend/hostedMode.png)
+
+  上述所有方式均是在无 VPN 的情况下实现的运行.
