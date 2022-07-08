@@ -196,4 +196,4 @@ DevTools Frontend 属于 Chromium 完全独立的一部分,代码托管在 Googl
 
       ![](https://image.white-than-wood.zone/devtools_frontend/hostedMode.png)
 
-  上述所有方式均是在无 VPN 的情况下实现的运行.
+ 上述所有方式均是在无 VPN 的情况下实现的运行.
