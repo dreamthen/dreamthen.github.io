@@ -187,6 +187,10 @@ DevTools Frontend 属于 Chromium 完全独立的一部分,代码托管在 Googl
 
             # 设置远程调试接口为 9222
             ./third_party/chrome/chrome-mac/Chromium.app/Contents/MacOS/Chromium --custom-devtools-frontend=http://localhost:8000/ --remote-debugging-port=9222
+
+      建立连接:
+
+      在任意地址栏中输入 http://localhost:9222 + EndPoint http://localhost:9222/json -> devtoolsFrontendUrl 值即可(等同于在当前页面直接打开 DevTools)
       
       <video muted controls="controls" autoplay="autoplay" loop="loop" style="width:100%;">
         <source src="https://image.white-than-wood.zone/devtools_frontend/hostedMode.mp4" type="video/mp4" />
@@ -196,4 +200,23 @@ DevTools Frontend 属于 Chromium 完全独立的一部分,代码托管在 Googl
 
       ![](https://image.white-than-wood.zone/devtools_frontend/hostedMode.png)
 
- 上述所有方式均是在无 VPN 的情况下实现的运行.
+    - 使用正式稳定版的 Chrome 演示运行
+
+      运行以下命令:
+
+            # 设置远程调试接口为 9222
+            /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --custom-devtools-frontend=http://localhost:8000/ --remote-debugging-port=9222
+
+      建立连接:
+
+      在任意地址栏中输入 http://localhost:9222 + EndPoint http://localhost:9222/json -> devtoolsFrontendUrl 值即可(等同于在当前页面直接打开 DevTools)
+      
+      <video muted controls="controls" autoplay="autoplay" loop="loop" style="width:100%;">
+        <source src="https://image.white-than-wood.zone/devtools_frontend/hostedModeChrome.mp4" type="video/mp4" />
+      </video>
+
+      终端显示:
+
+      ![](https://image.white-than-wood.zone/devtools_frontend/hostedModeChrome.png)
+
+上述所有方式均是在无 VPN 的情况下实现的运行.
