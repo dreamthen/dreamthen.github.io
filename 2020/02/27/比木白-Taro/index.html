@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="taro,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="微信小程序框架Taro2.0升级压缩微信小程序包体积增大比较多 原因    最近taro框架由1.x升级至了2.0版本，变化比较大的就是编译这一块儿，增加了按需加载runtime第三方依赖，需要下载第三方按需加载依赖包babel-plugin-transform-runtime以及babel-runtime，编译器也进行了优化，新增了@tarojs/mini-runner编译依赖，使得编译优雅了许">
+<meta name="keywords" content="taro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="比木白-Taro">
+<meta property="og:url" content="http://yoursite.com/2020/02/27/比木白-Taro/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="微信小程序框架Taro2.0升级压缩微信小程序包体积增大比较多 原因    最近taro框架由1.x升级至了2.0版本，变化比较大的就是编译这一块儿，增加了按需加载runtime第三方依赖，需要下载第三方按需加载依赖包babel-plugin-transform-runtime以及babel-runtime，编译器也进行了优化，新增了@tarojs/mini-runner编译依赖，使得编译优雅了许">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/taroPackageJson.png">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.168Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="比木白-Taro">
+<meta name="twitter:description" content="微信小程序框架Taro2.0升级压缩微信小程序包体积增大比较多 原因    最近taro框架由1.x升级至了2.0版本，变化比较大的就是编译这一块儿，增加了按需加载runtime第三方依赖，需要下载第三方按需加载依赖包babel-plugin-transform-runtime以及babel-runtime，编译器也进行了优化，新增了@tarojs/mini-runner编译依赖，使得编译优雅了许">
+<meta name="twitter:image" content="http://yoursite.com/images/taroPackageJson.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/27/比木白-Taro/">
+
+
+
+
+
+  <title>比木白-Taro | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/27/比木白-Taro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">比木白-Taro</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-27T20:57:40+08:00">
+                2020-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Taro/" itemprop="url" rel="index">
+                    <span itemprop="name">Taro</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="微信小程序框架Taro"><a href="#微信小程序框架Taro" class="headerlink" title="微信小程序框架Taro"></a>微信小程序框架Taro</h1><h2 id="2-0升级压缩微信小程序包体积增大比较多"><a href="#2-0升级压缩微信小程序包体积增大比较多" class="headerlink" title="2.0升级压缩微信小程序包体积增大比较多"></a>2.0升级压缩微信小程序包体积增大比较多</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  最近taro框架由1.x升级至了2.0版本，变化比较大的就是编译这一块儿，增加了按需加载runtime第三方依赖，需要下载第三方按需加载依赖包babel-plugin-transform-runtime以及babel-runtime，编译器也进行了优化，新增了@tarojs/mini-runner编译依赖，使得编译优雅了许多，而且利用webpackChain配置，可以配置更多的webpack插件，比如说上面提到的ContextReplacementPlugin剔除某些外部依赖不打入至包内，再比如说webpack-bundle-analyzer这种可以监听打包之后包体积大小，进行可视化的第三方依赖都可以方便进行使用。</p>
+<p>  但是实际效果,打包之后的体积比较与1.x版本,足足增大了400kb左右,导致我业务开发的小程序体积包从1.4M窜升至1.8M,uglify和csso压缩JS以及css的工具明显也不如之前1.x版本实用,开启压缩和不开启的实际效果,体积几乎没什么变化。</p>
+<p>  由此基于小程序要上线,我又退回至1.x的最后一个版本,也许是@tarojs/mini-runner刚开发不久,编译依赖不够成熟吧。</p>
+<p>  升级至2.0.6之后,这个问题有了不小的改善,Taro官方使用SplitChunksPlugin默认将打包分为四部分’runtime’,’vendors’,’taro’以及’commons’,分别代表的是懒加载、除了taro以外的在超过2个的入口模块都引入的第三方外部依赖包、taro除了taro以外的在超过2个的入口模块都引入的第三方外部依赖包以及在超过2个的入口模块都引入的公共业务部分。除了这些,taro还支持自己配置webpackChain SplitChunksPlugin自定义拆包。</p>
+<p>  升级至2.1.0之后,这个问题基本有了彻底的改善,但是需要修改package.json scripts命令,将全局环境变量NODE_ENV更改为production,将开发环境代码打包、压缩、缓存以及多进程配置置为生产环境配置,加入至’dev:weapp’命令中,当然添加参数的方式有多样,可以用cross-env,也可以用yargs,这里我使用的是cross-env。</p>
+<p>  taro-ui UI组件库的大小也改善了很多,尤其是支持了按需加载UI组件库方面,但是这里又出现了一个问题,taro-ui UI组件库在taro 2.1.0以后的版本生产环境也就是我所说的yarn run build:weapp,也可以使用我上述所说的将全局环境变量置为production,之后’dev:weapp’的方式,公共样式就不会导入进来,此bug在taro 2.1.5版本修复。<a href="https://github.com/NervJS/taro/issues/5998" target="_blank" rel="noopener">我提的taro issue</a></p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果是taro,这种使用react对接多端的框架,则是使用webpackChain</span></span><br><span class="line"><span class="comment">//2.0.6配置,config目录下的index.js</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    mini: &#123;</span><br><span class="line">        commonChunks: [<span class="string">'runtime'</span>, <span class="string">'vendors'</span>, <span class="string">'common'</span>],</span><br><span class="line">        webpackChain(chain, webpack) &#123;</span><br><span class="line">            chain.optimization.splitChunks(&#123;</span><br><span class="line">                 minChunks: <span class="number">2</span>,</span><br><span class="line">                 minSize: <span class="number">0</span>,</span><br><span class="line">                 name: <span class="string">'vendors'</span>,</span><br><span class="line">                 maxInitialRequests: <span class="literal">Infinity</span>,</span><br><span class="line">                 chunks: <span class="string">'all'</span>,</span><br><span class="line">                 cacheGroups: &#123;</span><br><span class="line">                    common: &#123;</span><br><span class="line">                        minChunks: <span class="number">2</span>,</span><br><span class="line">                        name: <span class="string">'common'</span>,</span><br><span class="line">                        chunks: <span class="string">'initial'</span>,</span><br><span class="line">                        priority: <span class="number">1</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    vendors: &#123;</span><br><span class="line">                        minChunks: <span class="number">2</span>,</span><br><span class="line">                        name: <span class="string">'vendors'</span>,</span><br><span class="line">                        test: <span class="function">(<span class="params"><span class="built_in">module</span></span>)=&gt;</span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="regexp">/[\\/]node_modules[\\/]/</span>.test(<span class="built_in">module</span>.resource);</span><br><span class="line">                        &#125;,</span><br><span class="line">                        chunks: <span class="string">'initial'</span>,</span><br><span class="line">                        priority: <span class="number">10</span></span><br><span class="line">                    &#125;</span><br><span class="line">                 &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2.1.0版本将开发环境代码置为生产环境代码,彻底解决2.0之后打包过大的问题</p>
+</blockquote>
+<p>  <img src="/images/taroPackageJson.png" alt></p>
+<h2 id="微信小程序中转义换行问题"><a href="#微信小程序中转义换行问题" class="headerlink" title="微信小程序中转义换行问题"></a>微信小程序中转义换行问题</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  开发微信小程序时,发现后台返回的某一些字符串当中含有\n换行符,实际意义是为了让字符串在换行符的位置上进行换行展示,在PC端或者移动端开发中,我们可以使用\&lt;br/>来置换字符串中所有的\n换行符,而在小程序中,就感觉有一些手足无措。<br>  于是查阅资料,找到了解决方案。</p>
+<blockquote>
+<p>详情</p>
+</blockquote>
+<ol>
+<li><p>在微信小程序中view标签中的任何可转义的字符,都不可以进行转义,只有在text标签中,且属性decode为true的情况下,才可以将转义字符进行转义。</p>
+</li>
+<li><p>字符串中的\n换行符,实际上为\n,故需要匹配字符串中所有的\n字符串,然后进行替换为\n换行符。</p>
+</li>
+</ol>
+   <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Taro项目中的例子    </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">     <span class="comment">//...</span></span><br><span class="line">     render() &#123;</span><br><span class="line">         <span class="comment">//这样就可以在页面中显示</span></span><br><span class="line">         <span class="comment">//我叫尹文楷,</span></span><br><span class="line">         <span class="comment">//我今年十二岁了,</span></span><br><span class="line">         <span class="comment">//我喜欢写代码.</span></span><br><span class="line">         <span class="keyword">let</span> value = <span class="string">'我叫尹文楷,\\n我今年十二岁了,\\n我喜欢写代码.'</span>.replace(<span class="regexp">/\\n/g</span>, <span class="string">'\n'</span>);</span><br><span class="line">         <span class="keyword">return</span> (</span><br><span class="line">             &lt;Text decode&gt;</span><br><span class="line">                  &#123;value&#125;</span><br><span class="line">             &lt;<span class="regexp">/Text&gt;</span></span><br><span class="line"><span class="regexp">         )       </span></span><br><span class="line"><span class="regexp">     &#125;   </span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="JSX渲染"><a href="#JSX渲染" class="headerlink" title="JSX渲染"></a>JSX渲染</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>   昨天在写Taro项目的时候,发现taro项目的渲染方法,最前端必须添加render,方可返回JSX,要是不添加render,编译时就会报错。而且不支持静态策略模式返回JSX,也会匹配不到语法而报错,所以就不使用策略模式来写了,而是使用判断语句switch来写,然而还是遇到了问题,switch每一个case分支判断语句,必须以{}花括号包裹返回。</p>
+<p>   另外,在调用渲染JSX的方法时,即使是箭头函数,也不能以解构定义的变量去进行调用,必须以软绑定的形式去进行调用。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+   <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Taro, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'@tarojs/taro'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    Image,</span><br><span class="line">    View</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'@tarojs/components'</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    renderShowConent = <span class="function">(<span class="params">type, content</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span>(type) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'TEXT'</span>: &#123;</span><br><span class="line">                <span class="keyword">return</span> &lt;Text&gt;</span><br><span class="line">                    &#123;content&#125;    </span><br><span class="line">                &lt;/Text&gt;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'IMG'</span>: &#123;</span><br><span class="line">                <span class="keyword">return</span> &lt;Image </span><br><span class="line">                    src=&#123;content&#125;</span><br><span class="line">                    alt=&#123;content&#125;</span><br><span class="line">                /&gt;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> type = <span class="string">'TEXT'</span>,</span><br><span class="line">              content = <span class="string">'yinwenkai'</span>;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;View&gt;</span><br><span class="line">                &#123;<span class="keyword">this</span>.renderShowConent(type, content)&#125;</span><br><span class="line">            &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="父子传参"><a href="#父子传参" class="headerlink" title="父子传参"></a>父子传参</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>   最近在写Taro小程序项目的时候,发现Taro小程序里面父子传参不像想象中的那么简单,尤其是this.props.children和自定义组件参数,实际在编译完之后this.props.children就是\&lt;slot>\&lt;/slot>,且在自组件里面使用this.props.children不能解构定义,比如{children} = this.props,必须使用this.props.children,而this.props.children不能为taro-ui的组件,必须为taro内置的原生组件;而自定义组件参数,规则就更多了,参数的命名前缀必须为render,在使用时也不可解构定义,必须使用this.props.render…,自定义组件参数最好不要是函数方法返回组件,而是直接赋值,这样可保万无一失。自定义组件参数既可为内置原生组件也可为taro-ui这种UI组件。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+   <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Taro, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'@tarojs/taro'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    View</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'@tarojs/components'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        renderDemo: PropTypes.element</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;View&gt;</span><br><span class="line">                &#123;<span class="keyword">this</span>.props.renderDemo&#125;</span><br><span class="line">                &#123;<span class="keyword">this</span>.props.children&#125;</span><br><span class="line">            &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">export default Demo;</span></span><br></pre></td></tr></table></figure>
+   <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Taro, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'@tarojs/taro'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    View</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'@tarojs/components'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">     AtButton</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'taro-ui'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> Demo <span class="keyword">from</span> <span class="string">'../Demo'</span>; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        renderDemo: PropTypes.element</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;View&gt;</span><br><span class="line">                &lt;Demo renderDemo=&#123;</span><br><span class="line">                     &lt;AtButton type=<span class="string">'primary'</span>&gt;按钮&lt;<span class="regexp">/AtButton&gt;</span></span><br><span class="line"><span class="regexp">                 &#125;&gt;</span></span><br><span class="line"><span class="regexp">                     &lt;View&gt;</span></span><br><span class="line"><span class="regexp">                         尹文楷,god bless you~</span></span><br><span class="line"><span class="regexp">                     &lt;/</span>View&gt;</span><br><span class="line">                &lt;<span class="regexp">/Demo&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>View&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Parent;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/taro/" rel="tag"># taro</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/27/比木白-Git/" rel="next" title="比木白-Git">
+                <i class="fa fa-chevron-left"></i> 比木白-Git
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/27/比木白-Nginx/" rel="prev" title="比木白-Nginx">
+                比木白-Nginx <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#微信小程序框架Taro"><span class="nav-number">1.</span> <span class="nav-text">微信小程序框架Taro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-0升级压缩微信小程序包体积增大比较多"><span class="nav-number">1.1.</span> <span class="nav-text">2.0升级压缩微信小程序包体积增大比较多</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微信小程序中转义换行问题"><span class="nav-number">1.2.</span> <span class="nav-text">微信小程序中转义换行问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSX渲染"><span class="nav-number">1.3.</span> <span class="nav-text">JSX渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#父子传参"><span class="nav-number">1.4.</span> <span class="nav-text">父子传参</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

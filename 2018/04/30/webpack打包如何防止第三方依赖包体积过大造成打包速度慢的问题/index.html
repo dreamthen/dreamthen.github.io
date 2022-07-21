@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="为何第三方依赖包会引起打包的体积过大 ES6的模块化机制,当引入外部第三方依赖包时,无论是否已经引入,都会再次将其引入进来,这时候就会存在重复引入导致打包体积过大、打包速度过慢的问题。  如何解决重复引入第三方依赖包,引起的打包体积过大以及打包速度过慢的问题  使用CommonsChunkPlugin提取公共模块,理想状态下是将第三方外部依赖包、业务代码、业务代码中的重复引入的公共部分和webpa">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-04-30 webpack打包如何防止第三方依赖包体积过大造成打包速度慢的问题">
+<meta property="og:url" content="http://yoursite.com/2018/04/30/webpack打包如何防止第三方依赖包体积过大造成打包速度慢的问题/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="为何第三方依赖包会引起打包的体积过大 ES6的模块化机制,当引入外部第三方依赖包时,无论是否已经引入,都会再次将其引入进来,这时候就会存在重复引入导致打包体积过大、打包速度过慢的问题。  如何解决重复引入第三方依赖包,引起的打包体积过大以及打包速度过慢的问题  使用CommonsChunkPlugin提取公共模块,理想状态下是将第三方外部依赖包、业务代码、业务代码中的重复引入的公共部分和webpa">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.164Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-04-30 webpack打包如何防止第三方依赖包体积过大造成打包速度慢的问题">
+<meta name="twitter:description" content="为何第三方依赖包会引起打包的体积过大 ES6的模块化机制,当引入外部第三方依赖包时,无论是否已经引入,都会再次将其引入进来,这时候就会存在重复引入导致打包体积过大、打包速度过慢的问题。  如何解决重复引入第三方依赖包,引起的打包体积过大以及打包速度过慢的问题  使用CommonsChunkPlugin提取公共模块,理想状态下是将第三方外部依赖包、业务代码、业务代码中的重复引入的公共部分和webpa">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/30/webpack打包如何防止第三方依赖包体积过大造成打包速度慢的问题/">
+
+
+
+
+
+  <title>2018-04-30 webpack打包如何防止第三方依赖包体积过大造成打包速度慢的问题 | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/webpack打包如何防止第三方依赖包体积过大造成打包速度慢的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018-04-30 webpack打包如何防止第三方依赖包体积过大造成打包速度慢的问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-30T20:46:05+08:00">
+                2018-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="为何第三方依赖包会引起打包的体积过大"><a href="#为何第三方依赖包会引起打包的体积过大" class="headerlink" title="为何第三方依赖包会引起打包的体积过大"></a>为何第三方依赖包会引起打包的体积过大</h1><blockquote>
+<p>ES6的模块化机制,当引入外部第三方依赖包时,无论是否已经引入,都会再次将其引入进来,这时候就会存在重复引入导致打包体积过大、打包速度过慢的问题。</p>
+</blockquote>
+<h1 id="如何解决重复引入第三方依赖包-引起的打包体积过大以及打包速度过慢的问题"><a href="#如何解决重复引入第三方依赖包-引起的打包体积过大以及打包速度过慢的问题" class="headerlink" title="如何解决重复引入第三方依赖包,引起的打包体积过大以及打包速度过慢的问题"></a>如何解决重复引入第三方依赖包,引起的打包体积过大以及打包速度过慢的问题</h1><blockquote>
+<ol>
+<li>使用CommonsChunkPlugin提取公共模块,理想状态下是将第三方外部依赖包、业务代码、业务代码中的重复引入的公共部分和webpack的引导程序以及manifest 加载运行外部依赖包都分别打成一个包,减小打包体积,提高打包的速度。</li>
+</ol>
+</blockquote>
+<pre><code>const webpack = require(&quot;webpack&quot;),
+      HtmlWebpackIncludeAssetsPlugin = require(&quot;html-webpack-include-assets-plugin&quot;),
+      HtmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);
+
+const PUBLIC_DIR = &quot;/&quot;;
+
+module.exports = {
+    entry: {
+        //login入口有引入testConfig.js以及reactConfig.js
+        login: `${APP_DIR}/login.js`,
+        //index入口也有引入testConfig.js以及reactConfig.js
+        index: `${APP_DIR}/index.js`,
+        //app入口没有引入testConfig.js,也没有引入reactConfig.js
+        app: `${APP_DIR}/app.js`,
+        //mobile入口有引入testConfig.js,却没有引入reactConfig.js
+        mobile: `${APP_DIR}/mobule.js`
+    },
+    plugins: [
+        //...
+        //首先我想把四个入口中的公共模块,包括引入的第三方外部依赖包都提取出来
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &apos;common&apos;,
+            filename: &apos;js/common.[hash].js&apos;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;login.html&quot;,
+            template: `${ROOT_DIR}/login.html`,
+            chunks: [&quot;common&quot;, &quot;login&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;index.html&quot;,
+            template: `${ROOT_DIR}/index.html`,
+            chunks: [&quot;common&quot;, &quot;index&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;app.html&quot;,
+            template: `${ROOT_DIR}/app.html`,
+            chunks: [&quot;common&quot;, &quot;app&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;mobile.html&quot;,
+            template: `${ROOT_DIR}/mobile.html`,
+            chunks: [&quot;common&quot;, &quot;mobile&quot;],
+            inject: &quot;body&quot;
+        })
+        //发现这样行不通,打包之后,common.[hash].js中只有webpack引导程序以及manifest 加载运行模块的代码,公共部分并没有办法提取出来。
+        //后来查找原因,原来是CommonsChunkPlugin中的minChunks属性默认设置为公共模块部分最小在全部入口全部引入,才会被提取合成公共代码。
+        //知道了原因,那就简单了,直接设置minChunks: 2,也就是说只要公共模块最小在两个入口引入,就可以被提取出来作为公共模块部分。
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &apos;common&apos;,
+            filename: &apos;js/common.[hash].js&apos;,
+            minChunks: 2
+        }),
+        ...
+        //这样设置之后发现是可以的,将公共的第三方的外部依赖包、testConfig.js、reactConfig.js、webpack引导程序以及manifest 加载运行模块部分都提取出来,打包至common.[hash].js中,减小了打包的体积,加快了打包速度。
+        //试想假如我只想提取testConfig.js模块
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &apos;common&apos;,
+            filename: &apos;js/common.[hash].js&apos;,
+            //minChunks还可以是一个函数,接收两个参数,module是指入口所引入的每一个模块,count则是指module被几个入口所调用
+            //module有两个属性: context和resource
+            //context: 模块所存储的目录位置
+            //resource: 模块所执行的文件名称
+            //这里就是使用resource模块所执行的文件名称去匹配testConfig,且模块至少被两个入口所引入,这样就可以单独提取testConfig.js文件了
+            minChunks: function(module, count) {
+                return module.resource &amp;&amp; /testConfig/.test(module.resource) &amp;&amp; count &gt;= 2;
+            }
+        }),
+        ...
+    ],
+    //将第三方公共依赖包与testConfig.js、reactConfig.js这种业务开发所使用的公共模块分离开,使得第三方公共依赖包分离在另一个包下
+    entry: {
+        //login入口有引入testConfig.js以及reactConfig.js
+        login: `${APP_DIR}/login.js`,
+        //index入口也有引入testConfig.js以及reactConfig.js
+        index: `${APP_DIR}/index.js`,
+        //app入口没有引入testConfig.js,也没有引入reactConfig.js
+        app: `${APP_DIR}/app.js`,
+        //mobile入口有引入testConfig.js,却没有引入reactConfig.js
+        mobile: `${APP_DIR}/mobule.js`,
+        //设置一个第三方外部依赖包的入口
+        vendor: [&apos;react&apos;, &apos;react-redux&apos;, &apos;redux&apos;, &apos;react-router&apos;, &apos;redux-thunk&apos;, &apos;redux-logger&apos;, &apos;react-dom&apos;, &apos;react-addons&apos;, &apos;prop-types&apos;, &apos;moment&apos;, &apos;antd&apos;, &apos;babel-polyfill&apos;]
+    },
+    plugins: [
+        ...
+        //这里无论入口是否引入了vendor入口数组里面的第三方依赖包,它都会对数组里面的第三方外部依赖包进行提取,当然这里的第三方外部依赖包是有限制的,module.context在这里起到了作用,只有模块所存储的路径含有&quot;node_modules&quot;的情况下,也就是说只有是在npm下载的第三方外部依赖包,才会被提取出来。
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &apos;vendor&apos;,
+            filename: &apos;js/vendor.[hash].js&apos;,
+            minChunks: function(module, count) {
+                return module.context &amp;&amp; module.context.includes(&quot;nodule_modules&quot;);
+            }
+        }),
+        //这样提取第三方外部依赖包是可以的,直接提取到js文件夹里面的vendor.[hash].js
+        //上面以及所有的提取的公共模块文件加hash的原因,是为了防止浏览器的永久缓存机制,使得文件更新过后,使用的还是原来文件的内容。
+        //提取出了第三方外部依赖包之后,由于想到它们不是业务代码,很少进行修改,尽量的多利用浏览器永久缓存机制,所以为了防止每一次构建都会引起它们hash值的改变,不能利用浏览器永久缓存机制,要把webpack引导程序以及manifest 加载运行文件提取到另一个模块包中。
+        //这里manifest就是隐藏的webpack引导程序以及manifest 加载和运行模块文件的入口
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &apos;manifest&apos;,
+            filename: &apos;js/manifest.[hash].js&apos;,
+            minChunks: Infinity
+        }),
+        //这样提取webpack引导程序以及manifest 加载和运行文件是可以的,直接提取到js文件夹里面的manifest.[hash].js
+        //再提取出业务使用的像testConfig.js、reactConfig.js公共模块,想着应该可以满足需求,业务代码的公共部分一个模块包,第三方外部依赖包一个模块包,以及webpack引导程序和manfiest 加载运行模块文件一个模块包
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &apos;common&apos;,
+            filename: &apos;js/common.[hash].js&apos;,
+            minChunks: 2
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;login.html&quot;,
+            template: `${ROOT_DIR}/login.html`,
+            chunks: [&quot;manifest&quot;, &quot;vendor&quot;, &quot;common&quot;, &quot;login&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;index.html&quot;,
+            template: `${ROOT_DIR}/index.html`,
+            chunks: [manifest&quot;, &quot;vendor&quot;, &quot;common&quot;, &quot;index&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;app.html&quot;,
+            template: `${ROOT_DIR}/app.html`,
+            chunks: [manifest&quot;, &quot;vendor&quot;, &quot;common&quot;, &quot;app&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;mobile.html&quot;,
+            template: `${ROOT_DIR}/mobile.html`,
+            chunks: [manifest&quot;, &quot;vendor&quot;, &quot;common&quot;, &quot;mobile&quot;],
+            inject: &quot;body&quot;
+        })
+        //发现这样实现是不可以的,第三方外部依赖包的模块包,webpack引导程序以及manifest 加载和运行模块文件的模块包被打出来了。
+        //但是common.[hash].js中却没有至少两个入口共同引入业务代码公共模块的部分,还是被分别打进了业务代码模块包中。
+        //且common.[hash].js中的代码实际上是webpack运行文件以及manfiest 加载和运行模块的文件部分,manfiest.[hash].js也不见了,好像common.[hash].js替换掉了。
+        //原因到现在还没有找到...
+        //CommonsChunkPlugin的缺点就在于:即使我使用了vendor的方式去提取公共的第三方外部依赖包模块,还是在每一次构建的时候,都会去进行打包,像我前面说的,第三方外部依赖包模块不像业务代码,很少进行修改。
+        //所以每一次都去进行打包,还是不妥当的,花费了很多时间在打包第三方外部依赖包上面。
+    ]
+};
+</code></pre><blockquote>
+<ol start="2">
+<li>使用DllPlugin、DllReferencePlugin、CommonsChunkPlugin以及HtmlWebpackIncludeAssetsPlugin实现对第三方外部依赖包模块、业务代码公共模块以及webpack引导程序和manifest 加载和运行模块文件都分别打成一个包,减小打包体积,提高打包的速度。</li>
+</ol>
+</blockquote>
+<pre><code>//使用DllPlugin和DllReferencePlugin,就不需要像CommonsChunkPlugin那样,对于第三方外部依赖包模块,每次都要去构建打包了,只需要另外配置一个webpack配置文件,就可以实现一劳永逸的体验。
+//只要没有下载新的第三方外部依赖包模块,就不需要利用webpack.dll.config配置文件去打dll包,总体上减少了每次都构建第三方外部依赖包模块的时间。
+//webpack.dll.config配置
+const webpack = require(&quot;webpack&quot;),
+    path = require(&quot;path&quot;);
+
+const PUBLIC_DIR = &quot;/&quot;,
+    DLL_DIR = path.resolve(__dirname, &quot;../dll&quot;),
+    ROOT_DIR = path.resolve(__dirname, &quot;../..&quot;);
+
+const webpackDllConfig = {
+    devtool: &quot;source-map&quot;,
+    entry: {
+        vendor: [&quot;react&quot;, &quot;react-router&quot;, &quot;redux&quot;, &quot;react-redux&quot;, &quot;redux-thunk&quot;, &quot;redux-logger&quot;, &quot;react-dom&quot;, &quot;react-addons&quot;, &quot;prop-types&quot;, &quot;antd&quot;, &quot;babel-polyfill&quot;]
+    },
+    output: {
+        publicPath: PUBLIC_DIR,
+        path: DLL_DIR,
+        filename: &quot;[name].dll.js&quot;,
+        library: &quot;[name]_[chunkhash]&quot;
+    },
+    plugins: [
+        //防止打包过程中出现错误,中断打包
+        new webpack.NoEmitOnErrorsPlugin(),
+        //谈一下DllPlugin,DllPlugin的机制是根据webpack制定的id映射到vendor入口中的第三方外部依赖包模块的路径上,生成映射关系,打包后,生成vendor.dll.js文件和vendor_manifest.dll.json文件,这个文件的内容是webpack制定的id与vendor入口中的第三方外部依赖包模块的映射数据,之后再使用DllReferencePlugin将vendor_manifest.dll.json文件引入到业务代码打包的配置文件的manfiest 加载和运行模块文件中,最后只要将vendor.dll.js引入到你所选择的业务代码入口就可以了。
+        //vendor.dll.js的作用是,根据vendor_manifest.dll.json中webpack制定的id与vendor入口中第三方外部依赖包模块路径的映射关系,业务代码入口所引入的第三方外部依赖包模块,都会通过vendor.dll.js全局函数进行处理,并根据所引入的第三方外部依赖包模块的id进行使用,且这样并不会把库文件中的代码也打包进去
+        new webpack.DllPlugin({
+            path: path.join(DLL_DIR, &quot;[name]_manifest.dll.json&quot;),
+            //name必须和output的library属性保持一致
+            name: &quot;[name]_[chunkhash]&quot;,
+            context: ROOT_DIR
+        }),
+        //对打包代码进行压缩
+        new webpack.optimize.UglifyJsPlugin({
+            uglifyOptions: {
+                sourceMap: true,
+                compress: {
+                    unused: false,
+                    dead_code: false,
+                    warnings: true
+                },
+                output: {
+                    comments: true
+                }
+            }
+        })
+    ]
+};
+
+export default webpackDllConfig;
+
+//业务代码webpack打包配置文件
+const webpack = require(&quot;webpack&quot;),
+    path = require(&quot;path&quot;),
+    //用来复制目录或者目录下的文件的插件
+    CopyWebpackPlugin = require(&quot;copy-webpack-config&quot;),
+    //用来将vendor.dll.js插入到业务代码入口的插件,但不可选择插入的入口业务代码文件,默认会将所有的入口业务代码都插入vendor.dll.js
+    AddAssetHtmlPlugin = require(&quot;add-asset-html-webpack-plugin&quot;),
+    //用来将vendor.dll.js插入到业务代码入口的插件,可选择插入的入口业务代码文件
+    HtmlWebpackIncludeAssetsPlugin = require(&quot;html-webpack-include-assets-plugin&quot;),
+    HtmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);
+
+const PUBLIC_DIR = &quot;/&quot;,
+    ROOT_DIR = path.resolve(__dirname, &quot;../&quot;),
+    BUILD_DIR = path.resolve(__dirname, &quot;../build&quot;),
+    DLL_DIR = path.resolve(__dirname, &quot;../dll&quot;),
+    IMAGE_DIR = path.resolve(__dirname, &quot;../images&quot;),
+    MANIFEST_DIR = require(path.resolve(__dirname, `${DLL_DIR}/vendor_manifest.dll.json`));
+
+const webpackProdConfig = {
+    entry: {
+        //login入口有引入testConfig.js以及reactConfig.js
+        login: `${APP_DIR}/login.js`,
+        //index入口也有引入testConfig.js以及reactConfig.js
+        index: `${APP_DIR}/index.js`,
+        //app入口没有引入testConfig.js,也没有引入reactConfig.js
+        app: `${APP_DIR}/app.js`,
+        //mobile入口有引入testConfig.js,却没有引入reactConfig.js
+        mobile: `${APP_DIR}/mobule.js`
+    },
+    ...
+    plugins: [
+        ...
+        //这里就是将vendor_manfiest.dll.json第三方外部依赖包模块引入到业务代码的打包配置文件的manifest 加载和运行模块文件中
+        new webpack.DllReferencePlugin({
+            manifest: MANIFEST_DIR,
+            context: ROOT_DIR
+        }),
+        new CopyWebpackPlugin([{
+            context: ROOT_DIR,
+            from: IMAGE_DIR,
+            to: `${BUILD_DIR}/images`
+        },{
+            context: ROOT_DIR,
+            from: DLL_DIR,
+            to: `${BUILD_DIR}/dll`
+        }, {
+            context: ROOT_DIR,
+            from: &quot;./dll/vendor.dll.js&quot;,
+            to: &quot;js/&quot;
+        }]),
+        //这里的AddAssetHtmlPlugin会将所有的业务代码入口都引入vendor.dll.js文件
+        //new AddAssetHtmlPlugin({
+        //    filepath: &quot;js/vendor.dll.js&quot;,
+        //    hash: true
+        //}),
+        //这里的HtmlWebpackIncludeAssetsPlugin会有选择的将login、index、app入口文件引入vendor.dll.js,可实现按需加载
+        //append属性设置为false,是确保vendor.dll.js文件在业务代码包模块之前引入
+        new HtmlWebpackIncludeAssetsPlugin({
+            assets: [&quot;js/vendor.dll.js&quot;],
+            files: [&quot;login.html&quot;, &quot;index.html&quot;, &quot;app.html&quot;],
+            append: false,
+            hash: true
+        }),
+        //这样第三方外部依赖包模块就生成了,当每次没有新的第三方外部依赖包模块下载时,就可以直接利用vendor.dll.js全局函数处理对引入的webpack制定的id与vendor_manfiest.dll.json中的第三方外部依赖包模块路径的映射进行调用
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &quot;common&quot;,
+            filename: &quot;js/common.[hash].js&quot;,
+            minChunks: 2
+        }),
+        //这里上面在CommonsChunkPlugin部分有介绍过,直接对业务代码中的公共模块部分进行提取,且至少在两个入口中有公共模块的引入
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &quot;manifest&quot;,
+            filename: &quot;js/manifest.[hash].js&quot;,
+            minChunks: Infinity
+        }),
+        //再将webpack引导程序以及manfiest 加载运行模块文件从common.[hash].js文件中提取出来,这样就完成配置了
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;login.html&quot;,
+            template: `${ROOT_DIR}/login.html`,
+            chunks: [&quot;manifest&quot;, &quot;common&quot;, &quot;login&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;index.html&quot;,
+            template: `${ROOT_DIR}/index.html`,
+            chunks: [manifest&quot;, &quot;common&quot;, &quot;index&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;app.html&quot;,
+            template: `${ROOT_DIR}/app.html`,
+            chunks: [manifest&quot;, &quot;common&quot;, &quot;app&quot;],
+            inject: &quot;body&quot;
+        }),
+        new HtmlWebpackPlugin({
+            publicPath: PUBLIC_DIR,
+            filename: &quot;mobile.html&quot;,
+            template: `${ROOT_DIR}/mobile.html`,
+            chunks: [manifest&quot;, &quot;common&quot;, &quot;mobile&quot;],
+            inject: &quot;body&quot;
+        })
+    ]
+};
+</code></pre><blockquote>
+<p>这种由DllPlugin、DllReferencePlugin和HtmlWebpackIncludAssetsPlugin(可实现<b>按需加载</b>)打包第三方外部依赖包模块,由CommonsChunkPlugin提取业务代码公共模块部分和webpack引导程序以及manifest 加载运行模块文件的方式,很好的实现了对第三方外部依赖包模块、业务代码公共模块以及webpack引导程序和manifest 加载和运行模块文件的打包,减小了打包体积,提高了打包的速度。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/30/关于闭包/" rel="next" title="2018-04-30 关于闭包">
+                <i class="fa fa-chevron-left"></i> 2018-04-30 关于闭包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/06/封装的一些小工具/" rel="prev" title="2018-05-06 封装的一些小工具">
+                2018-05-06 封装的一些小工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为何第三方依赖包会引起打包的体积过大"><span class="nav-number">1.</span> <span class="nav-text">为何第三方依赖包会引起打包的体积过大</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何解决重复引入第三方依赖包-引起的打包体积过大以及打包速度过慢的问题"><span class="nav-number">2.</span> <span class="nav-text">如何解决重复引入第三方依赖包,引起的打包体积过大以及打包速度过慢的问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

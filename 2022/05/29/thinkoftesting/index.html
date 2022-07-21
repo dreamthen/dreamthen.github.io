@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="testing,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="测试(testing)跨终端手动测试平台 lambdaTest   手动测试  Browser Testing. 可在线在不同的浏览器种类、版本、操作系统以及分辨率对website进行实时交互式测试,每次真实浏览器sessions可测试10分钟.  结论.  可切换配置浏览器种类、版本、操作系统以及分辨率; 可在线录屏、截图(录屏、截图可下载); 可在线标记bug(编辑bug截图、下载bug截图以">
+<meta name="keywords" content="testing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="think of testing">
+<meta property="og:url" content="http://yoursite.com/2022/05/29/thinkoftesting/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="测试(testing)跨终端手动测试平台 lambdaTest   手动测试  Browser Testing. 可在线在不同的浏览器种类、版本、操作系统以及分辨率对website进行实时交互式测试,每次真实浏览器sessions可测试10分钟.  结论.  可切换配置浏览器种类、版本、操作系统以及分辨率; 可在线录屏、截图(录屏、截图可下载); 可在线标记bug(编辑bug截图、下载bug截图以">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://image.white-than-wood.zone/appium/content.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/appium/tenet.png">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="think of testing">
+<meta name="twitter:description" content="测试(testing)跨终端手动测试平台 lambdaTest   手动测试  Browser Testing. 可在线在不同的浏览器种类、版本、操作系统以及分辨率对website进行实时交互式测试,每次真实浏览器sessions可测试10分钟.  结论.  可切换配置浏览器种类、版本、操作系统以及分辨率; 可在线录屏、截图(录屏、截图可下载); 可在线标记bug(编辑bug截图、下载bug截图以">
+<meta name="twitter:image" content="https://image.white-than-wood.zone/appium/content.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/05/29/thinkoftesting/">
+
+
+
+
+
+  <title>think of testing | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/29/thinkoftesting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">think of testing</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-29T12:32:35+08:00">
+                2022-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/testing/" itemprop="url" rel="index">
+                    <span itemprop="name">testing</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="测试-testing"><a href="#测试-testing" class="headerlink" title="测试(testing)"></a>测试(testing)</h1><h2 id="跨终端手动测试"><a href="#跨终端手动测试" class="headerlink" title="跨终端手动测试"></a>跨终端手动测试</h2><h3 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h3><blockquote>
+<p><a href="https://www.lambdatest.com/" target="_blank" rel="noopener">lambdaTest</a></p>
+</blockquote>
+<ul>
+<li><p>手动测试</p>
+<ul>
+<li><p><a href="https://app.lambdatest.com/console/realtime" target="_blank" rel="noopener">Browser Testing</a>.</p>
+<p>可在线在不同的浏览器种类、版本、操作系统以及分辨率对website进行实时交互式测试,每次真实浏览器sessions可测试10分钟.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>可切换配置浏览器种类、版本、操作系统以及分辨率;</li>
+<li>可在线录屏、截图(录屏、截图可下载);</li>
+<li>可在线标记bug(编辑bug截图、下载bug截图以及上传到lambdaTest合作的SLACK、JIRA和ASANA项目管理系统);</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://app.lambdatest.com/console/realtime" target="_blank" rel="noopener">App Testing</a>.</p>
+<p>可在线自由搭配不同的品牌手机、版本设备对App包或者App Url进行实时交互式测试,每次真机测试sessions可测试10分钟.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>可切换配置品牌手机以及版本设备;</li>
+<li>可在线录屏、截图(录屏、截图可下载);</li>
+<li>可在线标记bug(编辑bug截图、下载bug截图以及上传到lambdaTest合作的SLACK、JIRA和ASANA项目管理系统);</li>
+<li>可下载新的上传的App、移除任意App.</li>
+<li>可在线查看网络日志、App日志以及设备日志;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Browser Testing开发环境在线测试.</p>
+<p>可配合lambdaTest桌面应用(LT_Windows or LT_Macs)配合在线网站进行开发环境在线测试.</p>
+<ul>
+<li><p>配置.</p>
+<p><a href="https://www.lambdatest.com/support/docs/testing-locally-hosted-pages/" target="_blank" rel="noopener">Browser Testing开发环境在线测试视频</a>.</p>
+</li>
+</ul>
+</li>
+<li><p>结论.</p>
+<ul>
+<li>简洁、易用且容易理解;</li>
+<li>功能完备,在线随时切换终端设备配置、录屏下载、Debug标记应有尽有;</li>
+<li>测试过程流畅、无障碍性困难;</li>
+<li>其合作生态成熟且完备,例如其合作的一套项目管理系统SLACK、JIRA和ASANA;</li>
+<li>为测试人员大大提高了效率,节约了时间成本;</li>
+<li>开放的终端设备可重复使用;</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>大部分终端设备不开放.</li>
+<li>每个部分(Browser Testing or App Testing)体验时长不能超过30分钟.</li>
+<li>终端设备开放、永久使用需要付费.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://www.browserstack.com/" target="_blank" rel="noopener">browserstack</a></p>
+</blockquote>
+<ul>
+<li><p><a href="https://live.browserstack.com/dashboard#os=android&os_version=10.0&device=OnePlus+7T&device_browser=chrome&zoom_to_fit=true&full_screen=true&url=https%3A%2F%2Fwww.google.com%2F%3Fgws_rd%3Dssl&speed=1" target="_blank" rel="noopener">Browser Testing</a>.</p>
+<p>可在线在不同的浏览器种类、版本、操作系统以及分辨率对website进行实时交互式测试,每次真实浏览器sessions可测试1分钟.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>可切换配置浏览器种类、版本、操作系统以及分辨率;</li>
+<li>可在线标记bug(编辑bug截图、下载bug截图以及上传到Email、Github、browserstack合作的SLACK、JIRA和TRELLO项目管理系统);</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://app-live.browserstack.com/#os=iOS&os_version=14.0&zoom_to_fit=true&full_screen=true&speed=1" target="_blank" rel="noopener">App Testing</a>.</p>
+<p>可在线自由搭配不同的品牌手机、版本设备对App包或者App Url进行实时交互式测试,每次真机测试sessions可测试无限制.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>可切换配置品牌手机以及版本设备;</li>
+<li>可在线录屏、截图(录屏、截图可下载);</li>
+<li>可在线标记bug(编辑bug截图、下载bug截图以及上传到Email、Github、browserstack合作的SLACK、JIRA和TRELLO项目管理系统);</li>
+<li>可下载新的上传的App、移除任意App.</li>
+<li>可切换手机语言配置.</li>
+<li>可在线查看网络日志、App日志以及设备日志;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Browser Testing开发环境在线测试.</p>
+<p>可配合browserstack桌面应用(BrowserStackLocal.exe or BrowserStackLocal.dmg)配合在线网站进行开发环境在线测试.</p>
+<ul>
+<li><p>配置.</p>
+<p><a href="https://www.browserstack.com/docs/live/local-testing/test-using-local-testing" target="_blank" rel="noopener">Browser Testing开发环境在线测试视频</a>.</p>
+</li>
+</ul>
+</li>
+<li><p>结论.</p>
+<ul>
+<li>简洁、易用且容易理解;</li>
+<li>功能比较完备,在线随时切换终端设备配置、Debug标记;</li>
+<li>测试过程流畅、无障碍性困难;</li>
+<li>其合作生态成熟且完备,例如Email、Github和browserstack合作的SLACK、JIRA和TRELLO项目管理系统;</li>
+<li>为测试人员大大提高了效率,节约了时间成本;</li>
+<li>大部分浏览器设备开放,可进行体验.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>体验时间过短,每次真实浏览器sessions只能测试1分钟.</li>
+<li>App Testing体验时长不能超过30分钟.</li>
+<li>终端设备开放、永久使用需要付费.</li>
+<li>超过体验时间,不可重复体验开放的同一浏览器.</li>
+</ul>
+</li>
+</ul>
+<h2 id="跨终端自动化测试"><a href="#跨终端自动化测试" class="headerlink" title="跨终端自动化测试"></a>跨终端自动化测试</h2><ul>
+<li><p>自动化测试</p>
+<ul>
+<li><p>WebDriver.</p>
+<p>WebDriver是W3C的一个标准,是一个远程控制协议,提供操纵浏览器的方式,提供访问操作DOM的API.</p>
+<ul>
+<li><p>工作过程.</p>
+<p><a href="https://blog.csdn.net/ant_ren/article/details/7970793" target="_blank" rel="noopener">WebDriver的工作过程</a>.</p>
+</li>
+<li><p>衍生.</p>
+<p>Selenium、Appium都是基于WebDriver协议并进行了扩展,属于WebDriver的衍生品.</p>
+</li>
+</ul>
+</li>
+<li><p>浏览器自动化测试工具.</p>
+<ul>
+<li><p>Selenium.</p>
+<p>Selenium是浏览器自动化测试工具领域最为流行的一种测试套件.</p>
+<ul>
+<li>Selenium支持多浏览器平台(Chrome、Firefox、IE、Opera、Safari等);</li>
+<li>Selenium开发支持多语言(python、java、ruby、js、c#等);</li>
+<li>Selenium的Remote Control可以通过录制用户的操作,来简化Web测试人员的各项重复作业;</li>
+<li>Selenium的Grid具有编写、运行和并行处理测试的功能;</li>
+<li>Selenium的Core则是基于JsUnit,完全由JavaScript所编写,因此可以被运行在各种支持JavaScript的主流浏览器之上;</li>
+<li>Selenium开源免费;</li>
+</ul>
+</li>
+<li><p>Selenium IDE.</p>
+<p>Selenium IDE能够以插件的形式被安装到测试者的浏览器中,从而方便地实现Web界面的测试,是最为流行的一种可视化、自动化测试工具.</p>
+</li>
+<li><p>selenium-webdriver.</p>
+<p>浏览器自动化库,提供了许多浏览器自动化接口,用于测试web应用.</p>
+<ul>
+<li><p>api.</p>
+<p><a href="https://www.selenium.dev/selenium/docs/api/javascript/" target="_blank" rel="noopener">selenium-webdriver</a>.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>App自动化测试工具.</p>
+<ul>
+<li><p>Appium.</p>
+<p>Appium是一个开源的,适用于原生或混合移动应用(hybrid mobile apps)的自动化测试工具.</p>
+</li>
+<li><p>Appium特性.    </p>
+<ul>
+<li>Appium支持多App平台(Android、iOS等);</li>
+<li>Appium支持多语言(python、java、ruby、js、c#等),Appium选择了Client/Server的设计模式,只要client能够发送http请求给server,那么client用什么语言来实现都是可以的,这就是如何做到支持多语言的原因;</li>
+<li>Appium是跨平台的,可以用在OSX，Windows以及Linux桌面系统上运行;</li>
+<li>Appium扩展了WebDriver的协议,这样的好处是以前的WebDriver API能够直接被继承过来,以前的WebDriver各种语言的binding都可以拿来就用,省去了为浏览器、App端各开发一个client的工作量;</li>
+<li>Appium开源免费;</li>
+</ul>
+</li>
+<li><p>Appium框架组成.</p>
+<p><img src="https://image.white-than-wood.zone/appium/content.png" alt></p>
+</li>
+<li><p>Appium通信原理.</p>
+<p>Client端运行Webdriver协议的机器发送自动化指令给Appium server,Appium Server接收到client发送的指令后,转换为移动端能够识别的指令,然后发送给移动端设备,并对移动端设备进行操作.</p>
+</li>
+<li><p>Appium整体流程.</p>
+<p><img src="https://image.white-than-wood.zone/appium/tenet.png" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="平台-1"><a href="#平台-1" class="headerlink" title="平台"></a>平台</h3><blockquote>
+<p><a href="https://www.lambdatest.com/" target="_blank" rel="noopener">lambdaTest</a></p>
+</blockquote>
+<ul>
+<li><p>lambdaTest配合Selenium IDE.</p>
+<p><a href="https://www.lambdatest.com/support/docs/run-selenium-ide-tests-on-lambdatest-selenium-cloud-grid/" target="_blank" rel="noopener">Run Selenium IDE Tests with LambdaTest Selenium Grid</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>API、技术文档完备,引导配置成熟.</li>
+<li>可视化编辑测试用例流畅并且效果顶级;</li>
+<li>支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).</li>
+<li>与lambdaTest配合相得益彰,做到了跨浏览器自动化可视化测试完备且成熟的流程.</li>
+<li>录制操作、编写测试用例二合一,既考虑了定制性、精确性,也考虑了自动化、可视化和灵活性.</li>
+<li>测试报告: 截图、录屏、网络日志、Selenium日志、浏览器日志、浏览器参数以及终端日志俱有.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>无产品文档,无法直观具体了解产品.</li>
+<li>测试报告中有一些不完整,如性能报告.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>selenium-webdriver、jest配合lambdaTest.</p>
+<p><a href="https://www.lambdatest.com/support/docs/automation-testing-with-selenium-and-jest/" target="_blank" rel="noopener">Jest with Selenium: Tutorial to Run Your First Test on LambdaTest</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>API、技术文档完备,引导配置成熟.</li>
+<li>支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).</li>
+<li>测试报告: 截图、录屏、网络日志、Selenium日志、浏览器日志、浏览器参数以及终端日志俱有.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.</li>
+<li>无产品文档,无法直观具体了解产品.</li>
+<li>测试报告中有一些不完整,如性能报告.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>lambdaTest配合Appium.</p>
+<p><a href="https://www.lambdatest.com/support/docs/appium-nodejs-webdriverio/" target="_blank" rel="noopener">WebDriverIO With Appium in lambdaTest</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>API、技术文档完备,引导配置成熟.</li>
+<li>支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>真机跨终端自动化测试需要付费,无法体验产品.</li>
+<li>无产品文档,无法直观具体了解产品.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Visual UI Testing.</p>
+<p><a href="https://app.lambdatest.com/console/screenshot" target="_blank" rel="noopener">Visual UI Testing Screenshot</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>可实行多终端UI截图,并可实现对比.</li>
+<li>可下载、分享截图或者截图列表压缩包.</li>
+<li>可配置各终端的分辨率以及布局.</li>
+<li>可预定日程(每天、每个周、每个月)进行截图.</li>
+<li>根据账号保存每次截图列表历史.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>不可实行本地终端UI截图.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://www.aliyun.com/product/mqc" target="_blank" rel="noopener">阿里云移动测试</a></p>
+</blockquote>
+<ul>
+<li><p>阿里云移动测试配合Appium.</p>
+<p><a href="https://help.aliyun.com/document_detail/175761.html" target="_blank" rel="noopener">阿里云移动测试产品文档</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>API、技术文档完备,引导配置成熟.</li>
+<li>集成Appium IDE于阿里云平台内部,做到可视化、自动化测试.</li>
+<li>录制、编写测试用例二合一,做到了跨浏览器自动化可视化测试完备且成熟的流程.</li>
+<li>产品文档完备,可直观了解产品.</li>
+<li>测试报告:截图、录屏、测试用例日志、Appium日志、移动设备日志、错误日志以及性能报告一应俱全.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>只支持Python编写测试用例.</li>
+<li>测试报告中有一些不完整,如网络日志.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Visual UI Testing.</p>
+<p>无Visual UI Testing功能.</p>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://www.browserstack.com/" target="_blank" rel="noopener">browserstack</a>    </p>
+</blockquote>
+<ul>
+<li><p>browserstack配合Appium.</p>
+<p><a href="https://www.browserstack.com/docs/app-automate/appium/getting-started/nodejs/webdriverio" target="_blank" rel="noopener">WebDriverIO With Appium in browserstack</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>API、技术文档完备,引导配置成熟.</li>
+<li>支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).</li>
+<li>做到了跨浏览器自动化测试比较完备且成熟的流程.</li>
+<li>测试报告: 截图、录屏、网络日志、Appium日志、移动设备日志以及性能报告应有尽有.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.</li>
+<li>测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.</li>
+<li>产品文档有欠缺,急需补足.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Visual UI Testing.</p>
+<p><a href="https://www.browserstack.com/screenshots" target="_blank" rel="noopener">Visual UI Testing Screenshot</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>可进行多终端UI截图,进行对比.</li>
+<li>可下载、分享截图或者截图列表压缩包.</li>
+<li>根据账号保存每次截图列表历史.</li>
+<li>可配置各终端的分辨率以及布局.</li>
+<li>可实行本地终端UI截图.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>配置各终端的分辨率以及布局需付费.</li>
+<li>不可预定日程(每天、每个周、每个月)进行截图.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://saucelabs.com/" target="_blank" rel="noopener">sauceLabs</a></p>
+</blockquote>
+<ul>
+<li><p>sauceLabs配合Appium.</p>
+<p><a href="https://github.com/saucelabs-training/demo-js/tree/main/webdriverio/appium-app/examples/simple-example" target="_blank" rel="noopener">WebDriverIO With Appium in sauceLabs</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).</li>
+<li>做到了跨浏览器自动化测试比较完备且成熟的流程.</li>
+<li>测试报告: 截图、录屏、网络日志、Appium日志以及移动设备日志俱有.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>Simple Demo冗杂耦合在一起,下载很慢,且很乱.</li>
+<li>API、技术文档无任何引导,且比较简陋.</li>
+<li>无产品文档,无法直观具体了解产品.</li>
+<li>在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力不足.</li>
+<li>测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Visual UI Testing.</p>
+<p>无Visual UI Testing功能.</p>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://crossbrowsertesting.com" target="_blank" rel="noopener">CrossBrowserTesting</a></p>
+</blockquote>
+<ul>
+<li><p>CrossBrowserTesting配合Appium.</p>
+<p><a href="https://crossbrowsertesting.com/automated-testing/appium" target="_blank" rel="noopener">NodeJS With Appium in CrossBrowserTesting</a>.</p>
+<ul>
+<li><p>结论.</p>
+<ul>
+<li>支持多语言编写测试用例(python、java、ruby、js、PHP、c#等).</li>
+<li>做到了跨浏览器自动化测试比较完备且成熟的流程.</li>
+<li>测试报告: 截图、录屏、网络日志、Appium日志以及移动设备日志俱有.</li>
+</ul>
+</li>
+<li><p>问题.</p>
+<ul>
+<li>API、技术文档无任何引导,且比较简陋.</li>
+<li>无产品文档,无法直观具体了解产品.</li>
+<li>在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,没有做到完全自动化可视化测试.</li>
+<li>测试报告中有一些不完整,如测试用例日志,需要在命令行中查看.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Visual UI Testing.</p>
+<p>无Visual UI Testing功能.</p>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://www.aznfz.com/" target="_blank" rel="noopener">冰狐智能辅助</a></p>
+</blockquote>
+<p>  不使用Appium,有自己开发的一套移动端自动化测试工具.</p>
+<p>  <a href="https://www.aznfz.com/mobile-terminal/about" target="_blank" rel="noopener">冰狐智能辅助 - 移动端</a>.</p>
+<ul>
+<li><p>问题.</p>
+<ul>
+<li>只适用Android自动化测试.</li>
+<li>需要开发者自己准备设备,无在线真机调试,没有做到在线跨终端测试.</li>
+<li>只支持Javascript编写测试用例.</li>
+<li>在线平台不保存测试用例,也不集成测试套件,只能进行线下编辑测试用例,自动化可视化测试能力非常欠缺.</li>
+<li>无产品概念,无测试报告,只是单一的一种工具.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Visual UI Testing.</p>
+<p>无Visual UI Testing功能.</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/testing/" rel="tag"># testing</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/26/比木白-ES6/" rel="next" title="比木白-ES6">
+                <i class="fa fa-chevron-left"></i> 比木白-ES6
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/06/07/browserstackscreenshots/" rel="prev" title="browserstack screenshots">
+                browserstack screenshots <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#测试-testing"><span class="nav-number">1.</span> <span class="nav-text">测试(testing)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#跨终端手动测试"><span class="nav-number">1.1.</span> <span class="nav-text">跨终端手动测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#平台"><span class="nav-number">1.1.1.</span> <span class="nav-text">平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨终端自动化测试"><span class="nav-number">1.2.</span> <span class="nav-text">跨终端自动化测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#平台-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">平台</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

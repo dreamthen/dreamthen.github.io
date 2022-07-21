@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Javascript,Html,Css,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="赋值操作的返回 最近在读一本《JavaScript DOM 编程艺术》的书,其中有一句话引起了我的好奇,假如if判断语句中存在赋值语句,则赋值语句的返回总是true。我对此结果进行了检验  var a; //这种情况下,if判断语句中返回&amp;quot;good&amp;quot;,为true //打印&amp;quot;good result&amp;quot; if(a = &amp;quot;good&amp;quot;) {">
+<meta name="keywords" content="Javascript,Html,Css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-05-07 查漏补缺">
+<meta property="og:url" content="http://yoursite.com/2018/05/07/查漏补缺/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="赋值操作的返回 最近在读一本《JavaScript DOM 编程艺术》的书,其中有一句话引起了我的好奇,假如if判断语句中存在赋值语句,则赋值语句的返回总是true。我对此结果进行了检验  var a; //这种情况下,if判断语句中返回&amp;quot;good&amp;quot;,为true //打印&amp;quot;good result&amp;quot; if(a = &amp;quot;good&amp;quot;) {">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.165Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-05-07 查漏补缺">
+<meta name="twitter:description" content="赋值操作的返回 最近在读一本《JavaScript DOM 编程艺术》的书,其中有一句话引起了我的好奇,假如if判断语句中存在赋值语句,则赋值语句的返回总是true。我对此结果进行了检验  var a; //这种情况下,if判断语句中返回&amp;quot;good&amp;quot;,为true //打印&amp;quot;good result&amp;quot; if(a = &amp;quot;good&amp;quot;) {">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/07/查漏补缺/">
+
+
+
+
+
+  <title>2018-05-07 查漏补缺 | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/07/查漏补缺/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018-05-07 查漏补缺</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T15:06:50+08:00">
+                2018-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Html-or-Css-Or-Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Html or Css Or Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="赋值操作的返回"><a href="#赋值操作的返回" class="headerlink" title="赋值操作的返回"></a>赋值操作的返回</h1><blockquote>
+<p>最近在读一本《JavaScript DOM 编程艺术》的书,其中有一句话引起了我的好奇,假如if判断语句中存在赋值语句,则赋值语句的返回总是true。我对此结果进行了检验</p>
+</blockquote>
+<pre><code>var a;
+//这种情况下,if判断语句中返回&quot;good&quot;,为true
+//打印&quot;good result&quot;
+if(a = &quot;good&quot;) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回false,为false
+//什么都不打印
+if(a = false) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回undefined,为false
+//什么都不打印
+if(a = undefined) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回0,为false
+//什么都不打印
+if(a = 0) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回null,为false
+//什么都不打印
+if(a = null) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回{},为true
+//打印&quot;good result&quot;
+if(a = {}) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回[],为true
+//打印&quot;good result&quot;
+if(a = []) {
+    console.log(&quot;good result&quot;);
+}
+</code></pre><blockquote>
+<p>实践是检验真理的唯一标准,由此检验到赋值操作的返回就是其本身,本身类型转换后为true,则为true;转换后为false,则为false,并不总是返回true,书中的那句话实践出是不妥当的。</p>
+</blockquote>
+<h1 id="模板字符串的换行功能"><a href="#模板字符串的换行功能" class="headerlink" title="模板字符串的换行功能"></a>模板字符串的换行功能</h1><blockquote>
+<p>学模板字符串时,本来只是以为模板字符串所带来的只不过是一个外部变量引入的功能,这几天发现换行不直接写\n,直接换行编写,就可以实现换行功能</p>
+</blockquote>
+<pre><code>let name = &quot;Gary&quot;,
+    sentence = `Hi, ${name} is my name, 
+    I&apos;m 25 year&apos;s old~`;
+//这里打印
+//Hi, Gary is my name,
+//I&apos;m 25 year&apos;s old~    
+console.log(sentence);
+</code></pre><h1 id="ES6类的存取函数"><a href="#ES6类的存取函数" class="headerlink" title="ES6类的存取函数"></a>ES6类的存取函数</h1><blockquote>
+<p>在ES6中实现了类的表象,虽然还是基于原型链来实现的,但是大致的功能正在向着C、Java类的方式逐渐靠近,比如类的存取函数</p>
+</blockquote>
+<pre><code>class Book {
+    constructor(name = &quot;Gary&quot;) {
+        this._name = name;
+    }
+    //类的取值函数
+    get getBook() {
+        return this._name;
+    }
+    //类的存储函数
+    set setBook(value) {
+        this._name = `Hi, ${value}`;
+    }
+}
+//获取到&quot;书&quot;这个类的实例
+let book = new Book(&quot;Yinwk&quot;);
+//调用实例的取值函数
+//这里打印:
+//Yinwk
+console.log(book.getBook);
+//调用实例的存储函数
+book.setBook = &quot;yinwenkai&quot;;
+//再次调用实例的取值函数
+//这里打印:
+//yinwenkai
+console.log(book.getBook);
+</code></pre><h1 id="各类型比较运算符时的转化"><a href="#各类型比较运算符时的转化" class="headerlink" title="各类型比较运算符时的转化"></a>各类型比较运算符时的转化</h1><blockquote>
+<p>if(“package” == true) console.log(“package == true”);是会打印”package == true”呢,还是不会打印呢,很多人的答案肯定是会打印,理由是:因为”package”返回true啊,所以true == true啊。请看这里判断语句中是一个比较表达式,并不是if(“package”),是需要在比较语句两边进行转化的,普通类型进行toNumber,引用类型进行valueOf或者toString之后的原始值比较</p>
+</blockquote>
+<pre><code>if(null == undefeind) {...}    //返回true
+if(undefined == null) {...}    //返回true
+if(&quot;package&quot; == true) {...}    //将string和boolean类型进行number转化,
+                               //&quot;package&quot;转化为NaN,true转化为1,
+                               //NaN == 1吗?答案当然是false,返回false
+
+if(&quot;0&quot; == false){...}          //将string和boolean类型进行number转化,
+                               //&quot;0&quot;转化为0,false转化为0,
+                               //0 == 0吗?答案当然是true,返回true
+
+if(&quot;package&quot; == 1){...}        //将string和number类型进行number转化,
+                               //将&quot;package&quot;转化为NaN,1还是转化为1,
+                               //NaN == 1吗?答案当然是false,返回false
+
+let _obj = {name: &apos;Gary&apos;},
+    _objAno = {name: &apos;Gary&apos;};
+if(_obj == _objAno){...}       //将两个object类型进行valueOf方法或者toString方法的转化,哪个方法转化为原始值,就用转化为的原始值进行比较
+                               //{name: &apos;Gary&apos;}在valueOf方法转化为{name: &apos;Gary&apos;},在toString方法转化为&quot;[object Object]&quot;
+                               //原始值当然是valueOf方法转化的值
+                               //{name: &apos;Gary&apos;} == {name: &apos;Gary&apos;}吗？答案当然是false,返回false
+</code></pre><h1 id="ES6新增Array-prototype-include"><a href="#ES6新增Array-prototype-include" class="headerlink" title="ES6新增Array.prototype.include"></a>ES6新增Array.prototype.include</h1><blockquote>
+<p>ES6数组新增了一个判断是否包含数组元素的方法,用来检索数组中是否存在某个数组元素,基本有两种方式进行检索</p>
+</blockquote>
+<pre><code>let number_arr = [26, 18, 10, 55, 88, 100, 38, 44];
+//数组中的确包含 88 这个元素
+//在这里打印:
+//true
+console.log(number_arr.includes(88));
+//从数组下标为 5 的元素后面去寻找 88 这个元素
+//在这里打印:
+//false
+console.log(number_arr.includes(88, 5));                    
+</code></pre><h1 id="ES6类型数组"><a href="#ES6类型数组" class="headerlink" title="ES6类型数组"></a>ES6类型数组</h1><blockquote>
+<p>在ES6中引入了一些类型数组,他们的属性以及方法和普通的数组并无二致,只是对类型做了一些限制,比如Int8Array(8位二进制补码整数)、Uint8Array(8位无符号整数)、Int16Array(16位二进制补码整数)、Uint16Array(16位无符号整数)、Int32Array(32位二进制补码整数)、Uint32Array(32位无符号整数)等等</p>
+</blockquote>
+<h1 id="对具有着重符的字符串数组进行排序"><a href="#对具有着重符的字符串数组进行排序" class="headerlink" title="对具有着重符的字符串数组进行排序"></a>对具有着重符的字符串数组进行排序</h1><blockquote>
+<p>假如需要对具有着重符号的字符串数组进行排序,需要用localCompare</p>
+</blockquote>
+<pre><code>let string_arr = [&quot;Maève&quot;, &quot;Maeve&quot;];
+string_arr.sort(function sort_arr(a, b){
+    return a.localCompare(b);
+});
+//没有着重符号的数组元素会比有着重符号的数组元素小
+//这里打印:
+//[&quot;Maeve&quot;, &quot;Maève&quot;]
+console.log(string_arr);
+</code></pre><h1 id="apply、call硬绑定小经验"><a href="#apply、call硬绑定小经验" class="headerlink" title="apply、call硬绑定小经验"></a>apply、call硬绑定小经验</h1><pre><code>function Person() {
+    this.name = &quot;Gary&quot;;
+    this.age = 26;
+    console.log(this.name);
+    console.log(this.age);
+}
+let clay = {
+    name: &quot;Clay&quot;,
+    age: 27
+};
+//这里充分证明了new绑定实现构造函数对象的优先级大于call或者apply硬绑定
+//Person函数的this指向并没有指向clay,还保持着初始值
+//而对象clay的属性name和age的值都改变为Person函数this指向的值
+//在这里打印:
+//Gary
+//26
+//Gary
+//26
+Person.call(clay);
+console.log(clay.name);
+console.log(clay.age);
+
+function Person() {
+    console.log(this.name);
+    console.log(this.age);
+}
+let clay = {
+    name: &quot;Clay&quot;,
+    age: 27
+};
+//这里Person函数的this指向clay
+//而对象clay的属性name和age的值还是保持着初始值
+//在这里打印:
+//Clay
+//27
+//Clay
+//27
+Person.call(clay);
+console.log(clay.name);
+console.log(clay.age);
+</code></pre><blockquote>
+<p>从上面的例子,我们可以得出this的绑定优先级: new绑定 &gt; apply、call和bind硬绑定 &gt; 普通对象软绑定 &gt; 默认绑定,当this对象上面的属性进行定义声明,再使用apply、call或者bind硬绑定时,new绑定this对象上面的属性的优先级就大于apply、call或者bind硬绑定对象上面的属性的优先级,这时候显示的就是this对象上面的属性值,当this对象上面的属性没有进行定义声明,这时候apply、call或者bind硬绑定对象上面的属性的优先级就是最大的,这时候显示的就是硬绑定对象上面的属性的属性值</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+            <a href="/tags/Html/" rel="tag"># Html</a>
+          
+            <a href="/tags/Css/" rel="tag"># Css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/06/封装的一些小工具/" rel="next" title="2018-05-06 封装的一些小工具">
+                <i class="fa fa-chevron-left"></i> 2018-05-06 封装的一些小工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/07/浅谈使用jQuery和react的区别/" rel="prev" title="2018-05-07 浅谈使用jQuery和react的区别">
+                2018-05-07 浅谈使用jQuery和react的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#赋值操作的返回"><span class="nav-number">1.</span> <span class="nav-text">赋值操作的返回</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模板字符串的换行功能"><span class="nav-number">2.</span> <span class="nav-text">模板字符串的换行功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6类的存取函数"><span class="nav-number">3.</span> <span class="nav-text">ES6类的存取函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#各类型比较运算符时的转化"><span class="nav-number">4.</span> <span class="nav-text">各类型比较运算符时的转化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6新增Array-prototype-include"><span class="nav-number">5.</span> <span class="nav-text">ES6新增Array.prototype.include</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6类型数组"><span class="nav-number">6.</span> <span class="nav-text">ES6类型数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对具有着重符的字符串数组进行排序"><span class="nav-number">7.</span> <span class="nav-text">对具有着重符的字符串数组进行排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#apply、call硬绑定小经验"><span class="nav-number">8.</span> <span class="nav-text">apply、call硬绑定小经验</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ios16,xcode,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ios 16 beta 3现阶段 ios 16 内测版本已经出了 3 个版本,而今天要体验的 ios 16 就是最新的版本 —— ios 16 beta 3,在此可以直接通过 xcode beta ios 模拟器的方式直接体验.  安装 xcode beta 版本  通过 xcode 14.0 beta 3 可下载 xcode beta 最新版本.  下载 xip 文件成功后,再解压安装.  xc">
+<meta name="keywords" content="ios16,xcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ios 16 体验分享">
+<meta property="og:url" content="http://yoursite.com/2022/07/17/ios16beta体验/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="ios 16 beta 3现阶段 ios 16 内测版本已经出了 3 个版本,而今天要体验的 ios 16 就是最新的版本 —— ios 16 beta 3,在此可以直接通过 xcode beta ios 模拟器的方式直接体验.  安装 xcode beta 版本  通过 xcode 14.0 beta 3 可下载 xcode beta 最新版本.  下载 xip 文件成功后,再解压安装.  xc">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/download.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodeBeta.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodePublic.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodeBetaCreate.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodeBetaChooseApp.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodeBetaProduct.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodeBetaWorkSpace.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodeBetaDevice.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodeBetaOS.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/xcodeBetaRun.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_1.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_2.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_3.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_3_1.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_3_2.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_5.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_7.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_old.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/albums/ios16Albums.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/albums/ios16AlbumsHidden.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/albums/ios155Albums.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/albums/ios155AlbumsHidden.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/views/ios16view.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/views/ios155view.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/message/ios16message.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/message/ios155message.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/keyboard/ios16keyBoard.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/keyboard/ios155keyBoard.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/notice/notice.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/notice/notice_2.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/notice/notice_3.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/notice/notice_1.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/medicine/medicine.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/medicine/medicine_1.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/medicine/medicine_old.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/device/deviceAdapter.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_3.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_1.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_2.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/sspal/sspal_1.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/sspal/sspal_2.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/maps/maps.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/maps/ios16Maps.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/videos/iosVideos.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/videos/iosPictures.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/videos/videos.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/pictures/ios16Pictures.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/pictures/pictures.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/textview/ios15_5.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/textview/ios15_4.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/ios16/textview/resolve.png">
+<meta property="og:updated_time" content="2022-07-21T06:53:22.201Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ios 16 体验分享">
+<meta name="twitter:description" content="ios 16 beta 3现阶段 ios 16 内测版本已经出了 3 个版本,而今天要体验的 ios 16 就是最新的版本 —— ios 16 beta 3,在此可以直接通过 xcode beta ios 模拟器的方式直接体验.  安装 xcode beta 版本  通过 xcode 14.0 beta 3 可下载 xcode beta 最新版本.  下载 xip 文件成功后,再解压安装.  xc">
+<meta name="twitter:image" content="https://image.white-than-wood.zone/ios16/download.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/07/17/ios16beta体验/">
+
+
+
+
+
+  <title>ios 16 体验分享 | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/17/ios16beta体验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ios 16 体验分享</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-17T08:06:07+08:00">
+                2022-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ios16/" itemprop="url" rel="index">
+                    <span itemprop="name">ios16</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ios-16-beta-3"><a href="#ios-16-beta-3" class="headerlink" title="ios 16 beta 3"></a>ios 16 beta 3</h1><p>现阶段 ios 16 内测版本已经出了 3 个版本,而今天要体验的 ios 16 就是最新的版本 —— ios 16 beta 3,在此可以直接通过 xcode beta ios 模拟器的方式直接体验.</p>
+<blockquote>
+<p>安装 xcode beta 版本</p>
+</blockquote>
+<p>通过<a href="https://developer.apple.com/cn/xcode/resources/" target="_blank" rel="noopener"> xcode 14.0 beta 3 </a>可下载 xcode beta 最新版本.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/download.png" alt></p>
+<p>下载 xip 文件成功后,再解压安装.</p>
+<ul>
+<li>xcode 14.0 beta 3 (platform: ios 16 beta 3)</li>
+</ul>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBeta.png" alt></p>
+<ul>
+<li>xcode 13.4.1 (platform: ios 15.5)</li>
+</ul>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodePublic.png" alt></p>
+<p>PS: Mac 磁盘空间至少留出 30G 方可解压安装 beta 版本,否则会总是出现’磁盘空间不足…’的提示.<br>Tips: xcode 正式版本至少留出 50G 才可下载解压安装.</p>
+<blockquote>
+<p>体验 ios 16 beta 3 模拟器</p>
+</blockquote>
+<ul>
+<li><p>步骤</p>
+<p>此步骤是为了照顾那些第一次使用 xcode 的童鞋,这里将演示如何创建 xcode 应用,添加、选择、运行 ios 模拟器的步骤,已经熟知的童鞋可以略过.</p>
+<ul>
+<li><p>创建新项目</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaCreate.png" alt></p>
+</li>
+<li><p>选择创建 App 应用</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaChooseApp.png" alt></p>
+</li>
+<li><p>项目以及组织、公司名称</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaProduct.png" alt></p>
+</li>
+<li><p>WorkSpace、SwiftUI</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaWorkSpace.png" alt></p>
+</li>
+<li><p>选择模拟器机型以及 ios 版本</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaDevice.png" alt></p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaOS.png" alt></p>
+</li>
+<li><p>运行模拟器</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaRun.png" alt></p>
+</li>
+</ul>
+</li>
+<li><p>特性</p>
+<p>现在是’硬菜’,在此将与 ios 15.5对比,来分享体验 ios 16,以此来体现出 ios 16 的特性.而在对比中,为了控制变量,选用机型都为 iPhone 13 Pro.</p>
+<ul>
+<li><p>锁屏界面个性化.</p>
+<p>从 ios 16 开始,可以自定义锁屏界面的时间与日期样式,包含：颜色、背景、字型等,也能在锁屏加上实用小工具以快速查看,例如：天气、日历、智慧家庭等小工具. 此功能特性是 ios 16 最大的亮点,虽然在 xcode ios simulator 中 设置 -&gt; 壁纸 -&gt; 锁屏自定义(Lockscreen Widget) 并不存在,但可以通过锁屏右下角’相机’图标实行配置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes.png" style="width: 40%"><br>锁屏的变动主要围绕着个性化进行展开,时间的上下部分都被 Apple 定义为了小组件区域,上部以单行图标配文字的形式进行展现,可以根据自己的需要选择日历、股市、健身、时钟、天气五个原生类目.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_1.png" style="width: 40%"><br>时间的下部区域是模块化的小组件区域,这个区域内的小组件包含了股市、家庭、健身、日历、时钟、提醒事项、天气、电池八个原生类目.和顶部小组件不同的是,这里的组件样式更加丰富,设计感更强,大小选择也更加多样化,可以根据自己的喜好进行随意搭配.值得一提的是,锁屏的小组件 Apple 已将相关权限开放给开发者,如果 App 进行适配,后续将可以在锁屏中看到更多精彩的内容.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_2.png" style="width: 40%"><br>中间时间部分,Apple 不仅调整了占位大小,还提供了阿拉伯数字、阿拉伯印度文、天城文三种文字,每种文字包含了 6 种不同的设计.针对色彩部分,可以在最下方选择背景适配色彩,也可以选择纯白色.</p>
+<div style="display:flex;flex-flow: row nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3_1.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3_2.png"><br></div><br>在 ios 16 中,可以将自己的锁屏以及桌面与专注模式进行关联,在开启不同专注模式的同时,锁屏和桌面会自动切换到自己先前设定的方案中.在不同的环境下你可能需要接受到信息不一样,例如在家需要看智能设备的状态,在工作的时候需要看日程计划,在摄影的时候需要关心日出日落.在小组件不同的同时,也可以换一张不同的壁纸,换个壁纸也换一个心情.当然在 xcode ios simulator 模拟器中现阶段是不能添加新的壁纸,也不存在’专注模式’,进而没有办法体验.<br><div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_5.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_7.png"><br></div>
+
+<p>ios 15.5 中并不能自定义锁屏,也不能自定义添加实用小工具,更不能通过锁屏右下角’相机’图标实行配置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_old.png" style="width: 40%"></p>
+</li>
+<li><p>相册隐私加锁.</p>
+<p>ios 16 在相册中’已隐藏’和’最近删除’选项中,已经支持加锁,增强用户对于相册中图片安全性的保护.</p>
+<div style="display:flex;flex-flow: row nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios16Albums.png"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios16AlbumsHidden.png"><br></div><br>ios 15.5 在相册中’已隐藏’和’最近删除’选项中,并没有加锁.<br><br><div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios155Albums.png"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios155AlbumsHidden.png"><br></div>
+</li>
+<li><p>主界面底部页面改进.</p>
+<p>ios 16 在界面底部显示 banner 位置的’点’替换为新的 Spotlight 搜索气泡,在桌面直接向下滑动即可打开. 与页面点一样,可以在搜索气泡上向左或向右滑动,以加快滚动浏览其他主屏幕页面. Spotlight 支持搜索系统和应用内的文本、照片、文件等,还能进行单位、货币换算,当 iPhone 接入网络后,可以直接用关键字搜索网页.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/views/ios16view.png" style="width: 40%"></p>
+<p>ios 15.5 在界面底部显示 banner 位置的’点’还是原来的功能,向左或向右滑动,以加快滚动浏览其他主屏幕页面.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/views/ios155view.png" style="width: 40%"></p>
+</li>
+<li><p>短信息支持撤回以及二次编辑.</p>
+<p>ios 16 在短信息方面也做了升级,短信息支持撤回以及二次编辑发送.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/message/ios16message.png" style="width: 40%"></p>
+<p>ios 15.5 在短信息方面并不支持上述新功能.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/message/ios155message.png" style="width: 40%"></p>
+</li>
+<li><p>键盘方言方面追加了选项.</p>
+<p>ios 16 在键盘方面针对拼音输入追加了四川话的选项.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/keyboard/ios16keyBoard.png" style="width: 40%"></p>
+<p>ios 15.5 在键盘方面则不存在此选项.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/keyboard/ios155keyBoard.png" style="width: 40%"></p>
+</li>
+<li><p>锁屏通知底部显示.</p>
+<p>由于 ios 16 在锁屏个性化上的重大改进(自定义锁屏界面、锁屏中上部设置实用小工具),导致锁屏通知底部显示.</p>
+<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice.png"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_2.png"><br></div>
+
+<p>ios 15.5 锁屏通知仍然是屏幕中上部显示.</p>
+<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_3.png"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_1.png"><br></div>
+</li>
+<li><p>健康App 用药提醒</p>
+<p>ios 16 对于有日常药物服用需求的用户,可以在「健康」&gt;「 浏览」&gt;「用药」中设置并管理自己日常药物.设定好药品和服用时间后,ios 可以按时提示你去服用药物,并记录服药记录.此外,还支持一键导出自己的药品清单,方便购买时使用.</p>
+<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/medicine/medicine.png"><br> <img src="https://image.white-than-wood.zone/ios16/medicine/medicine_1.png"><br></div>
+
+<p>ios 15.5 健康App 则不存在用药提醒这个功能.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/medicine/medicine_old.png" style="width: 40%"></p>
+</li>
+<li><p>兼容设备列表.</p>
+<p>ios 16 已不再支持 iPhone 6S、6SPlus、7、7Plus、SE一代机型.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/device/deviceAdapter.png" alt></p>
+</li>
+</ul>
+</li>
+<li><p>憾事</p>
+<p>比较遗憾的是,ios 16 有很多做了比较大改动的新功能特性,在 xcode ios simulator 模拟器上面体验不到,下面就来例举一下.</p>
+<p>PS: 以下所有新功能特性,都是经过网上多渠道查询得论,未作实机验证.</p>
+<ul>
+<li><p>锁屏界面个性化.</p>
+<p>新的壁纸类型包含人物、照片、随机、Emoji、天气、天文、颜色八个主题.其中,选择人物主题时,系统会自动检测照片中前景部分,将前景放置在组件和时间的前方,整体融合效果非常好.但在 xcode ios simulator 模拟器上现阶段是不能添加新的壁纸,且不能对壁纸实行个性化设置,如果对图片实行设置壁纸会出现莫名bug: 壁纸并没有设置,且呈为全黑.<br><div style="display:flex;flex-flow: column nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_3.png" style="width: 80%"><br> <div style="display:flex;flex-flow: row nowrap;width: 80%;margin: 0 auto;"><br>  <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_1.png" alt><br>  <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_2.png" alt><br> </div><br></div><br>天气和天文这两种动态壁纸,则会根据你的定位和时间,实时变化锁屏的内容.说到这里,就不得不让人联想到这些锁屏和 AOD(全天候显示)的联系.自 iPhone 13 加入了 LTPO 的显示屏,支持显示刷新率在 10Hz 和 120Hz 之间动态调整.此外,近日在解析 ios 16 代码时发现了有关 AOD 相关的字段,显示 iPhone 14 Pro 和 iPhone 14 Pro Max 可能配备该功能.当然在 xcode ios simulator 模拟器上现阶段是不能添加新的壁纸,更无法设置动态壁纸,设置壁纸也会出现莫名bug,也无法通过内置搜索进行查询,进而无法实行设置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios.png" alt></p>
+</li>
+<li><p>强大的专注模式.</p>
+<p>除了上面所提及的,专注模式与锁屏进行联动,实现锁屏壁纸和小组件的自动切换,它也可以同时定义解锁后显示某一页主屏,并切换 Apple Watch 的表盘,在 xcode ios simulator 模拟器中是不存在 ‘sspal’ 或者 ‘专注模式’ 的,进而也无法实行体验.<br><img src="https://image.white-than-wood.zone/ios16/sspal/sspal_1.png" alt><br>还提供了一项专注模式过滤条件.在这里可以针对日历、信息、浏览器、低电量模式、深色模式进行更加细致的设定.例如,当相应的专注模式开启时,日历会会被筛选,其余的日历无法查看,系统会自动开启等等.这样一来,专注模式的功能变得更加自动化、更加个性化.相信在以后的更新中,专注模式应该可以做到更多的事情.<br><img src="https://image.white-than-wood.zone/ios16/sspal/sspal_2.png" alt></p>
+</li>
+<li><p>地图多途经点路线规划</p>
+<p>新版地图追加一项基础,但是又比较实用的功能多途经点路线规划,用户可以通过路线页面,追加自己需要到达的地点,实现途经点导航.目前该功能已在 11 个国家上线,国内上线时间未知.</p>
+<p> <img src="https://image.white-than-wood.zone/ios16/maps/maps.png"></p>
+<p>而在xcode ios simulator 模拟器上则是这番场景,GPS导航打开无法规划路线,坐标显示也是错误的.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/maps/ios16Maps.png" style="width: 40%"></p>
+</li>
+<li><p>视频中的实况文本</p>
+<p>iOS 15 Apple 为我们带来了实况文本的功能,让我们可以找相册、相机、输入的时候快速提取到图像的文字信息,而在 iOS 16 中，Apple 再次加强了实况文本的功能,在任意包含文字的画面暂停视频,即可执行拷贝、翻译、查询、共享等操作,并且适用于照片、快速查看、Safari 和其他应用程序多种场景.</p>
+<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;align-items: center;"><br> <img src="https://image.white-than-wood.zone/ios16/videos/iosVideos.png"><br> <img src="https://image.white-than-wood.zone/ios16/videos/iosPictures.png"><br></div>
+
+<p>而在xcode ios simulator 模拟器上则是无法提取任何的内容,视频实况文本功能是没有加上的.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/videos/videos.png" style="width: 40%"></p>
+</li>
+<li><p>照片支持快速抠图</p>
+<p>在回顾 iOS 15 推出的看图查询 (Visual Lookup) 功能的时候,Apple 还向我们介绍了借助 CoreML 和神经网络引擎实现的全新的抠图功能.只要在照片上长按,可以快速抠出图片的前景部分,这个功能不仅适用于现实拍摄的照片,虚拟的动画也同样适用.将抠下来的图片按住不放,可以直接切换后台发送到即时通讯应用中.（经测试 iPhone 上 iMessage、Line 等均支持,iOS 微信暂不支持、iPadOS 微信支持）.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/pictures/ios16Pictures.png"></p>
+<p>而在xcode ios simulator 模拟器上则是无法实行对百度下载的人像抠图功能,长按没有反应,是不存在全新的抠图功能的.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/pictures/pictures.png" style="width: 40%"></p>
+</li>
+</ul>
+</li>
+<li><p>技术特性</p>
+<ul>
+<li><p>ios 16 为了帮助使每行的长度在视觉上保持平衡,其中 TextKit,尤其是 TextKit 2,大大改进了换行算法,对于那些想要保持与 ios 15 相同外观以及追求’UI像素完美’的开发者可要注意哦~</p>
+<p><img src="https://image.white-than-wood.zone/ios16/textview/ios15_5.png"><br><img src="https://image.white-than-wood.zone/ios16/textview/ios15_4.png" style="width:100%;"></p>
+<p>从上面的图中可以看出,换行算法的修改还是很大的,为了始终保持 TextKit 2 两侧的间隙相同/平衡,苹果工程师舍弃了一些外观包袱和’UI像素完美’.</p>
+<ul>
+<li><p>解决方案: </p>
+<p>对于那些势必保持相同外观与追求’UI像素完美’的开发者来说,苹果的开发者论坛给出了一些可实行的方案,可以尝试一下.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/textview/resolve.png" style="width:100%;"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>  总得来说,ios 16 对于用户的安全性、便捷性、个性化和使用体感做的更加细致入微了,苹果在逐步将 iPhone 做的更加向纵深方向发展,而在横向创新领域,则并没有看到任何的扩展化,可能苹果是想现阶段在此 iPhone 的现功能基础上进行维护和深耕吧.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ios16/" rel="tag"># ios16</a>
+          
+            <a href="/tags/xcode/" rel="tag"># xcode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/07/03/搭建部署chrome-devtools-frontend/" rel="next" title="搭建部署devtools-frontend">
+                <i class="fa fa-chevron-left"></i> 搭建部署devtools-frontend
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ios-16-beta-3"><span class="nav-number">1.</span> <span class="nav-text">ios 16 beta 3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

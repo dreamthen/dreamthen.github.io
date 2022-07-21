@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Javascript,设计模式,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="单例模式 单例模式有两个特点: 全局性和唯一性.全局唯一性是指在全局环境中,只创建对象一次且保证对象在创建过后不被再次创建.下面我们就来演示一下Javascript语言的普通类单例模式和透明单例模式  普通类单例模式function GetSingleton(name) {     this.name = name;     this.instance = null; }  GetSingleto">
+<meta name="keywords" content="Javascript,设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-08-25 Javascript设计模式">
+<meta property="og:url" content="http://yoursite.com/2018/08/25/Javascript设计模式/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="单例模式 单例模式有两个特点: 全局性和唯一性.全局唯一性是指在全局环境中,只创建对象一次且保证对象在创建过后不被再次创建.下面我们就来演示一下Javascript语言的普通类单例模式和透明单例模式  普通类单例模式function GetSingleton(name) {     this.name = name;     this.instance = null; }  GetSingleto">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-08-25 Javascript设计模式">
+<meta name="twitter:description" content="单例模式 单例模式有两个特点: 全局性和唯一性.全局唯一性是指在全局环境中,只创建对象一次且保证对象在创建过后不被再次创建.下面我们就来演示一下Javascript语言的普通类单例模式和透明单例模式  普通类单例模式function GetSingleton(name) {     this.name = name;     this.instance = null; }  GetSingleto">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/25/Javascript设计模式/">
+
+
+
+
+
+  <title>2018-08-25 Javascript设计模式 | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/25/Javascript设计模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018-08-25 Javascript设计模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-25T11:37:47+08:00">
+                2018-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><blockquote>
+<p>单例模式有两个特点: 全局性和唯一性.全局唯一性是指在全局环境中,只创建对象一次且保证对象在创建过后不被再次创建.下面我们就来演示一下Javascript语言的普通类单例模式和透明单例模式</p>
+</blockquote>
+<h2 id="普通类单例模式"><a href="#普通类单例模式" class="headerlink" title="普通类单例模式"></a>普通类单例模式</h2><pre><code>function GetSingleton(name) {
+    this.name = name;
+    this.instance = null;
+}
+
+GetSingleton.prototype.getName = function() {
+    return this.name;
+};
+
+GetSingleton.prototype.Singleton = function(name) {
+    return this.instance || (this.instance = new GetSingleton(name));  
+};
+
+let gary_one = GetSingleton.prototype.Singleton(&quot;gary_one&quot;);
+let gary_two = GetSingleton.prototype.Singleton(&quot;gary_two&quot;);
+//在这里打印:
+//true
+console.log(gary_one === gary_two);
+</code></pre><h2 id="普通类单例模式-闭包版本"><a href="#普通类单例模式-闭包版本" class="headerlink" title="普通类单例模式(闭包版本)"></a>普通类单例模式(闭包版本)</h2><pre><code>function GetSingleton(name) {
+    this.name = name;
+}
+
+GetSingleton.prototype.getName = function() {
+    return this.name;
+};
+
+let Singleton = (function() {
+    let instance;
+    return function(name) {
+        return instance || (instance = new GetSingleton(name));
+    }
+})();
+
+let gary_one = Singleton(&quot;gary_one&quot;);
+let gary_two = Singleton(&quot;gary_two&quot;);
+//在这里打印:
+//true
+console.log(gary_one === gary_two);
+</code></pre><h2 id="透明单例模式"><a href="#透明单例模式" class="headerlink" title="透明单例模式"></a>透明单例模式</h2><pre><code>let GetSingleton = (function() {
+    let instance;
+    return function(html) {
+        if(instance) {
+            return instance;
+        }
+        this.html = html;
+        this.init();
+        return instance = this;
+    }
+})();
+
+GetSingleton.prototype.init = function() {
+    let div = document.createElement(&quot;div&quot;);
+    div.innerHTML = this.html;
+    document.body.appendChild(div);
+    return div;
+};
+
+let gary_one = new GetSingleton(&quot;gary_one&quot;);
+let gary_two = new GetSingleton(&quot;gary_two&quot;);
+//页面上只有创造了一个DIV DOM节点,内容是&quot;gary_one&quot;
+//在这里打印:
+//true
+console.log(gary_one === gary_two);
+</code></pre><h2 id="透明单例模式-代理模式版本"><a href="#透明单例模式-代理模式版本" class="headerlink" title="透明单例模式(代理模式版本)"></a>透明单例模式(代理模式版本)</h2><pre><code>function GetSingleton(html) {
+    this.html = html;
+    this.init();
+}
+
+GetSingleton.prototype.init = function() {
+    let div = document.createElement(&quot;div&quot;);
+    div.innerHTML = this.html;
+    document.body.appendChild(div);
+}
+
+let Singleton = (function() {
+    let instance;
+    return function(html) {
+        return instance || (instance = new GetSingleton(html));
+    }
+})();
+
+let gary_one = new Singleton(&quot;gary_one&quot;);
+let gary_two = new Singleton(&quot;gary_two&quot;);
+//页面上只有创造了一个DIV DOM节点,内容是&quot;gary_one&quot;
+//在这里打印:
+//true
+console.log(gary_one === gary_two);
+</code></pre><h2 id="Javascript单例模式-———-单一对象"><a href="#Javascript单例模式-———-单一对象" class="headerlink" title="Javascript单例模式 ——— 单一对象"></a>Javascript单例模式 ——— 单一对象</h2><pre><code>let obj_only = {
+    a() {
+        console.log(&quot;a&quot;);
+    },
+    b() {
+        console.log(&quot;b&quot;);
+    }
+};
+//在这里打印:
+//a
+obj_only.a();
+//在这里打印:
+//b
+obj_only.b();
+
+//动态空间对象
+let MyApp = {};
+MyApp.namespace = function(model) {
+    let parts = model.split(&quot;.&quot;),
+        prototype = MyApp;
+    for(let [key, value] of parts.entries()) {
+        if(!prototype[value]) {
+            prototype[value] = {};
+        }
+        prototype = prototype[value];
+    }    
+};
+MyApp.namespace(&quot;model&quot;);
+MyApp.namespace(&quot;div.style&quot;);
+//在这里打印:
+//{model: {}, div: {style: {}}}
+console.log(MyApp);
+
+//闭包
+function Person() {
+    let _name = &quot;Gary&quot;,
+        _age = 26;
+     return function() {
+        return `name: ${_name}, age: ${_age}`;
+     }   
+}
+let Gary = Person();
+//在这里打印:
+//name: Gary, age: 26
+console.log(Gary());
+</code></pre><h2 id="惰性单例模式"><a href="#惰性单例模式" class="headerlink" title="惰性单例模式"></a>惰性单例模式</h2><pre><code>//首先演示的不是惰性单例模式,而是对于创造单个对象有哪几种方式
+let GetSingleton = (function (){
+    let div = document.createElement(&quot;div&quot;);
+    div.innerHTML = &quot;Gary&quot;;
+    div.style.display = &quot;none&quot;;
+    document.body.appendChild(div);
+    return div;
+})();
+
+function Singleton() {
+    document.getElementById(&quot;open&quot;).onclick = function(e) {
+        let singletonDiv = GetSingleton;
+        singletonDiv.style.display = &quot;block&quot;;
+        //取消冒泡事件
+        e.stopImmediatePropagation();
+    };
+}
+
+//这种情况下,无论调不调用Singleton方法,界面在最开始加载时,就已经进行了DOM操作,添加了一个DIV DOM节点,并把这个节点的内容设置为Gary,显示方式设置为none,这种方式的确时创造了单个对象且不可再次创造,但是缺点还是比较明显的,创造不创造单个对象跟绑定事件并没有关系,假如我在页面上并没有触发绑定的事件,页面上在一开始还是具有已经创造好的DIV DOM节点的
+Singleton();
+
+
+function GetSingleton() {
+    let div = document.createElement(&quot;div&quot;);
+    div.innerHTML = &quot;Gary&quot;;
+    div.style.display = &quot;none&quot;;
+    document.body.appendChild(div);
+    return div;
+}
+
+function Singleton() {
+    document.getElementById(&quot;open&quot;).onclick = function(e) {
+        let singletonDiv = GetSingleton();
+        singletonDiv.style.display = &quot;block&quot;;
+        //取消冒泡
+        e.stopImmediatePropagation();
+    };
+}
+
+//这种情况下,满足了调用时再创造单个对象的条件,但是并不满足创造了单个对象并不可再次创造的条件,在这种情况下,每点击一次id为open的按钮一次,就会创造一个对象,这显然是不符合单例模式的特点的
+Singleton();
+
+let GetSingleton = (function() {
+    let res;
+    return function() {
+        if(!res) {
+            res = document.createElement(&quot;div&quot;);
+            res.innerHTML = &quot;Gary&quot;;
+            res.style.display = &quot;none&quot;;
+            document.body.appendChild(res);
+        }
+        return res;
+    }
+})();
+
+function Singleton() {
+    document.getElementById(&quot;open&quot;).onclick = function(e) {
+        let singletonDiv = GetSingleton();
+        singletonDiv.style.display = &quot;block&quot;;
+        //取消冒泡
+        e.stopImmediatePropagation();
+    };
+}
+
+//这种才是真正的惰性单例模式,在调用绑定事件时才创造单个对象,且也满足创造了单个对象并不可再次创造的条件,但是还是有优化的空间的
+Singleton();
+</code></pre><h2 id="惰性单例模式-优化版本"><a href="#惰性单例模式-优化版本" class="headerlink" title="惰性单例模式(优化版本)"></a>惰性单例模式(优化版本)</h2><pre><code>function GetSingleton(func) {
+    let res;
+    return function() {
+        return res || (res = func.apply(this, arguments));
+    }
+}
+
+let singleton = GetSingleton(function() {
+    let div = document.createElement(&quot;div&quot;);
+    div.innerHTML = &quot;Gary&quot;;
+    div.style.display = &quot;none&quot;;
+    document.body.appendChild(div);
+    return div;
+});
+
+function Singleton() {
+    document.getElementById(&quot;open&quot;).onclick = function(e) {
+        let singletonDiv = singleton();
+        singletonDiv.style.display = &quot;block&quot;;
+        //取消冒泡事件
+        e.stopImmediatePropagation();
+    };
+}
+
+//这是惰性单例模式的最终优化版本,最显著的特点时它的复用性,无论是创造任何的DOM节点,只用GetSingleton函数方法,外部传入一个func函数即可,立即满足创造单一对象之后不可再次创建的特点
+Singleton();
+</code></pre><h2 id="惰性单例模式的应用"><a href="#惰性单例模式的应用" class="headerlink" title="惰性单例模式的应用"></a>惰性单例模式的应用</h2><blockquote>
+<p>还记得jQuery工具库的.one函数方法嘛,它就是最经典的单例模式例子,我们今天来模拟一下</p>
+</blockquote>
+<pre><code>function GetSingleton(func) {
+    let res;
+    return function() {
+        return res || (res = func.apply(this, arguments));
+    }
+}
+
+let bindEvent = GetSingleton(function () {
+    document.getElementById(&quot;open&quot;).onclick = function(e) {
+        alert(&quot;Gary&quot;);
+        //取消冒泡
+        e.stopImmediatePropagation();
+    };
+    console.log(&quot;bind~&quot;);
+    return true;
+});
+
+function render() {
+    console.log(&quot;开始渲染~&quot;);
+    bindEvent();
+}
+
+//切实的实现了单例模式&quot;一朝绑定,终生收益&quot;的特性
+//在这里打印:
+//开始渲染~
+//bind~
+//开始渲染~
+//开始渲染~
+render();
+render();
+render();
+</code></pre><h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
+<p>策略模式的主要条件有三个: 可扩展、可复用和可替换,就让我们先演示一个非策略模式下的例子,我们要计算年终奖,首先要知晓月薪基数,然后再知道奖励倍数,就可以计算出最后的年终奖,一般我们会这么写</p>
+</blockquote>
+<pre><code>function getPerformance(performance, salary) {
+    if(performance === &quot;S&quot;) {
+        return salary * 4;
+    }
+    if(performance === &quot;A&quot;) {
+        return salary * 3;
+    }
+    if(performance === &quot;B&quot;) {
+        return salary * 2;
+    }
+}
+
+//在这里打印:
+//80000
+console.log(getPerformance(&quot;S&quot;, 20000));
+//在这里打印:
+//120000
+console.log(getPerformance(&quot;A&quot;, 40000));
+</code></pre><blockquote>
+<p>非策略模式的例子,存在很多缺点,首先,策略对象不可复用,策略对象逻辑全都写在一个函数对象里面,并不能拿出进行复用,其次,扩展很不方便,每一次扩展都必须去改变策略对象所处的逻辑函数对象,最后新的策略对象不可替换新的策略对象,接下来我们用传统的策略模式进行解决,首先将策略对象抽取到外面,形成一个抽象的对象</p>
+</blockquote>
+<pre><code>function PerformanceS() {
+
+}
+
+PerformanceS.prototype.getSalary = function(salary) {
+    return salary * 4;
+};
+
+function PerformanceA() {
+
+}
+
+PerformanceA.prototype.getSalary = function(salary) {
+    return salary * 3;
+};
+
+function PerformanceB() {
+
+}
+
+PerformanceB.prototype.getSalary = function(salary) {
+    return salary * 2;
+};
+
+function GetPerformanceSalary() {
+    this.performance = null;
+    this.salary = null;
+}
+
+GetPerformanceSalary.prototype.setPerformance = function(performance) {
+    this.performance = performance;
+};
+
+GetPerformanceSalary.prototype.setSalary = function(salary) {
+    this.salary = salary;
+};
+
+GetPerformanceSalary.prototype.getBonus = function() {
+    return this.performance.getSalary(this.salary);  
+};
+
+let getPerformanceSalary = new GetPerformanceSalary();
+getPerformanceSalary.setSalary(20000);
+getPerformanceSalary.setPerformance(new PerformanceS());
+//在这里打印:
+//80000
+console.log(getPerformanceSalary.getBonus());
+getPerformanceSalary.setSalary(40000);
+getPerformanceSalary.setPerformance(new PerformanceA());
+//在这里打印:
+//120000
+console.log(getPerformanceSalary.getBonus());
+</code></pre><blockquote>
+<p>策略模式下的策略对象,复用性、扩展性和替换性都很强,策略对象现在是以抽象函数的形式进行的定义,可以直接拿原有的抽象函数对象进行复用,也可以定义新的抽象函数对象进行扩展,在替换性方面,薪酬基数和策略对象模式都可根据set…方法的方式进行替换,并且得到不同的结果</p>
+</blockquote>
+<h2 id="Javascript策略模式"><a href="#Javascript策略模式" class="headerlink" title="Javascript策略模式"></a>Javascript策略模式</h2><pre><code>let categories = {
+    S(salary) {
+        return salary * 4;
+    },
+    A(salary) {
+        return salary * 3;
+    },
+    B(salary) {
+        return salary * 2;
+    }
+};
+
+function getPerformance(performance, salary) {
+    return categories[performance](salary);
+}
+
+//在这里打印:
+//80000
+console.log(getPerformance(&quot;S&quot;, 20000));
+//在这里打印:
+//120000
+console.log(getPerformance(&quot;A&quot;, 40000));
+</code></pre><h2 id="策略模式-——-表单验证"><a href="#策略模式-——-表单验证" class="headerlink" title="策略模式 —— 表单验证"></a>策略模式 —— 表单验证</h2><blockquote>
+<p>使用策略模式来进行表单验证,也是一种很好的做法,首先我们先不使用策略模式来编写表单验证</p>
+</blockquote>
+<pre><code>function validate() {
+    let userAgent = document.getElementById(&quot;user-agent&quot;);
+    if(userAgent.username.value === &quot;&quot;) {
+        return &quot;用户名不可为空&quot;;
+    }
+    if(userAgent.password.value.length !== 6) {
+        return &quot;密码长度必须为6位&quot;;
+    }
+    if(!/^1(3|5|8)[\d]{9}$/.test(userAgent.phone.value)) {
+        return &quot;手机号码不符合规范&quot;;
+    }
+}
+
+let userAgent = document.getElementById(&quot;user-agent&quot;);
+userAgent.onsubmit = function(e) {
+    let errMsg = validate();
+    if(errMsg) {
+        console.log(errMsg);
+    }
+    //取消冒泡事件
+    e.stopImmediatePropagation();
+    //取消默认事件
+    e.preventDefault();
+};
+</code></pre><blockquote>
+<p>策略对象不可复用,全都处在validate函数作用域下,且不可扩展,扩展必须去更改validate源代码,不符合开放封闭原则,更不能替换在任何的表单校验上面,只能针对特定的表单(name为username,password,phone的表单)进行校验,所以不使用策略模式,效果极差,下面我们就使用策略模式来进行表单校验</p>
+</blockquote>
+<pre><code>let categories = {
+    isNonUsername(value, errMsg) {
+        if(value === &quot;&quot;) {
+            return errMsg;
+        }
+    },
+    minLength(value, length, errMsg) {
+        if(value.length !== parseInt(length)) {
+            return errMsg;
+        }
+    },
+    isMobile(value, errMsg) {
+        if(!/^1(3|5|8)[\d]{9}$/.test(value)) {
+            return errMsg;
+        }
+    }
+};
+
+function Validate() {
+    this.cache = [];
+}
+
+Validate.prototype.add = function(dom, condition, errMsg) {
+    this.cache.push(function() {
+        let parts = condition.split(&quot;:&quot;);
+        let categories_condition = parts.shift();
+        parts.unshift(dom.value);
+        parts = [...parts, errMsg];
+        return categories[categories_condition].apply(dom, parts);
+    });
+};
+
+Validate.prototype.start = function() {
+    for(let [key, value] of this.cache.entries()) {
+        let validateFunc = value;
+        let errMsg = validateFunc();
+        if(errMsg) {
+            return errMsg;
+        }
+    }  
+};
+
+function validate() {
+    let userAgent = document.getElementById(&quot;user-agent&quot;),
+        new_validate = new Validate();
+    new_validate.add(userAgent.username, &quot;isNonUsername&quot;, &quot;用户名不可为空&quot;);
+    new_validate.add(userAgent.password, &quot;minLength:6&quot;, &quot;密码长度必须为6位&quot;);
+    new_validate.add(userAgent.phone, &quot;isMobile&quot;, &quot;手机号码不符合规范&quot;);
+    let errMsg = new_validate.start();
+    if(errMsg) {
+        return errMsg;
+    }    
+}
+
+let userAgent = document.getElementById(&quot;user-agent&quot;);
+userAgent.onsubmit = function(e) {
+    let errMsg = validate();
+    if(errMsg) {
+        console.log(errMsg);
+    }
+    //取消冒泡事件
+    e.stopImmediatePropagation();
+    //取消默认事件
+    e.preventDefault();
+};
+</code></pre><blockquote>
+<p>这样就利用策略模式的复用性、扩展性以及替换性完美的解决了表单验证,你这时可能会有疑问,假如表单里面一个表单项有多个验证条件怎么办,这套策略模式的方式不就不好使了嘛,别急,只要修改一下Validate.prototype.add函数方法,就可以既兼容一个还兼容多个验证条件</p>
+</blockquote>
+<pre><code>let categories = {
+    isNonUsername(value, errMsg) {
+        if(value === &quot;&quot;) {
+            return errMsg;
+        }
+    },
+    minLength(value, length, errMsg) {
+        if(value.length !== parseInt(length)) {
+            return errMsg;
+        }
+    },
+    isMobile(value, errMsg) {
+        if(!/^1(3|5|8)[\d]{9}$/.test(value)) {
+            return errMsg;
+        }
+    }
+};
+
+function Validate() {
+    this.cache = [];
+}
+
+Validate.prototype.add = function(dom, rules) {
+    for(let [key, value] of rules.entries()) {
+        this.cache.push((function() {
+            let condition = value[&quot;condition&quot;],
+                errMsg = value[&quot;errMsg&quot;];
+            return function() {
+                let parts = condition.split(&quot;:&quot;);
+                let categories_condition = parts.shift();
+                parts.unshift(dom.value);
+                parts = [...parts, errMsg];
+                return categories[categories_condition].apply(dom, parts);
+            }    
+        })());
+    }
+};
+
+Validate.prototype.start = function() {
+    for(let [key, value] of this.cache.entries()) {
+        let validateFunc = value;
+        let errMsg = validateFunc();
+        if(errMsg) {
+            return errMsg;
+        }
+    }
+};
+
+function validate() {
+    let userAgent = document.getElementById(&quot;user-agent&quot;),
+        new_validate = new Validate();
+     new_validate.add(userAgent.username, [{
+        condition: &quot;isNonUsername&quot;,
+        errMsg: &quot;用户名不可为空&quot;
+     }, {
+        condition: &quot;minLength:10&quot;,
+        errMsg: &quot;用户名长度必须为10位&quot;
+     }]);
+     new_validate.add(userAgent.password, [{
+        condition: &quot;minLength:6&quot;,
+        errMsg: &quot;密码长度必须为6位&quot;
+     }]);
+     new_validate.add(userAgent.phone, [{
+        condition: &quot;isMobile&quot;,
+        errMsg: &quot;手机号码不和规范&quot;
+     }]);
+
+     let errMsg = new_validate.start();
+     if(errMsg) {
+        return errMsg;
+     }
+}
+
+let userAgent = document.getElementById(&quot;user-agent&quot;);
+userAgent.onsubmit = function(e) {
+    let errMsg = validate();
+    if(errMsg) {
+        console.log(errMsg);
+    }
+    //取消冒泡事件
+    e.stopImmediatePropagation();
+    //取消默认事件
+    e.preventDefault();
+};
+</code></pre><blockquote>
+<p>这样就完美解决了多个验证条件的问题,这种策略模式可复用,可扩展,可替换,十分完美</p>
+</blockquote>
+<h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><blockquote>
+<p>下面我们要介绍的是代理模式,顾名思义,代理模式就是通过代理层去替代实体对象处理一些信息,其实就是在保护实体对象,减少实体对象的职责,在过滤、处理、整合信息之后再交给实体对象,这样会使得实体对象很轻便,对于实体对象的扩展性、维护性以及替换性有很大的帮助</p>
+</blockquote>
+<pre><code>function Flower() {
+}
+
+let xiaoming = {
+    sendFlower(target) {
+        let flower = new Flower();
+        target.receiveFlower(flower);
+    }
+};
+
+let A = {
+    receiveFlower(flower) {
+        console.log(&quot;已收到花朵: &quot; + flower);
+    }
+};
+
+let B = {
+    receiveFlower(flower) {
+        A.receiveFlower(flower);
+    }
+};
+
+//在这里打印:
+//已收到花朵: [object Object]
+xiaoming.sendFlower(B);
+</code></pre><blockquote>
+<p>这样就形成了一个小明送给女神A花朵表达想和她恋爱的心意,又不太好意思亲自送,只好让他跟A共同的好友B来进行代理送,这就是一个典型的代理模式的例子,你可能会问,这样做有什么意义呢,只不过多了一层罢了,的确这样只是多添加了一层而已,但是假如我们再改编一下剧情,你就会感觉很有意义</p>
+</blockquote>
+<pre><code>function Flower() {
+}
+
+let xiaoming = {
+    sendFlower(target) {
+        let flower = new Flower();
+        target.receiveFlower(flower);
+    }
+};
+
+let A = {
+    receiveFlower(flower) {
+        console.log(&quot;已收到花朵: &quot; + flower);
+    },
+    listenerBeHappy(func) {
+        let self = this;
+        setTimeout(function() {
+            func.apply(self);
+        }, 1000);
+    }
+};
+
+let B = {
+    receiveFlower(flower) {
+        A.listenerBeHappy(function () {
+            this.receiveFlower(flower);
+        });
+    }
+};
+
+//在这里打印:
+//已收到花朵: [object Object]
+xiaoming.sendFlower(B);
+</code></pre><blockquote>
+<p>故事的剧情转变成了这样,小明送给女神A花朵表达想和她恋爱的心意,又不太好意思亲自送,只好让他跟A共同的好友B来进行代理送,B清楚A什么时间心情最好,什么时间可以接受别人对她的表白,所以B在A心情很好的时候将小明的花朵转交给女神A,虽然也不见得小明的追求会成功,但是B的代理工作充分表明了代理模式</p>
+</blockquote>
+<h2 id="虚拟代理"><a href="#虚拟代理" class="headerlink" title="虚拟代理"></a>虚拟代理</h2><blockquote>
+<p>我们使用虚拟代理来写一个懒加载图片的例子,通常我们使用Js写加载图片时,一般会这么做</p>
+</blockquote>
+<pre><code>let loadImage = (function () {
+    let Image = document.createElement(&quot;img&quot;);
+    document.body.appendChild(Image);
+    return {
+        setSrc(src) {
+            Image.src = src;
+        }
+    }
+})();
+
+loadImage.setSrc(&quot;https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png&quot;);
+</code></pre><blockquote>
+<p>但是这样做有一个用户体验的交互问题,图片还没有完全渲染的时候,图片区域是空白的,这时候我们需要使用代理来虚拟在图片还没有完全渲染完毕的时候,先在所在区域展示loading加载图,当图片完全渲染完毕之后,再将所在区域替换成图片</p>
+</blockquote>
+<pre><code>let loadImage = (function () {
+    let Image = document.createElement(&quot;img&quot;);
+    document.body.appendChild(Image);
+    return {
+        setSrc(src) {
+            Image.src = src;
+        }
+    }
+})();
+
+let proxyLoadImage = (function () {
+    let img = new Image();
+    img.onload = function() {
+        loadImage.setSrc(this.src);
+    };
+
+    return {
+        setSrc(src) {
+            loadImage.setSrc(&quot;../img/zy.jpeg&quot;);
+            img.src = src;
+        }
+    }
+})();
+
+proxyLoadImage.setSrc(&quot;https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png&quot;);
+</code></pre><blockquote>
+<p>虚拟代理模式对于用户是无感的,用户不会知道你使用的是实体对象接口还是虚拟代理对象接口,且虚拟代理对象的复用性、扩展性以及可替换性都是很完美的,完全不会破坏原有的实体对象的代码结构,下面我们来写一个使用虚拟代理模式实现批量提交文件,节省浏览器和后台服务器资源的例子</p>
+</blockquote>
+<pre><code>function syncReadFile(id) {
+    console.log(&quot;开始上传文件: &quot; + id);
+}
+
+let checkbox = document.getElementsByName(&quot;checkbox&quot;);
+for(let i = 0; i &lt; checkbox.length; i ++) {
+    checkbox[i].onclick = function(e) {
+        if(this.checked) {
+            syncReadFile(this.id);
+        }
+        //取消冒泡事件
+        e.stopImmediatePropagation();
+    };
+}
+</code></pre><blockquote>
+<p>这个例子,我每点一次复选框,且复选框选中,就会上传文件,在短时间内选中多个复选框,会造成大量的上传请求发出,频繁的调用上传接口,会大量浪费浏览器和后台服务器资源,所以我们设置一个函数节流函数来模拟syncReadFile函数,相当于是一个虚拟代理模式的函数,节省浏览器和后台服务器资源</p>
+</blockquote>
+<pre><code>function syncReadFile(id) {
+    console.log(&quot;开始上传文件: &quot; + id);
+}
+
+let proxySyncReadFile = (function() {
+    let cache = [],
+        timer = null;
+    return function (id) {
+        let self = this;
+        cache = [...cache, id];
+        if(timer) {
+            return false;
+        }
+        timer = setTimeout(function () {
+            let id_transform = cache.join(&quot;,&quot;);
+            syncReadFile.call(self, id_transform);
+            clearTimeout(timer);
+            timer = null;
+            cache.length = 0;
+        }, 2000);
+    }    
+})();
+
+let checkbox = document.getElementsByName(&quot;checkbox&quot;);
+for(let i = 0; i &lt; checkbox.length; i ++) {
+    checkbox[i].onclick = function (e) {
+        if(this.checked) {
+            proxySyncReadFile(this.id);
+        }
+        //取消冒泡事件
+        e.stopImmediatePropagation();
+    };
+}
+</code></pre><h2 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h2><blockquote>
+<p>我们先来写一个缓存代理计算乘积的例子,当传入的参数与上一次传入的参数相同时,就使用缓存中的乘积结果,不需要再次进行计算</p>
+</blockquote>
+<pre><code>function getMultiple() {
+    let cache = {};
+    function multiple() {
+        let a = 1;
+        for(let i = 0; i &lt; arguments.length; i ++) {
+            a *= arguments[i];
+        }
+        return a;
+    }
+    return function() {
+        let cache_prototype = Array.prototype.join.call(arguments, &quot;_&quot;);
+        if(cache[cache_prototype]) {
+            return cache[cache_prototype];
+        }
+        console.log(&quot;again&quot;);
+        return cache[cache_prototype] = multiple.apply(this, arguments);
+    }
+}
+
+let multipleForReal = getMultiple();
+//在这里打印:
+//again
+//168
+console.log(multipleForReal(4, 6, 7));
+//在这里打印:
+//168
+console.log(multipleForReal(4, 6, 7));
+</code></pre><blockquote>
+<p>让我们将事情变得更有趣一些</p>
+</blockquote>
+<pre><code>function plus() {
+    let a = 0;
+    for(let i = 0; i &lt; arguments.length; i ++) {
+        a += arguments[i];
+    }
+    return a;
+}
+
+function multiple() {
+    let a = 1;
+    for(let i = 0; i &lt; arguments.length; i ++) {
+        a *= arguments[i];
+    }
+    return a;
+}
+
+function getMethod(func) {
+    let cache = {};
+    return function () {
+        let cache_prototype = Array.prototype.join.call(arguments, &quot;_&quot;);
+        if(cache[cache_prototype]) {
+            return cache[cache_prototype];
+        }
+        console.log(&quot;again&quot;);
+        return cache[cache_prototype] = func.apply(this, arguments);
+    }
+}
+
+let getMethodResult = getMethod(plus);
+//在这里打印:
+//again
+//20
+console.log(getMethodResult(4, 8, 8));
+//在这里打印:
+//20
+console.log(getMethodResult(4, 8, 8));
+let getMethodResult_multiple = getMethod(multiple);
+//在这里打印:
+//again
+//256
+console.log(getMethodResult_multiple(4, 8, 8));
+//在这里打印:
+//256
+console.log(getMethodResult_multiple(4, 8, 8));
+</code></pre><h1 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h1><blockquote>
+<p>除了某一些古代的语言,现代的程序语言都实现了内置迭代器,迭代器模式或许从来都没有被人所听说过,我们今天就用JavaScript来模拟迭代器模式</p>
+</blockquote>
+<pre><code>function each(arr, func) {
+    for(let [key, value] of arr.entries()) {
+        func.call(this, key, value);
+    }
+}
+
+//在这里打印:
+//0 2
+//1 6
+//2 8
+each([2, 6, 8], function (index, item) {
+    console.log(index, item);
+});
+</code></pre><blockquote>
+<p>这只是内部迭代器模式,将迭代逻辑放在内部实现,但是这样做很不灵活,比如我要实现一个俩数组是否相等的函数compare,你会发现compare的实现方式并不美观,且很不灵活</p>
+</blockquote>
+<pre><code>function each(arr, func) {
+    for(let [key, value] of arr.entries()) {
+        func.call(this, key, value);
+    }
+}
+
+function compare(arr, arrAno) {
+    if(arr.length !== arrAno.length) {
+        throw new Error(&quot;两个数组不相同&quot;);
+    }
+    each(arr, function (index, item) {
+        if(item !== arrAno[index]) {
+            throw new Error(&quot;两个数组不相同&quot;);
+        }
+    });
+    console.log(&quot;两个数组是相同的&quot;);
+}
+
+//在这里打印:
+//两个数组是相同的
+compare([1, 2, 5], [1, 2, 5]);
+//在这里报错:
+//两个数组不相同
+compare([1, 2, 8], [1, 3, 6]);
+</code></pre><h2 id="外部迭代模式"><a href="#外部迭代模式" class="headerlink" title="外部迭代模式"></a>外部迭代模式</h2><blockquote>
+<p>后来出现了外部迭代模式,代码如下,这种迭代模式,灵活的解决了外部传入迭代器时,一些比较复杂的需求,维护性、扩展性、灵活性都很高,且针对对象和数组,只要拥有length属性的对象都可以进行迭代</p>
+</blockquote>
+<pre><code>function Iterator(obj) {
+    let index = 0,
+        length = obj.length;
+    function next() {
+        index++;
+    }    
+    function isDone() {
+        return index &lt; length;
+    }
+    function getCurrentItem() {
+        return obj[index];
+    }
+    return {
+        length,
+        next,
+        isDone,
+        getCurrentItem
+    }
+}
+let iterator_arr = Iterator([55, 66, 99, 10, 1, 11, 28, 32]);
+//在这里打印:
+//55
+//66
+//99
+//10
+//1
+//11
+//28
+//32
+while(iterator_arr.isDone()) {
+    console.log(iterator_arr.getCurrentItem());
+    iterator_arr.next();
+}
+</code></pre><blockquote>
+<p>这样的话,我们来编写compare函数进行两个函数比对时,就会灵活,更可维护的多</p>
+</blockquote>
+<pre><code>function Iterator(obj) {
+    let index = 0,
+        length = obj.length;
+
+    function next() {
+        index++;
+    }
+
+    function getCurrentItem() {
+        return obj[index];
+    }
+
+    function isDone() {
+        return index &gt;= length;
+    }
+
+    return {
+        length,
+        isDone,
+        getCurrentItem,
+        next
+    }; 
+}
+
+function compare(arr, arrAno) {
+    if(arr.length !== arrAno.length) {
+        throw new Error(&quot;两个数组不相同&quot;);
+    }
+    while(!arr.isDone() &amp;&amp; !arrAno.isDone()) {
+        if(arr.getCurrentItem() !== arrAno.getCurrentItem()) {
+            throw new Error(&quot;两个数组不相同&quot;);
+        }
+        arr.next();
+        arrAno.next();
+    }
+    console.log(&quot;两个数组是相同的&quot;);
+}
+
+let iterator = Iterator([1, 6, 8, 10, 55, 25, 36, 96]);
+let iterator_ano = Iterator([1, 6, 8, 10, 55, 25, 36, 96]);
+let iterator_diff = Iterator([1, 6, 8, 10, 55, 25, 36, 96]);
+let iterator_diff_ano = Iterator([1, 6, 8, 10, 55, 28, 36, 96]);
+//在这里打印:
+//两个数组是相同的
+compare(iterator, iterator_ano);
+//在这里报错:
+//两个数组不相同
+compare(iterator_diff, iterator_diff_ano);
+</code></pre><blockquote>
+<p>jQuery中的each方法,就提供了迭代的功能,但是each方法不仅可以迭代数组,还可以迭代对象,我们来看一下each方法的源代码实现方式</p>
+</blockquote>
+<pre><code>$.each = function (obj, func) {
+    let value,
+        i = 0,
+        length = obj.length;
+    if(Object.prototype.toString.call(obj) === &quot;[object Array]&quot;) {
+        for(; i &lt; length; i++) {
+            value = func.call(this, i, obj[i]);
+            if(value === false) {
+                break;
+            }
+        }
+    } else {
+        for(i in obj) {
+            value = func.call(this, i, obj[i]);
+            if(value === false) {
+                break;
+            }
+        }
+    }
+}
+
+//在这里打印:
+//0 5
+//1 8
+//2 10
+$.each([5, 8, 10, 3, 66], function (index, item) {
+    if(item === 3) {
+        return false;
+    }
+    console.log(index, item);
+});
+</code></pre><blockquote>
+<p>这期间还使用了中断迭代器模式的判断语句 if(value === false) break;当函数返回false的时候,就将迭代器终止掉,直接break出for循环,下面我们来介绍反向迭代函数,我们分分钟搞定</p>
+</blockquote>
+<pre><code>function reverseEach(obj, func) {
+    let value;
+    for(let l = obj.length - 1; l &gt;=0; l--) {
+        value = func.call(this, l, obj[l]);
+        if(value === false) {
+            break;
+        }
+    }
+}
+
+//在这里打印:
+//4 101
+//3 99
+//2 66
+reverseEach([10, 88, 66, 99, 101], function (index, item) {
+    if(item === 88) {
+        return false;
+    }
+    console.log(index, item);
+});
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/21/使用Canvas绘制圆角按钮/" rel="next" title="2018-05-21 使用Canvas绘制圆角按钮">
+                <i class="fa fa-chevron-left"></i> 2018-05-21 使用Canvas绘制圆角按钮
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/03/关于该不该让伴侣在自己房本上加名字的理解/" rel="prev" title="2019-02-03 关于该不该让女伴侣在自己房本上加名字的理解">
+                2019-02-03 关于该不该让女伴侣在自己房本上加名字的理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通类单例模式"><span class="nav-number">1.1.</span> <span class="nav-text">普通类单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#普通类单例模式-闭包版本"><span class="nav-number">1.2.</span> <span class="nav-text">普通类单例模式(闭包版本)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透明单例模式"><span class="nav-number">1.3.</span> <span class="nav-text">透明单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透明单例模式-代理模式版本"><span class="nav-number">1.4.</span> <span class="nav-text">透明单例模式(代理模式版本)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript单例模式-———-单一对象"><span class="nav-number">1.5.</span> <span class="nav-text">Javascript单例模式 ——— 单一对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惰性单例模式"><span class="nav-number">1.6.</span> <span class="nav-text">惰性单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惰性单例模式-优化版本"><span class="nav-number">1.7.</span> <span class="nav-text">惰性单例模式(优化版本)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惰性单例模式的应用"><span class="nav-number">1.8.</span> <span class="nav-text">惰性单例模式的应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#策略模式"><span class="nav-number">2.</span> <span class="nav-text">策略模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript策略模式"><span class="nav-number">2.1.</span> <span class="nav-text">Javascript策略模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#策略模式-——-表单验证"><span class="nav-number">2.2.</span> <span class="nav-text">策略模式 —— 表单验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代理模式"><span class="nav-number">3.</span> <span class="nav-text">代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟代理"><span class="nav-number">3.1.</span> <span class="nav-text">虚拟代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存代理"><span class="nav-number">3.2.</span> <span class="nav-text">缓存代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#迭代器模式"><span class="nav-number">4.</span> <span class="nav-text">迭代器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#外部迭代模式"><span class="nav-number">4.1.</span> <span class="nav-text">外部迭代模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

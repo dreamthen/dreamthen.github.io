@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="devtools-frontend,chrome,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="devtools-frontend 原理分析  原理在《DevTools 实现原理与性能分析实战》和《Chrome DevTools Frontend 运行原理浅析》这两篇文章中实际上已经说得很清楚了,整个 Devtools 实现 PC 端: chrome浏览器,Android客户端: chrome 浏览器、App webview中调试都是完全依赖了 Chromium 浏览器内核,其高性能的Bli">
+<meta name="keywords" content="devtools-frontend,chrome">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建部署devtools-frontend">
+<meta property="og:url" content="http://yoursite.com/2022/07/03/搭建部署chrome-devtools-frontend/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="devtools-frontend 原理分析  原理在《DevTools 实现原理与性能分析实战》和《Chrome DevTools Frontend 运行原理浅析》这两篇文章中实际上已经说得很清楚了,整个 Devtools 实现 PC 端: chrome浏览器,Android客户端: chrome 浏览器、App webview中调试都是完全依赖了 Chromium 浏览器内核,其高性能的Bli">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://image.white-than-wood.zone/devtools_frontend/urlError.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/devtools_frontend/glicent.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/devtools_frontend/fileSystem.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/devtools_frontend/remoteUrl.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/devtools_frontend/remoteUrlShow.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/devtools_frontend/remoteUrl.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/devtools_frontend/hostedMode.png">
+<meta property="og:image" content="https://image.white-than-wood.zone/devtools_frontend/hostedModeChrome.png">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建部署devtools-frontend">
+<meta name="twitter:description" content="devtools-frontend 原理分析  原理在《DevTools 实现原理与性能分析实战》和《Chrome DevTools Frontend 运行原理浅析》这两篇文章中实际上已经说得很清楚了,整个 Devtools 实现 PC 端: chrome浏览器,Android客户端: chrome 浏览器、App webview中调试都是完全依赖了 Chromium 浏览器内核,其高性能的Bli">
+<meta name="twitter:image" content="https://image.white-than-wood.zone/devtools_frontend/urlError.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/07/03/搭建部署chrome-devtools-frontend/">
+
+
+
+
+
+  <title>搭建部署devtools-frontend | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/03/搭建部署chrome-devtools-frontend/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">搭建部署devtools-frontend</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-03T01:50:28+08:00">
+                2022-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/chrome-devtools-frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">chrome-devtools-frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="devtools-frontend"><a href="#devtools-frontend" class="headerlink" title="devtools-frontend"></a>devtools-frontend</h1><blockquote>
+<p>原理分析</p>
+</blockquote>
+<p>原理在<a href="https://www.cnblogs.com/vivotech/p/15735242.html" target="_blank" rel="noopener">《DevTools 实现原理与性能分析实战》</a>和<a href="https://zhaomenghuan.js.org/blog/chrome-devtools-frontend-analysis-of-principle.html" target="_blank" rel="noopener">《Chrome DevTools Frontend 运行原理浅析》</a>这两篇文章中实际上已经说得很清楚了,整个 Devtools 实现 PC 端: chrome浏览器,Android客户端: chrome 浏览器、App webview中调试都是完全依赖了 Chromium 浏览器内核,其高性能的Blink(之前是Webkit)渲染引擎使得这一套生态得以实现.</p>
+<blockquote>
+<p>源码下载及编译</p>
+</blockquote>
+<p>DevTools Frontend 属于 Chromium 完全独立的一部分,代码托管在 Google 开源仓库上,代码开源可以从这里下载(但是不推荐,因为源代码不全,无法进行检出和编译): <a href="https://chromium.googlesource.com/devtools/devtools-frontend/" target="_blank" rel="noopener">Chromium DevTools Frontend</a> 或 <a href="https://www.npmjs.com/package/chrome-devtools-frontend" target="_blank" rel="noopener">GitHub DevTools Frontend 镜像</a>.DevTools Frontend 基于 GN 构建.</p>
+<ul>
+<li><p>构建系统</p>
+<p>构建系统实际上就是一套编译规则,将无数的源代码文件根据一定的顺序和策略来进行编译,模块划分、编译成动静态库,最后链接成可执行代码通过构建系统的编译可以大大提升开发人员的工作效率.比如很常见的 GNU Makefile,但编写 GNU Makefile 是一件繁琐和乏味的事情,而且极容易出错.这时就出现了生成 GNU Makefile 的工具,比如 cmake、AutoMake 等等,这种构建系统称作元构建系统（meta build system）,如在Linux上软件仓库的概念还没有普及的时候,通常我们安装软件的步骤是:</p>
+<pre><code>./configure
+make
+make install
+</code></pre></li>
+<li><p>Chromium 中的构建系统</p>
+<p>几年前的chromium开源项目采用的是 GYP (Generate Your Projects）构建系统,这也是一种元构建系统.软件工程师根据 GYP 规则编写构建工程文件（通常以 gyp, gypi 为后缀）,GYP 工具根据 gyp 文件生成 GNU Makefile.接着chromium 项目又搞出了 Ninja 构建系统,但 Ninja 并不是用来取代 GYP 的,而是取代 GNU Makefile 的,据 Google 官方的说法是速度有了好几倍的提升.但对于开发者而言, 不需要去深入了解 GYP 或 GN 这样的元构建系统，因为这只是一种中间输出，所以 ninja 的出现，与开发者关系不大，原来怎么写 gyp，现在还是怎么写，只是构建命令稍微做了改变。GN 文件相当于 gyp 文件的下一代，和 GYP 差别不大，但是总体上比原来的 GYP 文件更清晰.</p>
+</li>
+<li><p>GN 元构建系统</p>
+<p>GN 是一种元构建系统,生成 Ninja 构建文件（Ninja build files）,相较 GYP 而言,有很大的优点:</p>
+<ol>
+<li>可读性更好，更容易编写和维护.</li>
+<li>速度更快，Google 官方给的数据是 20 倍的速度提升.</li>
+<li>修改 GN 文件后,执行 ninja 构建时会自动更新 Ninja 构建文件.</li>
+<li>更简单的模块依赖,提供了 public_deps, data_deps 等,在 GYP 中,只有一种目标依赖,导致依赖关系错综复杂,容易引入不必要的模块依赖.</li>
+<li>提供了更好的工具查询模块依赖图谱: 这在 GYP 构建系统中是一个噩梦,要查一个目标依赖哪些模块或者一个模块被哪些目标依赖几乎是不可能的.</li>
+<li>更好的调试支持: 在 GN 中，只需要一条 print 语句就可以解决.</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p>depot_tools</p>
+<p>depot_tools是一个工具集,里面包含了gclient、gcl、gn和ninja等工具,用来下载、编译、运行 和调试 Chromium 中的独立的项目,所以为了学习 Chromium 代码,下载安装 depot_tools 是前提.</p>
+<pre><code>git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+</code></pre><p>Tips: 这里使用终端下载 depot_tools 需要将终端或者 git 设置 VPN,否则会超时导致不能下载.</p>
+<pre><code># 终端临时设置 VPN
+export http_proxy=http://127.0.0.1:7890/
+export https_proxy=$http_proxy
+
+# 全局 git 设置 VPN
+git config --global http.proxy http://127.0.0.1:7890/
+git config --global https.proxy http://127.0.0.1:7890/
+</code></pre><p>打开 ~/.bash_profile 文件，将 depot_tools 添加到环境变量中,这样 depot_tools 里的工具命令就添加到了全局变量中(/path/to/depot_tools 为你 depot_tools 本地的路径).</p>
+<pre><code>vim ~/.bash_profile
+export PATH=$PATH:/path/to/depot_tools
+</code></pre><p>更新环境变量,立即生效命令.</p>
+<pre><code>source ~/.bash_profile
+</code></pre><p>这样所有的下载、编译、运行 和调试 Chromium 中的独立的项目的工具命令就全存在在全局变量中了,包括 GN 元构建系统.</p>
+</li>
+<li><p>源码下载</p>
+<pre><code># fetch 也是 depot_tools 中的工具命令.
+fetch devtools_frontend
+</code></pre><p>Tips: 这里使用终端下载 devtools_frontend 需要将终端或者 git 设置 VPN,否则会超时导致不能下载.</p>
+<pre><code># 终端临时设置 VPN
+export http_proxy=http://127.0.0.1:7890/
+export https_proxy=$http_proxy
+
+# 全局 git 设置 VPN
+git config --global http.proxy http://127.0.0.1:7890/
+git config --global https.proxy http://127.0.0.1:7890/
+</code></pre><p>PS: 如果电脑上装的是 python 3.x 的话,会出现证书验证失败的错误,需要手动验证激活,点击 Install Certificates.command 即可手动验证激活.</p>
+<pre><code>urllib.error.URLError: &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1108)
+</code></pre><p><img src="https://image.white-than-wood.zone/devtools_frontend/urlError.png" alt></p>
+<p>若出现以下内容:</p>
+<p><img src="https://image.white-than-wood.zone/devtools_frontend/glicent.png" alt></p>
+<p>说明资源发生了更新,运行以下命令来下载代码.</p>
+<pre><code>gclient sync
+</code></pre><ul>
+<li><p>gclient</p>
+<p>gclient 是由 Google 用 Python 开发的一套跨平台的 git 仓库管理工具,它的作用类似 git 的 submodule，用来将多个 git 仓库组成一个 solution 进行管理，比如 chromium 项目是由80多个独立的 git 仓库构成的.gclient sync 就是同步更新最新的代码资源.</p>
+</li>
+</ul>
+</li>
+<li><p>编译</p>
+<pre><code>cd devtools-frontend
+# GN 构建系统新生成一个编译目录,并产出 Ninja 构建文件
+gn gen out/Default
+# 运行 Ninja 构建文件进行根据编译规则实行编译
+autoninja -C out/Default
+</code></pre><p>编译生成的文件可以在 out/Default/gen/front_end 中找到.</p>
+</li>
+</ul>
+<blockquote>
+<p>基于Chrome运行</p>
+</blockquote>
+<p>  根据<a href="https://chromium.googlesource.com/devtools/devtools-frontend/+/HEAD/docs/workflows.md#Integrated-checkout" target="_blank" rel="noopener"> Devtools Frontend Workflows </a>以及<a href="https://docs.google.com/document/d/1COgCBWWuTh2o-Zbp6h_z0h0LtlJaimaEDsION4RZPxc/edit#heading=h.406e03aq0xjm" target="_blank" rel="noopener"> DevTools debugging workflow -&gt; Existing workflows </a>可知,原有的基于 DevServer 运行 DevTools 方式(npm start)已经移除,Chromium 79版本之后统一使用 –custom-devtools-frontend 方式.</p>
+<ul>
+<li><p>Chrome Canary</p>
+<p>  众所周知,Chrome = Chromium + Google产品集,那么Chrome Canary是什么呢? Chrome Canary 是更新速度最快的 Chrome 版本,几乎每天更新且支持自动更新,也是功能、代码最先进的 Chrome 版本,可独立安装、与其他版本的 Chrome 程序共存,适合进阶用户或开发者人员安装备用,尝鲜最新功能,由于是每日更新的 Chrome Dev 版本,极其不稳定.</p>
+<p>  Chrome Dev 是 Chrome 的开发者版本,每个周更新 1-2 次,虽然该版本已经过测试,但仍可能存在一些问题,但比 Chrome Canary 更稳定.</p>
+<p>  Chrome Beta 是 Chrome 的测试版本,每周更新一次,而每 4 周会进行一次重大的可纳入到稳定版本的更新.</p>
+</li>
+<li><p>通过文件系统运行</p>
+<pre><code>&lt;path-to-devtools-frontend&gt;/third_party/chrome/chrome-&lt;platform&gt;/chrome --custom-devtools-frontend=file://$(realpath out/Default/gen/front_end)
+</code></pre><p>Tips: file://…在 Mac 和 Linux 上,文件 url 必须以三个斜杠开头,$(realpath out/Default/gen/front_end)扩展的 Devtools Frontend 目录路径必须为绝对路径.<br>PS: 为了避免代价昂贵的 Chromium 构建,可以在预构建的 Chromium 中运行 DevTools Frontend.例如,可以使用最新版本的 Chrome Canary,或者使用 third_party/chrome 中下载的二进制文件.</p>
+<ul>
+<li><p>实际演示</p>
+<p>运行以下命令:</p>
+<pre><code>./third_party/chrome/chrome-mac/Chromium.app/Contents/MacOS/Chromium --custom-devtools-frontend=file:///Users/yinwk/keryi/devtools-frontend/out/Default/gen/front_end/
+</code></pre><video muted controls="controls" autoplay="autoplay" loop="loop" style="width:100%;"><br>  <source src="https://image.white-than-wood.zone/devtools_frontend/fileSystem.mp4" type="video/mp4"><br></video>
+
+<p>终端显示:</p>
+<p><img src="https://image.white-than-wood.zone/devtools_frontend/fileSystem.png" alt></p>
+</li>
+</ul>
+</li>
+<li><p>通过Server运行</p>
+<p>将 out/Default/gen/front_end 的内容放入本地服务器,比如运行:</p>
+<pre><code>python -m http.server
+</code></pre><p>这里用的是http-server.</p>
+<pre><code>cd out/Default/gen/front_end
+http-server -p 8000
+</code></pre><p><img src="https://image.white-than-wood.zone/devtools_frontend/remoteUrl.png" alt></p>
+<ul>
+<li><p>实际演示</p>
+<p>运行以下命令:</p>
+<pre><code>./third_party/chrome/chrome-mac/Chromium.app/Contents/MacOS/Chromium --custom-devtools-frontend=http://localhost:8000/
+</code></pre><video muted controls="controls" autoplay="autoplay" loop="loop" style="width:100%;"><br>  <source src="https://image.white-than-wood.zone/devtools_frontend/remoteUrl.mp4" type="video/mp4"><br></video>
+
+<p>终端显示:</p>
+<p><img src="https://image.white-than-wood.zone/devtools_frontend/remoteUrlShow.png" alt></p>
+</li>
+</ul>
+</li>
+<li><p>通过远程连接运行</p>
+<p>将 out/Default/gen/front_end 的内容放入本地服务器,比如运行:</p>
+<pre><code>python -m http.server
+</code></pre><p>这里用的是http-server.</p>
+<pre><code>cd out/Default/gen/front_end
+http-server -p 8000
+</code></pre><p><img src="https://image.white-than-wood.zone/devtools_frontend/remoteUrl.png" alt></p>
+<ul>
+<li><p>实际演示</p>
+<p>运行以下命令:</p>
+<pre><code># 设置远程调试接口为 9222
+./third_party/chrome/chrome-mac/Chromium.app/Contents/MacOS/Chromium --custom-devtools-frontend=http://localhost:8000/ --remote-debugging-port=9222
+</code></pre><p>建立连接:</p>
+<p>在任意地址栏中输入 <a href="http://localhost:9222" target="_blank" rel="noopener">http://localhost:9222</a> + EndPoint <a href="http://localhost:9222/json" target="_blank" rel="noopener">http://localhost:9222/json</a> -&gt; devtoolsFrontendUrl 值即可(等同于在当前页面直接打开 DevTools)</p>
+<video muted controls="controls" autoplay="autoplay" loop="loop" style="width:100%;"><br>  <source src="https://image.white-than-wood.zone/devtools_frontend/hostedMode.mp4" type="video/mp4"><br></video>
+
+<p>终端显示:</p>
+<p><img src="https://image.white-than-wood.zone/devtools_frontend/hostedMode.png" alt></p>
+</li>
+<li><p>使用正式稳定版的 Chrome 演示运行</p>
+<p>运行以下命令:</p>
+<pre><code># 设置远程调试接口为 9222
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --custom-devtools-frontend=http://localhost:8000/ --remote-debugging-port=9222
+</code></pre><p>建立连接:</p>
+<p>在任意地址栏中输入 <a href="http://localhost:9222" target="_blank" rel="noopener">http://localhost:9222</a> + EndPoint <a href="http://localhost:9222/json" target="_blank" rel="noopener">http://localhost:9222/json</a> -&gt; devtoolsFrontendUrl 值即可(等同于在当前页面直接打开 DevTools)</p>
+<video muted controls="controls" autoplay="autoplay" loop="loop" style="width:100%;"><br>  <source src="https://image.white-than-wood.zone/devtools_frontend/hostedModeChrome.mp4" type="video/mp4"><br></video>
+
+<p>终端显示:</p>
+<p><img src="https://image.white-than-wood.zone/devtools_frontend/hostedModeChrome.png" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>上述所有方式均是在无 VPN 的情况下实现的运行.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/devtools-frontend/" rel="tag"># devtools-frontend</a>
+          
+            <a href="/tags/chrome/" rel="tag"># chrome</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/06/20/这样的我终究也熟了/" rel="next" title="这样的我，终究也熟了">
+                <i class="fa fa-chevron-left"></i> 这样的我，终究也熟了
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/07/17/ios16beta体验/" rel="prev" title="ios 16 体验分享">
+                ios 16 体验分享 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#devtools-frontend"><span class="nav-number">1.</span> <span class="nav-text">devtools-frontend</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

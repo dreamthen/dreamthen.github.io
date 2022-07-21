@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ECMAScript 2015,ES6,javascript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ES6语法重点在最近阅读了《深入理解ES6》这本书之后,发现ES6中有一些不为人所熟悉的部分却成为了提升开发效率的利器,所以将这些语法重点进行规整总结,分享输出给各位小伙伴. 块级作用域临时死区  ES6中的块级作用域为了防止变量提升,产生了临时死区的方案,也就是说如果你在let、const定义块级作用域变量之前,直接使用此名称的变量,临时死区里面的逻辑就会报错,在执行同步代码度过临时死区之前,使">
+<meta name="keywords" content="ECMAScript 2015,ES6,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="比木白-ES6">
+<meta property="og:url" content="http://yoursite.com/2020/04/26/比木白-ES6/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="ES6语法重点在最近阅读了《深入理解ES6》这本书之后,发现ES6中有一些不为人所熟悉的部分却成为了提升开发效率的利器,所以将这些语法重点进行规整总结,分享输出给各位小伙伴. 块级作用域临时死区  ES6中的块级作用域为了防止变量提升,产生了临时死区的方案,也就是说如果你在let、const定义块级作用域变量之前,直接使用此名称的变量,临时死区里面的逻辑就会报错,在执行同步代码度过临时死区之前,使">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/tailCall.png">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="比木白-ES6">
+<meta name="twitter:description" content="ES6语法重点在最近阅读了《深入理解ES6》这本书之后,发现ES6中有一些不为人所熟悉的部分却成为了提升开发效率的利器,所以将这些语法重点进行规整总结,分享输出给各位小伙伴. 块级作用域临时死区  ES6中的块级作用域为了防止变量提升,产生了临时死区的方案,也就是说如果你在let、const定义块级作用域变量之前,直接使用此名称的变量,临时死区里面的逻辑就会报错,在执行同步代码度过临时死区之前,使">
+<meta name="twitter:image" content="http://yoursite.com/images/tailCall.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/26/比木白-ES6/">
+
+
+
+
+
+  <title>比木白-ES6 | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/26/比木白-ES6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">比木白-ES6</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-26T11:04:47+08:00">
+                2020-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ES6语法重点"><a href="#ES6语法重点" class="headerlink" title="ES6语法重点"></a>ES6语法重点</h1><p>在最近阅读了《深入理解ES6》这本书之后,发现ES6中有一些不为人所熟悉的部分却成为了提升开发效率的利器,所以将这些语法重点进行规整总结,分享输出给各位小伙伴.</p>
+<h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><h3 id="临时死区"><a href="#临时死区" class="headerlink" title="临时死区"></a>临时死区</h3><p>  ES6中的块级作用域为了防止变量提升,产生了临时死区的方案,也就是说如果你在let、const定义块级作用域变量之前,直接使用此名称的变量,临时死区里面的逻辑就会报错,在执行同步代码度过临时死区之前,使用任何名称的变量都会报错,直到执行过临时死区之后,才会解封.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span></span><br><span class="line"><span class="comment">//这时候a变量不存在变量提升,会报语法错误</span></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">let</span> a = <span class="string">'a,china,my hometown~'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="comment">//这里打印: a,china,my hometown~</span></span><br></pre></td></tr></table></figure>
+<h3 id="for循环中的块级作用域"><a href="#for循环中的块级作用域" class="headerlink" title="for循环中的块级作用域"></a>for循环中的块级作用域</h3><p>  ES6中for循环块级作用域中使用的let和const定义变量,和在普通的块级作用域中定义变量不同.for循环块级作用域中是循环的每一次都会声明赋值变量,不是对上次迭代变量的叠加或者累计,而是重新赋值声明,值等于上一次迭代变量加一.在for…in循环获取对象的属性集合项中,也是每一次迭代都会重新声明赋值属性.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    arr.push(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">arr.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    item();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//这里打印:</span></span><br><span class="line"><span class="comment">//0</span></span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="comment">//5</span></span><br><span class="line"><span class="comment">//6</span></span><br><span class="line"><span class="comment">//7</span></span><br><span class="line"><span class="comment">//8</span></span><br><span class="line"><span class="comment">//9</span></span><br></pre></td></tr></table></figure>
+<h3 id="块级作用域最佳实践"><a href="#块级作用域最佳实践" class="headerlink" title="块级作用域最佳实践"></a>块级作用域最佳实践</h3><blockquote>
+<p>ES6块级作用域最佳实践</p>
+</blockquote>
+<p>  尽量在业务开发中,全部使用const定义数据,只有认识到此数据是要进行计算的,就使用let定义数据.</p>
+<blockquote>
+<p>原因</p>
+</blockquote>
+<p>  大部分的数据是不可变的,只是作为查询或者展示,而可变的用于前端计算赋值的数据在实际应用场景当中很少很少.</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="以码位而非字符来匹配字符"><a href="#以码位而非字符来匹配字符" class="headerlink" title="以码位而非字符来匹配字符"></a>以码位而非字符来匹配字符</h3><p>  在没有引入Unicode之前,正则表达式使用以一个16位编码也就是两个码位来匹配一个字符,那时候2^16次方个字符在计算机的字符世界中是够用的,但是在引入Unicode之后,2^16次方个字符在诺大的字符集当中非常吃不消,所以正则表达式新增了u描述符,以一个码位也就是32位编码来匹配一个Unicode字符.至此,所有Unicode字符被分为两类,基本平面(BMP)以及辅助平面,BMP是在2^16次方哥字符之内的,而其余超出的则是辅助平面范围</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'𠮷'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.length);                    <span class="comment">//2,已超过BMP范围,转以辅助平面</span></span><br><span class="line"><span class="built_in">console</span>.log(str.charAt(<span class="number">0</span>));                 <span class="comment">//无法识别的乱码,因为以BMP的方式去获取字符,超出范围获取到的只能是�</span></span><br><span class="line"><span class="built_in">console</span>.log(str.charAt(<span class="number">1</span>));                 <span class="comment">//还是�</span></span><br><span class="line"><span class="built_in">console</span>.log(str.charCodeAt(<span class="number">0</span>));             <span class="comment">//55362,不能获取到真实字符的码位,只能获取到码位的一半</span></span><br><span class="line"><span class="built_in">console</span>.log(str.charCodeAt(<span class="number">1</span>));             <span class="comment">//57271,不能获取到真实字符的码位,只能获取到码位的一半</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.fromCharCode(<span class="number">55362</span>));    <span class="comment">//�</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.fromCharCode(<span class="number">57271</span>));    <span class="comment">//�</span></span><br><span class="line"><span class="built_in">console</span>.log(str.codePointAt(<span class="number">0</span>));            <span class="comment">//134071,这才是非BMP的辅助平面的方式所匹配的32位码位的真实码位值</span></span><br><span class="line"><span class="built_in">console</span>.log(str.codePointAt(<span class="number">1</span>));            <span class="comment">//57271,不能获取到真实字符的码位,只能获取到码位的一半</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.fromCodePoint(<span class="number">134071</span>));  <span class="comment">//𠮷,直接使用非BMP的辅助平面的方式可以匹配到真实字符</span></span><br></pre></td></tr></table></figure>
+<h3 id="u描述符"><a href="#u描述符" class="headerlink" title="u描述符"></a>u描述符</h3>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'𠮷'</span>,</span><br><span class="line">    str_double = <span class="string">'𠮷𠮷'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/\u&#123;20bb7&#125;/</span>.test(str));         <span class="comment">//因为\u&#123;20bb7&#125;超过了BMP16位编码的限制,所以是false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/\u&#123;20bb7&#125;/u</span>.test(str));        <span class="comment">//使用u描述符来表述辅助平面的范围,所以是true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/𠮷/</span>.test(str));                <span class="comment">//这里并没有转化成\u&#123;20bb7&#125;BMP16位编码,而是直接用字符去进行匹配,所以返回true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/𠮷&#123;2&#125;/</span>.test(str_double));      <span class="comment">//这里使用了&#123;2&#125;表示将前面的字符乘以2,但这时候就会转化成\u&#123;20bb7&#125;BMP16位编码,超过了BMP16位编码的限制,所以是false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/𠮷&#123;2&#125;/u</span>.test(str_double));     <span class="comment">//使用u描述符来表述辅助平面的范围,所以是true</span></span><br></pre></td></tr></table></figure>
+<p>  如果u描述符要兼容老版本浏览器,需要使用try {} catch(err) {},并且使用构造调用,这样是最安全的</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">'𠮷'</span>,</span><br><span class="line">        reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\u&#123;20bb7&#125;'</span>, <span class="string">'u'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(reg.test(str));</span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="各种新增的处理字符串的方法"><a href="#各种新增的处理字符串的方法" class="headerlink" title="各种新增的处理字符串的方法"></a>各种新增的处理字符串的方法</h3><blockquote>
+<p>includes,字符串中是否含有某字符或者某字符串</p>
+</blockquote>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'hello,world'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.includes(<span class="string">'o'</span>));             <span class="comment">//表示此字符串中是否含有o字符,这里返回true</span></span><br><span class="line"><span class="built_in">console</span>.log(str.includes(<span class="string">'o'</span>, <span class="number">7</span>));          <span class="comment">//表示此字符串中从下标为7位置开始直到字符串最后,是否含有o字符,这里返回true</span></span><br><span class="line"><span class="built_in">console</span>.log(str.includes(<span class="string">'o'</span>, <span class="number">8</span>));          <span class="comment">//表示此字符串中从下标为8位置开始直到字符串最后,是否含有o字符,这里返回false</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>startsWith,字符串中是否以某字符或者某字符串开头</p>
+</blockquote>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'hello,world'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.startsWith(<span class="string">'hello'</span>));       <span class="comment">//表示此字符串中是否以hello字符串开头,这里返回true</span></span><br><span class="line"><span class="built_in">console</span>.log(str.startsWith(<span class="string">','</span>, <span class="number">5</span>));        <span class="comment">//表示此字符串中从下标为5位置开始直到字符串最后是否以,字符开头,这里返回true</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>endsWith,字符串中是否以某字符或者某字符串结尾</p>
+</blockquote>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'hello,world'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.endsWith(<span class="string">'ld'</span>));            <span class="comment">//表示此字符串中是否以ld字符串结尾,这里返回true</span></span><br><span class="line"><span class="built_in">console</span>.log(str.endsWith(<span class="string">'o'</span>, <span class="number">7</span>));          <span class="comment">//表示此字符串中从下标为7位置开始直到字符串开头是否以o字符结尾,这里返回false</span></span><br><span class="line"><span class="built_in">console</span>.log(str.endsWith(<span class="string">'o'</span>, <span class="number">8</span>));          <span class="comment">//表示此字符串中从下标为8位置开始直到字符串开头是否以o字符结尾,这里返回true</span></span><br><span class="line"><span class="built_in">console</span>.log(str.endsWith(<span class="string">'o'</span>, <span class="number">5</span>));          <span class="comment">//表示此字符串中从下标为5位置开始直到字符串开头是否以o字符结尾,这里返回true</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>repeat,将某字符或者字符串重复n次</p>
+</blockquote>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'pet'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.repeat(<span class="number">2</span>));                 <span class="comment">//表示此字符串重复2次输出,这里返回petpet</span></span><br><span class="line"><span class="built_in">console</span>.log(str.repeat(<span class="number">5</span>));                 <span class="comment">//表示此字符串重复5此输出,这里返回petpetpetpetpet</span></span><br></pre></td></tr></table></figure>
+<h3 id="y描述符-粘滞描述符"><a href="#y描述符-粘滞描述符" class="headerlink" title="y描述符,粘滞描述符"></a>y描述符,粘滞描述符</h3><p>  y粘滞描述符,是区别于g全局描述符,与正则表达式匹配的lastIndex有直接关系,其匹配必须从字符串的开头0下标开始,如果匹配,则从匹配结束的位置开始,再开始匹配,如果再次匹配不到,则回到字符串的开头0下标开始,多次匹配的规则在字符串中必须是连续的.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'hello.hello.hello.hello.hello.'</span>,</span><br><span class="line">    reg_y = <span class="regexp">/hello./y</span>,</span><br><span class="line">    reg_g = <span class="regexp">/hello./g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(reg_g.exec(str));               <span class="comment">//这时全局描述符匹配到["hello.", index: 0, input: "hello.hello.hello.hello.hello.", groups: undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_y.exec(str));               <span class="comment">//这时粘滞描述符匹配到["hello.", index: 0, input: "hello.hello.hello.hello.hello.", groups: undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_g.lastIndex);               <span class="comment">//带有全局描述符正则表达式的lastIndex为6</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_y.lastIndex);               <span class="comment">//带有粘滞描述符正则表达式的lastIndex为6</span></span><br><span class="line"><span class="comment">//这时候设置带有全局和粘滞描述符的正则表达式的lastIndex为1</span></span><br><span class="line">reg_g.lastIndex = <span class="number">1</span>;</span><br><span class="line">reg_y.lastIndex = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//再去匹配整个字符串</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_g.exec(str));               <span class="comment">//这时全局描述符匹配到["hello.", index: 6, input: "hello.hello.hello.hello.hello.", groups: undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_y.exec(str));               <span class="comment">//这时粘滞描述符匹配到的值为null</span></span><br><span class="line"><span class="comment">//可以看出y粘滞描述符与正则表达式匹配的lastIndex有直接关系,且必须是从lastIndex位置为起点字符串的开头开始能匹配到,才会有匹配值,否则为null,lastIndex会回到源字符串的头部也就是下标为0处,为下次匹配做准备.</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'hello.hello.hello.hello.hello.'</span>,</span><br><span class="line">    reg_ny = <span class="regexp">/hello/y</span>,</span><br><span class="line">    reg_y = <span class="regexp">/hello./y</span>,</span><br><span class="line">    reg_g = <span class="regexp">/hello./g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(reg_g.exec(str));               <span class="comment">//这时全局描述符匹配到["hello.", index: 0, input: "hello.hello.hello.hello.hello.", groups: undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_y.exec(str));               <span class="comment">//这时粘滞描述符匹配到["hello.", index: 0, input: "hello.hello.hello.hello.hello.", groups: undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_ny.exec(str));              <span class="comment">//这时粘滞描述符匹配到["hello", index: 0, input: "hello.hello.hello.hello.hello.", groups: undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_g.lastIndex);               <span class="comment">//带有全局描述符正则表达式的lastIndex为6</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_y.lastIndex);               <span class="comment">//带有粘滞描述符正则表达式的lastIndex为6</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_ny.lastIndex);              <span class="comment">//带有粘滞描述符正则表达式的lastIndex为5</span></span><br><span class="line"><span class="comment">//再去匹配整个字符串</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_g.exec(str));               <span class="comment">//这时全局描述符匹配到["hello.", index: 6, input: "hello.hello.hello.hello.hello.", groups: undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_y.exec(str));               <span class="comment">//这时粘滞描述符匹配到["hello.", index: 6, input: "hello.hello.hello.hello.hello.", groups: undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_ny.exec(str));              <span class="comment">//这时粘滞描述符匹配到的值为null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//可以看出y粘滞描述符多次匹配的规则在字符串中必须是连续的,且必须是从lastIndex位置为起点字符串的开头开始能匹配到,才会有匹配值,否则为null,lastIndex会回到源字符串的头部也就是下标为0处,为下次匹配做准备.</span></span><br></pre></td></tr></table></figure>
+<p>  如果y粘滞描述符要兼容老版本浏览器,需要使用try {} catch(err) {},并且使用构造调用,这样是最安全的</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">'hello.hello.hello.hello.hello.'</span>,</span><br><span class="line">        reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'hello.'</span>, <span class="string">'y'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(reg.test(str));</span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="source、flags与sticky"><a href="#source、flags与sticky" class="headerlink" title="source、flags与sticky"></a>source、flags与sticky</h3><p>  source用于获取正则表达式的除了描述符以外的内容,flags则用于获取正则表达式的描述符,而sticky则是用于获取此正则表达式是否存在y粘滞描述符</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> reg_g = <span class="regexp">/hello./g</span>,</span><br><span class="line">    reg_y = <span class="regexp">/hello./y</span>,</span><br><span class="line">    reg_yi = <span class="regexp">/hello./yi</span>;</span><br><span class="line"><span class="built_in">console</span>.log(reg_g.source, reg_g.flags, reg_g.sticky);       <span class="comment">//这里打印: hello. g false </span></span><br><span class="line"><span class="built_in">console</span>.log(reg_y.source, reg_y.flags, reg_y.sticky);       <span class="comment">//这里打印: hello. y true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg_yi.source, reg_yi.flags, reg_yi.sticky);    <span class="comment">//这里打印: hello. yi true</span></span><br></pre></td></tr></table></figure>
+<p>  顺便说一下在没有flags来获取正则表达式的描述符时,一般会是这么去封装一个获取正则表达式描述符的方法</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flags</span>(<span class="params">reg</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _reg = <span class="built_in">String</span>(reg),</span><br><span class="line">        flagsPosition = _reg.lastIndexOf(<span class="string">'/'</span>);</span><br><span class="line">    <span class="keyword">return</span> flagsPosition !== <span class="number">-1</span> ? _reg.slice(flagsPosition + <span class="number">1</span>) : <span class="string">''</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(flags(<span class="regexp">/hello./yi</span>));                            <span class="comment">//在这里打印: yi</span></span><br></pre></td></tr></table></figure>
+<h3 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h3><p>  模板标签处理模板字符串的数据参数顺序以及源字符串的操作很便利,你只要写一个函数,并直接放在模板字符串前方,这样就可以直接模板字符串进行处理了,函数的第一个参数是一个数组,表示的是所有除了引入变量以外的字符片段的集合,而后面的参数则是按照引入变量的顺序从左至右的排开,你可以使用不定参数将其转化为数组,不论你怎么引入变量,字符片段的集合数组总是比不定参数转化的数组的长度多一,所以我们可以自己去写一个模板标签,用交织的形式去组合字符串的原顺序或是自定义顺序.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'Gary'</span>,</span><br><span class="line">    age = <span class="number">27</span>,</span><br><span class="line">    hobby = <span class="string">'basketball'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tags</span>(<span class="params">iterators, ...params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> tags_str = <span class="string">''</span>,</span><br><span class="line">        iterators_length = iterators.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> [key, value] <span class="keyword">of</span> params.entries()) &#123;</span><br><span class="line">        tags_str += iterators[key];</span><br><span class="line">        tags_str += value;</span><br><span class="line">    &#125;</span><br><span class="line">    tags_str += iterators[iterators_length - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> tags_str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(tags<span class="string">`我是<span class="subst">$&#123;name&#125;</span>, 我今年<span class="subst">$&#123;age&#125;</span>岁了, 我的爱好是<span class="subst">$&#123;hobby&#125;</span>`</span>);   </span><br><span class="line"><span class="comment">//在这里打印: 我是Gary, 我今年27岁了, 我的爱好是basketball</span></span><br></pre></td></tr></table></figure>
+<p>  还有一种处理源字符串操作的模板标签,可以使源字符串不做转义.那就是String.raw</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'Gary'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`啊哈,\n<span class="subst">$&#123;name&#125;</span>,原来是你`</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.raw<span class="string">`啊哈,\n<span class="subst">$&#123;name&#125;</span>,原来是你`</span>);</span><br><span class="line"><span class="comment">//在这里打印: 啊哈,</span></span><br><span class="line"><span class="comment">//Gary,原来是你</span></span><br><span class="line"><span class="comment">//在这里打印: 啊哈,\nGary,原来是你</span></span><br></pre></td></tr></table></figure>
+<p>  它可以使换行、制表这些转义符不做转义,我们可以自己写一个和它一致的模板标签,每一个源字符片段都有一个raw的特有属性,其可以将其本身变为不可转义.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'Gary'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">raw</span>(<span class="params">iterators, ...params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> raw_str = <span class="string">''</span>,</span><br><span class="line">        iterators_length = iterators.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> [key, value] <span class="keyword">of</span> params.entries()) &#123;</span><br><span class="line">        raw_str += iterators.raw[key];</span><br><span class="line">        raw_str += value;</span><br><span class="line">    &#125;</span><br><span class="line">    raw_str += iterators.raw[iterators_length - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> raw_str;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`啊哈,\n<span class="subst">$&#123;name&#125;</span>,原来是你`</span>);</span><br><span class="line"><span class="built_in">console</span>.log(raw<span class="string">`啊哈,\n<span class="subst">$&#123;name&#125;</span>,原来是你`</span>);</span><br><span class="line"><span class="comment">//在这里打印: 啊哈,</span></span><br><span class="line"><span class="comment">//Gary,原来是你</span></span><br><span class="line"><span class="comment">//在这里打印: 啊哈,\nGary,原来是你</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>  默认参数使得传参更加简化、方便,只有传递的参数为undefined,就给予默认值,如果不为undefined,则进行赋值,类似于for循环let、const每次创建一个声明一样,默认参数也会在函数词法作用域的顶部使用let、const创建一个声明.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPerson</span>(<span class="params">name, age = <span class="number">25</span>, hobby = <span class="string">'basketball'</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`I'm <span class="subst">$&#123;name&#125;</span>, <span class="subst">$&#123;age&#125;</span> year's old, I love <span class="subst">$&#123;hobby&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">getPerson(<span class="string">'Gary'</span>);</span><br><span class="line"><span class="comment">//在这里打印: I'm Gary, 25 year's old, I love basketball</span></span><br><span class="line"><span class="comment">//类似于</span></span><br><span class="line"><span class="comment">//function getPerson(name, _age, _hobby) &#123;</span></span><br><span class="line"><span class="comment">//    let age = typeof _age === 'undefined' ? _age : 25;</span></span><br><span class="line"><span class="comment">//    let hobby = typeof _hobby === 'undefined' ? _hobby : 'basketball';</span></span><br><span class="line"><span class="comment">//    console.log(`I'm $&#123;name&#125;, $&#123;age&#125; year's old, I love $&#123;hobby&#125;`);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+<p>  甚至可以在非第一个默认参数上面去承接之前定义好的传参或者默认参数.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumber</span>(<span class="params">first = <span class="number">1</span>, second = first</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`first: <span class="subst">$&#123;first&#125;</span>, second: <span class="subst">$&#123;second&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">getNumber();</span><br><span class="line"><span class="comment">//在这里打印： first: 1, second: 1</span></span><br><span class="line">getNumber(<span class="number">10</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">//在这里打印: first: 10, second: 2</span></span><br><span class="line">getNumber(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//在这里打印: first: 100, second: 100</span></span><br><span class="line"><span class="comment">//类似于</span></span><br><span class="line"><span class="comment">//function getNumber(_first, _second) &#123;</span></span><br><span class="line"><span class="comment">//  let first = _first || 1;</span></span><br><span class="line"><span class="comment">//  let second = _second || first;</span></span><br><span class="line"><span class="comment">//  console.log(`first: $&#123;first&#125;, second: $&#123;second&#125;`);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+<p>  但是默认参数也存在临时死区的,在没有把临时死区当中的变量释放出来之前,直接使用,会引起语法错误.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumber</span>(<span class="params">first = second, second = <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`first: <span class="subst">$&#123;first&#125;</span>, second: <span class="subst">$&#123;second&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">getNumber();</span><br><span class="line"><span class="comment">//在这里会报语法错误,因为在first不传参赋值的情况下,second变量还处于临时死区当中,并未释放,不可以赋值给first</span></span><br><span class="line">getNumber(<span class="number">10</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">//在这里打印: first: 10, second: 2</span></span><br><span class="line">getNumber(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//在这里打印: first: 100, second: 1</span></span><br><span class="line"><span class="comment">//类似于</span></span><br><span class="line"><span class="comment">//function getNumber(_first, _second) &#123;</span></span><br><span class="line"><span class="comment">//  let first = _first || _second;</span></span><br><span class="line"><span class="comment">//  let second = _second || 1;</span></span><br><span class="line"><span class="comment">//  console.log(`first: $&#123;first&#125;, second: $&#123;second&#125;`);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+<p>  也可使用函数返回值的形式作为默认参数.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumberOne</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumber</span>(<span class="params">first = getNumberOne(</span>), <span class="title">second</span> = <span class="title">first</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`first: <span class="subst">$&#123;first&#125;</span>, second: <span class="subst">$&#123;second&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line">getNumber();</span><br><span class="line"><span class="comment">//在这里打印: first: 1, second: 1</span></span><br><span class="line">getNumber(<span class="number">10</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">//在这里打印: first: 10, second: 2</span></span><br><span class="line">getNumber(<span class="number">100</span>);</span><br><span class="line"><span class="comment">//在这里打印: first: 100, second: 100</span></span><br><span class="line"><span class="comment">//类似于</span></span><br><span class="line"><span class="comment">//function getNumber(_first, _second) &#123;</span></span><br><span class="line"><span class="comment">//  let first = _first || getNumberOne();</span></span><br><span class="line"><span class="comment">//  let second = _second || first;</span></span><br><span class="line"><span class="comment">//  console.log(`first: $&#123;first&#125;, second: $&#123;second&#125;`);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="不定参数"><a href="#不定参数" class="headerlink" title="不定参数"></a>不定参数</h3><p>  在ES6之前,对于不确定传参的数量的函数,我们基本上使用arguments对象来处理,但是不怎么方便,因为遇到很多情况是,我既有前几个确定的参数,又有后面不确定的参数,所以这时候的处理就需要跳过前几个确定的参数,比如UnderScore.js的pick方法,我们可以来模拟一下.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = &#123;&#125;,</span><br><span class="line">        args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> val <span class="keyword">of</span> args) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> obj[val] !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">            result[val] = obj[val];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">    name: <span class="string">'Gary'</span>,</span><br><span class="line">    age: <span class="number">25</span>,</span><br><span class="line">    hobby: <span class="string">'My dream is over the world~'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(pick(person, <span class="string">'name'</span>, <span class="string">'hobby'</span>));</span><br><span class="line"><span class="comment">//在这里打印: &#123;name: 'Gary', hobby: 'My dream is over the world~'&#125;</span></span><br></pre></td></tr></table></figure>
+<p>  在ES6中,为了使这种传参更加方便,引入了不定参数,我们无需对不确定的参数进行特殊处理,还是拿UnderScore.js的pick方法来模拟.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">obj, ...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> val <span class="keyword">of</span> args) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> obj[val] !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">            result[val] = obj[val];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">    name: <span class="string">'Gary'</span>,</span><br><span class="line">    age: <span class="number">25</span>,</span><br><span class="line">    hobby: <span class="string">'My dream is over the world~'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(pick(person, <span class="string">'name'</span>, <span class="string">'hobby'</span>));</span><br><span class="line"><span class="comment">//在这里打印: &#123;name: 'Gary', hobby: 'My dream is over the world~'&#125;</span></span><br></pre></td></tr></table></figure>
+<p>  不定参数必须以函数参数的最后位置出现,如果后方位置还有参数,则会报错</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">obj, ...args, <span class="string">'age'</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> val <span class="keyword">of</span> args) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> obj[val] !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">            result[val] = obj[val];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">    name: <span class="string">'Gary'</span>,</span><br><span class="line">    age: <span class="number">25</span>,</span><br><span class="line">    hobby: <span class="string">'My dream is over the world~'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(pick(person, <span class="string">'name'</span>, <span class="string">'hobby'</span>));</span><br><span class="line"><span class="comment">//在这里就会报语法错误</span></span><br></pre></td></tr></table></figure>
+<h3 id="展开运算符"><a href="#展开运算符" class="headerlink" title="展开运算符"></a>展开运算符</h3><p>  在ES6之前,有一些内置函数和对象比如说Math.max不支持以数组传入参数,只能一个一个的传入,所以我们这时候就需要使用apply的形式,直接传入数组,然后转化为参数.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> value = <span class="number">100</span>,</span><br><span class="line">    value_ano = <span class="number">120</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max(value, value_ano));</span><br><span class="line"><span class="comment">//在这里打印: 120</span></span><br><span class="line"><span class="keyword">let</span> value_arr = [<span class="number">0</span>, <span class="number">99</span> ,<span class="number">-10</span>, <span class="number">100</span>, <span class="number">1000</span>, <span class="number">2000</span>, <span class="number">200</span>, <span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, value_arr));</span><br><span class="line"><span class="comment">//在这里打印: 2000</span></span><br></pre></td></tr></table></figure>
+<p>  在ES6推出了展开运算符之后,这种情况发生了改变,我们不需要使用apply的这种形式进行显式绑定.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> value_arr = [<span class="number">0</span>, <span class="number">99</span> ,<span class="number">-10</span>, <span class="number">100</span>, <span class="number">1000</span>, <span class="number">2000</span>, <span class="number">200</span>, <span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max(...value_arr));</span><br><span class="line"><span class="comment">//在这里打印: 2000</span></span><br></pre></td></tr></table></figure>
+<p>  有了展开运算符和不定参数的支持,在函数传参方面大为改观,我们现在可以使用这两种新形势进行配合写一个bind显式绑定方法.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">Function</span>.prototype.bind) &#123;</span><br><span class="line">    <span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">context, ...params</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">        <span class="keyword">let</span> fBind;</span><br><span class="line">        fBind = <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">              <span class="comment">//这里做判断是为了防止返回的函数,使用new构造调用.new绑定的优先级高于其他绑定</span></span><br><span class="line">              <span class="keyword">return</span> self.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fBind ? <span class="keyword">this</span> : context, [...params, ...args])</span><br><span class="line">        &#125;;</span><br><span class="line">        F.prototype = self.prototype;</span><br><span class="line">        fBind.prototype = <span class="keyword">new</span> F();</span><br><span class="line">        <span class="keyword">return</span> fBind;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">//实验一下</span></span><br><span class="line">    <span class="keyword">let</span> obj = &#123;<span class="attr">name</span>: <span class="string">'Gary'</span>, <span class="attr">age</span>: <span class="number">25</span>&#125;;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">    Person.prototype.introduce = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`I'm <span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>, <span class="subst">$&#123;<span class="keyword">this</span>.age&#125;</span> year's old`</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">let</span> func = Person.bind(obj, <span class="string">'Tom'</span>);</span><br><span class="line">    func(<span class="number">28</span>);</span><br><span class="line">    <span class="comment">//在这里打印: </span></span><br><span class="line">    <span class="comment">//Gary </span></span><br><span class="line">    <span class="comment">//Tom</span></span><br><span class="line">    <span class="comment">//25</span></span><br><span class="line">    <span class="comment">//28</span></span><br><span class="line">    <span class="keyword">let</span> _func = Person.bind(obj);</span><br><span class="line">    <span class="keyword">let</span> quote = <span class="keyword">new</span> _func(<span class="string">'Simon'</span>, <span class="number">30</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(quote.name, quote.age);</span><br><span class="line">    quote.introduce();</span><br><span class="line">    <span class="comment">//在这里打印:</span></span><br><span class="line">    <span class="comment">//undefined</span></span><br><span class="line">    <span class="comment">//Simon</span></span><br><span class="line">    <span class="comment">//undefined</span></span><br><span class="line">    <span class="comment">//30</span></span><br><span class="line">    <span class="comment">//Simon 30</span></span><br><span class="line">    <span class="comment">//I'm Simon, 30 year's old</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="new-target"><a href="#new-target" class="headerlink" title="new.target"></a>new.target</h3><p>  函数在普通调用和构造调用时,所使用的内置函数是不同的,普通调用使用的是[[Call]]内置函数,而构造调用使用的是[[Constructor]],而在一些必须使用构造调用的函数的判断就成了问题.在ES6之前是这样判断的</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Person)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'此函数必须使用构造调用～'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> gary = <span class="keyword">new</span> Person(<span class="string">'Yinwenkai'</span>, <span class="number">26</span>);</span><br><span class="line"><span class="built_in">console</span>.log(gary.name, gary.age);</span><br><span class="line"><span class="comment">//在这里打印: Yinwenkai 26</span></span><br><span class="line"><span class="keyword">let</span> simon = Person(<span class="string">'Yinwenkai'</span>, <span class="number">27</span>);</span><br><span class="line"><span class="comment">//在这里就会报语法错误,因为函数直接调用,使用的是[\[Call\]]内置函数,并不是[\[Constructor\]],这边就会抛出错误,this指向window或者global</span></span><br></pre></td></tr></table></figure>
+<p>  但是这样还是会有漏洞的,我们可以使用硬绑定,将Person硬绑定至构造调用出来的引用对象上面.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Person)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'此函数必须使用构造调用～'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">let</span> gary = <span class="keyword">new</span> Person(<span class="string">'Yinwenkai'</span>, <span class="number">26</span>);</span><br><span class="line"><span class="built_in">console</span>.log(gary.name, gary.age);</span><br><span class="line"><span class="comment">//在这里打印: Yinwenkai 26</span></span><br><span class="line"><span class="keyword">let</span> simon = Person(<span class="string">'Yinwenkai'</span>, <span class="number">27</span>);</span><br><span class="line"><span class="comment">//在这里就会报语法错误,因为函数直接调用,使用的是[\[Call\]]内置函数,并不是[\[Constructor\]],这边就会抛出错误,this指向window或者global</span></span><br><span class="line"><span class="keyword">let</span> lily = Person.call(gary, <span class="string">'Yinwenkai'</span>, <span class="number">30</span>);</span><br><span class="line"><span class="comment">//在这里就不会报任何错误,因为硬绑定到构造调用出来的引用对象上面,就可以普通调用了.</span></span><br></pre></td></tr></table></figure>
+<p>  所以ES6推出了new.target,此对象总是指向构造调用函数本身的,也就是说使用[[Constructor]]去调用才会有此对象,如果使用[[Call]]去调用就不会有此对象也就等于undefined</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">new</span>.target === Person) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'此函数必须使用构造调用～'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">let</span> gary = <span class="keyword">new</span> Person(<span class="string">'Yinwenkai'</span>, <span class="number">26</span>);</span><br><span class="line"><span class="built_in">console</span>.log(gary.name, gary.age);</span><br><span class="line"><span class="comment">//在这里打印: Yinwenkai 26</span></span><br><span class="line"><span class="keyword">let</span> simon = Person(<span class="string">'Yinwenkai'</span>, <span class="number">27</span>);</span><br><span class="line"><span class="comment">//在这里就会报语法错误,因为函数直接调用,使用的是[\[Call\]]内置函数,并不是[\[Constructor\]],这边就会抛出错误,this指向window或者global</span></span><br><span class="line"><span class="keyword">let</span> lily = Person.call(gary, <span class="string">'Yinwenkai'</span>, <span class="number">30</span>);</span><br><span class="line"><span class="comment">//在这里还是会报语法错误,因为new.target不管函数如何硬绑定,它也只在使用[[Constructor]]去调用函数的时候,才是存在的</span></span><br></pre></td></tr></table></figure>
+<h3 id="块级函数"><a href="#块级函数" class="headerlink" title="块级函数"></a>块级函数</h3><p>  ES6中,因为有了块级作用域,所以对函数的声明限制在严格模式下做了强控,由此有了块级函数,只能在此块级作用域中可访问并调用到此函数,全局并不能访问到并调用</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'this is foo func~'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(foo);</span><br><span class="line">    foo();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(foo);</span><br><span class="line">foo();</span><br><span class="line"><span class="comment">//在这里打印:</span></span><br><span class="line"><span class="comment">//ƒ foo() &#123;</span></span><br><span class="line"><span class="comment">//  console.log('this is foo func~');</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//this is foo func~</span></span><br><span class="line"><span class="comment">//下面就会报语法错误</span></span><br><span class="line"><span class="comment">//VM1182:9 Uncaught ReferenceError: foo is not defined</span></span><br><span class="line"><span class="comment">//at &lt;anonymous&gt;:9:17</span></span><br></pre></td></tr></table></figure>
+<p>  但是如果不是在严格模式下,不仅在此块级作用域中可访问并调用到此函数,全局依然可以访问并调用</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'this is foo func~'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(foo);</span><br><span class="line">    foo();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(foo);</span><br><span class="line">foo();</span><br><span class="line"><span class="comment">//在这里打印:</span></span><br><span class="line"><span class="comment">//ƒ foo() &#123;</span></span><br><span class="line"><span class="comment">//  console.log('this is foo func~');</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//this is foo func~</span></span><br><span class="line"><span class="comment">//ƒ foo() &#123;</span></span><br><span class="line"><span class="comment">//  console.log('this is foo func~');</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//this is foo func~</span></span><br></pre></td></tr></table></figure>
+<h3 id="name"><a href="#name" class="headerlink" title="name"></a>name</h3><p>  说到name,就不得不说它被开创的原因,它本来是为了追溯堆栈信息而生,就是当出现某些错误的时候,比如TypeError、ReferenceError和SyntaxError时,引擎就会根据此函数的name查找所在函数的发生错误的位置,一层层寻找下去,形成函数调用时追溯错误信息的堆栈.而name就成了函数的名称,length就成了函数参数的个数.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name, age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.length);</span><br><span class="line"><span class="comment">//在这里打印:</span></span><br><span class="line"><span class="comment">//person</span></span><br><span class="line"><span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<p>  不同方式生成的函数的名称是不同的,比如说bind硬绑定,它所返回的函数的名称就是”bound [[函数真实名称]]”,而使用Function构造出来的函数的名称则是”anonymous”.</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name, age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> gary = person.bind(<span class="literal">null</span>, <span class="string">'Gary'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(gary.name);</span><br><span class="line"><span class="comment">//在这里打印</span></span><br><span class="line"><span class="comment">//bound person</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> <span class="built_in">Function</span>();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="comment">//在这里打印</span></span><br><span class="line"><span class="comment">//anonymous</span></span><br></pre></td></tr></table></figure>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>  ES6中最让人感兴趣之一,也是变化最大之一的改动就是箭头函数了.特点在于它的方便和简化,它废弃了传统JS函数中的一些复杂而又让人费解的特性,其实际多应用在回调函数、Promise处理异步问题的结构中.<br>  特性:</p>
+<ol>
+<li>不可使用new绑定构造调用,就是说箭头函数里就无[[Constructor]]内置属性</li>
+<li>不可改变函数this的指向,this永远指向外层词法作用域</li>
+<li>不可在函数内部使用arguments,也就是说arguments在箭头函数里面压根儿不存在</li>
+<li>不可在函数内部使用super,既然不能new绑定构造调用,那肯定也不能使用继承了,更不能使用super</li>
+<li><p>不可使用new.target,既然不能new绑定构造调用,那肯定也用不了new.target,箭头函数里就无[[Constructor]]内置属性,而new.target又与[[Constructor]]内置属性相关</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'Simon'</span>;</span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    name: <span class="string">'Gary'</span>,</span><br><span class="line">    getName: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> simon = &#123;</span><br><span class="line">    name: <span class="string">'Simon'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj.getName());</span><br><span class="line"><span class="built_in">console</span>.log(obj.getName.call(simon));</span><br><span class="line"><span class="comment">//在这里打印</span></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"><span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Person = <span class="function">(<span class="params">name, age</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> aaron = <span class="keyword">new</span> Person(<span class="string">'aaron'</span>, <span class="number">25</span>);</span><br><span class="line"><span class="comment">//在这里会报类型错误</span></span><br><span class="line"><span class="comment">//Uncaught TypeError: Person is not a constructor</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Person = <span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line">Person(<span class="string">'Alice'</span>);</span><br><span class="line"><span class="comment">//在这里直接报引入错误</span></span><br><span class="line"><span class="comment">//VM74:3 Uncaught ReferenceError: arguments is not defined</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Person = <span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">new</span>.target === Person) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'此函数必须使用构造调用'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person(<span class="string">'比木白'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="comment">//在这里直接报引入语法错误</span></span><br><span class="line"><span class="comment">//Uncaught SyntaxError: new.target expression is not allowed here</span></span><br></pre></td></tr></table></figure>
+<h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><p>  其实尾调用优化的定义非常简单,目标也很清楚,就是一句话:循环利用某一堆栈,让我们先看一张图</p>
+<p>  <img src="/images/tailCall.png" alt></p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="string">'Gary'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> b = <span class="string">'Simon'</span>;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">const</span> c = <span class="string">'Lily'</span>;</span><br><span class="line">            <span class="built_in">console</span>.log(a, b, c);</span><br><span class="line">        &#125;</span><br><span class="line">        foo();</span><br><span class="line">    &#125;</span><br><span class="line">    bar();</span><br><span class="line">&#125;</span><br><span class="line">baz();</span><br><span class="line"><span class="comment">//在这里打印:</span></span><br><span class="line"><span class="comment">//Gary Simon Lily</span></span><br></pre></td></tr></table></figure>
+<p>  上述代码和图全面阐述了非尾调用时,函数堆栈执行的情形,当baz函数执行时,会将此函数推到内存的,但是baz函数不会因为执行调用而被销毁,因为内部还存在bar函数,等待bar函数执行完毕之后,baz才会从堆栈栈底销毁,而bar函数的执行,又会产生推到内存栈底的函数,以此类baz -&gt; bar关系推bar -&gt; foo是一样的,堆栈随着内部函数的调用不断累积,且不能第一时间被销毁,必须等待内部的堆栈调用完全销毁才能轮到自己.这种不可复用的堆栈使用,ES6给出了优化功能,那就是尾调用.</p>
+<p>  尾调用的条件</p>
+<ol>
+<li>内部函数的调用必须在外层函数结构体的最后一行执行,并且进行返回.</li>
+<li>不可在内部函数结构体中,使用任何外层函数结构体中的变量、方法,也就是说不能存在闭包或者词法作用域链等行为.</li>
+<li><p>内部函数的调用必须在外层函数结构体的最后一行不可进行显式计算返回.</p>
+<p>让我们举一个非尾调用优化的例子,来个阶乘吧</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> n * factorial(n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">factorial(<span class="number">5</span>);</span><br><span class="line"><span class="comment">//在这里打印:</span></span><br><span class="line"><span class="comment">//120</span></span><br></pre></td></tr></table></figure>
+<p>再举一个阶乘尾调用优化的例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">n, total = <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> factorial(n - <span class="number">1</span>, total * n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">factorial(<span class="number">5</span>);</span><br><span class="line"><span class="comment">//在这里打印:</span></span><br><span class="line"><span class="comment">//120</span></span><br></pre></td></tr></table></figure>
+<p>这就是尾调用优化,符合一开始我所说的是三个条件,递归调用函数是在函数结构体的最后一行,且并没有进行显式计算,不存在闭包和函数作用域链使用任何外层函数结构体中的变量、方法的情况.</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ECMAScript-2015/" rel="tag"># ECMAScript 2015</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/04/比木白-多种方式搭建前端项目/" rel="next" title="比木白-多种方式搭建项目">
+                <i class="fa fa-chevron-left"></i> 比木白-多种方式搭建项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/05/29/thinkoftesting/" rel="prev" title="think of testing">
+                think of testing <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6语法重点"><span class="nav-number">1.</span> <span class="nav-text">ES6语法重点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#块级作用域"><span class="nav-number">1.1.</span> <span class="nav-text">块级作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#临时死区"><span class="nav-number">1.1.1.</span> <span class="nav-text">临时死区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环中的块级作用域"><span class="nav-number">1.1.2.</span> <span class="nav-text">for循环中的块级作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级作用域最佳实践"><span class="nav-number">1.1.3.</span> <span class="nav-text">块级作用域最佳实践</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">1.2.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以码位而非字符来匹配字符"><span class="nav-number">1.2.1.</span> <span class="nav-text">以码位而非字符来匹配字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u描述符"><span class="nav-number">1.2.2.</span> <span class="nav-text">u描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各种新增的处理字符串的方法"><span class="nav-number">1.2.3.</span> <span class="nav-text">各种新增的处理字符串的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#y描述符-粘滞描述符"><span class="nav-number">1.2.4.</span> <span class="nav-text">y描述符,粘滞描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#source、flags与sticky"><span class="nav-number">1.2.5.</span> <span class="nav-text">source、flags与sticky</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板标签"><span class="nav-number">1.2.6.</span> <span class="nav-text">模板标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认参数"><span class="nav-number">1.3.1.</span> <span class="nav-text">默认参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不定参数"><span class="nav-number">1.3.2.</span> <span class="nav-text">不定参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#展开运算符"><span class="nav-number">1.3.3.</span> <span class="nav-text">展开运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new-target"><span class="nav-number">1.3.4.</span> <span class="nav-text">new.target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级函数"><span class="nav-number">1.3.5.</span> <span class="nav-text">块级函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name"><span class="nav-number">1.3.6.</span> <span class="nav-text">name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">1.3.7.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尾调用优化"><span class="nav-number">1.3.8.</span> <span class="nav-text">尾调用优化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

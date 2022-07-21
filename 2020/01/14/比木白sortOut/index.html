@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="react,微信小程序,JS,TS,Git,Nginx,moment,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="足球前端规范一、Git提交注释部分(git comment -m ‘?’)，建议规范起来。 原因    首先比较重要的一点就是，当出现代码合并冲突问题或者代码合并合漏的情况，可以根据注释模板标识来进行查找，具体的人具体的提交版本可以一目了然，不必打扰其他相关的人；其次就是分支回滚时，可以清楚的看出回滚位置，做到很便捷的回滚；最后一点，能清晰的反应开发者这一个周都做了什么，更利于开发者回顾这一个周业">
+<meta name="keywords" content="react,微信小程序,JS,TS,Git,Nginx,moment">
+<meta property="og:type" content="article">
+<meta property="og:title" content="比木白-整理sortOut">
+<meta property="og:url" content="http://yoursite.com/2020/01/14/比木白sortOut/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="足球前端规范一、Git提交注释部分(git comment -m ‘?’)，建议规范起来。 原因    首先比较重要的一点就是，当出现代码合并冲突问题或者代码合并合漏的情况，可以根据注释模板标识来进行查找，具体的人具体的提交版本可以一目了然，不必打扰其他相关的人；其次就是分支回滚时，可以清楚的看出回滚位置，做到很便捷的回滚；最后一点，能清晰的反应开发者这一个周都做了什么，更利于开发者回顾这一个周业">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="比木白-整理sortOut">
+<meta name="twitter:description" content="足球前端规范一、Git提交注释部分(git comment -m ‘?’)，建议规范起来。 原因    首先比较重要的一点就是，当出现代码合并冲突问题或者代码合并合漏的情况，可以根据注释模板标识来进行查找，具体的人具体的提交版本可以一目了然，不必打扰其他相关的人；其次就是分支回滚时，可以清楚的看出回滚位置，做到很便捷的回滚；最后一点，能清晰的反应开发者这一个周都做了什么，更利于开发者回顾这一个周业">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/14/比木白sortOut/">
+
+
+
+
+
+  <title>比木白-整理sortOut | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/14/比木白sortOut/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">比木白-整理sortOut</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-14T12:22:07+08:00">
+                2020-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端规范/" itemprop="url" rel="index">
+                    <span itemprop="name">前端规范</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="足球前端规范"><a href="#足球前端规范" class="headerlink" title="足球前端规范"></a>足球前端规范</h1><h2 id="一、Git提交注释部分-git-comment-m-‘-’-，建议规范起来。"><a href="#一、Git提交注释部分-git-comment-m-‘-’-，建议规范起来。" class="headerlink" title="一、Git提交注释部分(git comment -m ‘?’)，建议规范起来。"></a>一、Git提交注释部分(git comment -m ‘?’)，建议规范起来。</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  首先比较重要的一点就是，当出现代码合并冲突问题或者代码合并合漏的情况，可以根据注释模板标识来进行查找，具体的人具体的提交版本可以一目了然，不必打扰其他相关的人；其次就是分支回滚时，可以清楚的看出回滚位置，做到很便捷的回滚；最后一点，能清晰的反应开发者这一个周都做了什么，更利于开发者回顾这一个周业务或者技术开发，再现实点儿的意义就是便于写周报，😄</p>
+<pre><code>为此，我在我们足球业务组内部制定了一套注释草案，请大家建议、提意见或者查漏补缺:
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们以type:description形式来写注释，中间的:表达的是在某一种类型下，提交的某某某版本注释</span></span><br><span class="line">开发业务  <span class="string">'business:xxx'</span></span><br><span class="line">修改bug  <span class="string">'fix:xxx'</span></span><br><span class="line">优化  <span class="string">'optimize:xxx’</span></span><br><span class="line"><span class="string">追加文档  '</span>doc:xxx<span class="string">'</span></span><br><span class="line"><span class="string">生态搭建  '</span>build:xxx’</span><br><span class="line">样式修改  <span class="string">'style:xxx'</span></span><br><span class="line">重写  <span class="string">'rewrite:xxx'</span></span><br><span class="line">单元测试  <span class="string">'test:xxx'</span></span><br><span class="line"><span class="comment">//这里面是有交集冲突的，比如: </span></span><br><span class="line"><span class="comment">//如果只改了样式，而没有动任何其他的配置，那就是style:xxx</span></span><br><span class="line"><span class="comment">//但如果改了样式又改了其他的部分，是要按照当时业务场景来看的，可能是business、fix、optimize、rewrite等等</span></span><br><span class="line"><span class="comment">//以此类推，就是当单纯改了某一个分类，就按照分类算，但如果改了不同的分类，那就按照业务场景来看。</span></span><br><span class="line"><span class="comment">//有的小伙伴英语不好，多学几个单词感觉费劲，咱也有中文版:</span></span><br><span class="line">开发业务  <span class="string">'业务:xxx'</span></span><br><span class="line">修改bug  <span class="string">'问题:xxx'</span></span><br><span class="line">优化  <span class="string">'优化:xxx'</span></span><br><span class="line">追加文档  <span class="string">'文档:xxx'</span></span><br><span class="line">生态搭建  <span class="string">'生态:xxx'</span></span><br><span class="line">样式修改  <span class="string">'样式:xxx'</span></span><br><span class="line">重写  <span class="string">'重写:xxx'</span></span><br><span class="line">单元测试  <span class="string">'测试:xxx'</span></span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="二、Jenkins发布系统步骤"><a href="#二、Jenkins发布系统步骤" class="headerlink" title="二、Jenkins发布系统步骤"></a>二、Jenkins发布系统步骤</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  也就是为什么要有这个系统。我们的前端打包之后的文件实际上就是一些静态资源，开发人员每一次都要打包，而且还要上传到gitlab上面，静态资源是不应该放到gitlab代码管理库里面去的，有了这个发布系统，直接交给流程机器人进行打包处理，并自动发布到SIT、STG和PRD的环境上面，减少了人工的打包以及手动拉到服务器上面的时间，且静态资源也是分发到OSS静态资源服务器上面，可谓物归其所地。</p>
+<blockquote>
+<p>步骤</p>
+</blockquote>
+<p>  打开<a><a href="http://ticket.hupu.io/desk/" target="_blank" rel="noopener">http://ticket.hupu.io/desk/</a></a>这个发布工单的系统，如果是创建一个新的项目应用，无论是后台还是前端，选择”新应用申请”，申请一个新项目应用，申请就会耗一些时间，运维老大会对你申请的这个应用提出意见，比如应用名字等等，按照规范改，之后要找不同的人(王节红(运维老大)跟他说你这个应用的gitlab所在地址等等确认、邰鹏(拓海CBA官网的运维负责人)的确认)，最后新应用上线完成。</p>
+<p>  之后，需要进行前端配置，由于OSS只放html文件，打包后的静态文件（CSS、JS等），需要放入W1服务器，OSS不支持CDN加速，而W1服务器实际上就是一个CDN服务器，所以需要配置webpack中的publicPath，访问静态文件需要使用w1的域名，路径为:<a><a href="http://w1.hoopchina.com.cn/games/static/项目名" target="_blank" rel="noopener">http://w1.hoopchina.com.cn/games/static/项目名</a></a>。</p>
+<blockquote>
+<p>缺点</p>
+</blockquote>
+<p>  当然也存在比较多的缺点，和前端小伙伴讨论的过程中，发现这个发布系统，只能单线程发布，对于多线程提交工单，并不支持，且进行提交工单的分支必须为release，所以当多人项目发布不同的功能点时，由于提交的时间点不同，当一人提交上去，另外的小伙伴就只能等着，等待这人的功能测试完全上线，才可以提交第二个工单，这样效率实际上是大大降低的。</p>
+<blockquote>
+<p>优化建议</p>
+</blockquote>
+<p>  和小伙伴商量之后，希望发布工单系统可以支持多分支提交工单，不只依赖于release分支，可以选择多个分支并入release分支，既可以勾选并入，也可以消除勾选移除，发布时，先检测是否存在冲突，解决完冲突之后，再发布至release，release分支发至sit和stg环境，待测试测完之后，再选择prd发布至线上并合入master分支（想法gitlab上的项目默认接入ci/cd，可以暴露gitlab的菜单选项，针对于某一个项目自定义自己的发布工单系统）。</p>
+<h2 id="三、表单校验插件能在我们业务前端内使用"><a href="#三、表单校验插件能在我们业务前端内使用" class="headerlink" title="三、表单校验插件能在我们业务前端内使用"></a>三、表单校验插件能在我们业务前端内使用</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  抛弃之前的if else冗长的判断逻辑，将其集成插件使用，减少项目代码的冗余，提高规则插件的可复用性，此插件符合设计模式单一职责以及开放封闭的原则，使用策略模式来编写。</p>
+<blockquote>
+<p>原理</p>
+</blockquote>
+<p>  此插件是以校验规则为基则，支持添加一或多个校验变量对应一或多个校验规则，来实现一对一、多对一、一对多和多对多的校验方式，数据类型支持数组或者是字符串，校验规则可以自定义，且对出现异常或者问题时的提示语，也支持type:提示异常语的形式来弹出或者飞入等自定义形式提示异常。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> verify <span class="keyword">from</span> <span class="string">"../utils/verify"</span>;</span><br><span class="line"><span class="keyword">const</span> &#123;phone, code, password, passwordConfirm&#125; = <span class="keyword">this</span>.state;</span><br><span class="line"><span class="keyword">return</span> verify.addRule([</span><br><span class="line">    phone,</span><br><span class="line">    code,</span><br><span class="line">    password,</span><br><span class="line">    passwordConfirm</span><br><span class="line">], [&#123;</span><br><span class="line">    rule: <span class="string">'isEmpty'</span>,</span><br><span class="line">    errMsg: [</span><br><span class="line">        <span class="string">'warning:请输入手机号'</span>,</span><br><span class="line">        <span class="string">'warning:请输入正确的验证码'</span>,</span><br><span class="line">        <span class="string">'warning:请输入6-16位密码'</span>,</span><br><span class="line">        <span class="string">'warning:请输入6-16位确认密码'</span></span><br><span class="line">    ]</span><br><span class="line">&#125;]).addRule(</span><br><span class="line">    phone, [&#123;</span><br><span class="line">        rule: <span class="string">'isPhone:^1[3|4|5|6|7|8|9]\\d&#123;9&#125;$'</span>,</span><br><span class="line">        errMsg: [</span><br><span class="line">            <span class="string">'warning:输入的手机号不符合标准'</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;]).addRule(</span><br><span class="line">    password,</span><br><span class="line">    [&#123;</span><br><span class="line">        rule: <span class="string">'passwordBit:6'</span>,</span><br><span class="line">        errMsg: [</span><br><span class="line">            <span class="string">'warning:请输入6-16位密码'</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;]</span><br><span class="line">).addRule(</span><br><span class="line">    password,</span><br><span class="line">    [&#123;</span><br><span class="line">        rule: <span class="string">'passwordReg:^[\\w]+$'</span>,</span><br><span class="line">        errMsg: [</span><br><span class="line">            <span class="string">'warning:请输入数字或者字母'</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;]</span><br><span class="line">).addRule(</span><br><span class="line">    password, [&#123;</span><br><span class="line">        rule: <span class="string">`isConfirm:<span class="subst">$&#123;passwordConfirm&#125;</span>`</span>,</span><br><span class="line">        errMsg: [</span><br><span class="line">            <span class="string">'warning:两次输入得密码不一致'</span></span><br><span class="line">        ]</span><br><span class="line">&#125;]).execute();</span><br></pre></td></tr></table></figure>
+</code></pre><blockquote>
+<p>源码</p>
+</blockquote>
+<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//表单校验插件</span></span><br><span class="line"><span class="keyword">let</span> verify = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> ruleMap = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</span><br><span class="line">    <span class="keyword">const</span> rulesList = &#123;</span><br><span class="line">        <span class="comment">//校验输入框是否为空</span></span><br><span class="line">        isEmpty(val, type, errMsg) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((!val &amp;&amp; val !== <span class="number">0</span>) || val.length &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    type,</span><br><span class="line">                    errMsg</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//校验密码和确认密码是否相同</span></span><br><span class="line">        isConfirm(val, confirmVal, type, errMsg) &#123;</span><br><span class="line">            <span class="keyword">if</span> (val !== confirmVal) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    type,</span><br><span class="line">                    errMsg</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//校验密码长度</span></span><br><span class="line">        passwordBit(val, length, type, errMsg) &#123;</span><br><span class="line">            <span class="keyword">if</span> (val.length &lt; length) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    type,</span><br><span class="line">                    errMsg</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//校验密码是否是只有数字或者字母</span></span><br><span class="line">        passwordReg(val, reg, type, errMsg) &#123;</span><br><span class="line">            <span class="keyword">let</span> _reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(reg, <span class="string">'g'</span>);</span><br><span class="line">            <span class="keyword">if</span>(!_reg.test(val)) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    type,</span><br><span class="line">                    errMsg</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//校验手机号码</span></span><br><span class="line">        isPhone(val, reg, type, errMsg) &#123;</span><br><span class="line">            <span class="keyword">let</span> _reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(reg);</span><br><span class="line">            <span class="keyword">if</span>(!_reg.test(val)) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    type,</span><br><span class="line">                    errMsg</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Verify</span> </span>&#123;</span><br><span class="line">        <span class="keyword">constructor</span>() &#123;</span><br><span class="line">            ruleMap.set(<span class="keyword">this</span>, []);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 添加校验规则</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param <span class="variable">vals</span></span></span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param <span class="variable">rules</span></span></span></span><br><span class="line"><span class="comment">         * <span class="doctag">@returns <span class="type">&#123;Verify&#125;</span></span></span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        addRule = <span class="function">(<span class="params">vals, rules</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> mapList = ruleMap.get(<span class="keyword">this</span>);</span><br><span class="line">            vals = (<span class="built_in">Object</span>.prototype.toString.call(vals) === <span class="string">"[object Array]"</span>) ? vals : [vals];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> [key, val] <span class="keyword">of</span> vals.entries()) &#123;</span><br><span class="line">                rules.forEach(<span class="function"><span class="params">ruleItem</span> =&gt;</span> &#123;</span><br><span class="line">                    mapList.push(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                        <span class="keyword">let</span> &#123;rule, errMsg&#125; = ruleItem;</span><br><span class="line">                        <span class="keyword">const</span> operation = rule.split(<span class="string">":"</span>);</span><br><span class="line">                        errMsg = errMsg <span class="keyword">instanceof</span> <span class="built_in">Array</span> ? errMsg : [errMsg];</span><br><span class="line">                        <span class="keyword">const</span> currentErrMsg = errMsg[key];</span><br><span class="line">                        <span class="keyword">const</span> method = operation.shift();</span><br><span class="line">                        operation.unshift(val);</span><br><span class="line">                        operation.push(...currentErrMsg.split(<span class="string">":"</span>));</span><br><span class="line">                        <span class="keyword">return</span> rulesList[method](...operation);</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            ruleMap.set(<span class="keyword">this</span>, mapList);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 进行校验</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@returns <span class="type">&#123;boolean|*&#125;</span></span></span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        execute = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> mapList = ruleMap.get(<span class="keyword">this</span>);</span><br><span class="line">            <span class="keyword">let</span> msg;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> mapVal <span class="keyword">of</span> mapList.values()) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((msg = mapVal())) &#123;</span><br><span class="line">                    <span class="keyword">this</span>.clear();</span><br><span class="line">                    <span class="keyword">return</span> msg;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.clear();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 将校验规则的方法都清除掉</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        clear = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            ruleMap.set(<span class="keyword">this</span>, []);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Verify();</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> verify;</span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="四、目录结构"><a href="#四、目录结构" class="headerlink" title="四、目录结构"></a>四、目录结构</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  建立一个生态，最重要的就是目录结构，一个好的目录结构，能够使开发的效率变高，省去过多的查找目录、路径和文件的时间，而开发一个生态或者一个项目，往往是要和业务连接起来的，所以目录结构有必要与业务紧密相连。</p>
+<blockquote>
+<p>详情</p>
+</blockquote>
+<p>  我们足球业务项目，建议采用umi的那种目录结构，配合业务界面的组件，无论是业务组件(不包含公用组件)、业务样式、私有业务样式变量，还是redux的行为action、触发redux action行为产生数据处理并返回的reducer、私有静态常量、私有工具，都放入和业务界面组件同一个目录路径下，这样在开发某一个界面的业务时，就不需要返回上一级甚至于根目录下寻找这些业务可能必备的样式、组件、工具、action、reducer和静态变量。</p>
+<p>  而公有的部分则放入到盛装业务界面组件根路径的外部，比如静态图片、文字字体、音频和视频资源、公有的样式、公有的样式变量、公有的工具和组件以及公有的静态常量，都放入外部，分目录盛装，名字叫啥就不建议了，最起码要语义清晰且常用，让人能够比较容易的理解。</p>
+<h2 id="五、react-state和props的使用"><a href="#五、react-state和props的使用" class="headerlink" title="五、react state和props的使用"></a>五、react state和props的使用</h2><blockquote>
+<p>概括</p>
+</blockquote>
+<p>  state花心,props专一 ; state如此善变,props始终如一</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>  在还没有redux统一管理数据的年代,我们一般使用state来承接变量,在一个组件的内部,我们一般使用state来控制这个组件的喜怒哀乐和言行举止,控制器呢,就是setState;但是当组件套用时,父子关系呈现出来,父组件发现没办法传授和教育子组件一些经验和知识,因为组件都是有血有肉有自己意识的,所以只能强制,父组件通过传入自己的state,来改变子组件的一些坏习惯,俗话说得好,<b>“小树不修不直溜,人不修理哏啾啾”</b>,自然在子组件还没有成熟时,传入子组件内部的父组件state(也就是子组件props),子组件是无法修改的,只能听之任之,接受洗礼,但是当子组件变成熟,父组件变老,子组件想要改变父组件的需求也就自然显示出来,那如何能修改呢,只能劝父组件授权给他,以为父组件好的名义,父组件听到了心里,觉得”儿啊，长大了，懂事了”,直接给予子组件一个方法,这个方法行为直接可以改变父组件的state生活行为,而这个方法是子组件控制的。</p>
+<p>  故state承接的是变量,而props只是state在父子传递state时的桥梁,桥梁是不可妄动的。</p>
+<p>  建议state中不要放入常量,如果嫌某常量只是在本组件内使用或者嫌重新建一个静态常量文件麻烦,那就直接使用组件内部的this.constants = {number: ‘这是常量’};或者不放入到react组件内,直接在文件顶部加一个const constants = {number: ‘这是常量’};也是可以的。</p>
+<h2 id="六、react事件"><a href="#六、react事件" class="headerlink" title="六、react事件"></a>六、react事件</h2><blockquote>
+<p>定义</p>
+</blockquote>
+<p>  事件往往代表一个对象、一个组件和一套工具的行为,而react事件的演化从初始阶段的bind显示硬绑定,至中期的箭头函数,直至现阶段比较好的箭头函数配合data-propsType属性的方式。</p>
+<blockquote>
+<p>前期bind硬绑定</p>
+</blockquote>
+<p>  在前期,我们既希望事件函数的this指向React组件对象本身,又希望可以传递某些数据状态,且this不要指向事件所绑定的元素dom或者react虚拟dom，在这时候，我们选择了bind硬绑定,事件.bind(this, params)酱紫,但是发现这样大抵是为内存泄漏埋下了隐患。</p>
+<p>  我们先看一下模拟bind的js源代码:</p>
+<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _this = <span class="keyword">this</span>,</span><br><span class="line">        fBind,</span><br><span class="line">        args = [...arguments];</span><br><span class="line">    args.shift();</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    fBind = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> newArgs = [...args, ...arguments];</span><br><span class="line">        <span class="keyword">return</span> _this.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fBind ? <span class="keyword">this</span> : context, newArgs);</span><br><span class="line">   &#125;;</span><br><span class="line">    <span class="comment">//这里让返回的函数的隐式原型指向其绑定的事件函数的显式原型</span></span><br><span class="line">    F.prototype = _this.prototype;</span><br><span class="line">    fBind.prototype = <span class="keyword">new</span> F();</span><br><span class="line">    <span class="keyword">return</span> fBind;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</code></pre><p>  这样就是一个完整的bind硬绑定的函数，基于Function函数对象的原型链上面，但是大家可以看到，bind硬绑定形成了一个闭包，fBind的这个函数对象，在异步机制中的内存当中是一直存在的。那就意味着，我硬绑定多个事件，就会形成多个闭包，这样迟早会形成内存泄漏，实在是不可取的一个方式。</p>
+<blockquote>
+<p>中期的箭头函数与现阶段的箭头函数配合data-propsType属性</p>
+</blockquote>
+<p>  对于箭头函数，我们极为熟悉，不能改变其this的指向、无arguments类参数数组、不能使用new绑定构造调用和引用关联以及不能使用super继承。这样既写法简单，this的指向又解决了，指向React组件对象本身，且不指向事件所绑定的元素dom或者react虚拟dom。那么参数如何传入呢，当然你如果不嫌麻烦，可以这样:</p>
+<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div onClick=&#123;(e) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> type = <span class="string">'me'</span>;</span><br><span class="line">    <span class="comment">//这个就是你定义的箭头函数</span></span><br><span class="line">    onChangeHandler(type, e);</span><br><span class="line">&#125;&#125;&gt;</span><br><span class="line">    来吧，点击</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</code></pre><p>  但是太过麻烦，每次都要内部一个箭头函数，在外面又要再定义一个封装的箭头函数，感觉有点儿烦。所以我们可以利用自定义属性的方法，来解决这个问题。</p>
+<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  onChangeHandler = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123;target&#125; = e || &#123;&#125;;</span><br><span class="line">      <span class="keyword">const</span> type = target.getAttribute(<span class="string">'data-type'</span>);</span><br><span class="line">      <span class="built_in">console</span>.log(type);</span><br><span class="line">  &#125;;</span><br><span class="line">  render() &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123;onChangeHandler&#125; = <span class="keyword">this</span>;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">          &lt;div </span><br><span class="line">              data-type=<span class="string">'me'</span></span><br><span class="line">              onClick=&#123;onChangeHandler&#125;&gt;</span><br><span class="line">                来吧，点击</span><br><span class="line">          &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      );   </span></span><br><span class="line"><span class="regexp">  &#125;   </span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+</code></pre><p>  这种箭头函数配合data-propsType属性的方式，简易实用，是现阶段比较好的事件实现过程。</p>
+<h2 id="七、添加注释"><a href="#七、添加注释" class="headerlink" title="七、添加注释"></a>七、添加注释</h2><blockquote>
+<p>详情</p>
+</blockquote>
+<p>  注释是体现一个好的开发人员素养的标识,好且有效的注释在多人团队同时开发过程中的垫脚石,所以建议小伙伴们,无论是在业务逻辑还是技术逻辑比较复杂的部分,做好详细的注释,复杂技术逻辑只要讲清楚代码逻辑即可,而复杂业务逻辑,就需要讲业务的背景讲清楚,即是什么、为什么详细的表达明白。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+            <a href="/tags/微信小程序/" rel="tag"># 微信小程序</a>
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+            <a href="/tags/TS/" rel="tag"># TS</a>
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+            <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          
+            <a href="/tags/moment/" rel="tag"># moment</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/23/你不知道的Javascript/" rel="next" title="你不知道的Javascript">
+                <i class="fa fa-chevron-left"></i> 你不知道的Javascript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/27/比木白-Webpack/" rel="prev" title="比木白-Webpack">
+                比木白-Webpack <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#足球前端规范"><span class="nav-number">1.</span> <span class="nav-text">足球前端规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Git提交注释部分-git-comment-m-‘-’-，建议规范起来。"><span class="nav-number">1.1.</span> <span class="nav-text">一、Git提交注释部分(git comment -m ‘?’)，建议规范起来。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Jenkins发布系统步骤"><span class="nav-number">1.2.</span> <span class="nav-text">二、Jenkins发布系统步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、表单校验插件能在我们业务前端内使用"><span class="nav-number">1.3.</span> <span class="nav-text">三、表单校验插件能在我们业务前端内使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、目录结构"><span class="nav-number">1.4.</span> <span class="nav-text">四、目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、react-state和props的使用"><span class="nav-number">1.5.</span> <span class="nav-text">五、react state和props的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、react事件"><span class="nav-number">1.6.</span> <span class="nav-text">六、react事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、添加注释"><span class="nav-number">1.7.</span> <span class="nav-text">七、添加注释</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

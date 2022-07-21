@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="testing,browserstack,screenshots,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="实现browserstack screenshotsbrowserstack screenshots api   Screenshots API，通过调用 Screenshots API 的例子node-browserstack screenshots就可以得知，通过 http 请求 https://www.browserstack.com/screenshots 接口:  url(需要测试截图的">
+<meta name="keywords" content="testing,browserstack,screenshots">
+<meta property="og:type" content="article">
+<meta property="og:title" content="browserstack screenshots">
+<meta property="og:url" content="http://yoursite.com/2022/06/07/browserstackscreenshots/index.html">
+<meta property="og:site_name" content="yinwk_Gary Blog">
+<meta property="og:description" content="实现browserstack screenshotsbrowserstack screenshots api   Screenshots API，通过调用 Screenshots API 的例子node-browserstack screenshots就可以得知，通过 http 请求 https://www.browserstack.com/screenshots 接口:  url(需要测试截图的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/basic_comms.png">
+<meta property="og:image" content="http://yoursite.com/images/automate_test.png">
+<meta property="og:image" content="http://yoursite.com/images/appium_android.png">
+<meta property="og:image" content="http://yoursite.com/images/appium_ios.png">
+<meta property="og:updated_time" content="2022-07-21T03:53:49.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="browserstack screenshots">
+<meta name="twitter:description" content="实现browserstack screenshotsbrowserstack screenshots api   Screenshots API，通过调用 Screenshots API 的例子node-browserstack screenshots就可以得知，通过 http 请求 https://www.browserstack.com/screenshots 接口:  url(需要测试截图的">
+<meta name="twitter:image" content="http://yoursite.com/images/basic_comms.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/06/07/browserstackscreenshots/">
+
+
+
+
+
+  <title>browserstack screenshots | yinwk_Gary Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yinwk_Gary Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/07/browserstackscreenshots/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yinwk_Gary">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yinwk_Gary Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">browserstack screenshots</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-07T22:58:37+08:00">
+                2022-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/testing/" itemprop="url" rel="index">
+                    <span itemprop="name">testing</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="实现browserstack-screenshots"><a href="#实现browserstack-screenshots" class="headerlink" title="实现browserstack screenshots"></a>实现browserstack screenshots</h1><h2 id="browserstack-screenshots-api"><a href="#browserstack-screenshots-api" class="headerlink" title="browserstack screenshots api"></a>browserstack screenshots api</h2><p>   <a hef="https://www.browserstack.com/screenshots/api">Screenshots API</a>，通过调用 Screenshots API 的例子<a href="https://github.com/scottgonzalez/node-browserstack/blob/master/lib/screenshot.js" target="_blank" rel="noopener">node-browserstack screenshots</a>就可以得知，通过 http 请求 <a href="https://www.browserstack.com/screenshots" target="_blank" rel="noopener">https://www.browserstack.com/screenshots</a> 接口:</p>
+<ul>
+<li>url(需要测试截图的url);</li>
+<li>os(测试环境: 操作系统);</li>
+<li>os_version(测试环境: 操作系统版本);</li>
+<li>browser(测试环境: 浏览器类型);</li>
+<li>browser_version(测试环境: 浏览器版本);</li>
+<li>device(测试环境: 若需要移动设备,设备类型);</li>
+<li>orientation(测试环境: 设备的屏幕方向);</li>
+<li>mac_res(测试环境: mac浏览器屏幕分辨率);</li>
+<li>win_res(测试环境: windows浏览器屏幕分辨率);</li>
+<li>quality(测试环境: 截图是否压缩);</li>
+<li>local(测试环境: 是否建立本地测试连接);</li>
+<li>wait_time(测试环境: 截图前等待的时间);</li>
+<li>callback_url(测试环境: 回调网址);</li>
+</ul>
+<p>选择性带入上述参数就可生成截图列表极其状态，并回调到对应的url页面上。类似的，lambdaTest 上面也是有一套 Screenshots API 实现逻辑，<a href="https://www.lambdatest.com/support/api-doc/" target="_blank" rel="noopener">AUTOMATED SCREENSHOTS API</a>，其例子请求方式相同，都是通过 http 请求。</p>
+<h2 id="browserstack-Screenshots-API背后所实现的原理"><a href="#browserstack-Screenshots-API背后所实现的原理" class="headerlink" title="browserstack Screenshots API背后所实现的原理"></a>browserstack Screenshots API背后所实现的原理</h2><p>辗转反侧的通过 Google、询问平台技术支持人员，最后得到的结论是: Screenshots API背后使用了多个自动化测试脚本和不同的框架来捕获屏幕截图，其中包含了selenium webdriver，也就是说基本上为了捕获截图，browserstack 使用了 selenium webdriver 技术，但 selenium webdriver 只限于针对PC端/移动端的浏览器。</p>
+<h2 id="哪些方式可以实现跨终端自动化截图？"><a href="#哪些方式可以实现跨终端自动化截图？" class="headerlink" title="哪些方式可以实现跨终端自动化截图？"></a>哪些方式可以实现跨终端自动化截图？</h2><ul>
+<li><p>Selenium WebDriver</p>
+<ul>
+<li><p>Selenium 是什么?</p>
+<p>Selenium 是一套基于浏览器的自动化工具，它提供了一种跨平台、跨浏览器的端到端的 web 自动化解决方案。</p>
+<p>Selenium 主要包括三部分:</p>
+<ul>
+<li>Selenium IDE：它可以进行录制回放用户操作，并且可以把录制的操作以多种语言（如JAVA、Python、C#等）的形式导出成测试用例。</li>
+<li>Selenium WebDriver：提供 Web 自动化所需的 API，主要用作浏览器控制、页面元素选择和调试，通常也被成为WebDriver。不同的浏览器需要不同的 WebDriver，例如针对Chrome使用的chromedriver。</li>
+<li>Selenium Grid：提供了在不同机器的不同浏览器上运行 selenium 测试的能力，一个分布式运行用例时的工具。</li>
+</ul>
+</li>
+<li><p>Selenium WebDriver 的工作原理</p>
+<p>简单来说: 自动化 Selenium WebDriver API 测试脚本发送请求给浏览器的驱动，驱动将测试脚本解析后的结果发送给浏览器，浏览器执行驱动发来的指令，并最终完成想要的操作。</p>
+</li>
+<li><p>Selenium WebDriver 的结构</p>
+<p>典型的 C/S 结构，Selenium WebDriver API 相当于是客户端，而浏览器驱动才是服务器端。</p>
+</li>
+<li><p>浏览器的驱动兼容多个测试脚本的原因</p>
+<p>WebDriver基于的协议：JSON Wire protocol，这个协议规范在WebDriver中数据都是以JSON的形式存在并进行传送的，所以在 client 和 server 之间，只要是基于JSON Wire Protocol来传递数据，与具体的脚本语言无关。</p>
+</li>
+<li><p>WebDriver协议 - JSON Wire protocol</p>
+<p><a href="https://www.selenium.dev/documentation/legacy/json_wire_protocol/" target="_blank" rel="noopener">JSON Wire protocol 官方文档</a>，是<a href="https://w3c.github.io/webdriver/" target="_blank" rel="noopener">W3C WebDriver协议</a>的前身，是在http协议基础上，对http请求及响应的body部分的数据的进一步规范，必须以JSON的形式存在并进行传送，提供了操作浏览器<a href="https://w3c.github.io/webdriver/#endpoints" target="_blank" rel="noopener">命令的方法以及所对应的 URI 模板。<a></a></a></p>
+</li>
+<li><p>深析 Selenium WebDriver 的工作原理</p>
+<ol>
+<li>对于每一条转换为 JSON 之后的 Selenium WebDriver API 测试脚本,会通过 CommandExecutor 发送 http 请求给浏览器的驱动。</li>
+<li>浏览器驱动中包含了一个 WebDriver remote server，通过监听端口用来接收 http 请求。</li>
+<li>WebDriver remote server 接收到请求后根据请求来具体操控对应的浏览器。</li>
+<li>浏览器执行具体的测试脚本步骤。</li>
+<li>浏览器将执行结果返回给 WebDriver remote server。</li>
+<li>WebDriver remote server 又将结果返回给 Selenium WebDriver API client 端。</li>
+</ol>
+<p><img src="/images/basic_comms.png" alt></p>
+</li>
+<li><p>自动化截图</p>
+<p>可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的屏幕截图，会返回以 Base64 格式编码的 PNG 图片。</p>
+<p><a href="https://www.selenium.dev/documentation/webdriver/browser/windows/#takescreenshot" target="_blank" rel="noopener">TakeScreenshot(屏幕截图)</a></p>
+<p>也可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的元素内的屏幕截图，会返回以 Base64 格式编码的 PNG 图片。</p>
+<p><a href="https://www.selenium.dev/documentation/webdriver/browser/windows/#takeelementscreenshot" target="_blank" rel="noopener">TakeElementScreenshot(元素内屏幕截图)</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Appium</p>
+<ul>
+<li><p>Appium 是什么?</p>
+<p>Appium 是一个开源的移动端自动化测试工具，用于自动化 iOS设备、 Android设备 和 Windows 桌面系统上的原生、移动 Web 和混合应用，通过 Node.js 编写，用于启动 Appium HTTP Server。</p>
+<ul>
+<li>[原生应用]指那些用 iOS、 Android 或者 Windows SDKs 编写的应用。</li>
+<li>[移动 Web 应用]是用移动端浏览器访问的应用(Appium 支持 iOS 上的 Safari、Chrome 和 Android 上的内置浏览器）。</li>
+<li>[混合应用]带有一个[ webview ]的包装器——用来和 Web 内容交互的原生控件。</li>
+</ul>
+</li>
+<li><p>安装</p>
+<p>可以通过 NPM 安装。</p>
+<pre><code>npm install -g appium
+</code></pre><p>也可以通过 <a href="https://github.com/appium/appium-desktop/releases" target="_blank" rel="noopener">Appium Desktop</a> 桌面应用程序安装。</p>
+<p>PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href="https://appium.io/docs/en/about-appium/appium-clients/index.html" target="_blank" rel="noopener"> Appium 服务器的客户端程序库</a>，它是基于 WebDriver 协议: JSON Wire protocol 扩展实现了 <a href="https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md" target="_blank" rel="noopener">Mobile JSON Wire Protocol</a> 协议，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。</p>
+<p>配置驱动，<a href="https://appium.io/docs/en/about-appium/getting-started/?lang=zh#driver-specific-setup" target="_blank" rel="noopener">Driver-Specific Setup</a>。</p>
+<p>PS: 驱动是包含在 Appium server 的工作范围内的。</p>
+</li>
+<li><p>Appium 的结构</p>
+<p>典型的 C/S 结构，Appium client 相当于是客户端，Appium server 是服务器端。</p>
+</li>
+<li><p>深析 Appium 的工作原理</p>
+<ol>
+<li>测试人员执行测试脚本(java,python等脚本)通过 Appium client 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。</li>
+<li><p>之后，Appium server 需要与移动端 App 依赖的自动化测试框架进行通信。</p>
+<p><img src="/images/automate_test.png" alt></p>
+<p>Appium server 会通过 TCP/IP 协议转发请求并转化成移动设备可以识别的命令（command）给不同设备的中间件，在转发请求的同时，会在 PC 端开启一个监听端口 4724，来接收设备返回的结果。</p>
+</li>
+<li><p>Appium server with Android</p>
+<p>以 UIAutomator 的自动化测试框架为例。</p>
+<p><img src="/images/appium_android.png" alt></p>
+<p>命令（command）由中间件 bootstrap.jar 通过监听设备的4724端口来获得，经过其解释，将它们转换为 Android 设备可理解的 UIAutomator 格式，Android 设备通过 UIAutomator 命令调用其提供的 API 去做一些实际的操作；接着，Android 设备通过 bootstrap.jar 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。</p>
+</li>
+<li><p>Appium server with IOS</p>
+<p>以 XCUITest 的自动化测试框架为例。</p>
+<p><img src="/images/appium_ios.png" alt></p>
+<p>命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过其解释，通过调用 IOS 设备的 XCUITest API 将它们转换为 IOS 设备可理解的格式，IOS 设备通过转换后的命令去做一些实际的操作；接着，IOS 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。</p>
+</li>
+</ol>
+</li>
+<li><p>DesiredCapabilities</p>
+<p>用于配置 Appium C/S 会话，告诉 Appium Server 您想要自动化的平台、应用程序等一系列信息。其是一组设置的键值对的集合，其中键对应设置的名称，而值对应设置的值。其通过 Mobile JSON Wire Protocol 协议以 JSON 格式发送测试设备信息给 Appium server。</p>
+</li>
+<li><p>自动化截图</p>
+<p>可以通过 Appium Commands API 用于截取当前视口/窗口/页面的图片，会返回以 Base64 格式编码的 PNG 图片。</p>
+<p><a href="https://appium.io/docs/en/commands/session/screenshot/#take-screenshot" target="_blank" rel="noopener">TakeScreenshot(屏幕截图)</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/testing/" rel="tag"># testing</a>
+          
+            <a href="/tags/browserstack/" rel="tag"># browserstack</a>
+          
+            <a href="/tags/screenshots/" rel="tag"># screenshots</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/05/29/thinkoftesting/" rel="next" title="think of testing">
+                <i class="fa fa-chevron-left"></i> think of testing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/06/12/日常开发难点/" rel="prev" title="日常开发难点">
+                日常开发难点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13704681?s=400&u=bfc4636397a7c4384f63d4836a33d1797cd2c660&v=4" alt="yinwk_Gary">
+            
+              <p class="site-author-name" itemprop="name">yinwk_Gary</p>
+              <p class="site-description motion-element" itemprop="description">Gary's blog,记录_从今天开始</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/dreamthen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://dreamthen.00@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/u/0/103833130011211353424" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实现browserstack-screenshots"><span class="nav-number">1.</span> <span class="nav-text">实现browserstack screenshots</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#browserstack-screenshots-api"><span class="nav-number">1.1.</span> <span class="nav-text">browserstack screenshots api</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#browserstack-Screenshots-API背后所实现的原理"><span class="nav-number">1.2.</span> <span class="nav-text">browserstack Screenshots API背后所实现的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哪些方式可以实现跨终端自动化截图？"><span class="nav-number">1.3.</span> <span class="nav-text">哪些方式可以实现跨终端自动化截图？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yinwk_Gary</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
