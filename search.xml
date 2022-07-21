@@ -324,6 +324,47 @@ hexo deploy
       </tags>
   </entry>
   <entry>
+    <title>2018-04-27 关于webstorm</title>
+    <url>/2018/04/27/%E5%85%B3%E4%BA%8Ewebstorm/</url>
+    <content><![CDATA[<h1 id="webstorm-license-server"><a href="#webstorm-license-server" class="headerlink" title="webstorm license server"></a>webstorm license server</h1><blockquote>
+<p>从毕业就开始使用webstorm,从webstorm 11到webstorm 2017,再到现在的webstorm 2018,webstorm IDE功能越来越强大,但是我从来不使用正版,而今天就给大家介绍一下,在使用盗版过程中最大的困难——license server。在最初的时候,我也是百度的一些Activation code,后来发现这些Activation code极不稳定,可能是一个Activation code只能在一个终端使用吧,我放弃了使用Activation code的方式。</p>
+</blockquote>
+<blockquote>
+<p>后来,在<b>Webstorm吧</b>找到了一种可以设置试用期到2099年的方法:改变本地的日期时间至2099年11月30日,然后安装webstorm,选择试用,试用期一个月,这时候你的试用期就到了2099年的12月31日。假如你已经安装了webstorm,直接找到WINDOWS系统,C:/Users(用户)/你的WINDOWS电脑用户名/.Webstorm2017.2/config/eval,直接将eval文件删掉,重新打开webstorm,更改本地日期,后面的操作就同上了。直到2017.3版本之前,使用的很舒服,到了2017.3版本,JetBrains发现了这个漏洞,进行了修补,由此也放弃了使用这种方式。</p>
+</blockquote>
+<blockquote>
+<p>再之后,就开始使用license server,使用的license server如下:</p>
+</blockquote>
+<pre><code>http://idea.imsxm.com (2017.3.3版本极其之前版本可用)
+http://idea.iteblog.com/key.php (2017.1可用)
+http://www.aku.vn/idea (2017.1可用)
+http://idea.ibdyr.com (2017.3.3版本极其之前版本可用)
+</code></pre><blockquote>
+<p>再后来,就开始使用本地nginx反向代理<a href="http://idea.imsxm.com,将下面的配置放进server中" target="_blank" rel="noopener">http://idea.imsxm.com,将下面的配置放进server中</a>:</p>
+</blockquote>
+<pre><code>location /rpc {
+        proxy_pass   http://idea.imsxm.com/rpc;
+        proxy_redirect             off;
+        proxy_set_header           Host $host;
+        proxy_set_header           X-Real-IP $remote_addr;
+        proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+</code></pre><blockquote>
+<p>现在连本地nginx反向代理都失效了,jetbrains在2017.3.4版本使用了ip地址动态封禁,经过我很长时间的寻找,找到了现在在2018版本之后都可使用的license server:</p>
+</blockquote>
+<pre><code>http://www.activejetbrains.ml
+</code></pre><blockquote>
+<p>最新的license server转自网上的一篇文章,来源于<a href="https://www.imsxm.com/jetbrains-license-server.html" target="_blank" rel="noopener">https://www.imsxm.com/jetbrains-license-server.html</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>webstorm</category>
+      </categories>
+      <tags>
+        <tag>webstorm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2018-04-27 关于webpack</title>
     <url>/2018/04/27/%E5%85%B3%E4%BA%8Ewebpack/</url>
     <content><![CDATA[<h1 id="关于webpack"><a href="#关于webpack" class="headerlink" title="关于webpack"></a>关于webpack</h1><blockquote>
@@ -535,44 +576,73 @@ function co(gc_co){
       </tags>
   </entry>
   <entry>
-    <title>2018-04-27 关于webstorm</title>
-    <url>/2018/04/27/%E5%85%B3%E4%BA%8Ewebstorm/</url>
-    <content><![CDATA[<h1 id="webstorm-license-server"><a href="#webstorm-license-server" class="headerlink" title="webstorm license server"></a>webstorm license server</h1><blockquote>
-<p>从毕业就开始使用webstorm,从webstorm 11到webstorm 2017,再到现在的webstorm 2018,webstorm IDE功能越来越强大,但是我从来不使用正版,而今天就给大家介绍一下,在使用盗版过程中最大的困难——license server。在最初的时候,我也是百度的一些Activation code,后来发现这些Activation code极不稳定,可能是一个Activation code只能在一个终端使用吧,我放弃了使用Activation code的方式。</p>
+    <title>2018-04-30 关于闭包</title>
+    <url>/2018/04/30/%E5%85%B3%E4%BA%8E%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h1 id="什么是回调函数"><a href="#什么是回调函数" class="headerlink" title="什么是回调函数"></a>什么是回调函数</h1><blockquote>
+<p>A函数作为B函数的参数,并在B函数中执行,A函数就是回调函数。</p>
 </blockquote>
-<blockquote>
-<p>后来,在<b>Webstorm吧</b>找到了一种可以设置试用期到2099年的方法:改变本地的日期时间至2099年11月30日,然后安装webstorm,选择试用,试用期一个月,这时候你的试用期就到了2099年的12月31日。假如你已经安装了webstorm,直接找到WINDOWS系统,C:/Users(用户)/你的WINDOWS电脑用户名/.Webstorm2017.2/config/eval,直接将eval文件删掉,重新打开webstorm,更改本地日期,后面的操作就同上了。直到2017.3版本之前,使用的很舒服,到了2017.3版本,JetBrains发现了这个漏洞,进行了修补,由此也放弃了使用这种方式。</p>
-</blockquote>
-<blockquote>
-<p>再之后,就开始使用license server,使用的license server如下:</p>
-</blockquote>
-<pre><code>http://idea.imsxm.com (2017.3.3版本极其之前版本可用)
-http://idea.iteblog.com/key.php (2017.1可用)
-http://www.aku.vn/idea (2017.1可用)
-http://idea.ibdyr.com (2017.3.3版本极其之前版本可用)
-</code></pre><blockquote>
-<p>再后来,就开始使用本地nginx反向代理<a href="http://idea.imsxm.com,将下面的配置放进server中" target="_blank" rel="noopener">http://idea.imsxm.com,将下面的配置放进server中</a>:</p>
-</blockquote>
-<pre><code>location /rpc {
-        proxy_pass   http://idea.imsxm.com/rpc;
-        proxy_redirect             off;
-        proxy_set_header           Host $host;
-        proxy_set_header           X-Real-IP $remote_addr;
-        proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;
+<pre><code>function setTimer(fn, timer) {
+    fn(timer);
 }
+
+//function timer就是function setTimer的回调函数
+setTimer(function timer(time) {
+    console.log(time);
+}, 1000);
 </code></pre><blockquote>
-<p>现在连本地nginx反向代理都失效了,jetbrains在2017.3.4版本使用了ip地址动态封禁,经过我很长时间的寻找,找到了现在在2018版本之后都可使用的license server:</p>
+<p>回调函数也分同步和异步,上例就是同步,而像setTimeout,setInterval中这种牵扯到消息队列(异步队列),Event Loop的回调函数来说,就是异步。</p>
 </blockquote>
-<pre><code>http://www.activejetbrains.ml
+<h1 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h1><blockquote>
+<p>“A函数中包含B函数,并返回B函数,调用B函数可以使用A函数作用域中定义的变量”,B函数就是闭包,示例如下:</p>
+</blockquote>
+<pre><code>function foo() {
+    let _name = &quot;Gary&quot;;
+    function bar() {
+        console.log(`name: ${_name}`);
+    }
+    return bar;
+}
+//foo函数执行之后,作用域会被销毁,随之而然的作用域中定义的变量应该会被销毁,并被引擎垃圾回收机制回收,
+//但是在这里神奇的事情发生了,foo函数作用域并没有被销毁之后回收,而是还存在于内存中,并被bar使用,这里就形成了闭包。
+let bar = foo();
+bar();
 </code></pre><blockquote>
-<p>最新的license server转自网上的一篇文章,来源于<a href="https://www.imsxm.com/jetbrains-license-server.html" target="_blank" rel="noopener">https://www.imsxm.com/jetbrains-license-server.html</a></p>
+<p>还有一种形式是这样</p>
 </blockquote>
-]]></content>
+<pre><code>function foo() {
+    let _name = &quot;Gary&quot;;
+    function bar() {
+        console.log(`name: ${_name}`);
+    }
+    baz(bar);
+}
+
+//这里在foo函数执行之后,按理来说,foo函数中作用域,以及其中_name变量,都会被销毁,并随后被引擎垃圾回收机制回收。
+//但是神奇的是,这里的作用域并没有被销毁,而其中的_name变量也没有被销毁,当然也没有被引擎垃圾回收机制回收,而还是存储于内存中,并被bar使用,这里就形成了闭包。
+function baz(fn) {
+    fn();
+}
+
+foo();
+</code></pre>]]></content>
       <categories>
-        <category>webstorm</category>
+        <category>闭包</category>
       </categories>
       <tags>
-        <tag>webstorm</tag>
+        <tag>闭包</tag>
+        <tag>回调函数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2018-05-07 浅谈使用jQuery和react的区别</title>
+    <url>/2018/05/07/%E6%B5%85%E8%B0%88%E4%BD%BF%E7%94%A8jQuery%E5%92%8Creact%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>react</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>jQuery</tag>
       </tags>
   </entry>
   <entry>
@@ -912,61 +982,287 @@ const webpackProdConfig = {
       </tags>
   </entry>
   <entry>
-    <title>2018-04-30 关于闭包</title>
-    <url>/2018/04/30/%E5%85%B3%E4%BA%8E%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<h1 id="什么是回调函数"><a href="#什么是回调函数" class="headerlink" title="什么是回调函数"></a>什么是回调函数</h1><blockquote>
-<p>A函数作为B函数的参数,并在B函数中执行,A函数就是回调函数。</p>
+    <title>2018-05-07 查漏补缺</title>
+    <url>/2018/05/07/%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA/</url>
+    <content><![CDATA[<h1 id="赋值操作的返回"><a href="#赋值操作的返回" class="headerlink" title="赋值操作的返回"></a>赋值操作的返回</h1><blockquote>
+<p>最近在读一本《JavaScript DOM 编程艺术》的书,其中有一句话引起了我的好奇,假如if判断语句中存在赋值语句,则赋值语句的返回总是true。我对此结果进行了检验</p>
 </blockquote>
-<pre><code>function setTimer(fn, timer) {
-    fn(timer);
+<pre><code>var a;
+//这种情况下,if判断语句中返回&quot;good&quot;,为true
+//打印&quot;good result&quot;
+if(a = &quot;good&quot;) {
+    console.log(&quot;good result&quot;);
 }
 
-//function timer就是function setTimer的回调函数
-setTimer(function timer(time) {
-    console.log(time);
-}, 1000);
+//这种情况下,if判断语句中返回false,为false
+//什么都不打印
+if(a = false) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回undefined,为false
+//什么都不打印
+if(a = undefined) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回0,为false
+//什么都不打印
+if(a = 0) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回null,为false
+//什么都不打印
+if(a = null) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回{},为true
+//打印&quot;good result&quot;
+if(a = {}) {
+    console.log(&quot;good result&quot;);
+}
+
+//这种情况下,if判断语句中返回[],为true
+//打印&quot;good result&quot;
+if(a = []) {
+    console.log(&quot;good result&quot;);
+}
 </code></pre><blockquote>
-<p>回调函数也分同步和异步,上例就是同步,而像setTimeout,setInterval中这种牵扯到消息队列(异步队列),Event Loop的回调函数来说,就是异步。</p>
+<p>实践是检验真理的唯一标准,由此检验到赋值操作的返回就是其本身,本身类型转换后为true,则为true;转换后为false,则为false,并不总是返回true,书中的那句话实践出是不妥当的。</p>
 </blockquote>
-<h1 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h1><blockquote>
-<p>“A函数中包含B函数,并返回B函数,调用B函数可以使用A函数作用域中定义的变量”,B函数就是闭包,示例如下:</p>
+<h1 id="模板字符串的换行功能"><a href="#模板字符串的换行功能" class="headerlink" title="模板字符串的换行功能"></a>模板字符串的换行功能</h1><blockquote>
+<p>学模板字符串时,本来只是以为模板字符串所带来的只不过是一个外部变量引入的功能,这几天发现换行不直接写\n,直接换行编写,就可以实现换行功能</p>
 </blockquote>
-<pre><code>function foo() {
-    let _name = &quot;Gary&quot;;
-    function bar() {
-        console.log(`name: ${_name}`);
+<pre><code>let name = &quot;Gary&quot;,
+    sentence = `Hi, ${name} is my name, 
+    I&apos;m 25 year&apos;s old~`;
+//这里打印
+//Hi, Gary is my name,
+//I&apos;m 25 year&apos;s old~    
+console.log(sentence);
+</code></pre><h1 id="ES6类的存取函数"><a href="#ES6类的存取函数" class="headerlink" title="ES6类的存取函数"></a>ES6类的存取函数</h1><blockquote>
+<p>在ES6中实现了类的表象,虽然还是基于原型链来实现的,但是大致的功能正在向着C、Java类的方式逐渐靠近,比如类的存取函数</p>
+</blockquote>
+<pre><code>class Book {
+    constructor(name = &quot;Gary&quot;) {
+        this._name = name;
     }
-    return bar;
+    //类的取值函数
+    get getBook() {
+        return this._name;
+    }
+    //类的存储函数
+    set setBook(value) {
+        this._name = `Hi, ${value}`;
+    }
 }
-//foo函数执行之后,作用域会被销毁,随之而然的作用域中定义的变量应该会被销毁,并被引擎垃圾回收机制回收,
-//但是在这里神奇的事情发生了,foo函数作用域并没有被销毁之后回收,而是还存在于内存中,并被bar使用,这里就形成了闭包。
-let bar = foo();
-bar();
+//获取到&quot;书&quot;这个类的实例
+let book = new Book(&quot;Yinwk&quot;);
+//调用实例的取值函数
+//这里打印:
+//Yinwk
+console.log(book.getBook);
+//调用实例的存储函数
+book.setBook = &quot;yinwenkai&quot;;
+//再次调用实例的取值函数
+//这里打印:
+//yinwenkai
+console.log(book.getBook);
+</code></pre><h1 id="各类型比较运算符时的转化"><a href="#各类型比较运算符时的转化" class="headerlink" title="各类型比较运算符时的转化"></a>各类型比较运算符时的转化</h1><blockquote>
+<p>if(“package” == true) console.log(“package == true”);是会打印”package == true”呢,还是不会打印呢,很多人的答案肯定是会打印,理由是:因为”package”返回true啊,所以true == true啊。请看这里判断语句中是一个比较表达式,并不是if(“package”),是需要在比较语句两边进行转化的,普通类型进行toNumber,引用类型进行valueOf或者toString之后的原始值比较</p>
+</blockquote>
+<pre><code>if(null == undefeind) {...}    //返回true
+if(undefined == null) {...}    //返回true
+if(&quot;package&quot; == true) {...}    //将string和boolean类型进行number转化,
+                               //&quot;package&quot;转化为NaN,true转化为1,
+                               //NaN == 1吗?答案当然是false,返回false
+
+if(&quot;0&quot; == false){...}          //将string和boolean类型进行number转化,
+                               //&quot;0&quot;转化为0,false转化为0,
+                               //0 == 0吗?答案当然是true,返回true
+
+if(&quot;package&quot; == 1){...}        //将string和number类型进行number转化,
+                               //将&quot;package&quot;转化为NaN,1还是转化为1,
+                               //NaN == 1吗?答案当然是false,返回false
+
+let _obj = {name: &apos;Gary&apos;},
+    _objAno = {name: &apos;Gary&apos;};
+if(_obj == _objAno){...}       //将两个object类型进行valueOf方法或者toString方法的转化,哪个方法转化为原始值,就用转化为的原始值进行比较
+                               //{name: &apos;Gary&apos;}在valueOf方法转化为{name: &apos;Gary&apos;},在toString方法转化为&quot;[object Object]&quot;
+                               //原始值当然是valueOf方法转化的值
+                               //{name: &apos;Gary&apos;} == {name: &apos;Gary&apos;}吗？答案当然是false,返回false
+</code></pre><h1 id="ES6新增Array-prototype-include"><a href="#ES6新增Array-prototype-include" class="headerlink" title="ES6新增Array.prototype.include"></a>ES6新增Array.prototype.include</h1><blockquote>
+<p>ES6数组新增了一个判断是否包含数组元素的方法,用来检索数组中是否存在某个数组元素,基本有两种方式进行检索</p>
+</blockquote>
+<pre><code>let number_arr = [26, 18, 10, 55, 88, 100, 38, 44];
+//数组中的确包含 88 这个元素
+//在这里打印:
+//true
+console.log(number_arr.includes(88));
+//从数组下标为 5 的元素后面去寻找 88 这个元素
+//在这里打印:
+//false
+console.log(number_arr.includes(88, 5));                    
+</code></pre><h1 id="ES6类型数组"><a href="#ES6类型数组" class="headerlink" title="ES6类型数组"></a>ES6类型数组</h1><blockquote>
+<p>在ES6中引入了一些类型数组,他们的属性以及方法和普通的数组并无二致,只是对类型做了一些限制,比如Int8Array(8位二进制补码整数)、Uint8Array(8位无符号整数)、Int16Array(16位二进制补码整数)、Uint16Array(16位无符号整数)、Int32Array(32位二进制补码整数)、Uint32Array(32位无符号整数)等等</p>
+</blockquote>
+<h1 id="对具有着重符的字符串数组进行排序"><a href="#对具有着重符的字符串数组进行排序" class="headerlink" title="对具有着重符的字符串数组进行排序"></a>对具有着重符的字符串数组进行排序</h1><blockquote>
+<p>假如需要对具有着重符号的字符串数组进行排序,需要用localCompare</p>
+</blockquote>
+<pre><code>let string_arr = [&quot;Maève&quot;, &quot;Maeve&quot;];
+string_arr.sort(function sort_arr(a, b){
+    return a.localCompare(b);
+});
+//没有着重符号的数组元素会比有着重符号的数组元素小
+//这里打印:
+//[&quot;Maeve&quot;, &quot;Maève&quot;]
+console.log(string_arr);
+</code></pre><h1 id="apply、call硬绑定小经验"><a href="#apply、call硬绑定小经验" class="headerlink" title="apply、call硬绑定小经验"></a>apply、call硬绑定小经验</h1><pre><code>function Person() {
+    this.name = &quot;Gary&quot;;
+    this.age = 26;
+    console.log(this.name);
+    console.log(this.age);
+}
+let clay = {
+    name: &quot;Clay&quot;,
+    age: 27
+};
+//这里充分证明了new绑定实现构造函数对象的优先级大于call或者apply硬绑定
+//Person函数的this指向并没有指向clay,还保持着初始值
+//而对象clay的属性name和age的值都改变为Person函数this指向的值
+//在这里打印:
+//Gary
+//26
+//Gary
+//26
+Person.call(clay);
+console.log(clay.name);
+console.log(clay.age);
+
+function Person() {
+    console.log(this.name);
+    console.log(this.age);
+}
+let clay = {
+    name: &quot;Clay&quot;,
+    age: 27
+};
+//这里Person函数的this指向clay
+//而对象clay的属性name和age的值还是保持着初始值
+//在这里打印:
+//Clay
+//27
+//Clay
+//27
+Person.call(clay);
+console.log(clay.name);
+console.log(clay.age);
 </code></pre><blockquote>
-<p>还有一种形式是这样</p>
+<p>从上面的例子,我们可以得出this的绑定优先级: new绑定 &gt; apply、call和bind硬绑定 &gt; 普通对象软绑定 &gt; 默认绑定,当this对象上面的属性进行定义声明,再使用apply、call或者bind硬绑定时,new绑定this对象上面的属性的优先级就大于apply、call或者bind硬绑定对象上面的属性的优先级,这时候显示的就是this对象上面的属性值,当this对象上面的属性没有进行定义声明,这时候apply、call或者bind硬绑定对象上面的属性的优先级就是最大的,这时候显示的就是硬绑定对象上面的属性的属性值</p>
 </blockquote>
-<pre><code>function foo() {
-    let _name = &quot;Gary&quot;;
-    function bar() {
-        console.log(`name: ${_name}`);
-    }
-    baz(bar);
-}
-
-//这里在foo函数执行之后,按理来说,foo函数中作用域,以及其中_name变量,都会被销毁,并随后被引擎垃圾回收机制回收。
-//但是神奇的是,这里的作用域并没有被销毁,而其中的_name变量也没有被销毁,当然也没有被引擎垃圾回收机制回收,而还是存储于内存中,并被bar使用,这里就形成了闭包。
-function baz(fn) {
-    fn();
-}
-
-foo();
-</code></pre>]]></content>
+]]></content>
       <categories>
-        <category>闭包</category>
+        <category>Html or Css Or Javascript</category>
       </categories>
       <tags>
-        <tag>闭包</tag>
-        <tag>回调函数</tag>
+        <tag>Javascript</tag>
+        <tag>Html</tag>
+        <tag>Css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2018-05-21 使用Canvas绘制圆角按钮</title>
+    <url>/2018/05/21/%E4%BD%BF%E7%94%A8Canvas%E7%BB%98%E5%88%B6%E5%9C%86%E8%A7%92%E6%8C%89%E9%92%AE/</url>
+    <content><![CDATA[<h1 id="使用Canvas可视化工具绘制圆角按钮"><a href="#使用Canvas可视化工具绘制圆角按钮" class="headerlink" title="使用Canvas可视化工具绘制圆角按钮"></a>使用Canvas可视化工具绘制圆角按钮</h1><blockquote>
+<p>最近刚接触了Canvas可视化工具,下面通过一个使用Canvas绘制的圆角按钮的例子,来实践学到的Canvas经验</p>
+</blockquote>
+<pre><code>//对加载完成事件的封装,在本人写的日志2018-05-06-封装的一些小工具中有详细描述,在这里不再做更多的赘述
+let addEvent = (eventLoad) =&gt; {
+    let load = window.onload;
+    if(typeof load !== &quot;function&quot;) {
+        window.onload = eventLoad;
+    } else {
+        window.onload = function() {
+            load();
+            eventLoad();
+        };
+    }
+};
+
+//Canvas绘制圆角按钮的函数
+let canvasRadiusButton = () =&gt; {
+    //假如DOM-Core中不存在getElementById方法,则返回false,退出函数
+    if(!document.getElementById) return false;
+    //假如DOM-Core中不存在createElement方法,则返回false,退出函数
+    if(!document.createElement) return false;
+    //假如DOM中不存在id名为home的元素节点,则返回false,退出函数
+    if(!document.getElementById(&quot;home&quot;)) return false;
+    //获取id名为home的元素节点
+    let home = document.getElementById(&quot;home&quot;),
+        //创造出canvas元素节点标签
+        canvas = document.createElement(&quot;canvas&quot;);
+    //设置canvas元素节点标签的宽度和高度都为200px    
+    canvas.width = 200;
+    canvas.height = 200;
+    //设置canvas绘制画布的类型为: 2d(平面画布)
+    let ctx = canvas.getContext(&quot;2d&quot;);
+    //绘制画布开始绘制路径
+    ctx.beginPath();
+    //设置绘制画布的起点坐标为: (12, 20)
+    ctx.moveTo(12, 20);
+    //使用贝塞尔曲线去绘制圆角
+    //bezierCurveTo方法有三组坐标参数,前面两组为两个控制点位置,利用这两个控制点可以完美的画出半圆、椭圆甚至是圆角,最后一组为曲线终点的位置
+    ctx.bezierCurveTo(12, 16, 15, 14, 19, 14);
+    //绘制直线至画布的(129, 14)坐标
+    ctx.lineTo(129, 14);
+    //继续使用贝塞尔曲线绘制圆角
+    ctx.bezierCurveTo(133, 14, 136, 16, 136, 20);
+    //绘制直线至画布的(136, 45)坐标
+    ctx.lineTo(136, 45);
+    //继续使用贝塞尔曲线绘制圆角
+    ctx.bezierCurveTo(136, 49, 133, 51, 129, 51);
+    //绘制直线至画布的(19, 51)坐标
+    ctx.lineTo(19, 51);
+    //继续使用贝塞尔曲线绘制圆角
+    ctx.bezierCurveTo(15, 51, 12, 49, 12, 45);
+    //绘制直线至画布的(12, 20)坐标
+    ctx.lineTo(12, 20);
+    //绘制画布结束绘制路径
+    ctx.closePath();
+    //设置画布路径的填充样式为: rgba(255, 255, 0, 0.8)
+    ctx.fillStyle = &quot;rgba(255, 255, 0, 0.8)&quot;;
+    //进行画布填充
+    ctx.fill();
+    //设置画布路径的color样式为: rgba(255, 0, 0, 0.5) 
+    ctx.strokeStyle = &quot;rgba(255, 0, 0, 0.5)&quot;;
+    //画布路径绘制完毕,实现绘制模型
+    ctx.stroke();
+    //将canvas元素节点添加到home元素节点里面,作为home元素节点的子节点    
+    home.appendChild(canvas);
+};
+
+addEvent(canvasRadiusButton);
+</code></pre>]]></content>
+      <categories>
+        <category>Canvas</category>
+      </categories>
+      <tags>
+        <tag>Canvas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2019-02-03 关于该不该让女伴侣在自己房本上加名字的理解</title>
+    <url>/2019/02/03/%E5%85%B3%E4%BA%8E%E8%AF%A5%E4%B8%8D%E8%AF%A5%E8%AE%A9%E4%BC%B4%E4%BE%A3%E5%9C%A8%E8%87%AA%E5%B7%B1%E6%88%BF%E6%9C%AC%E4%B8%8A%E5%8A%A0%E5%90%8D%E5%AD%97%E7%9A%84%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="关于该不该让女伴侣在自己房本上加名字的理解"><a href="#关于该不该让女伴侣在自己房本上加名字的理解" class="headerlink" title="关于该不该让女伴侣在自己房本上加名字的理解"></a>关于该不该让女伴侣在自己房本上加名字的理解</h1><p>关于这个问题,我认为男女双方结婚,就是在开一家公司,经营一家公司的业务,开公司,为了公司可以按照双方一致的目标前行,就要有保障弱势、先付出一方的制度在。很明显,在一段婚姻中,是女方先付出,男方后付出,包括女方的青春、生孩子、照顾家庭。而在现有的社会大体制度下,还远远没有形成男女平等的形势,女性还是处于劣势的,所以在婚姻中,女方也自然而然的是劣势的,所以既然男女双方要共同经营一个家庭、一个共同体,需要首先保障劣势和先付出的一方。所以我认为是该让女伴侣在自己房本上加名字的。</p>
+]]></content>
+      <categories>
+        <category>经济学改变世界观</category>
+      </categories>
+      <tags>
+        <tag>经济学</tag>
+        <tag>世界观</tag>
       </tags>
   </entry>
   <entry>
@@ -1895,289 +2191,6 @@ addEvent(document.getElementById(&quot;open&quot;), &quot;click&quot;, function(
       <tags>
         <tag>封装</tag>
         <tag>小工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2018-05-07 查漏补缺</title>
-    <url>/2018/05/07/%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA/</url>
-    <content><![CDATA[<h1 id="赋值操作的返回"><a href="#赋值操作的返回" class="headerlink" title="赋值操作的返回"></a>赋值操作的返回</h1><blockquote>
-<p>最近在读一本《JavaScript DOM 编程艺术》的书,其中有一句话引起了我的好奇,假如if判断语句中存在赋值语句,则赋值语句的返回总是true。我对此结果进行了检验</p>
-</blockquote>
-<pre><code>var a;
-//这种情况下,if判断语句中返回&quot;good&quot;,为true
-//打印&quot;good result&quot;
-if(a = &quot;good&quot;) {
-    console.log(&quot;good result&quot;);
-}
-
-//这种情况下,if判断语句中返回false,为false
-//什么都不打印
-if(a = false) {
-    console.log(&quot;good result&quot;);
-}
-
-//这种情况下,if判断语句中返回undefined,为false
-//什么都不打印
-if(a = undefined) {
-    console.log(&quot;good result&quot;);
-}
-
-//这种情况下,if判断语句中返回0,为false
-//什么都不打印
-if(a = 0) {
-    console.log(&quot;good result&quot;);
-}
-
-//这种情况下,if判断语句中返回null,为false
-//什么都不打印
-if(a = null) {
-    console.log(&quot;good result&quot;);
-}
-
-//这种情况下,if判断语句中返回{},为true
-//打印&quot;good result&quot;
-if(a = {}) {
-    console.log(&quot;good result&quot;);
-}
-
-//这种情况下,if判断语句中返回[],为true
-//打印&quot;good result&quot;
-if(a = []) {
-    console.log(&quot;good result&quot;);
-}
-</code></pre><blockquote>
-<p>实践是检验真理的唯一标准,由此检验到赋值操作的返回就是其本身,本身类型转换后为true,则为true;转换后为false,则为false,并不总是返回true,书中的那句话实践出是不妥当的。</p>
-</blockquote>
-<h1 id="模板字符串的换行功能"><a href="#模板字符串的换行功能" class="headerlink" title="模板字符串的换行功能"></a>模板字符串的换行功能</h1><blockquote>
-<p>学模板字符串时,本来只是以为模板字符串所带来的只不过是一个外部变量引入的功能,这几天发现换行不直接写\n,直接换行编写,就可以实现换行功能</p>
-</blockquote>
-<pre><code>let name = &quot;Gary&quot;,
-    sentence = `Hi, ${name} is my name, 
-    I&apos;m 25 year&apos;s old~`;
-//这里打印
-//Hi, Gary is my name,
-//I&apos;m 25 year&apos;s old~    
-console.log(sentence);
-</code></pre><h1 id="ES6类的存取函数"><a href="#ES6类的存取函数" class="headerlink" title="ES6类的存取函数"></a>ES6类的存取函数</h1><blockquote>
-<p>在ES6中实现了类的表象,虽然还是基于原型链来实现的,但是大致的功能正在向着C、Java类的方式逐渐靠近,比如类的存取函数</p>
-</blockquote>
-<pre><code>class Book {
-    constructor(name = &quot;Gary&quot;) {
-        this._name = name;
-    }
-    //类的取值函数
-    get getBook() {
-        return this._name;
-    }
-    //类的存储函数
-    set setBook(value) {
-        this._name = `Hi, ${value}`;
-    }
-}
-//获取到&quot;书&quot;这个类的实例
-let book = new Book(&quot;Yinwk&quot;);
-//调用实例的取值函数
-//这里打印:
-//Yinwk
-console.log(book.getBook);
-//调用实例的存储函数
-book.setBook = &quot;yinwenkai&quot;;
-//再次调用实例的取值函数
-//这里打印:
-//yinwenkai
-console.log(book.getBook);
-</code></pre><h1 id="各类型比较运算符时的转化"><a href="#各类型比较运算符时的转化" class="headerlink" title="各类型比较运算符时的转化"></a>各类型比较运算符时的转化</h1><blockquote>
-<p>if(“package” == true) console.log(“package == true”);是会打印”package == true”呢,还是不会打印呢,很多人的答案肯定是会打印,理由是:因为”package”返回true啊,所以true == true啊。请看这里判断语句中是一个比较表达式,并不是if(“package”),是需要在比较语句两边进行转化的,普通类型进行toNumber,引用类型进行valueOf或者toString之后的原始值比较</p>
-</blockquote>
-<pre><code>if(null == undefeind) {...}    //返回true
-if(undefined == null) {...}    //返回true
-if(&quot;package&quot; == true) {...}    //将string和boolean类型进行number转化,
-                               //&quot;package&quot;转化为NaN,true转化为1,
-                               //NaN == 1吗?答案当然是false,返回false
-
-if(&quot;0&quot; == false){...}          //将string和boolean类型进行number转化,
-                               //&quot;0&quot;转化为0,false转化为0,
-                               //0 == 0吗?答案当然是true,返回true
-
-if(&quot;package&quot; == 1){...}        //将string和number类型进行number转化,
-                               //将&quot;package&quot;转化为NaN,1还是转化为1,
-                               //NaN == 1吗?答案当然是false,返回false
-
-let _obj = {name: &apos;Gary&apos;},
-    _objAno = {name: &apos;Gary&apos;};
-if(_obj == _objAno){...}       //将两个object类型进行valueOf方法或者toString方法的转化,哪个方法转化为原始值,就用转化为的原始值进行比较
-                               //{name: &apos;Gary&apos;}在valueOf方法转化为{name: &apos;Gary&apos;},在toString方法转化为&quot;[object Object]&quot;
-                               //原始值当然是valueOf方法转化的值
-                               //{name: &apos;Gary&apos;} == {name: &apos;Gary&apos;}吗？答案当然是false,返回false
-</code></pre><h1 id="ES6新增Array-prototype-include"><a href="#ES6新增Array-prototype-include" class="headerlink" title="ES6新增Array.prototype.include"></a>ES6新增Array.prototype.include</h1><blockquote>
-<p>ES6数组新增了一个判断是否包含数组元素的方法,用来检索数组中是否存在某个数组元素,基本有两种方式进行检索</p>
-</blockquote>
-<pre><code>let number_arr = [26, 18, 10, 55, 88, 100, 38, 44];
-//数组中的确包含 88 这个元素
-//在这里打印:
-//true
-console.log(number_arr.includes(88));
-//从数组下标为 5 的元素后面去寻找 88 这个元素
-//在这里打印:
-//false
-console.log(number_arr.includes(88, 5));                    
-</code></pre><h1 id="ES6类型数组"><a href="#ES6类型数组" class="headerlink" title="ES6类型数组"></a>ES6类型数组</h1><blockquote>
-<p>在ES6中引入了一些类型数组,他们的属性以及方法和普通的数组并无二致,只是对类型做了一些限制,比如Int8Array(8位二进制补码整数)、Uint8Array(8位无符号整数)、Int16Array(16位二进制补码整数)、Uint16Array(16位无符号整数)、Int32Array(32位二进制补码整数)、Uint32Array(32位无符号整数)等等</p>
-</blockquote>
-<h1 id="对具有着重符的字符串数组进行排序"><a href="#对具有着重符的字符串数组进行排序" class="headerlink" title="对具有着重符的字符串数组进行排序"></a>对具有着重符的字符串数组进行排序</h1><blockquote>
-<p>假如需要对具有着重符号的字符串数组进行排序,需要用localCompare</p>
-</blockquote>
-<pre><code>let string_arr = [&quot;Maève&quot;, &quot;Maeve&quot;];
-string_arr.sort(function sort_arr(a, b){
-    return a.localCompare(b);
-});
-//没有着重符号的数组元素会比有着重符号的数组元素小
-//这里打印:
-//[&quot;Maeve&quot;, &quot;Maève&quot;]
-console.log(string_arr);
-</code></pre><h1 id="apply、call硬绑定小经验"><a href="#apply、call硬绑定小经验" class="headerlink" title="apply、call硬绑定小经验"></a>apply、call硬绑定小经验</h1><pre><code>function Person() {
-    this.name = &quot;Gary&quot;;
-    this.age = 26;
-    console.log(this.name);
-    console.log(this.age);
-}
-let clay = {
-    name: &quot;Clay&quot;,
-    age: 27
-};
-//这里充分证明了new绑定实现构造函数对象的优先级大于call或者apply硬绑定
-//Person函数的this指向并没有指向clay,还保持着初始值
-//而对象clay的属性name和age的值都改变为Person函数this指向的值
-//在这里打印:
-//Gary
-//26
-//Gary
-//26
-Person.call(clay);
-console.log(clay.name);
-console.log(clay.age);
-
-function Person() {
-    console.log(this.name);
-    console.log(this.age);
-}
-let clay = {
-    name: &quot;Clay&quot;,
-    age: 27
-};
-//这里Person函数的this指向clay
-//而对象clay的属性name和age的值还是保持着初始值
-//在这里打印:
-//Clay
-//27
-//Clay
-//27
-Person.call(clay);
-console.log(clay.name);
-console.log(clay.age);
-</code></pre><blockquote>
-<p>从上面的例子,我们可以得出this的绑定优先级: new绑定 &gt; apply、call和bind硬绑定 &gt; 普通对象软绑定 &gt; 默认绑定,当this对象上面的属性进行定义声明,再使用apply、call或者bind硬绑定时,new绑定this对象上面的属性的优先级就大于apply、call或者bind硬绑定对象上面的属性的优先级,这时候显示的就是this对象上面的属性值,当this对象上面的属性没有进行定义声明,这时候apply、call或者bind硬绑定对象上面的属性的优先级就是最大的,这时候显示的就是硬绑定对象上面的属性的属性值</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Html or Css Or Javascript</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-        <tag>Html</tag>
-        <tag>Css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2018-05-07 浅谈使用jQuery和react的区别</title>
-    <url>/2018/05/07/%E6%B5%85%E8%B0%88%E4%BD%BF%E7%94%A8jQuery%E5%92%8Creact%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>react</category>
-      </categories>
-      <tags>
-        <tag>react</tag>
-        <tag>jQuery</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2018-05-21 使用Canvas绘制圆角按钮</title>
-    <url>/2018/05/21/%E4%BD%BF%E7%94%A8Canvas%E7%BB%98%E5%88%B6%E5%9C%86%E8%A7%92%E6%8C%89%E9%92%AE/</url>
-    <content><![CDATA[<h1 id="使用Canvas可视化工具绘制圆角按钮"><a href="#使用Canvas可视化工具绘制圆角按钮" class="headerlink" title="使用Canvas可视化工具绘制圆角按钮"></a>使用Canvas可视化工具绘制圆角按钮</h1><blockquote>
-<p>最近刚接触了Canvas可视化工具,下面通过一个使用Canvas绘制的圆角按钮的例子,来实践学到的Canvas经验</p>
-</blockquote>
-<pre><code>//对加载完成事件的封装,在本人写的日志2018-05-06-封装的一些小工具中有详细描述,在这里不再做更多的赘述
-let addEvent = (eventLoad) =&gt; {
-    let load = window.onload;
-    if(typeof load !== &quot;function&quot;) {
-        window.onload = eventLoad;
-    } else {
-        window.onload = function() {
-            load();
-            eventLoad();
-        };
-    }
-};
-
-//Canvas绘制圆角按钮的函数
-let canvasRadiusButton = () =&gt; {
-    //假如DOM-Core中不存在getElementById方法,则返回false,退出函数
-    if(!document.getElementById) return false;
-    //假如DOM-Core中不存在createElement方法,则返回false,退出函数
-    if(!document.createElement) return false;
-    //假如DOM中不存在id名为home的元素节点,则返回false,退出函数
-    if(!document.getElementById(&quot;home&quot;)) return false;
-    //获取id名为home的元素节点
-    let home = document.getElementById(&quot;home&quot;),
-        //创造出canvas元素节点标签
-        canvas = document.createElement(&quot;canvas&quot;);
-    //设置canvas元素节点标签的宽度和高度都为200px    
-    canvas.width = 200;
-    canvas.height = 200;
-    //设置canvas绘制画布的类型为: 2d(平面画布)
-    let ctx = canvas.getContext(&quot;2d&quot;);
-    //绘制画布开始绘制路径
-    ctx.beginPath();
-    //设置绘制画布的起点坐标为: (12, 20)
-    ctx.moveTo(12, 20);
-    //使用贝塞尔曲线去绘制圆角
-    //bezierCurveTo方法有三组坐标参数,前面两组为两个控制点位置,利用这两个控制点可以完美的画出半圆、椭圆甚至是圆角,最后一组为曲线终点的位置
-    ctx.bezierCurveTo(12, 16, 15, 14, 19, 14);
-    //绘制直线至画布的(129, 14)坐标
-    ctx.lineTo(129, 14);
-    //继续使用贝塞尔曲线绘制圆角
-    ctx.bezierCurveTo(133, 14, 136, 16, 136, 20);
-    //绘制直线至画布的(136, 45)坐标
-    ctx.lineTo(136, 45);
-    //继续使用贝塞尔曲线绘制圆角
-    ctx.bezierCurveTo(136, 49, 133, 51, 129, 51);
-    //绘制直线至画布的(19, 51)坐标
-    ctx.lineTo(19, 51);
-    //继续使用贝塞尔曲线绘制圆角
-    ctx.bezierCurveTo(15, 51, 12, 49, 12, 45);
-    //绘制直线至画布的(12, 20)坐标
-    ctx.lineTo(12, 20);
-    //绘制画布结束绘制路径
-    ctx.closePath();
-    //设置画布路径的填充样式为: rgba(255, 255, 0, 0.8)
-    ctx.fillStyle = &quot;rgba(255, 255, 0, 0.8)&quot;;
-    //进行画布填充
-    ctx.fill();
-    //设置画布路径的color样式为: rgba(255, 0, 0, 0.5) 
-    ctx.strokeStyle = &quot;rgba(255, 0, 0, 0.5)&quot;;
-    //画布路径绘制完毕,实现绘制模型
-    ctx.stroke();
-    //将canvas元素节点添加到home元素节点里面,作为home元素节点的子节点    
-    home.appendChild(canvas);
-};
-
-addEvent(canvasRadiusButton);
-</code></pre>]]></content>
-      <categories>
-        <category>Canvas</category>
-      </categories>
-      <tags>
-        <tag>Canvas</tag>
       </tags>
   </entry>
   <entry>
@@ -3180,70 +3193,12 @@ reverseEach([10, 88, 66, 99, 101], function (index, item) {
         <category>世界观</category>
       </categories>
       <tags>
+        <tag>世界观</tag>
         <tag>历史</tag>
         <tag>军事</tag>
         <tag>经济</tag>
         <tag>文学</tag>
         <tag>人生</tag>
-        <tag>世界观</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2019-02-03 关于该不该让女伴侣在自己房本上加名字的理解</title>
-    <url>/2019/02/03/%E5%85%B3%E4%BA%8E%E8%AF%A5%E4%B8%8D%E8%AF%A5%E8%AE%A9%E4%BC%B4%E4%BE%A3%E5%9C%A8%E8%87%AA%E5%B7%B1%E6%88%BF%E6%9C%AC%E4%B8%8A%E5%8A%A0%E5%90%8D%E5%AD%97%E7%9A%84%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="关于该不该让女伴侣在自己房本上加名字的理解"><a href="#关于该不该让女伴侣在自己房本上加名字的理解" class="headerlink" title="关于该不该让女伴侣在自己房本上加名字的理解"></a>关于该不该让女伴侣在自己房本上加名字的理解</h1><p>关于这个问题,我认为男女双方结婚,就是在开一家公司,经营一家公司的业务,开公司,为了公司可以按照双方一致的目标前行,就要有保障弱势、先付出一方的制度在。很明显,在一段婚姻中,是女方先付出,男方后付出,包括女方的青春、生孩子、照顾家庭。而在现有的社会大体制度下,还远远没有形成男女平等的形势,女性还是处于劣势的,所以在婚姻中,女方也自然而然的是劣势的,所以既然男女双方要共同经营一个家庭、一个共同体,需要首先保障劣势和先付出的一方。所以我认为是该让女伴侣在自己房本上加名字的。</p>
-]]></content>
-      <categories>
-        <category>经济学改变世界观</category>
-      </categories>
-      <tags>
-        <tag>世界观</tag>
-        <tag>经济学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>学习图解HTTP一书笔记</title>
-    <url>/2019/02/03/%E5%AD%A6%E4%B9%A0%E5%9B%BE%E8%A7%A3HTTP%E4%B8%80%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>HTTP协议: 超文本传输协议<br>URI:统一资源标识符<br>URL:统一资源定位符<br>从客户端应用层传输到服务器段应用层的过程:</p>
-<pre><code>客户端应用层发出HTTP请求,将数据包加上应用层的首部发送给传输层(TCP),
-TCP协议将数据包进行分割,分割成多个小数据包,并把小数据包进行标号(用在服务器端传输层以排序整合),之后将这些进行标号的小数据包加上传送层的首部发送给网络层(IP),
-IP根据地址,进行查询并加上网络层的首部发送至服务器端的网络层(IP)。
-接着服务器端的网络层对客户端网络层首部进行去掉的工作,并发送给传输层,
-传输层对客户端传输层的首部进行去掉,并且将标号的小数据包根据标号进行排序整合,形成大数据包,发送至服务器的应用层,
-服务器的应用层将大数据包的客户端应用层的首部进行去掉的工作,这样则看到了原数据。    
-</code></pre>]]></content>
-      <categories>
-        <category>图解HTTP</category>
-      </categories>
-      <tags>
-        <tag>HTTP</tag>
-        <tag>图解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>比木白-Git</title>
-    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-Git/</url>
-    <content><![CDATA[<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h2 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  昨天在配置我们这个博客项目系统的时候,配置主题时,发现主题大多数都是从外部的github项目里面clone到本地的themes目录下的,导致我上传到远程github时,没办法做到将外部的github项目一起推上去,而此系统固定的主题又想一键生成,不需要团队成员自己麻烦的手动配置。<br>  于是经过和同事的讨论（这里感谢我的同事——鹏辉[小灰灰]）,通过git子模块的形式,做到了一键hexo主题生成的方案。</p>
-<blockquote>
-<p>详情</p>
-</blockquote>
-<p>  首先将外部github hexo主题项目fork到自己的账号下，然后拉取自己账号下的项目，配置好主题的一些属性以及方法，push到远程，这样一个配置好的hexo主题项目就完成了。</p>
-<p>  接着使用git submodule add @git/… themes/next将自己账号下刚刚fork的项目放到hexo主题目录下，这时候就会生成一个.gitmodules文件与子模块建立关系。</p>
-<p>  最后编写bash文件，形成一个命令，这里我在package.json里面写一句命令语，也就是yarn run themes 或者 npm run themes，下面是bash文件的详情:</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! bin/bash</span></span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>拉取并生成主题</p>
-</blockquote>
-<p>  完成之后，开发者就可以直接从远程git clone @git/…拉取项目，之后输入命令yarn run themes 或者 npm run themes，就可一键生成固定的主题啦!</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -3343,6 +3298,129 @@ IP根据地址,进行查询并加上网络层的首部发送至服务器端的�
         <tag>Git</tag>
         <tag>Nginx</tag>
         <tag>moment</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>学习图解HTTP一书笔记</title>
+    <url>/2019/02/03/%E5%AD%A6%E4%B9%A0%E5%9B%BE%E8%A7%A3HTTP%E4%B8%80%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>HTTP协议: 超文本传输协议<br>URI:统一资源标识符<br>URL:统一资源定位符<br>从客户端应用层传输到服务器段应用层的过程:</p>
+<pre><code>客户端应用层发出HTTP请求,将数据包加上应用层的首部发送给传输层(TCP),
+TCP协议将数据包进行分割,分割成多个小数据包,并把小数据包进行标号(用在服务器端传输层以排序整合),之后将这些进行标号的小数据包加上传送层的首部发送给网络层(IP),
+IP根据地址,进行查询并加上网络层的首部发送至服务器端的网络层(IP)。
+接着服务器端的网络层对客户端网络层首部进行去掉的工作,并发送给传输层,
+传输层对客户端传输层的首部进行去掉,并且将标号的小数据包根据标号进行排序整合,形成大数据包,发送至服务器的应用层,
+服务器的应用层将大数据包的客户端应用层的首部进行去掉的工作,这样则看到了原数据。    
+</code></pre>]]></content>
+      <categories>
+        <category>图解HTTP</category>
+      </categories>
+      <tags>
+        <tag>HTTP</tag>
+        <tag>图解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比木白-React</title>
+    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-React/</url>
+    <content><![CDATA[<h1 id="React"><a href="#React" class="headerlink" title="React"></a>React</h1><h2 id="List-List-Item"><a href="#List-List-Item" class="headerlink" title="List List.Item"></a>List List.Item</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  最近在搞CBA m站适配时,尝试写了一把JS 基础组件,首当其冲的就是List List.Item列表组件,在我们m站适配中随处可见,其关键点就在于,怎么将某些在List列表组件中的属性,放到Item列表项组件里面,至此就想到了使用HOC高阶组件。</p>
+<blockquote>
+<p>详情</p>
+</blockquote>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//List组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> cns <span class="keyword">from</span> <span class="string">'classnames'</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">'./item'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        className: PropTypes.string,</span><br><span class="line">        onClick: PropTypes.func</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Item = Item;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Item高阶组件</span></span><br><span class="line">    itemHOC = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;children, onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> <span class="function">(<span class="params">children &amp;&amp; children.length &gt; <span class="number">0</span></span>) ? <span class="params">React</span>.<span class="params">Children</span>.<span class="params">map</span>(<span class="params">children, (child = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123;<span class="attr">type</span>: Child, props = &#123;&#125;&#125; = child;</span><br><span class="line">            <span class="keyword">if</span>(Child !== Item) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'List component must be an Item component inside~'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> &lt;Child &#123;...props&#125; onClick=&#123;onClick&#125;/&gt;;</span><br><span class="line">        &#125;) : <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;className = <span class="string">''</span>&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123;itemHOC = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;section className=&#123;cns(</span><br><span class="line">                <span class="string">'list'</span>,</span><br><span class="line">                className</span><br><span class="line">            )&#125;&gt;</span><br><span class="line">                &#123;itemHOC()&#125;</span><br><span class="line">            &lt;<span class="regexp">/section&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default List;</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//Item组件  </span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> cns <span class="keyword">from</span> <span class="string">'classnames'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.less'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        className: PropTypes.string,</span><br><span class="line">        onClick: PropTypes.func,</span><br><span class="line">        value: PropTypes.any</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;</span><br><span class="line">            className = <span class="string">''</span>, </span><br><span class="line">            value,</span><br><span class="line">            onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;, </span><br><span class="line">            children</span><br><span class="line">        &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div className=&#123;cns(<span class="string">'list-item'</span>, className)&#125;</span><br><span class="line">                 onClick=&#123;(e) =&gt; onClick(value, e)&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;children&#125;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )   </span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Item;</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Item组件样式*/</span></span><br><span class="line"><span class="selector-class">.list-item</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">14px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  这样就完成了List列表组件 List.Item列表项的基础组件的基础搭建,使用起来也是很简单的…</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">'./components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Item = List.Item;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">            </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> list = <span class="built_in">Array</span>.from(<span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123;<span class="attr">length</span>: <span class="number">10</span>&#125;), (item, index) =&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;[index]: (index + <span class="number">1</span>)&#125;;        </span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">            &lt;List className=<span class="string">'demo-list'</span></span><br><span class="line">                  onClick=&#123;(item, e) =&gt; &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(item);</span><br><span class="line">                  &#125;&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;</span><br><span class="line">                    list &amp;&amp; list.length &gt; <span class="number">0</span> &amp;&amp; list.map(<span class="function">(<span class="params">listItem, index</span>) =&gt;</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> &lt;Item className='demo-list-item'</span><br><span class="line">                                     value=&#123;listItem&#125;</span><br><span class="line">                                     key=&#123;index&#125;</span><br><span class="line">                        &gt;</span><br><span class="line">                            &#123;JSON.stringify(listItem)&#125;</span><br><span class="line">                        &lt;/Item&gt;</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &lt;<span class="regexp">/List&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="react-router路由多层嵌套"><a href="#react-router路由多层嵌套" class="headerlink" title="react-router路由多层嵌套"></a>react-router路由多层嵌套</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  最近在搞拓海官网的后台管理时,使用了react-router 4的路由多层嵌套配合继承、装饰器搞了一套路由页面,自我感觉还是不错的,所以我分享这一套嵌套路由配置。</p>
+<p>  PS: 此页面只适用于嵌套路由,嵌套路由指的是在某一父路由下的子路由只能在此父路由下使用,其余页面不可使用。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>  首先当然是安装依赖,配置打包、编译、缓存、压缩、分割chunks入口、404重定向、开发环境热更新、生产环境抽取、本地Node服务器和多核处理等等这些,这些属于搭建前端项目生态部分,我在之前的博客当中分享过的’多种方式搭建前端项目’中提到过了,下面我们就直接上干货好了。</p>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//入口</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;render&#125; <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> Layouts <span class="keyword">from</span> <span class="string">'./layouts'</span>;</span><br><span class="line"></span><br><span class="line">render(&lt;Layouts /&gt;, <span class="built_in">document</span>.querySelector(<span class="string">'#root'</span>));</span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//基类,用于嵌套路由的继承,以及各级路由承接使用</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Route&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> DocumentTitle <span class="keyword">from</span> <span class="string">'react-document-title'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseLayout</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    state = &#123;</span><br><span class="line">        <span class="comment">//扁平化处理之后的路由</span></span><br><span class="line">        routersTransform: []</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        对路由进行扁平化处理</span></span><br><span class="line"><span class="comment">    */</span>    </span><br><span class="line">    transformRouters = <span class="function">(<span class="params">routers = [], path = <span class="string">'/'</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;transformRouters = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">let</span> &#123;routersTransform = []&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        routers.forEach(<span class="function">(<span class="params">routerItem, routerIndex</span>) =&gt;</span> &#123;</span><br><span class="line">            routerItem.path = <span class="string">`<span class="subst">$&#123;path&#125;</span>/<span class="subst">$&#123;routerItem.path&#125;</span>`</span>.replace(<span class="regexp">/[\/]+/g</span>, <span class="string">'/'</span>);</span><br><span class="line">            routersTransform = [...routersTransform, routerItem];</span><br><span class="line">            routerItem.children &amp;&amp; routerItem.children.length &gt; <span class="number">0</span> &amp;&amp; transformRouters(routerItem.children, routerItem.path);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> routersTransform;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        查找当前页面路径,并返回地址</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    searchMatch = <span class="function">(<span class="params">routers = [], pathname = <span class="string">'/'</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;searchMatch = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> routers) &#123;</span><br><span class="line">            <span class="keyword">if</span>(item.path.includes(pathname)) &#123;</span><br><span class="line">                <span class="keyword">return</span> item.title;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> item.children &amp;&amp; item.children.length &gt; <span class="number">0</span> &amp;&amp; searchMatch(item.children, pathname);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        获取页面的标题</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    getPageTitle = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123;<span class="attr">history</span>: &#123;<span class="attr">location</span>: &#123;pathname = <span class="string">''</span>&#125;&#125;&#125; = props;</span><br><span class="line">        <span class="keyword">const</span> &#123;searchMatch = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> searchMatch(routers, pathname);</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="comment">//这里用于不嵌套路由时使用</span></span><br><span class="line">        <span class="comment">// _routers = [];</span></span><br><span class="line">        <span class="comment">// const &#123;transformRouters = () =&gt; &#123;&#125;&#125; = this;</span></span><br><span class="line">        <span class="comment">// _routers = transformRouters([...routers]);</span></span><br><span class="line">        <span class="comment">// return _routers &amp;&amp; _routers.length &gt; 0 &amp;&amp; _routers.map(routerItem =&gt; &#123;</span></span><br><span class="line">        <span class="keyword">return</span> routers &amp;&amp; routers.length &gt; <span class="number">0</span> &amp;&amp; routers.map(<span class="function"><span class="params">routerItem</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &lt;Route </span><br><span class="line">                key=&#123;routerItem.key&#125;</span><br><span class="line">                path=&#123;routerItem.path&#125;</span><br><span class="line">                exact=&#123;routerItem.exact&#125;</span><br><span class="line">                component=&#123;(props)=&gt; &#123;</span><br><span class="line">                    const Component = routerItem.component;</span><br><span class="line">                    return &lt;DocumentTitle&gt;</span><br><span class="line">                        &lt;Component &#123;...props&#125; routers=&#123;routerItem.children&#125; /&gt;</span><br><span class="line">                    &lt;/DocumentTitle&gt;</span><br><span class="line">                &#125;&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> BaseLayout;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'../pages/home'</span>;</span><br><span class="line"><span class="keyword">import</span> Master <span class="keyword">from</span> <span class="string">'../pages/master'</span>;</span><br><span class="line"><span class="comment">//路由静态配置</span></span><br><span class="line"><span class="keyword">const</span> routers = [&#123;</span><br><span class="line">    key: <span class="string">'home'</span>,</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    title: <span class="string">'拓海官网 - 首页'</span>,</span><br><span class="line">    name: <span class="string">'首页'</span>,</span><br><span class="line">    component: Home</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    key: <span class="string">'master'</span>,</span><br><span class="line">    path: <span class="string">'/master'</span>,</span><br><span class="line">    title: <span class="string">'拓海官网 - 主子'</span>,</span><br><span class="line">    name: <span class="string">'主子'</span>,</span><br><span class="line">    component: Master</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    routers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Layout&#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;BrowserRouter&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> BaseLayout <span class="keyword">from</span> <span class="string">'./base'</span>;</span><br><span class="line"><span class="keyword">import</span> Headers <span class="keyword">from</span> <span class="string">'./header'</span>;</span><br><span class="line"><span class="keyword">import</span> routers <span class="keyword">from</span> <span class="string">'../routers'</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> utils <span class="keyword">from</span> <span class="string">'../utils'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;Header, Content&#125; = Layout;</span><br><span class="line"></span><br><span class="line"><span class="comment">//入口处,使用class继承方式</span></span><br><span class="line"><span class="comment">//装饰器导入路由配置</span></span><br><span class="line">@utils.packageApi.decorators.getRouters(&#123;routers&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Layouts</span> <span class="keyword">extends</span> <span class="title">BaseLayout</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">let</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="comment">//这里用于不嵌套路由时使用</span></span><br><span class="line">        <span class="comment">// _routers = [];</span></span><br><span class="line">        <span class="comment">// const &#123;transformRouters = () =&gt; &#123;&#125;&#125; = this;</span></span><br><span class="line">        <span class="comment">// _routers = transformRouters([...routers]);</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Layout&gt;</span><br><span class="line">                &lt;Header&gt;</span><br><span class="line">                    &#123;<span class="comment">/*&lt;Headers routers=&#123;_routers&#125; /&gt;*/</span>&#125;</span><br><span class="line">                    &lt;Headers routers=&#123;routers&#125; /&gt;</span><br><span class="line">                &lt;<span class="regexp">/Header&gt;</span></span><br><span class="line"><span class="regexp">                &lt;Content&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;BrowserRouter&gt;</span></span><br><span class="line"><span class="regexp">                        &#123;super.render()&#125;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>BrowserRouter&gt;</span><br><span class="line">                &lt;<span class="regexp">/Content&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Layout&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Layouts;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="comment">//decorators 装饰器</span></span><br><span class="line"><span class="comment">//高阶函数 属性代理</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRouters</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">WrapperComponent</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">            <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">            state = &#123;</span><br><span class="line">                innerParams: &#123;&#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            </span><br><span class="line">            componentDidMount() &#123;</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                    innerParams: &#123;...params&#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;   </span><br><span class="line">                </span><br><span class="line">            render() &#123;</span><br><span class="line">                <span class="keyword">const</span> &#123;innerParams&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">                <span class="keyword">return</span> (</span><br><span class="line">                    &lt;WrapperComponent &#123;...innerParams&#125; /&gt;</span><br><span class="line">                );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    getRouters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Menu&#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;NavLink&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;Item&#125; = Menu;</span><br><span class="line"></span><br><span class="line"><span class="comment">//头部路由导航</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Headers</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired</span><br><span class="line">    &#125;;</span><br><span class="line">        </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Menu&gt;</span><br><span class="line">                &#123;routers &amp;&amp; routers.length &gt; <span class="number">0</span> &amp;&amp; routers.map(<span class="function">(<span class="params">routerItem</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> (&lt;Item key=&#123;routerItem.key&#125;&gt;</span><br><span class="line">                        &lt;NavLink to=&#123;routerItem.path&#125;&gt;</span><br><span class="line">                            &#123;routerItem.name&#125;</span><br><span class="line">                        &lt;/NavLink&gt;</span><br><span class="line">                    &lt;/Item&gt;)</span><br><span class="line">                &#125;)&#125;</span><br><span class="line">            &lt;<span class="regexp">/Menu&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Headers;</span></span><br></pre></td></tr></table></figure>
+<p>  自此react-router路由多层嵌套配置完成,如果想要只在某一路由下使用子路由,重复第2、4、6步即可。</p>
+<p>  PS:附上我的目录结构图</p>
+<p>  <img src="/images/routersConfig.png" alt></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比木白-Webpack</title>
+    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-Webpack/</url>
+    <content><![CDATA[<h1 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h1><h2 id="ContextReplacementPlugin"><a href="#ContextReplacementPlugin" class="headerlink" title="ContextReplacementPlugin"></a>ContextReplacementPlugin</h2><blockquote>
+<p>详情</p>
+</blockquote>
+<p>  taro小程序升级至2.0版本之后,由于transform-runtime按需打包的插件加入,导致taro小程序的包超过2M,通过webpack-bundle-analyzer查看每个模块体积的大小插件,可以看到moment.js以及其语言包占了差不多600kb-700kb的体积,所以需要将语言包剔除不需要的,只保留zh-CN中文包,这里需要使用到ContextReplacementPlugin,将不需要的依赖包不打入包内,进行剔除掉,做到按需打包。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//如果是webpack,则是要在webpack.config.js中的plugin里面配置</span></span><br><span class="line"><span class="keyword">import</span> webpack <span class="keyword">from</span> <span class="string">"webpack"</span>;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.ContextReplacementPlugin(<span class="regexp">/moment\/\\locale$/</span>, /zh-cn/);</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果是taro,这种使用react对接多端的框架,则是使用webpackChain</span></span><br><span class="line"><span class="comment">//2.0.0配置,config目录下的index.js</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    mini: &#123;</span><br><span class="line">        webpackChain(chain, webpack) &#123;</span><br><span class="line">            chain.plugin(<span class="string">'contextReplacement'</span>).use(<span class="keyword">new</span> webpack.ContextReplacementPlugin(<span class="regexp">/moment[\/\\]locale/</span>, /zh-cn/), []);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="UglifyJsPlugin"><a href="#UglifyJsPlugin" class="headerlink" title="UglifyJsPlugin"></a>UglifyJsPlugin</h2><blockquote>
+<p>详情</p>
+</blockquote>
+<p>  UglifyJsPlugin用于压缩、缓存和删除一些无用、注释的代码的作用。之前是放于webpack内部plugins插件数组里面的,webpack 4之后是将UglifyJsPlugin作为一个单独的插件抽取了出来,并把位置从plugins属性数组放入至optimization优化属性里面。</p>
+<p>  最近在CBA移动端m站适配,还出现了IOS 10.13.1系统的苹果手机,打开缓存、压缩以及删除注释后的打包代码,页面打不开的情况,发现需要配置UglifyWebpackPlugin里面的uglifyOptions,添加mangle属性,并将safari10的内部属性设置为true。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>  普通配置如下(也是我这边使用的):</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> UglifyJsPlugin = <span class="built_in">require</span>(<span class="string">'uglifyjs-webpack-plugin'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    optimization: &#123;</span><br><span class="line">        minimizer: [</span><br><span class="line">            <span class="keyword">new</span> UglifyJsPlugin(&#123;</span><br><span class="line">                <span class="comment">//是否启用缓存文件机制</span></span><br><span class="line">                cache: <span class="literal">true</span>,</span><br><span class="line">                <span class="comment">//是否启用多核进行压缩文件</span></span><br><span class="line">                parallel: <span class="literal">true</span>,</span><br><span class="line">                uglifyOptions: &#123;</span><br><span class="line">                    output: &#123;</span><br><span class="line">                        <span class="comment">//这里将除了@license之外的注释全都剔除掉</span></span><br><span class="line">                        comments: <span class="regexp">/@license/i</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    mangle: &#123;</span><br><span class="line">                        safari10: <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,   </span><br><span class="line">                <span class="comment">//是否剔除注释</span></span><br><span class="line">                extractComments: <span class="literal">true</span></span><br><span class="line">            &#125;)</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意</p>
+</blockquote>
+<p>  uglifyjs-webpack-plugin只支持压缩、缓存以及剔除注释ES5语法的项目文件,如果想要这些功能放到ES6语法上面,需要下载其他的第三方外部依赖包 —— terser-webpack-plugin</p>
+<h2 id="TerserWebpackPlugin"><a href="#TerserWebpackPlugin" class="headerlink" title="TerserWebpackPlugin"></a>TerserWebpackPlugin</h2><blockquote>
+<p>详情</p>
+</blockquote>
+<p>  与uglifyjs-webpack-plugin的配置、使用方式以及产生的作用基本一样,不一样的点在于,uglifyjs-webpack-plugin不能对ES6语法的项目文件进行压缩、缓存文件以及剔除注释,而terser-webpack-plugin可以。</p>
+<p>  最近在CBA移动端m站适配,还出现了IOS 10.13.1系统的苹果手机,打开缓存、压缩以及删除注释后的打包代码,页面打不开的情况,发现需要配置TerserWebpackPlugin里面的terserOptions,添加mangle属性,并将safari10的内部属性设置为true。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>  普通配置如下(也是我这边使用的):</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> TerserWebpackPlugin = <span class="built_in">require</span>(<span class="string">'terser-webpack-plugin'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    optimization: &#123;</span><br><span class="line">        minimizer: [</span><br><span class="line">            <span class="keyword">new</span> TerserWebpackPlugin(&#123;</span><br><span class="line">                <span class="comment">//是否启用缓存文件机制</span></span><br><span class="line">                cache: <span class="literal">true</span>,</span><br><span class="line">                <span class="comment">//是否启用多核压缩文件机制</span></span><br><span class="line">                parallel: <span class="literal">true</span>,</span><br><span class="line">                terserOptions: &#123;</span><br><span class="line">                    output: &#123;</span><br><span class="line">                        <span class="comment">//除了含有@license的注释,其余都剔除掉</span></span><br><span class="line">                        comments: <span class="regexp">/@license/i</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="comment">//用于兼容IOS 10.13.1系统的h5页面</span></span><br><span class="line">                    mangle: &#123;</span><br><span class="line">                        safari10: <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="comment">//是否剔除注释</span></span><br><span class="line">                extractComments: <span class="literal">true</span></span><br><span class="line">            &#125;)</span><br><span class="line">        ]   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="SplitChunksPlugin"><a href="#SplitChunksPlugin" class="headerlink" title="SplitChunksPlugin"></a>SplitChunksPlugin</h2><blockquote>
+<p>详情</p>
+</blockquote>
+<p>  CommonsChunkPlugin的优化转化类型,重点是将多个入口的公共导入部分以及第三方依赖包的公共导入部分抽出,形成多个文件,由于浏览器加载文件是异步的,且可以生成浏览器缓存文件,所以对于整个网站的性能以及加载速度都是质的提升。之前CommonsChunkPlugin也是放于webpack内部plugins插件数组里面,现在把位置从plugins属性数组放入至optimization优化属性里面。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>  普通配置如下(也是我这边使用的):</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    optimization: &#123;</span><br><span class="line">        SplitChunks: &#123;</span><br><span class="line">            <span class="comment">//导出公共部分的文件大小最小为0byte</span></span><br><span class="line">            minSize: <span class="number">0</span>,</span><br><span class="line">            <span class="comment">//至少一个入口，将一个入口里面的公共部分导出生成另外一个js文件</span></span><br><span class="line">            minChunks: <span class="number">1</span>,</span><br><span class="line">            chunks: <span class="string">'all'</span>,</span><br><span class="line">            cacheGroups: &#123;</span><br><span class="line">                <span class="comment">//将某些体积大的第三方依赖包里面的公共导入部分导出,并命名为packageBase</span></span><br><span class="line">                packageBase: &#123;</span><br><span class="line">                    name: <span class="string">'packageBase'</span>,</span><br><span class="line">                    minSize: <span class="number">0</span>,</span><br><span class="line">                    minChunks: <span class="number">1</span>,</span><br><span class="line">                    chunks: <span class="string">'initial'</span>,</span><br><span class="line">                    <span class="comment">//对应的是react、redux、react-dom、lodash、moment和antd这些体积比较大的包</span></span><br><span class="line">                    test: <span class="function">(<span class="params"><span class="built_in">module</span></span>)=&gt;</span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="regexp">/(react|redux|react-dom|lodash|moment|antd)/</span>.test(<span class="built_in">module</span>.context);</span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="comment">//优先级为10</span></span><br><span class="line">                    priority: <span class="number">10</span>   </span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="comment">//将自己编写的某些公共导入部分导出,并命名为commons</span></span><br><span class="line">                commons: &#123;</span><br><span class="line">                    name: <span class="string">'commons'</span>,</span><br><span class="line">                    minSize: <span class="number">0</span>,</span><br><span class="line">                    minChunks: <span class="number">1</span>,</span><br><span class="line">                    chunks: <span class="string">'initial'</span>,</span><br><span class="line">                    <span class="comment">//优先级为5</span></span><br><span class="line">                    priority: <span class="number">5</span></span><br><span class="line">                &#125;   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="如何设置url-loader的图片打包生成的目录路径"><a href="#如何设置url-loader的图片打包生成的目录路径" class="headerlink" title="如何设置url-loader的图片打包生成的目录路径"></a>如何设置url-loader的图片打包生成的目录路径</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  最近在搞欧冠”数说”欧冠的h5项目时,遇到了一个问题:打包生成的图片,如何放至打包目录的images目录下,经过查阅资料,images的配置不仅仅有limit属性设置图片体积大小的限制来区分什么时候图片以base64显示,什么时候以打包压缩之后的图片显示,还有一个name属性,可以用来设置打包生成的目录路径以及文件名称。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>  普通配置如下(也是我这边使用的):</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [<span class="comment">//...</span></span><br><span class="line">        &#123;</span><br><span class="line">               test: <span class="regexp">/(png|bmp|jpg|jpeg|gif)$/i</span>,</span><br><span class="line">               use: [&#123;</span><br><span class="line">                  loader: <span class="string">'url-loader'</span>,</span><br><span class="line">                  options: &#123;</span><br><span class="line">                          limit: <span class="number">102400</span>,</span><br><span class="line">                          <span class="comment">//这样就可以配置图片打包生成的目录路径以及文件名称</span></span><br><span class="line">                          <span class="comment">//注意: [name]为chunks入口的名称</span></span><br><span class="line">                          name: <span class="string">'images/[name].[hash:6].[ext]'</span>  </span><br><span class="line">                  &#125;</span><br><span class="line">               &#125;] </span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Webpack</category>
+      </categories>
+      <tags>
+        <tag>wbpack</tag>
       </tags>
   </entry>
   <entry>
@@ -3461,50 +3539,6 @@ http {
       </tags>
   </entry>
   <entry>
-    <title>比木白-React</title>
-    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-React/</url>
-    <content><![CDATA[<h1 id="React"><a href="#React" class="headerlink" title="React"></a>React</h1><h2 id="List-List-Item"><a href="#List-List-Item" class="headerlink" title="List List.Item"></a>List List.Item</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  最近在搞CBA m站适配时,尝试写了一把JS 基础组件,首当其冲的就是List List.Item列表组件,在我们m站适配中随处可见,其关键点就在于,怎么将某些在List列表组件中的属性,放到Item列表项组件里面,至此就想到了使用HOC高阶组件。</p>
-<blockquote>
-<p>详情</p>
-</blockquote>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//List组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> cns <span class="keyword">from</span> <span class="string">'classnames'</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">'./item'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        className: PropTypes.string,</span><br><span class="line">        onClick: PropTypes.func</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Item = Item;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Item高阶组件</span></span><br><span class="line">    itemHOC = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;children, onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> <span class="function">(<span class="params">children &amp;&amp; children.length &gt; <span class="number">0</span></span>) ? <span class="params">React</span>.<span class="params">Children</span>.<span class="params">map</span>(<span class="params">children, (child = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123;<span class="attr">type</span>: Child, props = &#123;&#125;&#125; = child;</span><br><span class="line">            <span class="keyword">if</span>(Child !== Item) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'List component must be an Item component inside~'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> &lt;Child &#123;...props&#125; onClick=&#123;onClick&#125;/&gt;;</span><br><span class="line">        &#125;) : <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;className = <span class="string">''</span>&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123;itemHOC = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;section className=&#123;cns(</span><br><span class="line">                <span class="string">'list'</span>,</span><br><span class="line">                className</span><br><span class="line">            )&#125;&gt;</span><br><span class="line">                &#123;itemHOC()&#125;</span><br><span class="line">            &lt;<span class="regexp">/section&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default List;</span></span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//Item组件  </span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> cns <span class="keyword">from</span> <span class="string">'classnames'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.less'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        className: PropTypes.string,</span><br><span class="line">        onClick: PropTypes.func,</span><br><span class="line">        value: PropTypes.any</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;</span><br><span class="line">            className = <span class="string">''</span>, </span><br><span class="line">            value,</span><br><span class="line">            onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;, </span><br><span class="line">            children</span><br><span class="line">        &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div className=&#123;cns(<span class="string">'list-item'</span>, className)&#125;</span><br><span class="line">                 onClick=&#123;(e) =&gt; onClick(value, e)&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;children&#125;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )   </span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Item;</span></span><br></pre></td></tr></table></figure>
-  <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Item组件样式*/</span></span><br><span class="line"><span class="selector-class">.list-item</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">14px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  这样就完成了List列表组件 List.Item列表项的基础组件的基础搭建,使用起来也是很简单的…</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">'./components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Item = List.Item;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">            </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> list = <span class="built_in">Array</span>.from(<span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123;<span class="attr">length</span>: <span class="number">10</span>&#125;), (item, index) =&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;[index]: (index + <span class="number">1</span>)&#125;;        </span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">            &lt;List className=<span class="string">'demo-list'</span></span><br><span class="line">                  onClick=&#123;(item, e) =&gt; &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(item);</span><br><span class="line">                  &#125;&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;</span><br><span class="line">                    list &amp;&amp; list.length &gt; <span class="number">0</span> &amp;&amp; list.map(<span class="function">(<span class="params">listItem, index</span>) =&gt;</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> &lt;Item className='demo-list-item'</span><br><span class="line">                                     value=&#123;listItem&#125;</span><br><span class="line">                                     key=&#123;index&#125;</span><br><span class="line">                        &gt;</span><br><span class="line">                            &#123;JSON.stringify(listItem)&#125;</span><br><span class="line">                        &lt;/Item&gt;</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &lt;<span class="regexp">/List&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="react-router路由多层嵌套"><a href="#react-router路由多层嵌套" class="headerlink" title="react-router路由多层嵌套"></a>react-router路由多层嵌套</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  最近在搞拓海官网的后台管理时,使用了react-router 4的路由多层嵌套配合继承、装饰器搞了一套路由页面,自我感觉还是不错的,所以我分享这一套嵌套路由配置。</p>
-<p>  PS: 此页面只适用于嵌套路由,嵌套路由指的是在某一父路由下的子路由只能在此父路由下使用,其余页面不可使用。</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-<p>  首先当然是安装依赖,配置打包、编译、缓存、压缩、分割chunks入口、404重定向、开发环境热更新、生产环境抽取、本地Node服务器和多核处理等等这些,这些属于搭建前端项目生态部分,我在之前的博客当中分享过的’多种方式搭建前端项目’中提到过了,下面我们就直接上干货好了。</p>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//入口</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;render&#125; <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> Layouts <span class="keyword">from</span> <span class="string">'./layouts'</span>;</span><br><span class="line"></span><br><span class="line">render(&lt;Layouts /&gt;, <span class="built_in">document</span>.querySelector(<span class="string">'#root'</span>));</span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//基类,用于嵌套路由的继承,以及各级路由承接使用</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Route&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> DocumentTitle <span class="keyword">from</span> <span class="string">'react-document-title'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseLayout</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    state = &#123;</span><br><span class="line">        <span class="comment">//扁平化处理之后的路由</span></span><br><span class="line">        routersTransform: []</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        对路由进行扁平化处理</span></span><br><span class="line"><span class="comment">    */</span>    </span><br><span class="line">    transformRouters = <span class="function">(<span class="params">routers = [], path = <span class="string">'/'</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;transformRouters = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">let</span> &#123;routersTransform = []&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        routers.forEach(<span class="function">(<span class="params">routerItem, routerIndex</span>) =&gt;</span> &#123;</span><br><span class="line">            routerItem.path = <span class="string">`<span class="subst">$&#123;path&#125;</span>/<span class="subst">$&#123;routerItem.path&#125;</span>`</span>.replace(<span class="regexp">/[\/]+/g</span>, <span class="string">'/'</span>);</span><br><span class="line">            routersTransform = [...routersTransform, routerItem];</span><br><span class="line">            routerItem.children &amp;&amp; routerItem.children.length &gt; <span class="number">0</span> &amp;&amp; transformRouters(routerItem.children, routerItem.path);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> routersTransform;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        查找当前页面路径,并返回地址</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    searchMatch = <span class="function">(<span class="params">routers = [], pathname = <span class="string">'/'</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;searchMatch = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> routers) &#123;</span><br><span class="line">            <span class="keyword">if</span>(item.path.includes(pathname)) &#123;</span><br><span class="line">                <span class="keyword">return</span> item.title;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> item.children &amp;&amp; item.children.length &gt; <span class="number">0</span> &amp;&amp; searchMatch(item.children, pathname);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        获取页面的标题</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    getPageTitle = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123;<span class="attr">history</span>: &#123;<span class="attr">location</span>: &#123;pathname = <span class="string">''</span>&#125;&#125;&#125; = props;</span><br><span class="line">        <span class="keyword">const</span> &#123;searchMatch = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> searchMatch(routers, pathname);</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="comment">//这里用于不嵌套路由时使用</span></span><br><span class="line">        <span class="comment">// _routers = [];</span></span><br><span class="line">        <span class="comment">// const &#123;transformRouters = () =&gt; &#123;&#125;&#125; = this;</span></span><br><span class="line">        <span class="comment">// _routers = transformRouters([...routers]);</span></span><br><span class="line">        <span class="comment">// return _routers &amp;&amp; _routers.length &gt; 0 &amp;&amp; _routers.map(routerItem =&gt; &#123;</span></span><br><span class="line">        <span class="keyword">return</span> routers &amp;&amp; routers.length &gt; <span class="number">0</span> &amp;&amp; routers.map(<span class="function"><span class="params">routerItem</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &lt;Route </span><br><span class="line">                key=&#123;routerItem.key&#125;</span><br><span class="line">                path=&#123;routerItem.path&#125;</span><br><span class="line">                exact=&#123;routerItem.exact&#125;</span><br><span class="line">                component=&#123;(props)=&gt; &#123;</span><br><span class="line">                    const Component = routerItem.component;</span><br><span class="line">                    return &lt;DocumentTitle&gt;</span><br><span class="line">                        &lt;Component &#123;...props&#125; routers=&#123;routerItem.children&#125; /&gt;</span><br><span class="line">                    &lt;/DocumentTitle&gt;</span><br><span class="line">                &#125;&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> BaseLayout;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'../pages/home'</span>;</span><br><span class="line"><span class="keyword">import</span> Master <span class="keyword">from</span> <span class="string">'../pages/master'</span>;</span><br><span class="line"><span class="comment">//路由静态配置</span></span><br><span class="line"><span class="keyword">const</span> routers = [&#123;</span><br><span class="line">    key: <span class="string">'home'</span>,</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    title: <span class="string">'拓海官网 - 首页'</span>,</span><br><span class="line">    name: <span class="string">'首页'</span>,</span><br><span class="line">    component: Home</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    key: <span class="string">'master'</span>,</span><br><span class="line">    path: <span class="string">'/master'</span>,</span><br><span class="line">    title: <span class="string">'拓海官网 - 主子'</span>,</span><br><span class="line">    name: <span class="string">'主子'</span>,</span><br><span class="line">    component: Master</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    routers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Layout&#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;BrowserRouter&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> BaseLayout <span class="keyword">from</span> <span class="string">'./base'</span>;</span><br><span class="line"><span class="keyword">import</span> Headers <span class="keyword">from</span> <span class="string">'./header'</span>;</span><br><span class="line"><span class="keyword">import</span> routers <span class="keyword">from</span> <span class="string">'../routers'</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> utils <span class="keyword">from</span> <span class="string">'../utils'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;Header, Content&#125; = Layout;</span><br><span class="line"></span><br><span class="line"><span class="comment">//入口处,使用class继承方式</span></span><br><span class="line"><span class="comment">//装饰器导入路由配置</span></span><br><span class="line">@utils.packageApi.decorators.getRouters(&#123;routers&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Layouts</span> <span class="keyword">extends</span> <span class="title">BaseLayout</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">let</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="comment">//这里用于不嵌套路由时使用</span></span><br><span class="line">        <span class="comment">// _routers = [];</span></span><br><span class="line">        <span class="comment">// const &#123;transformRouters = () =&gt; &#123;&#125;&#125; = this;</span></span><br><span class="line">        <span class="comment">// _routers = transformRouters([...routers]);</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Layout&gt;</span><br><span class="line">                &lt;Header&gt;</span><br><span class="line">                    &#123;<span class="comment">/*&lt;Headers routers=&#123;_routers&#125; /&gt;*/</span>&#125;</span><br><span class="line">                    &lt;Headers routers=&#123;routers&#125; /&gt;</span><br><span class="line">                &lt;<span class="regexp">/Header&gt;</span></span><br><span class="line"><span class="regexp">                &lt;Content&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;BrowserRouter&gt;</span></span><br><span class="line"><span class="regexp">                        &#123;super.render()&#125;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>BrowserRouter&gt;</span><br><span class="line">                &lt;<span class="regexp">/Content&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Layout&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Layouts;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="comment">//decorators 装饰器</span></span><br><span class="line"><span class="comment">//高阶函数 属性代理</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRouters</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">WrapperComponent</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">            <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">            state = &#123;</span><br><span class="line">                innerParams: &#123;&#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            </span><br><span class="line">            componentDidMount() &#123;</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                    innerParams: &#123;...params&#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;   </span><br><span class="line">                </span><br><span class="line">            render() &#123;</span><br><span class="line">                <span class="keyword">const</span> &#123;innerParams&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">                <span class="keyword">return</span> (</span><br><span class="line">                    &lt;WrapperComponent &#123;...innerParams&#125; /&gt;</span><br><span class="line">                );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    getRouters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Menu&#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;NavLink&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;Item&#125; = Menu;</span><br><span class="line"></span><br><span class="line"><span class="comment">//头部路由导航</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Headers</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired</span><br><span class="line">    &#125;;</span><br><span class="line">        </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Menu&gt;</span><br><span class="line">                &#123;routers &amp;&amp; routers.length &gt; <span class="number">0</span> &amp;&amp; routers.map(<span class="function">(<span class="params">routerItem</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> (&lt;Item key=&#123;routerItem.key&#125;&gt;</span><br><span class="line">                        &lt;NavLink to=&#123;routerItem.path&#125;&gt;</span><br><span class="line">                            &#123;routerItem.name&#125;</span><br><span class="line">                        &lt;/NavLink&gt;</span><br><span class="line">                    &lt;/Item&gt;)</span><br><span class="line">                &#125;)&#125;</span><br><span class="line">            &lt;<span class="regexp">/Menu&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Headers;</span></span><br></pre></td></tr></table></figure>
-<p>  自此react-router路由多层嵌套配置完成,如果想要只在某一路由下使用子路由,重复第2、4、6步即可。</p>
-<p>  PS:附上我的目录结构图</p>
-<p>  <img src="/images/routersConfig.png" alt></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>比木白-Taro</title>
     <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-Taro/</url>
     <content><![CDATA[<h1 id="微信小程序框架Taro"><a href="#微信小程序框架Taro" class="headerlink" title="微信小程序框架Taro"></a>微信小程序框架Taro</h1><h2 id="2-0升级压缩微信小程序包体积增大比较多"><a href="#2-0升级压缩微信小程序包体积增大比较多" class="headerlink" title="2.0升级压缩微信小程序包体积增大比较多"></a>2.0升级压缩微信小程序包体积增大比较多</h2><blockquote>
@@ -3565,66 +3599,6 @@ http {
       </tags>
   </entry>
   <entry>
-    <title>比木白-Webpack</title>
-    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-Webpack/</url>
-    <content><![CDATA[<h1 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h1><h2 id="ContextReplacementPlugin"><a href="#ContextReplacementPlugin" class="headerlink" title="ContextReplacementPlugin"></a>ContextReplacementPlugin</h2><blockquote>
-<p>详情</p>
-</blockquote>
-<p>  taro小程序升级至2.0版本之后,由于transform-runtime按需打包的插件加入,导致taro小程序的包超过2M,通过webpack-bundle-analyzer查看每个模块体积的大小插件,可以看到moment.js以及其语言包占了差不多600kb-700kb的体积,所以需要将语言包剔除不需要的,只保留zh-CN中文包,这里需要使用到ContextReplacementPlugin,将不需要的依赖包不打入包内,进行剔除掉,做到按需打包。</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//如果是webpack,则是要在webpack.config.js中的plugin里面配置</span></span><br><span class="line"><span class="keyword">import</span> webpack <span class="keyword">from</span> <span class="string">"webpack"</span>;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.ContextReplacementPlugin(<span class="regexp">/moment\/\\locale$/</span>, /zh-cn/);</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果是taro,这种使用react对接多端的框架,则是使用webpackChain</span></span><br><span class="line"><span class="comment">//2.0.0配置,config目录下的index.js</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    mini: &#123;</span><br><span class="line">        webpackChain(chain, webpack) &#123;</span><br><span class="line">            chain.plugin(<span class="string">'contextReplacement'</span>).use(<span class="keyword">new</span> webpack.ContextReplacementPlugin(<span class="regexp">/moment[\/\\]locale/</span>, /zh-cn/), []);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="UglifyJsPlugin"><a href="#UglifyJsPlugin" class="headerlink" title="UglifyJsPlugin"></a>UglifyJsPlugin</h2><blockquote>
-<p>详情</p>
-</blockquote>
-<p>  UglifyJsPlugin用于压缩、缓存和删除一些无用、注释的代码的作用。之前是放于webpack内部plugins插件数组里面的,webpack 4之后是将UglifyJsPlugin作为一个单独的插件抽取了出来,并把位置从plugins属性数组放入至optimization优化属性里面。</p>
-<p>  最近在CBA移动端m站适配,还出现了IOS 10.13.1系统的苹果手机,打开缓存、压缩以及删除注释后的打包代码,页面打不开的情况,发现需要配置UglifyWebpackPlugin里面的uglifyOptions,添加mangle属性,并将safari10的内部属性设置为true。</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-<p>  普通配置如下(也是我这边使用的):</p>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> UglifyJsPlugin = <span class="built_in">require</span>(<span class="string">'uglifyjs-webpack-plugin'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    optimization: &#123;</span><br><span class="line">        minimizer: [</span><br><span class="line">            <span class="keyword">new</span> UglifyJsPlugin(&#123;</span><br><span class="line">                <span class="comment">//是否启用缓存文件机制</span></span><br><span class="line">                cache: <span class="literal">true</span>,</span><br><span class="line">                <span class="comment">//是否启用多核进行压缩文件</span></span><br><span class="line">                parallel: <span class="literal">true</span>,</span><br><span class="line">                uglifyOptions: &#123;</span><br><span class="line">                    output: &#123;</span><br><span class="line">                        <span class="comment">//这里将除了@license之外的注释全都剔除掉</span></span><br><span class="line">                        comments: <span class="regexp">/@license/i</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    mangle: &#123;</span><br><span class="line">                        safari10: <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,   </span><br><span class="line">                <span class="comment">//是否剔除注释</span></span><br><span class="line">                extractComments: <span class="literal">true</span></span><br><span class="line">            &#125;)</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意</p>
-</blockquote>
-<p>  uglifyjs-webpack-plugin只支持压缩、缓存以及剔除注释ES5语法的项目文件,如果想要这些功能放到ES6语法上面,需要下载其他的第三方外部依赖包 —— terser-webpack-plugin</p>
-<h2 id="TerserWebpackPlugin"><a href="#TerserWebpackPlugin" class="headerlink" title="TerserWebpackPlugin"></a>TerserWebpackPlugin</h2><blockquote>
-<p>详情</p>
-</blockquote>
-<p>  与uglifyjs-webpack-plugin的配置、使用方式以及产生的作用基本一样,不一样的点在于,uglifyjs-webpack-plugin不能对ES6语法的项目文件进行压缩、缓存文件以及剔除注释,而terser-webpack-plugin可以。</p>
-<p>  最近在CBA移动端m站适配,还出现了IOS 10.13.1系统的苹果手机,打开缓存、压缩以及删除注释后的打包代码,页面打不开的情况,发现需要配置TerserWebpackPlugin里面的terserOptions,添加mangle属性,并将safari10的内部属性设置为true。</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-<p>  普通配置如下(也是我这边使用的):</p>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> TerserWebpackPlugin = <span class="built_in">require</span>(<span class="string">'terser-webpack-plugin'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    optimization: &#123;</span><br><span class="line">        minimizer: [</span><br><span class="line">            <span class="keyword">new</span> TerserWebpackPlugin(&#123;</span><br><span class="line">                <span class="comment">//是否启用缓存文件机制</span></span><br><span class="line">                cache: <span class="literal">true</span>,</span><br><span class="line">                <span class="comment">//是否启用多核压缩文件机制</span></span><br><span class="line">                parallel: <span class="literal">true</span>,</span><br><span class="line">                terserOptions: &#123;</span><br><span class="line">                    output: &#123;</span><br><span class="line">                        <span class="comment">//除了含有@license的注释,其余都剔除掉</span></span><br><span class="line">                        comments: <span class="regexp">/@license/i</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="comment">//用于兼容IOS 10.13.1系统的h5页面</span></span><br><span class="line">                    mangle: &#123;</span><br><span class="line">                        safari10: <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="comment">//是否剔除注释</span></span><br><span class="line">                extractComments: <span class="literal">true</span></span><br><span class="line">            &#125;)</span><br><span class="line">        ]   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="SplitChunksPlugin"><a href="#SplitChunksPlugin" class="headerlink" title="SplitChunksPlugin"></a>SplitChunksPlugin</h2><blockquote>
-<p>详情</p>
-</blockquote>
-<p>  CommonsChunkPlugin的优化转化类型,重点是将多个入口的公共导入部分以及第三方依赖包的公共导入部分抽出,形成多个文件,由于浏览器加载文件是异步的,且可以生成浏览器缓存文件,所以对于整个网站的性能以及加载速度都是质的提升。之前CommonsChunkPlugin也是放于webpack内部plugins插件数组里面,现在把位置从plugins属性数组放入至optimization优化属性里面。</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-<p>  普通配置如下(也是我这边使用的):</p>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    optimization: &#123;</span><br><span class="line">        SplitChunks: &#123;</span><br><span class="line">            <span class="comment">//导出公共部分的文件大小最小为0byte</span></span><br><span class="line">            minSize: <span class="number">0</span>,</span><br><span class="line">            <span class="comment">//至少一个入口，将一个入口里面的公共部分导出生成另外一个js文件</span></span><br><span class="line">            minChunks: <span class="number">1</span>,</span><br><span class="line">            chunks: <span class="string">'all'</span>,</span><br><span class="line">            cacheGroups: &#123;</span><br><span class="line">                <span class="comment">//将某些体积大的第三方依赖包里面的公共导入部分导出,并命名为packageBase</span></span><br><span class="line">                packageBase: &#123;</span><br><span class="line">                    name: <span class="string">'packageBase'</span>,</span><br><span class="line">                    minSize: <span class="number">0</span>,</span><br><span class="line">                    minChunks: <span class="number">1</span>,</span><br><span class="line">                    chunks: <span class="string">'initial'</span>,</span><br><span class="line">                    <span class="comment">//对应的是react、redux、react-dom、lodash、moment和antd这些体积比较大的包</span></span><br><span class="line">                    test: <span class="function">(<span class="params"><span class="built_in">module</span></span>)=&gt;</span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="regexp">/(react|redux|react-dom|lodash|moment|antd)/</span>.test(<span class="built_in">module</span>.context);</span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="comment">//优先级为10</span></span><br><span class="line">                    priority: <span class="number">10</span>   </span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="comment">//将自己编写的某些公共导入部分导出,并命名为commons</span></span><br><span class="line">                commons: &#123;</span><br><span class="line">                    name: <span class="string">'commons'</span>,</span><br><span class="line">                    minSize: <span class="number">0</span>,</span><br><span class="line">                    minChunks: <span class="number">1</span>,</span><br><span class="line">                    chunks: <span class="string">'initial'</span>,</span><br><span class="line">                    <span class="comment">//优先级为5</span></span><br><span class="line">                    priority: <span class="number">5</span></span><br><span class="line">                &#125;   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="如何设置url-loader的图片打包生成的目录路径"><a href="#如何设置url-loader的图片打包生成的目录路径" class="headerlink" title="如何设置url-loader的图片打包生成的目录路径"></a>如何设置url-loader的图片打包生成的目录路径</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  最近在搞欧冠”数说”欧冠的h5项目时,遇到了一个问题:打包生成的图片,如何放至打包目录的images目录下,经过查阅资料,images的配置不仅仅有limit属性设置图片体积大小的限制来区分什么时候图片以base64显示,什么时候以打包压缩之后的图片显示,还有一个name属性,可以用来设置打包生成的目录路径以及文件名称。</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-<p>  普通配置如下(也是我这边使用的):</p>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [<span class="comment">//...</span></span><br><span class="line">        &#123;</span><br><span class="line">               test: <span class="regexp">/(png|bmp|jpg|jpeg|gif)$/i</span>,</span><br><span class="line">               use: [&#123;</span><br><span class="line">                  loader: <span class="string">'url-loader'</span>,</span><br><span class="line">                  options: &#123;</span><br><span class="line">                          limit: <span class="number">102400</span>,</span><br><span class="line">                          <span class="comment">//这样就可以配置图片打包生成的目录路径以及文件名称</span></span><br><span class="line">                          <span class="comment">//注意: [name]为chunks入口的名称</span></span><br><span class="line">                          name: <span class="string">'images/[name].[hash:6].[ext]'</span>  </span><br><span class="line">                  &#125;</span><br><span class="line">               &#125;] </span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Webpack</category>
-      </categories>
-      <tags>
-        <tag>wbpack</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>比木白-moment</title>
     <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-moment/</url>
     <content><![CDATA[<h1 id="moment"><a href="#moment" class="headerlink" title="moment"></a>moment</h1><h2 id="将时间戳-毫秒-转化为固定格式"><a href="#将时间戳-毫秒-转化为固定格式" class="headerlink" title="将时间戳(毫秒)转化为固定格式"></a>将时间戳(毫秒)转化为固定格式</h2><blockquote>
@@ -3644,6 +3618,32 @@ http {
       </categories>
       <tags>
         <tag>moment</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比木白-Git</title>
+    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-Git/</url>
+    <content><![CDATA[<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h2 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  昨天在配置我们这个博客项目系统的时候,配置主题时,发现主题大多数都是从外部的github项目里面clone到本地的themes目录下的,导致我上传到远程github时,没办法做到将外部的github项目一起推上去,而此系统固定的主题又想一键生成,不需要团队成员自己麻烦的手动配置。<br>  于是经过和同事的讨论（这里感谢我的同事——鹏辉[小灰灰]）,通过git子模块的形式,做到了一键hexo主题生成的方案。</p>
+<blockquote>
+<p>详情</p>
+</blockquote>
+<p>  首先将外部github hexo主题项目fork到自己的账号下，然后拉取自己账号下的项目，配置好主题的一些属性以及方法，push到远程，这样一个配置好的hexo主题项目就完成了。</p>
+<p>  接着使用git submodule add @git/… themes/next将自己账号下刚刚fork的项目放到hexo主题目录下，这时候就会生成一个.gitmodules文件与子模块建立关系。</p>
+<p>  最后编写bash文件，形成一个命令，这里我在package.json里面写一句命令语，也就是yarn run themes 或者 npm run themes，下面是bash文件的详情:</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! bin/bash</span></span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>拉取并生成主题</p>
+</blockquote>
+<p>  完成之后，开发者就可以直接从远程git clone @git/…拉取项目，之后输入命令yarn run themes 或者 npm run themes，就可一键生成固定的主题啦!</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -3791,6 +3791,26 @@ http {
       </categories>
       <tags>
         <tag>可视化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比木白-音频和视频</title>
+    <url>/2020/03/22/%E6%AF%94%E6%9C%A8%E7%99%BD-%E9%9F%B3%E9%A2%91%E5%92%8C%E8%A7%86%E9%A2%91/</url>
+    <content><![CDATA[<h1 id="音频与视频"><a href="#音频与视频" class="headerlink" title="音频与视频"></a>音频与视频</h1><h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  最近在写虎扑足球”战疫”期间,接触音频audio bgm在页面上播放、暂停和停止的功能,在react里面使用了纯的原生的元素标签,但是发现了一些问题,autoPlay属性自动播放并不能每一次刷新页面都会立即播放,而是自动播放的次数极少,后来发现原来是<a href="https://gamedev.stackexchange.com/questions/163365/html5-games-play-failed-because-the-user-didnt-interact-with-the-document-fi" target="_blank">用户不希望在打开网页之后,自动播放视频或者音频,他们希望自己能手动选择。</a>于是就选择了,不进行自动播放,一开始进入页面,音频是关着的,用户手动选择播放与否。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> AudioBg <span class="keyword">from</span> <span class="string">'../assets/audio'</span>;</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);<span class="keyword">this</span>.audio = <span class="literal">null</span>;&#125;</span><br><span class="line">    </span><br><span class="line">    state = &#123;</span><br><span class="line">        isPlay: <span class="literal">false</span></span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        用户手动选择播放与否,播放或者暂停</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    onClickHandler = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;isPlay = <span class="literal">false</span>&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            isPlay: !isPlay</span><br><span class="line">        &#125;, ()=&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span>(isPlay) &#123;</span><br><span class="line">                <span class="comment">//音频播放</span></span><br><span class="line">                <span class="keyword">this</span>.audio.play();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//音频暂停</span></span><br><span class="line">                <span class="keyword">this</span>.audio.pause();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//取消冒泡事件</span></span><br><span class="line">        e.stopPropagation();</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        如果音频播放完,则将其播放的时间调至开头,再次进行播放</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    onEndedHandler = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.audio.currentTime = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>.audio.play();</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;onClickHandler = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;, onEndedHandler = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;&gt;</span><br><span class="line">                &lt;button onClick=&#123;onClickHandler&#125;&gt;点击播放/暂停&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;audio src=&#123;AudioBg&#125; </span></span><br><span class="line"><span class="regexp">                       loop=&#123;false&#125; </span></span><br><span class="line"><span class="regexp">                       autoPlay=&#123;false&#125; </span></span><br><span class="line"><span class="regexp">                       ref=&#123;refs =&gt; this.audio = refs&#125;</span></span><br><span class="line"><span class="regexp">                       onEnded=&#123;onEndedHandler&#125;</span></span><br><span class="line"><span class="regexp">                &gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>audio&gt;</span><br><span class="line">            &lt;<span class="regexp">/&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;    </span></span><br><span class="line"><span class="regexp"> &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"> export default Demo;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>audio and video</category>
+      </categories>
+      <tags>
+        <tag>audio</tag>
+        <tag>video</tag>
       </tags>
   </entry>
   <entry>
@@ -4222,26 +4242,6 @@ http {
       </tags>
   </entry>
   <entry>
-    <title>比木白-音频和视频</title>
-    <url>/2020/03/22/%E6%AF%94%E6%9C%A8%E7%99%BD-%E9%9F%B3%E9%A2%91%E5%92%8C%E8%A7%86%E9%A2%91/</url>
-    <content><![CDATA[<h1 id="音频与视频"><a href="#音频与视频" class="headerlink" title="音频与视频"></a>音频与视频</h1><h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  最近在写虎扑足球”战疫”期间,接触音频audio bgm在页面上播放、暂停和停止的功能,在react里面使用了纯的原生的元素标签,但是发现了一些问题,autoPlay属性自动播放并不能每一次刷新页面都会立即播放,而是自动播放的次数极少,后来发现原来是<a href="https://gamedev.stackexchange.com/questions/163365/html5-games-play-failed-because-the-user-didnt-interact-with-the-document-fi" target="_blank">用户不希望在打开网页之后,自动播放视频或者音频,他们希望自己能手动选择。</a>于是就选择了,不进行自动播放,一开始进入页面,音频是关着的,用户手动选择播放与否。</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> AudioBg <span class="keyword">from</span> <span class="string">'../assets/audio'</span>;</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);<span class="keyword">this</span>.audio = <span class="literal">null</span>;&#125;</span><br><span class="line">    </span><br><span class="line">    state = &#123;</span><br><span class="line">        isPlay: <span class="literal">false</span></span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        用户手动选择播放与否,播放或者暂停</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    onClickHandler = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;isPlay = <span class="literal">false</span>&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            isPlay: !isPlay</span><br><span class="line">        &#125;, ()=&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span>(isPlay) &#123;</span><br><span class="line">                <span class="comment">//音频播放</span></span><br><span class="line">                <span class="keyword">this</span>.audio.play();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//音频暂停</span></span><br><span class="line">                <span class="keyword">this</span>.audio.pause();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//取消冒泡事件</span></span><br><span class="line">        e.stopPropagation();</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        如果音频播放完,则将其播放的时间调至开头,再次进行播放</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    onEndedHandler = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.audio.currentTime = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>.audio.play();</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;onClickHandler = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;, onEndedHandler = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;&gt;</span><br><span class="line">                &lt;button onClick=&#123;onClickHandler&#125;&gt;点击播放/暂停&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;audio src=&#123;AudioBg&#125; </span></span><br><span class="line"><span class="regexp">                       loop=&#123;false&#125; </span></span><br><span class="line"><span class="regexp">                       autoPlay=&#123;false&#125; </span></span><br><span class="line"><span class="regexp">                       ref=&#123;refs =&gt; this.audio = refs&#125;</span></span><br><span class="line"><span class="regexp">                       onEnded=&#123;onEndedHandler&#125;</span></span><br><span class="line"><span class="regexp">                &gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>audio&gt;</span><br><span class="line">            &lt;<span class="regexp">/&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;    </span></span><br><span class="line"><span class="regexp"> &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"> export default Demo;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>audio and video</category>
-      </categories>
-      <tags>
-        <tag>audio</tag>
-        <tag>video</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>比木白-多种方式搭建项目</title>
     <url>/2020/04/04/%E6%AF%94%E6%9C%A8%E7%99%BD-%E5%A4%9A%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%90%AD%E5%BB%BA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h1 id="express-react-webpack"><a href="#express-react-webpack" class="headerlink" title="express+react+webpack"></a>express+react+webpack</h1><blockquote>
@@ -4663,6 +4663,205 @@ http {
       </tags>
   </entry>
   <entry>
+    <title>日常开发难点</title>
+    <url>/2022/06/12/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E9%9A%BE%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="列表项上下键选中使用-scrollIntoView-behavior-‘smooth’-抖动问题"><a href="#列表项上下键选中使用-scrollIntoView-behavior-‘smooth’-抖动问题" class="headerlink" title="列表项上下键选中使用 scrollIntoView behavior: ‘smooth’ 抖动问题"></a>列表项上下键选中使用 scrollIntoView behavior: ‘smooth’ 抖动问题</h1><blockquote>
+<p>原理分析</p>
+</blockquote>
+<p>  放弃计算DOM getBoundingClientRect的方式，也不使用原版每次选中都进行 scrollIntoView 自适应 ‘smooth’ 滚动，而是采用底层 API <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API" target="_blank" rel="noopener">Intersection Observer API</a> 来计算列表项(list-item)是否存在于可视的列表范围(list-container)之内，底层 API 性能、效率、效果都比前面两种方式高的多。</p>
+<p>  Intersection Observer 从用法上还是蛮简单的，那理解上来说呢，简单来讲：是一个观察者模式，目标元素与视口会产生一个是否可见交叉区，通过观察视口与目标元素的交叉关系，可以在 callback 回调中获取目标元素与视口的交叉关系信息，产生”交叉观察器”的效果。</p>
+<p>  <img src="https://image.white-than-wood.zone/difficult/intersection.gif" alt></p>
+<p>  特性: callback 一般只会触发两次，一次是目标元素开始可见，另一次是开始不可见。</p>
+<blockquote>
+<p>可行性分析</p>
+</blockquote>
+<p>  那在个人的项目例子中呢，所有的 list-item 都是目标元素，通过观察完全超出视口范围的第一个 list-item 开始可见的时间点来引起 scrollIntoView 平滑动画过渡的 ‘smooth’ 滚动，在滚动之后视口有新的一批 list-item 的情况下，重建 IntersectionObserver，重置 IntersectionObserver 实例，以此来循环。</p>
+<p>  可以这么想，”交叉观察器”观察的永远是新的一批 list-item 与视口的交叉关系，而老一批 list-item 在 scrollIntoView 滚动之后，因”交叉观察器”特性(只会触发两次)应当重建”交叉观察器”重新观察。</p>
+<p>  在这时候可能想问，有没有可能存在一种情况，scrollIntoView 平滑动画过渡的 ‘smooth’ 滚动的时间会慢于按键的速度，通过完全超出视口范围的第二个、第三个等 list-item 开始可见的时间点再次引起滚动，从而产生抖动的问题呢？答案是理论上存在这种可能性，而在实际操作上，极端操作极速按键按住不放的情况下存在，而在比较快按键的节奏下，是不存在这种可能性的。</p>
+<ul>
+<li>首先，在第一次滚动之后，第一时间就对 IntersectionObserver 实行重建，IntersectionObserver 实例实行重置，将源实例置为null并停止对所有目标元素可见性变化的观察，虽然观察者本身仍然处于活动状态，在 disconnect() 之后，目标元素仍然可以通过 observe() 传递给观察者，但没有目标，在实例置为null后，会很快被垃圾回收机制处理，所以这时候是不会存在的。</li>
+<li>其次，即使按键按住不放极速实行选中，也可以通过节流来解决，因为按键按住不放这种操作，本身就是一种非常规且触及极端边界的操作，不必实时且完全满足这种极端操作。</li>
+</ul>
+<p>PS: 这种重建 IntersectionObserver，重置 IntersectionObserver 实例的方式确实有一些不是很优雅，但官方并没有提供动态修改的方法，不可能把希望寄托在官方修改api上，了解ECMA的提案流程的同学肯定知道，那将是个十分漫长的过程，所以眼下就只能找到这种比较切实的办法来解决这个问题。</p>
+<p>Attention: 原生事件的监听会阻断 scrollIntoView ‘smooth’ 滚动动画的执行，产生滑动卡顿，所以必须取消默认事件的执行( e.preventDefault() )或者直接取消监听事件。</p>
+<blockquote>
+<p>实际演示</p>
+</blockquote>
+  <video muted controls="controls" autoplay="autoplay" loop="loop"><br>    <source src="https://image.white-than-wood.zone/difficult/point.mp4" type="video/mp4"><br>  </video>
+]]></content>
+      <categories>
+        <category>难点</category>
+      </categories>
+      <tags>
+        <tag>难点</tag>
+        <tag>日常开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ios 16 体验分享</title>
+    <url>/2022/07/17/ios16beta%E4%BD%93%E9%AA%8C/</url>
+    <content><![CDATA[<h1 id="ios-16-beta-3"><a href="#ios-16-beta-3" class="headerlink" title="ios 16 beta 3"></a>ios 16 beta 3</h1><p>现阶段 ios 16 内测版本已经出了 3 个版本,而今天要体验的 ios 16 就是最新的版本 —— ios 16 beta 3,在此可以直接通过 xcode beta ios 模拟器的方式直接体验.</p>
+<blockquote>
+<p>安装 xcode beta 版本</p>
+</blockquote>
+<p>通过<a href="https://developer.apple.com/cn/xcode/resources/" target="_blank" rel="noopener"> xcode 14.0 beta 3 </a>可下载 xcode beta 最新版本.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/download.png" alt></p>
+<p>下载 xip 文件成功后,再解压安装.</p>
+<ul>
+<li>xcode 14.0 beta 3 (platform: ios 16 beta 3)</li>
+</ul>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBeta.png" alt></p>
+<ul>
+<li>xcode 13.4.1 (platform: ios 15.5)</li>
+</ul>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodePublic.png" alt></p>
+<p>PS: Mac 磁盘空间至少留出 30G 方可解压安装 beta 版本,否则会总是出现’磁盘空间不足…’的提示.<br>Tips: xcode 正式版本至少留出 50G 才可下载解压安装.</p>
+<blockquote>
+<p>体验 ios 16 beta 3 模拟器</p>
+</blockquote>
+<ul>
+<li><p>步骤</p>
+<p>此步骤是为了照顾那些第一次使用 xcode 的童鞋,这里将演示如何创建 xcode 应用,添加、选择、运行 ios 模拟器的步骤,已经熟知的童鞋可以略过.</p>
+<ul>
+<li><p>创建新项目</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaCreate.png" alt></p>
+</li>
+<li><p>选择创建 App 应用</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaChooseApp.png" alt></p>
+</li>
+<li><p>项目以及组织、公司名称</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaProduct.png" alt></p>
+</li>
+<li><p>WorkSpace、SwiftUI</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaWorkSpace.png" alt></p>
+</li>
+<li><p>选择模拟器机型以及 ios 版本</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaDevice.png" alt></p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaOS.png" alt></p>
+</li>
+<li><p>运行模拟器</p>
+<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaRun.png" alt></p>
+</li>
+</ul>
+</li>
+<li><p>特性</p>
+<p>现在是’硬菜’,在此将与 ios 15.5对比,来分享体验 ios 16,以此来体现出 ios 16 的特性.而在对比中,为了控制变量,选用机型都为 iPhone 13 Pro.</p>
+<ul>
+<li><p>锁屏界面个性化.</p>
+<p>从 ios 16 开始,可以自定义锁屏界面的时间与日期样式,包含：颜色、背景、字型等,也能在锁屏加上实用小工具以快速查看,例如：天气、日历、智慧家庭等小工具. 此功能特性是 ios 16 最大的亮点,虽然在 xcode ios simulator 中 设置 -&gt; 壁纸 -&gt; 锁屏自定义(Lockscreen Widget) 并不存在,但可以通过锁屏右下角’相机’图标实行配置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes.png" style="width: 40%"><br>锁屏的变动主要围绕着个性化进行展开,时间的上下部分都被 Apple 定义为了小组件区域,上部以单行图标配文字的形式进行展现,可以根据自己的需要选择日历、股市、健身、时钟、天气五个原生类目.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_1.png" style="width: 40%"><br>时间的下部区域是模块化的小组件区域,这个区域内的小组件包含了股市、家庭、健身、日历、时钟、提醒事项、天气、电池八个原生类目.和顶部小组件不同的是,这里的组件样式更加丰富,设计感更强,大小选择也更加多样化,可以根据自己的喜好进行随意搭配.值得一提的是,锁屏的小组件 Apple 已将相关权限开放给开发者,如果 App 进行适配,后续将可以在锁屏中看到更多精彩的内容.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_2.png" style="width: 40%"><br>中间时间部分,Apple 不仅调整了占位大小,还提供了阿拉伯数字、阿拉伯印度文、天城文三种文字,每种文字包含了 6 种不同的设计.针对色彩部分,可以在最下方选择背景适配色彩,也可以选择纯白色.</p>
+<div style="display:flex;flex-flow: row nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3_1.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3_2.png"><br></div><br>在 ios 16 中,可以将自己的锁屏以及桌面与专注模式进行关联,在开启不同专注模式的同时,锁屏和桌面会自动切换到自己先前设定的方案中.在不同的环境下你可能需要接受到信息不一样,例如在家需要看智能设备的状态,在工作的时候需要看日程计划,在摄影的时候需要关心日出日落.在小组件不同的同时,也可以换一张不同的壁纸,换个壁纸也换一个心情.当然在 xcode ios simulator 模拟器中现阶段是不能添加新的壁纸,也不存在’专注模式’,进而没有办法体验.<br><div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_5.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_7.png"><br></div>
+
+<p>ios 15.5 中并不能自定义锁屏,也不能自定义添加实用小工具,更不能通过锁屏右下角’相机’图标实行配置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_old.png" style="width: 40%"></p>
+</li>
+<li><p>相册隐私加锁.</p>
+<p>ios 16 在相册中’已隐藏’和’最近删除’选项中,已经支持加锁,增强用户对于相册中图片安全性的保护.</p>
+<div style="display:flex;flex-flow: row nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios16Albums.png"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios16AlbumsHidden.png"><br></div><br>ios 15.5 在相册中’已隐藏’和’最近删除’选项中,并没有加锁.<br><br><div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios155Albums.png"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios155AlbumsHidden.png"><br></div>
+</li>
+<li><p>主界面底部页面改进.</p>
+<p>ios 16 在界面底部显示 banner 位置的’点’替换为新的 Spotlight 搜索气泡,在桌面直接向下滑动即可打开. 与页面点一样,可以在搜索气泡上向左或向右滑动,以加快滚动浏览其他主屏幕页面. Spotlight 支持搜索系统和应用内的文本、照片、文件等,还能进行单位、货币换算,当 iPhone 接入网络后,可以直接用关键字搜索网页.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/views/ios16view.png" style="width: 40%"></p>
+<p>ios 15.5 在界面底部显示 banner 位置的’点’还是原来的功能,向左或向右滑动,以加快滚动浏览其他主屏幕页面.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/views/ios155view.png" style="width: 40%"></p>
+</li>
+<li><p>短信息支持撤回以及二次编辑.</p>
+<p>ios 16 在短信息方面也做了升级,短信息支持撤回以及二次编辑发送.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/message/ios16message.png" style="width: 40%"></p>
+<p>ios 15.5 在短信息方面并不支持上述新功能.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/message/ios155message.png" style="width: 40%"></p>
+</li>
+<li><p>键盘方言方面追加了选项.</p>
+<p>ios 16 在键盘方面针对拼音输入追加了四川话的选项.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/keyboard/ios16keyBoard.png" style="width: 40%"></p>
+<p>ios 15.5 在键盘方面则不存在此选项.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/keyboard/ios155keyBoard.png" style="width: 40%"></p>
+</li>
+<li><p>锁屏通知底部显示.</p>
+<p>由于 ios 16 在锁屏个性化上的重大改进(自定义锁屏界面、锁屏中上部设置实用小工具),导致锁屏通知底部显示.</p>
+<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice.png"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_2.png"><br></div>
+
+<p>ios 15.5 锁屏通知仍然是屏幕中上部显示.</p>
+<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_3.png"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_1.png"><br></div>
+</li>
+<li><p>健康App 用药提醒</p>
+<p>ios 16 对于有日常药物服用需求的用户,可以在「健康」&gt;「 浏览」&gt;「用药」中设置并管理自己日常药物.设定好药品和服用时间后,ios 可以按时提示你去服用药物,并记录服药记录.此外,还支持一键导出自己的药品清单,方便购买时使用.</p>
+<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/medicine/medicine.png"><br> <img src="https://image.white-than-wood.zone/ios16/medicine/medicine_1.png"><br></div>
+
+<p>ios 15.5 健康App 则不存在用药提醒这个功能.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/medicine/medicine_old.png" style="width: 40%"></p>
+</li>
+<li><p>兼容设备列表.</p>
+<p>ios 16 已不再支持 iPhone 6S、6SPlus、7、7Plus、SE一代机型.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/device/deviceAdapter.png" alt></p>
+</li>
+</ul>
+</li>
+<li><p>憾事</p>
+<p>比较遗憾的是,ios 16 有很多做了比较大改动的新功能特性,在 xcode ios simulator 模拟器上面体验不到,下面就来例举一下.</p>
+<p>PS: 以下所有新功能特性,都是经过网上多渠道查询得论,未作实机验证.</p>
+<ul>
+<li><p>锁屏界面个性化.</p>
+<p>新的壁纸类型包含人物、照片、随机、Emoji、天气、天文、颜色八个主题.其中,选择人物主题时,系统会自动检测照片中前景部分,将前景放置在组件和时间的前方,整体融合效果非常好.但在 xcode ios simulator 模拟器上现阶段是不能添加新的壁纸,且不能对壁纸实行个性化设置,如果对图片实行设置壁纸会出现莫名bug: 壁纸并没有设置,且呈为全黑.<br><div style="display:flex;flex-flow: column nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_3.png" style="width: 80%"><br> <div style="display:flex;flex-flow: row nowrap;width: 80%;margin: 0 auto;"><br>  <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_1.png" alt><br>  <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_2.png" alt><br> </div><br></div><br>天气和天文这两种动态壁纸,则会根据你的定位和时间,实时变化锁屏的内容.说到这里,就不得不让人联想到这些锁屏和 AOD(全天候显示)的联系.自 iPhone 13 加入了 LTPO 的显示屏,支持显示刷新率在 10Hz 和 120Hz 之间动态调整.此外,近日在解析 ios 16 代码时发现了有关 AOD 相关的字段,显示 iPhone 14 Pro 和 iPhone 14 Pro Max 可能配备该功能.当然在 xcode ios simulator 模拟器上现阶段是不能添加新的壁纸,更无法设置动态壁纸,设置壁纸也会出现莫名bug,也无法通过内置搜索进行查询,进而无法实行设置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios.png" alt></p>
+</li>
+<li><p>强大的专注模式.</p>
+<p>除了上面所提及的,专注模式与锁屏进行联动,实现锁屏壁纸和小组件的自动切换,它也可以同时定义解锁后显示某一页主屏,并切换 Apple Watch 的表盘,在 xcode ios simulator 模拟器中是不存在 ‘sspal’ 或者 ‘专注模式’ 的,进而也无法实行体验.<br><img src="https://image.white-than-wood.zone/ios16/sspal/sspal_1.png" alt><br>还提供了一项专注模式过滤条件.在这里可以针对日历、信息、浏览器、低电量模式、深色模式进行更加细致的设定.例如,当相应的专注模式开启时,日历会会被筛选,其余的日历无法查看,系统会自动开启等等.这样一来,专注模式的功能变得更加自动化、更加个性化.相信在以后的更新中,专注模式应该可以做到更多的事情.<br><img src="https://image.white-than-wood.zone/ios16/sspal/sspal_2.png" alt></p>
+</li>
+<li><p>地图多途经点路线规划</p>
+<p>新版地图追加一项基础,但是又比较实用的功能多途经点路线规划,用户可以通过路线页面,追加自己需要到达的地点,实现途经点导航.目前该功能已在 11 个国家上线,国内上线时间未知.</p>
+<p> <img src="https://image.white-than-wood.zone/ios16/maps/maps.png"></p>
+<p>而在xcode ios simulator 模拟器上则是这番场景,GPS导航打开无法规划路线,坐标显示也是错误的.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/maps/ios16Maps.png" style="width: 40%"></p>
+</li>
+<li><p>视频中的实况文本</p>
+<p>iOS 15 Apple 为我们带来了实况文本的功能,让我们可以找相册、相机、输入的时候快速提取到图像的文字信息,而在 iOS 16 中，Apple 再次加强了实况文本的功能,在任意包含文字的画面暂停视频,即可执行拷贝、翻译、查询、共享等操作,并且适用于照片、快速查看、Safari 和其他应用程序多种场景.</p>
+<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;align-items: center;"><br> <img src="https://image.white-than-wood.zone/ios16/videos/iosVideos.png"><br> <img src="https://image.white-than-wood.zone/ios16/videos/iosPictures.png"><br></div>
+
+<p>而在xcode ios simulator 模拟器上则是无法提取任何的内容,视频实况文本功能是没有加上的.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/videos/videos.png" style="width: 40%"></p>
+</li>
+<li><p>照片支持快速抠图</p>
+<p>在回顾 iOS 15 推出的看图查询 (Visual Lookup) 功能的时候,Apple 还向我们介绍了借助 CoreML 和神经网络引擎实现的全新的抠图功能.只要在照片上长按,可以快速抠出图片的前景部分,这个功能不仅适用于现实拍摄的照片,虚拟的动画也同样适用.将抠下来的图片按住不放,可以直接切换后台发送到即时通讯应用中.（经测试 iPhone 上 iMessage、Line 等均支持,iOS 微信暂不支持、iPadOS 微信支持）.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/pictures/ios16Pictures.png"></p>
+<p>而在xcode ios simulator 模拟器上则是无法实行对百度下载的人像抠图功能,长按没有反应,是不存在全新的抠图功能的.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/pictures/pictures.png" style="width: 40%"></p>
+</li>
+</ul>
+</li>
+<li><p>技术特性</p>
+<ul>
+<li><p>ios 16 为了帮助使每行的长度在视觉上保持平衡,其中 TextKit,尤其是 TextKit 2,大大改进了换行算法,对于那些想要保持与 ios 15 相同外观以及追求’UI像素完美’的开发者可要注意哦~</p>
+<p><img src="https://image.white-than-wood.zone/ios16/textview/ios15_5.png"><br><img src="https://image.white-than-wood.zone/ios16/textview/ios15_4.png" style="width:100%;"></p>
+<p>从上面的图中可以看出,换行算法的修改还是很大的,为了始终保持 TextKit 2 两侧的间隙相同/平衡,苹果工程师舍弃了一些外观包袱和’UI像素完美’.</p>
+<ul>
+<li><p>解决方案: </p>
+<p>对于那些势必保持相同外观与追求’UI像素完美’的开发者来说,苹果的开发者论坛给出了一些可实行的方案,可以尝试一下.</p>
+<p><img src="https://image.white-than-wood.zone/ios16/textview/resolve.png" style="width:100%;"></p>
+</li>
+<li><p>OpenGL 崩溃</p>
+<p>根据苹果开发者论坛 <a href="https://developer.apple.com/forums/thread/707644" target="_blank" rel="noopener">OpenGL crashes (iOS 16)</a>,当在 ios 16 beta simulator 模拟器中调用 presentRenderBuffer 时,OpenGL 崩溃,在 iOS 15 或更低版本运行正常.</p>
+<ul>
+<li><p>解决方案:</p>
+<p>根据苹果的开发者论坛中某开发者所给的回复,已经在 ios 16 beta 3 中进行了修复.也就证明了 beta 3 之前的 ios 16 beta 版本都有调用 OpenGL presentRenderBuffer 以及 EXC_BAD_ACCESS 会出现崩溃的情况,开发小伙伴们注意了哦~</p>
+<p><img src="https://image.white-than-wood.zone/ios16/crashed/openGL.png" style="width:100%;"></p>
+<p>Tips: 此回复并没有得到确认,可能还是需要实践验证一下是否可行.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>  总得来说,ios 16 对于用户的安全性、便捷性、个性化和使用体感做的更加细致入微了,苹果在逐步将 iPhone 做的更加向纵深方向发展,而在横向创新领域,则并没有看到任何的扩展化,可能苹果是想现阶段在此 iPhone 的现功能基础上进行维护和深耕吧.</p>
+]]></content>
+      <categories>
+        <category>ios16</category>
+      </categories>
+      <tags>
+        <tag>ios16</tag>
+        <tag>xcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建部署devtools-frontend</title>
     <url>/2022/07/03/%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2chrome-devtools-frontend/</url>
     <content><![CDATA[<h1 id="devtools-frontend"><a href="#devtools-frontend" class="headerlink" title="devtools-frontend"></a>devtools-frontend</h1><blockquote>
@@ -4830,195 +5029,6 @@ http-server -p 8000
       <tags>
         <tag>devtools-frontend</tag>
         <tag>chrome</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ios 16 体验分享</title>
-    <url>/2022/07/17/ios16beta%E4%BD%93%E9%AA%8C/</url>
-    <content><![CDATA[<h1 id="ios-16-beta-3"><a href="#ios-16-beta-3" class="headerlink" title="ios 16 beta 3"></a>ios 16 beta 3</h1><p>现阶段 ios 16 内测版本已经出了 3 个版本,而今天要体验的 ios 16 就是最新的版本 —— ios 16 beta 3,在此可以直接通过 xcode beta ios 模拟器的方式直接体验.</p>
-<blockquote>
-<p>安装 xcode beta 版本</p>
-</blockquote>
-<p>通过<a href="https://developer.apple.com/cn/xcode/resources/" target="_blank" rel="noopener"> xcode 14.0 beta 3 </a>可下载 xcode beta 最新版本.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/download.png" alt></p>
-<p>下载 xip 文件成功后,再解压安装.</p>
-<ul>
-<li>xcode 14.0 beta 3 (platform: ios 16 beta 3)</li>
-</ul>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodeBeta.png" alt></p>
-<ul>
-<li>xcode 13.4.1 (platform: ios 15.5)</li>
-</ul>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodePublic.png" alt></p>
-<p>PS: Mac 磁盘空间至少留出 30G 方可解压安装 beta 版本,否则会总是出现’磁盘空间不足…’的提示.<br>Tips: xcode 正式版本至少留出 50G 才可下载解压安装.</p>
-<blockquote>
-<p>体验 ios 16 beta 3 模拟器</p>
-</blockquote>
-<ul>
-<li><p>步骤</p>
-<p>此步骤是为了照顾那些第一次使用 xcode 的童鞋,这里将演示如何创建 xcode 应用,添加、选择、运行 ios 模拟器的步骤,已经熟知的童鞋可以略过.</p>
-<ul>
-<li><p>创建新项目</p>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaCreate.png" alt></p>
-</li>
-<li><p>选择创建 App 应用</p>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaChooseApp.png" alt></p>
-</li>
-<li><p>项目以及组织、公司名称</p>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaProduct.png" alt></p>
-</li>
-<li><p>WorkSpace、SwiftUI</p>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaWorkSpace.png" alt></p>
-</li>
-<li><p>选择模拟器机型以及 ios 版本</p>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaDevice.png" alt></p>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaOS.png" alt></p>
-</li>
-<li><p>运行模拟器</p>
-<p><img src="https://image.white-than-wood.zone/ios16/xcodeBetaRun.png" alt></p>
-</li>
-</ul>
-</li>
-<li><p>特性</p>
-<p>现在是’硬菜’,在此将与 ios 15.5对比,来分享体验 ios 16,以此来体现出 ios 16 的特性.而在对比中,为了控制变量,选用机型都为 iPhone 13 Pro.</p>
-<ul>
-<li><p>锁屏界面个性化.</p>
-<p>从 ios 16 开始,可以自定义锁屏界面的时间与日期样式,包含：颜色、背景、字型等,也能在锁屏加上实用小工具以快速查看,例如：天气、日历、智慧家庭等小工具. 此功能特性是 ios 16 最大的亮点,虽然在 xcode ios simulator 中 设置 -&gt; 壁纸 -&gt; 锁屏自定义(Lockscreen Widget) 并不存在,但可以通过锁屏右下角’相机’图标实行配置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes.png" style="width: 40%"><br>锁屏的变动主要围绕着个性化进行展开,时间的上下部分都被 Apple 定义为了小组件区域,上部以单行图标配文字的形式进行展现,可以根据自己的需要选择日历、股市、健身、时钟、天气五个原生类目.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_1.png" style="width: 40%"><br>时间的下部区域是模块化的小组件区域,这个区域内的小组件包含了股市、家庭、健身、日历、时钟、提醒事项、天气、电池八个原生类目.和顶部小组件不同的是,这里的组件样式更加丰富,设计感更强,大小选择也更加多样化,可以根据自己的喜好进行随意搭配.值得一提的是,锁屏的小组件 Apple 已将相关权限开放给开发者,如果 App 进行适配,后续将可以在锁屏中看到更多精彩的内容.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_2.png" style="width: 40%"><br>中间时间部分,Apple 不仅调整了占位大小,还提供了阿拉伯数字、阿拉伯印度文、天城文三种文字,每种文字包含了 6 种不同的设计.针对色彩部分,可以在最下方选择背景适配色彩,也可以选择纯白色.</p>
-<div style="display:flex;flex-flow: row nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3_1.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_3_2.png"><br></div><br>在 ios 16 中,可以将自己的锁屏以及桌面与专注模式进行关联,在开启不同专注模式的同时,锁屏和桌面会自动切换到自己先前设定的方案中.在不同的环境下你可能需要接受到信息不一样,例如在家需要看智能设备的状态,在工作的时候需要看日程计划,在摄影的时候需要关心日出日落.在小组件不同的同时,也可以换一张不同的壁纸,换个壁纸也换一个心情.当然在 xcode ios simulator 模拟器中现阶段是不能添加新的壁纸,也不存在’专注模式’,进而没有办法体验.<br><div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_5.png"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_7.png"><br></div>
-
-<p>ios 15.5 中并不能自定义锁屏,也不能自定义添加实用小工具,更不能通过锁屏右下角’相机’图标实行配置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_old.png" style="width: 40%"></p>
-</li>
-<li><p>相册隐私加锁.</p>
-<p>ios 16 在相册中’已隐藏’和’最近删除’选项中,已经支持加锁,增强用户对于相册中图片安全性的保护.</p>
-<div style="display:flex;flex-flow: row nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios16Albums.png"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios16AlbumsHidden.png"><br></div><br>ios 15.5 在相册中’已隐藏’和’最近删除’选项中,并没有加锁.<br><br><div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios155Albums.png"><br> <img src="https://image.white-than-wood.zone/ios16/albums/ios155AlbumsHidden.png"><br></div>
-</li>
-<li><p>主界面底部页面改进.</p>
-<p>ios 16 在界面底部显示 banner 位置的’点’替换为新的 Spotlight 搜索气泡,在桌面直接向下滑动即可打开. 与页面点一样,可以在搜索气泡上向左或向右滑动,以加快滚动浏览其他主屏幕页面. Spotlight 支持搜索系统和应用内的文本、照片、文件等,还能进行单位、货币换算,当 iPhone 接入网络后,可以直接用关键字搜索网页.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/views/ios16view.png" style="width: 40%"></p>
-<p>ios 15.5 在界面底部显示 banner 位置的’点’还是原来的功能,向左或向右滑动,以加快滚动浏览其他主屏幕页面.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/views/ios155view.png" style="width: 40%"></p>
-</li>
-<li><p>短信息支持撤回以及二次编辑.</p>
-<p>ios 16 在短信息方面也做了升级,短信息支持撤回以及二次编辑发送.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/message/ios16message.png" style="width: 40%"></p>
-<p>ios 15.5 在短信息方面并不支持上述新功能.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/message/ios155message.png" style="width: 40%"></p>
-</li>
-<li><p>键盘方言方面追加了选项.</p>
-<p>ios 16 在键盘方面针对拼音输入追加了四川话的选项.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/keyboard/ios16keyBoard.png" style="width: 40%"></p>
-<p>ios 15.5 在键盘方面则不存在此选项.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/keyboard/ios155keyBoard.png" style="width: 40%"></p>
-</li>
-<li><p>锁屏通知底部显示.</p>
-<p>由于 ios 16 在锁屏个性化上的重大改进(自定义锁屏界面、锁屏中上部设置实用小工具),导致锁屏通知底部显示.</p>
-<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice.png"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_2.png"><br></div>
-
-<p>ios 15.5 锁屏通知仍然是屏幕中上部显示.</p>
-<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_3.png"><br> <img src="https://image.white-than-wood.zone/ios16/notice/notice_1.png"><br></div>
-</li>
-<li><p>健康App 用药提醒</p>
-<p>ios 16 对于有日常药物服用需求的用户,可以在「健康」&gt;「 浏览」&gt;「用药」中设置并管理自己日常药物.设定好药品和服用时间后,ios 可以按时提示你去服用药物,并记录服药记录.此外,还支持一键导出自己的药品清单,方便购买时使用.</p>
-<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;"><br> <img src="https://image.white-than-wood.zone/ios16/medicine/medicine.png"><br> <img src="https://image.white-than-wood.zone/ios16/medicine/medicine_1.png"><br></div>
-
-<p>ios 15.5 健康App 则不存在用药提醒这个功能.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/medicine/medicine_old.png" style="width: 40%"></p>
-</li>
-<li><p>兼容设备列表.</p>
-<p>ios 16 已不再支持 iPhone 6S、6SPlus、7、7Plus、SE一代机型.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/device/deviceAdapter.png" alt></p>
-</li>
-</ul>
-</li>
-<li><p>憾事</p>
-<p>比较遗憾的是,ios 16 有很多做了比较大改动的新功能特性,在 xcode ios simulator 模拟器上面体验不到,下面就来例举一下.</p>
-<p>PS: 以下所有新功能特性,都是经过网上多渠道查询得论,未作实机验证.</p>
-<ul>
-<li><p>锁屏界面个性化.</p>
-<p>新的壁纸类型包含人物、照片、随机、Emoji、天气、天文、颜色八个主题.其中,选择人物主题时,系统会自动检测照片中前景部分,将前景放置在组件和时间的前方,整体融合效果非常好.但在 xcode ios simulator 模拟器上现阶段是不能添加新的壁纸,且不能对壁纸实行个性化设置,如果对图片实行设置壁纸会出现莫名bug: 壁纸并没有设置,且呈为全黑.<br><div style="display:flex;flex-flow: column nowrap;"><br> <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_3.png" style="width: 80%"><br> <div style="display:flex;flex-flow: row nowrap;width: 80%;margin: 0 auto;"><br>  <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_1.png" alt><br>  <img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios_2.png" alt><br> </div><br></div><br>天气和天文这两种动态壁纸,则会根据你的定位和时间,实时变化锁屏的内容.说到这里,就不得不让人联想到这些锁屏和 AOD(全天候显示)的联系.自 iPhone 13 加入了 LTPO 的显示屏,支持显示刷新率在 10Hz 和 120Hz 之间动态调整.此外,近日在解析 ios 16 代码时发现了有关 AOD 相关的字段,显示 iPhone 14 Pro 和 iPhone 14 Pro Max 可能配备该功能.当然在 xcode ios simulator 模拟器上现阶段是不能添加新的壁纸,更无法设置动态壁纸,设置壁纸也会出现莫名bug,也无法通过内置搜索进行查询,进而无法实行设置.<br><img src="https://image.white-than-wood.zone/ios16/lockscreens/changes_ios.png" alt></p>
-</li>
-<li><p>强大的专注模式.</p>
-<p>除了上面所提及的,专注模式与锁屏进行联动,实现锁屏壁纸和小组件的自动切换,它也可以同时定义解锁后显示某一页主屏,并切换 Apple Watch 的表盘,在 xcode ios simulator 模拟器中是不存在 ‘sspal’ 或者 ‘专注模式’ 的,进而也无法实行体验.<br><img src="https://image.white-than-wood.zone/ios16/sspal/sspal_1.png" alt><br>还提供了一项专注模式过滤条件.在这里可以针对日历、信息、浏览器、低电量模式、深色模式进行更加细致的设定.例如,当相应的专注模式开启时,日历会会被筛选,其余的日历无法查看,系统会自动开启等等.这样一来,专注模式的功能变得更加自动化、更加个性化.相信在以后的更新中,专注模式应该可以做到更多的事情.<br><img src="https://image.white-than-wood.zone/ios16/sspal/sspal_2.png" alt></p>
-</li>
-<li><p>地图多途经点路线规划</p>
-<p>新版地图追加一项基础,但是又比较实用的功能多途经点路线规划,用户可以通过路线页面,追加自己需要到达的地点,实现途经点导航.目前该功能已在 11 个国家上线,国内上线时间未知.</p>
-<p> <img src="https://image.white-than-wood.zone/ios16/maps/maps.png"></p>
-<p>而在xcode ios simulator 模拟器上则是这番场景,GPS导航打开无法规划路线,坐标显示也是错误的.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/maps/ios16Maps.png" style="width: 40%"></p>
-</li>
-<li><p>视频中的实况文本</p>
-<p>iOS 15 Apple 为我们带来了实况文本的功能,让我们可以找相册、相机、输入的时候快速提取到图像的文字信息,而在 iOS 16 中，Apple 再次加强了实况文本的功能,在任意包含文字的画面暂停视频,即可执行拷贝、翻译、查询、共享等操作,并且适用于照片、快速查看、Safari 和其他应用程序多种场景.</p>
-<div style="display:flex;flex-flow: row nowrap;margin-bottom: 28px;align-items: center;"><br> <img src="https://image.white-than-wood.zone/ios16/videos/iosVideos.png"><br> <img src="https://image.white-than-wood.zone/ios16/videos/iosPictures.png"><br></div>
-
-<p>而在xcode ios simulator 模拟器上则是无法提取任何的内容,视频实况文本功能是没有加上的.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/videos/videos.png" style="width: 40%"></p>
-</li>
-<li><p>照片支持快速抠图</p>
-<p>在回顾 iOS 15 推出的看图查询 (Visual Lookup) 功能的时候,Apple 还向我们介绍了借助 CoreML 和神经网络引擎实现的全新的抠图功能.只要在照片上长按,可以快速抠出图片的前景部分,这个功能不仅适用于现实拍摄的照片,虚拟的动画也同样适用.将抠下来的图片按住不放,可以直接切换后台发送到即时通讯应用中.（经测试 iPhone 上 iMessage、Line 等均支持,iOS 微信暂不支持、iPadOS 微信支持）.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/pictures/ios16Pictures.png"></p>
-<p>而在xcode ios simulator 模拟器上则是无法实行对百度下载的人像抠图功能,长按没有反应,是不存在全新的抠图功能的.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/pictures/pictures.png" style="width: 40%"></p>
-</li>
-</ul>
-</li>
-<li><p>技术特性</p>
-<ul>
-<li><p>ios 16 为了帮助使每行的长度在视觉上保持平衡,其中 TextKit,尤其是 TextKit 2,大大改进了换行算法,对于那些想要保持与 ios 15 相同外观以及追求’UI像素完美’的开发者可要注意哦~</p>
-<p><img src="https://image.white-than-wood.zone/ios16/textview/ios15_5.png"><br><img src="https://image.white-than-wood.zone/ios16/textview/ios15_4.png" style="width:100%;"></p>
-<p>从上面的图中可以看出,换行算法的修改还是很大的,为了始终保持 TextKit 2 两侧的间隙相同/平衡,苹果工程师舍弃了一些外观包袱和’UI像素完美’.</p>
-<ul>
-<li><p>解决方案: </p>
-<p>对于那些势必保持相同外观与追求’UI像素完美’的开发者来说,苹果的开发者论坛给出了一些可实行的方案,可以尝试一下.</p>
-<p><img src="https://image.white-than-wood.zone/ios16/textview/resolve.png" style="width:100%;"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>  总得来说,ios 16 对于用户的安全性、便捷性、个性化和使用体感做的更加细致入微了,苹果在逐步将 iPhone 做的更加向纵深方向发展,而在横向创新领域,则并没有看到任何的扩展化,可能苹果是想现阶段在此 iPhone 的现功能基础上进行维护和深耕吧.</p>
-]]></content>
-      <categories>
-        <category>ios16</category>
-      </categories>
-      <tags>
-        <tag>ios16</tag>
-        <tag>xcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>日常开发难点</title>
-    <url>/2022/06/12/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E9%9A%BE%E7%82%B9/</url>
-    <content><![CDATA[<h1 id="列表项上下键选中使用-scrollIntoView-behavior-‘smooth’-抖动问题"><a href="#列表项上下键选中使用-scrollIntoView-behavior-‘smooth’-抖动问题" class="headerlink" title="列表项上下键选中使用 scrollIntoView behavior: ‘smooth’ 抖动问题"></a>列表项上下键选中使用 scrollIntoView behavior: ‘smooth’ 抖动问题</h1><blockquote>
-<p>原理分析</p>
-</blockquote>
-<p>  放弃计算DOM getBoundingClientRect的方式，也不使用原版每次选中都进行 scrollIntoView 自适应 ‘smooth’ 滚动，而是采用底层 API <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API" target="_blank" rel="noopener">Intersection Observer API</a> 来计算列表项(list-item)是否存在于可视的列表范围(list-container)之内，底层 API 性能、效率、效果都比前面两种方式高的多。</p>
-<p>  Intersection Observer 从用法上还是蛮简单的，那理解上来说呢，简单来讲：是一个观察者模式，目标元素与视口会产生一个是否可见交叉区，通过观察视口与目标元素的交叉关系，可以在 callback 回调中获取目标元素与视口的交叉关系信息，产生”交叉观察器”的效果。</p>
-<p>  <img src="https://image.white-than-wood.zone/difficult/intersection.gif" alt></p>
-<p>  特性: callback 一般只会触发两次，一次是目标元素开始可见，另一次是开始不可见。</p>
-<blockquote>
-<p>可行性分析</p>
-</blockquote>
-<p>  那在个人的项目例子中呢，所有的 list-item 都是目标元素，通过观察完全超出视口范围的第一个 list-item 开始可见的时间点来引起 scrollIntoView 平滑动画过渡的 ‘smooth’ 滚动，在滚动之后视口有新的一批 list-item 的情况下，重建 IntersectionObserver，重置 IntersectionObserver 实例，以此来循环。</p>
-<p>  可以这么想，”交叉观察器”观察的永远是新的一批 list-item 与视口的交叉关系，而老一批 list-item 在 scrollIntoView 滚动之后，因”交叉观察器”特性(只会触发两次)应当重建”交叉观察器”重新观察。</p>
-<p>  在这时候可能想问，有没有可能存在一种情况，scrollIntoView 平滑动画过渡的 ‘smooth’ 滚动的时间会慢于按键的速度，通过完全超出视口范围的第二个、第三个等 list-item 开始可见的时间点再次引起滚动，从而产生抖动的问题呢？答案是理论上存在这种可能性，而在实际操作上，极端操作极速按键按住不放的情况下存在，而在比较快按键的节奏下，是不存在这种可能性的。</p>
-<ul>
-<li>首先，在第一次滚动之后，第一时间就对 IntersectionObserver 实行重建，IntersectionObserver 实例实行重置，将源实例置为null并停止对所有目标元素可见性变化的观察，虽然观察者本身仍然处于活动状态，在 disconnect() 之后，目标元素仍然可以通过 observe() 传递给观察者，但没有目标，在实例置为null后，会很快被垃圾回收机制处理，所以这时候是不会存在的。</li>
-<li>其次，即使按键按住不放极速实行选中，也可以通过节流来解决，因为按键按住不放这种操作，本身就是一种非常规且触及极端边界的操作，不必实时且完全满足这种极端操作。</li>
-</ul>
-<p>PS: 这种重建 IntersectionObserver，重置 IntersectionObserver 实例的方式确实有一些不是很优雅，但官方并没有提供动态修改的方法，不可能把希望寄托在官方修改api上，了解ECMA的提案流程的同学肯定知道，那将是个十分漫长的过程，所以眼下就只能找到这种比较切实的办法来解决这个问题。</p>
-<p>Attention: 原生事件的监听会阻断 scrollIntoView ‘smooth’ 滚动动画的执行，产生滑动卡顿，所以必须取消默认事件的执行( e.preventDefault() )或者直接取消监听事件。</p>
-<blockquote>
-<p>实际演示</p>
-</blockquote>
-  <video muted controls="controls" autoplay="autoplay" loop="loop"><br>    <source src="https://image.white-than-wood.zone/difficult/point.mp4" type="video/mp4"><br>  </video>
-]]></content>
-      <categories>
-        <category>难点</category>
-      </categories>
-      <tags>
-        <tag>难点</tag>
-        <tag>日常开发</tag>
       </tags>
   </entry>
   <entry>
