@@ -141,7 +141,7 @@
 <meta property="og:image" content="https://image.white-than-wood.zone/ios16/textview/ios15_4.png">
 <meta property="og:image" content="https://image.white-than-wood.zone/ios16/textview/resolve.png">
 <meta property="og:image" content="https://image.white-than-wood.zone/ios16/crashed/openGL.png">
-<meta property="og:updated_time" content="2022-07-21T08:40:17.042Z">
+<meta property="og:updated_time" content="2022-07-21T08:42:04.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios 16 体验分享">
 <meta name="twitter:description" content="ios 16 beta 3现阶段 ios 16 内测版本已经出了 3 个版本,而今天要体验的 ios 16 就是最新的版本 —— ios 16 beta 3,在此可以直接通过 xcode beta ios 模拟器的方式直接体验.  安装 xcode beta 版本  通过 xcode 14.0 beta 3 可下载 xcode beta 最新版本.  下载 xip 文件成功后,再解压安装.  xc">
@@ -575,6 +575,8 @@
 <p>对于那些势必保持相同外观与追求’UI像素完美’的开发者来说,苹果的开发者论坛给出了可实行的方案,将 TextKit 2 替换成 TextKit 1,可以尝试一下.</p>
 <p><img src="https://image.white-than-wood.zone/ios16/textview/resolve.png" style="width:100%;"></p>
 </li>
+</ul>
+</li>
 <li><p>调用绘制图形 OpenGL API 崩溃</p>
 <p>根据苹果开发者论坛 <a href="https://developer.apple.com/forums/thread/707644" target="_blank" rel="noopener">OpenGL crashes (iOS 16)</a>,当在 ios 16 beta simulator 模拟器中调用 presentRenderBuffer 时,OpenGL 崩溃,在 iOS 15 或更低版本运行正常.</p>
 <ul>
@@ -588,8 +590,6 @@
 <li><p>Lockscreen Widget(锁屏小工具) 支持 ios 15</p>
 <p>有没有一种可能,在现有的 Widget Bundle 中添加 Lock Screen Widget 并仍然支持 ios 15,怎么做可以实现呢?<br>答案是: 根据苹果开发者论坛和 stackoverflow 可知,下续代码应该是有效的,但也亟需实践验证可行性.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> struct SomeWidgetBundle: WidgetBundle &#123;</span><br><span class="line">   @WidgetBundleBuilder</span><br><span class="line">   <span class="keyword">var</span> body: some Widget &#123;</span><br><span class="line">       AlwaysAvailableWidget()</span><br><span class="line">       LockScreenWidget()</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> struct LockScreenWidget: Widget &#123;</span><br><span class="line">   <span class="keyword">var</span> body: some WidgetConfiguration &#123;</span><br><span class="line">     if #available(iOSApplicationExtension 16.0, *) &#123;</span><br><span class="line">       <span class="keyword">return</span> StaticConfiguration(</span><br><span class="line">         kind: <span class="string">"some.kind"</span>,</span><br><span class="line">         provider: LockScreenWidgetTimelineProvider()</span><br><span class="line">       ) &#123; provider <span class="keyword">in</span></span><br><span class="line">         Text(<span class="string">"Some view"</span>)</span><br><span class="line">       &#125;</span><br><span class="line">       .configurationDisplayName(<span class="string">"Some display name"</span>)</span><br><span class="line">       .description(<span class="string">"Some description"</span>)</span><br><span class="line">       .supportedFamilies([.accessoryCircular])</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> EmptyWidgetConfiguration()</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
 </li>
 </ul>
 </li>
