@@ -210,43 +210,6 @@ hexo deploy
       </tags>
   </entry>
   <entry>
-    <title>2018-04-25 react-router 3.0 browserHistory配置</title>
-    <url>/2018/04/25/react-router-3-0-browserHistory%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="为什么推荐使用browserHistory-舍弃hashHistory"><a href="#为什么推荐使用browserHistory-舍弃hashHistory" class="headerlink" title="为什么推荐使用browserHistory,舍弃hashHistory"></a>为什么推荐使用browserHistory,舍弃hashHistory</h1><blockquote>
-<ol>
-<li>首先browserHistory从表现来看,比较舒服和语义化,更易读。</li>
-<li>browserHistory使用的是HTML5的History API,根据路由路径的变化引起浏览器历史记录的变化;hashHistory则是依靠hash的改变,来使得浏览器的历史记录发生改变。hashHistory的hash部分不会请求到服务端,服务端获取不到URL的细节部分,而browserHistory使用的History API需要服务端的支持,服务端可以完全的掌握URL中的细节部分。</li>
-<li>有一些浏览器会把hashHistory URL当中的hash部分删除掉,记起之前进行分享的时候,URL传到微信中,hash部分遭到丢失。</li>
-</ol>
-</blockquote>
-<h1 id="browserHistory配置"><a href="#browserHistory配置" class="headerlink" title="browserHistory配置"></a>browserHistory配置</h1><blockquote>
-<p>路由上面除了引入不同,基本上和hashHistory配置相同</p>
-</blockquote>
-<pre><code>import {Router, browserHistory} from &quot;react-router&quot;;
-&lt;Router history={browserHistory}&gt;
-&lt;/Router&gt;
-</code></pre><blockquote>
-<p>配置路径为空时,callback的处理,使用webpack-dev-server时,在配置文件内部添加</p>
-</blockquote>
-<pre><code>historyApiFallback: true
-</code></pre><blockquote>
-<p>使用nginx时,在配置文件内部添加</p>
-</blockquote>
-<pre><code>location / {
-    root ...
-    index index.html index.htm
-    try_files $uri /index.html
-}
-</code></pre>]]></content>
-      <categories>
-        <category>react-router</category>
-      </categories>
-      <tags>
-        <tag>react-router</tag>
-        <tag>browserHistory</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2018-04-25 react优化</title>
     <url>/2018/04/25/react%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h1 id="React性能优化"><a href="#React性能优化" class="headerlink" title="React性能优化"></a>React性能优化</h1><blockquote>
@@ -285,6 +248,43 @@ hexo deploy
       </categories>
       <tags>
         <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2018-04-25 react-router 3.0 browserHistory配置</title>
+    <url>/2018/04/25/react-router-3-0-browserHistory%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="为什么推荐使用browserHistory-舍弃hashHistory"><a href="#为什么推荐使用browserHistory-舍弃hashHistory" class="headerlink" title="为什么推荐使用browserHistory,舍弃hashHistory"></a>为什么推荐使用browserHistory,舍弃hashHistory</h1><blockquote>
+<ol>
+<li>首先browserHistory从表现来看,比较舒服和语义化,更易读。</li>
+<li>browserHistory使用的是HTML5的History API,根据路由路径的变化引起浏览器历史记录的变化;hashHistory则是依靠hash的改变,来使得浏览器的历史记录发生改变。hashHistory的hash部分不会请求到服务端,服务端获取不到URL的细节部分,而browserHistory使用的History API需要服务端的支持,服务端可以完全的掌握URL中的细节部分。</li>
+<li>有一些浏览器会把hashHistory URL当中的hash部分删除掉,记起之前进行分享的时候,URL传到微信中,hash部分遭到丢失。</li>
+</ol>
+</blockquote>
+<h1 id="browserHistory配置"><a href="#browserHistory配置" class="headerlink" title="browserHistory配置"></a>browserHistory配置</h1><blockquote>
+<p>路由上面除了引入不同,基本上和hashHistory配置相同</p>
+</blockquote>
+<pre><code>import {Router, browserHistory} from &quot;react-router&quot;;
+&lt;Router history={browserHistory}&gt;
+&lt;/Router&gt;
+</code></pre><blockquote>
+<p>配置路径为空时,callback的处理,使用webpack-dev-server时,在配置文件内部添加</p>
+</blockquote>
+<pre><code>historyApiFallback: true
+</code></pre><blockquote>
+<p>使用nginx时,在配置文件内部添加</p>
+</blockquote>
+<pre><code>location / {
+    root ...
+    index index.html index.htm
+    try_files $uri /index.html
+}
+</code></pre>]]></content>
+      <categories>
+        <category>react-router</category>
+      </categories>
+      <tags>
+        <tag>react-router</tag>
+        <tag>browserHistory</tag>
       </tags>
   </entry>
   <entry>
@@ -352,47 +352,6 @@ const PUBLIC_DIR = &quot;/&quot;,
       <tags>
         <tag>webpack</tag>
         <tag>webpack-dev-server</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2018-04-27 关于webstorm</title>
-    <url>/2018/04/27/%E5%85%B3%E4%BA%8Ewebstorm/</url>
-    <content><![CDATA[<h1 id="webstorm-license-server"><a href="#webstorm-license-server" class="headerlink" title="webstorm license server"></a>webstorm license server</h1><blockquote>
-<p>从毕业就开始使用webstorm,从webstorm 11到webstorm 2017,再到现在的webstorm 2018,webstorm IDE功能越来越强大,但是我从来不使用正版,而今天就给大家介绍一下,在使用盗版过程中最大的困难——license server。在最初的时候,我也是百度的一些Activation code,后来发现这些Activation code极不稳定,可能是一个Activation code只能在一个终端使用吧,我放弃了使用Activation code的方式。</p>
-</blockquote>
-<blockquote>
-<p>后来,在<b>Webstorm吧</b>找到了一种可以设置试用期到2099年的方法:改变本地的日期时间至2099年11月30日,然后安装webstorm,选择试用,试用期一个月,这时候你的试用期就到了2099年的12月31日。假如你已经安装了webstorm,直接找到WINDOWS系统,C:/Users(用户)/你的WINDOWS电脑用户名/.Webstorm2017.2/config/eval,直接将eval文件删掉,重新打开webstorm,更改本地日期,后面的操作就同上了。直到2017.3版本之前,使用的很舒服,到了2017.3版本,JetBrains发现了这个漏洞,进行了修补,由此也放弃了使用这种方式。</p>
-</blockquote>
-<blockquote>
-<p>再之后,就开始使用license server,使用的license server如下:</p>
-</blockquote>
-<pre><code>http://idea.imsxm.com (2017.3.3版本极其之前版本可用)
-http://idea.iteblog.com/key.php (2017.1可用)
-http://www.aku.vn/idea (2017.1可用)
-http://idea.ibdyr.com (2017.3.3版本极其之前版本可用)
-</code></pre><blockquote>
-<p>再后来,就开始使用本地nginx反向代理<a href="http://idea.imsxm.com,将下面的配置放进server中" target="_blank" rel="noopener">http://idea.imsxm.com,将下面的配置放进server中</a>:</p>
-</blockquote>
-<pre><code>location /rpc {
-        proxy_pass   http://idea.imsxm.com/rpc;
-        proxy_redirect             off;
-        proxy_set_header           Host $host;
-        proxy_set_header           X-Real-IP $remote_addr;
-        proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;
-}
-</code></pre><blockquote>
-<p>现在连本地nginx反向代理都失效了,jetbrains在2017.3.4版本使用了ip地址动态封禁,经过我很长时间的寻找,找到了现在在2018版本之后都可使用的license server:</p>
-</blockquote>
-<pre><code>http://www.activejetbrains.ml
-</code></pre><blockquote>
-<p>最新的license server转自网上的一篇文章,来源于<a href="https://www.imsxm.com/jetbrains-license-server.html" target="_blank" rel="noopener">https://www.imsxm.com/jetbrains-license-server.html</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>webstorm</category>
-      </categories>
-      <tags>
-        <tag>webstorm</tag>
       </tags>
   </entry>
   <entry>
@@ -573,6 +532,47 @@ function co(gc_co){
         <tag>异步</tag>
         <tag>Promise</tag>
         <tag>async await</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2018-04-27 关于webstorm</title>
+    <url>/2018/04/27/%E5%85%B3%E4%BA%8Ewebstorm/</url>
+    <content><![CDATA[<h1 id="webstorm-license-server"><a href="#webstorm-license-server" class="headerlink" title="webstorm license server"></a>webstorm license server</h1><blockquote>
+<p>从毕业就开始使用webstorm,从webstorm 11到webstorm 2017,再到现在的webstorm 2018,webstorm IDE功能越来越强大,但是我从来不使用正版,而今天就给大家介绍一下,在使用盗版过程中最大的困难——license server。在最初的时候,我也是百度的一些Activation code,后来发现这些Activation code极不稳定,可能是一个Activation code只能在一个终端使用吧,我放弃了使用Activation code的方式。</p>
+</blockquote>
+<blockquote>
+<p>后来,在<b>Webstorm吧</b>找到了一种可以设置试用期到2099年的方法:改变本地的日期时间至2099年11月30日,然后安装webstorm,选择试用,试用期一个月,这时候你的试用期就到了2099年的12月31日。假如你已经安装了webstorm,直接找到WINDOWS系统,C:/Users(用户)/你的WINDOWS电脑用户名/.Webstorm2017.2/config/eval,直接将eval文件删掉,重新打开webstorm,更改本地日期,后面的操作就同上了。直到2017.3版本之前,使用的很舒服,到了2017.3版本,JetBrains发现了这个漏洞,进行了修补,由此也放弃了使用这种方式。</p>
+</blockquote>
+<blockquote>
+<p>再之后,就开始使用license server,使用的license server如下:</p>
+</blockquote>
+<pre><code>http://idea.imsxm.com (2017.3.3版本极其之前版本可用)
+http://idea.iteblog.com/key.php (2017.1可用)
+http://www.aku.vn/idea (2017.1可用)
+http://idea.ibdyr.com (2017.3.3版本极其之前版本可用)
+</code></pre><blockquote>
+<p>再后来,就开始使用本地nginx反向代理<a href="http://idea.imsxm.com,将下面的配置放进server中" target="_blank" rel="noopener">http://idea.imsxm.com,将下面的配置放进server中</a>:</p>
+</blockquote>
+<pre><code>location /rpc {
+        proxy_pass   http://idea.imsxm.com/rpc;
+        proxy_redirect             off;
+        proxy_set_header           Host $host;
+        proxy_set_header           X-Real-IP $remote_addr;
+        proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+</code></pre><blockquote>
+<p>现在连本地nginx反向代理都失效了,jetbrains在2017.3.4版本使用了ip地址动态封禁,经过我很长时间的寻找,找到了现在在2018版本之后都可使用的license server:</p>
+</blockquote>
+<pre><code>http://www.activejetbrains.ml
+</code></pre><blockquote>
+<p>最新的license server转自网上的一篇文章,来源于<a href="https://www.imsxm.com/jetbrains-license-server.html" target="_blank" rel="noopener">https://www.imsxm.com/jetbrains-license-server.html</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>webstorm</category>
+      </categories>
+      <tags>
+        <tag>webstorm</tag>
       </tags>
   </entry>
   <entry>
@@ -2089,6 +2089,19 @@ console.log(clay.age);
       </tags>
   </entry>
   <entry>
+    <title>2019-02-03 关于该不该让女伴侣在自己房本上加名字的理解</title>
+    <url>/2019/02/03/%E5%85%B3%E4%BA%8E%E8%AF%A5%E4%B8%8D%E8%AF%A5%E8%AE%A9%E4%BC%B4%E4%BE%A3%E5%9C%A8%E8%87%AA%E5%B7%B1%E6%88%BF%E6%9C%AC%E4%B8%8A%E5%8A%A0%E5%90%8D%E5%AD%97%E7%9A%84%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="关于该不该让女伴侣在自己房本上加名字的理解"><a href="#关于该不该让女伴侣在自己房本上加名字的理解" class="headerlink" title="关于该不该让女伴侣在自己房本上加名字的理解"></a>关于该不该让女伴侣在自己房本上加名字的理解</h1><p>关于这个问题,我认为男女双方结婚,就是在开一家公司,经营一家公司的业务,开公司,为了公司可以按照双方一致的目标前行,就要有保障弱势、先付出一方的制度在。很明显,在一段婚姻中,是女方先付出,男方后付出,包括女方的青春、生孩子、照顾家庭。而在现有的社会大体制度下,还远远没有形成男女平等的形势,女性还是处于劣势的,所以在婚姻中,女方也自然而然的是劣势的,所以既然男女双方要共同经营一个家庭、一个共同体,需要首先保障劣势和先付出的一方。所以我认为是该让女伴侣在自己房本上加名字的。</p>
+]]></content>
+      <categories>
+        <category>经济学改变世界观</category>
+      </categories>
+      <tags>
+        <tag>经济学</tag>
+        <tag>世界观</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2018-05-07 浅谈使用jQuery和react的区别</title>
     <url>/2018/05/07/%E6%B5%85%E8%B0%88%E4%BD%BF%E7%94%A8jQuery%E5%92%8Creact%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[]]></content>
@@ -2101,83 +2114,26 @@ console.log(clay.age);
       </tags>
   </entry>
   <entry>
-    <title>2018-05-21 使用Canvas绘制圆角按钮</title>
-    <url>/2018/05/21/%E4%BD%BF%E7%94%A8Canvas%E7%BB%98%E5%88%B6%E5%9C%86%E8%A7%92%E6%8C%89%E9%92%AE/</url>
-    <content><![CDATA[<h1 id="使用Canvas可视化工具绘制圆角按钮"><a href="#使用Canvas可视化工具绘制圆角按钮" class="headerlink" title="使用Canvas可视化工具绘制圆角按钮"></a>使用Canvas可视化工具绘制圆角按钮</h1><blockquote>
-<p>最近刚接触了Canvas可视化工具,下面通过一个使用Canvas绘制的圆角按钮的例子,来实践学到的Canvas经验</p>
-</blockquote>
-<pre><code>//对加载完成事件的封装,在本人写的日志2018-05-06-封装的一些小工具中有详细描述,在这里不再做更多的赘述
-let addEvent = (eventLoad) =&gt; {
-    let load = window.onload;
-    if(typeof load !== &quot;function&quot;) {
-        window.onload = eventLoad;
-    } else {
-        window.onload = function() {
-            load();
-            eventLoad();
-        };
-    }
-};
+    <title>2019-02-03 名言名句</title>
+    <url>/2019/02/03/%E5%90%8D%E8%A8%80%E5%90%8D%E5%8F%A5/</url>
+    <content><![CDATA[<h1 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h1><p>不懂得改变主意的人,什么都改变不了。  —— 温斯顿 丘吉尔</p><br><p>上帝要毁灭一个人,必先使其发狂。  —— 西方谚语</p><br><p>如果你问丘吉尔,为什么要做议员,他一定会说,”因为我要做大臣”;如果你再问丘吉尔,为什么要做大臣,他会斩钉截铁的说,”因为我要做首相”。  ——英国媒体,大概是《泰晤士报》</p>
 
-//Canvas绘制圆角按钮的函数
-let canvasRadiusButton = () =&gt; {
-    //假如DOM-Core中不存在getElementById方法,则返回false,退出函数
-    if(!document.getElementById) return false;
-    //假如DOM-Core中不存在createElement方法,则返回false,退出函数
-    if(!document.createElement) return false;
-    //假如DOM中不存在id名为home的元素节点,则返回false,退出函数
-    if(!document.getElementById(&quot;home&quot;)) return false;
-    //获取id名为home的元素节点
-    let home = document.getElementById(&quot;home&quot;),
-        //创造出canvas元素节点标签
-        canvas = document.createElement(&quot;canvas&quot;);
-    //设置canvas元素节点标签的宽度和高度都为200px    
-    canvas.width = 200;
-    canvas.height = 200;
-    //设置canvas绘制画布的类型为: 2d(平面画布)
-    let ctx = canvas.getContext(&quot;2d&quot;);
-    //绘制画布开始绘制路径
-    ctx.beginPath();
-    //设置绘制画布的起点坐标为: (12, 20)
-    ctx.moveTo(12, 20);
-    //使用贝塞尔曲线去绘制圆角
-    //bezierCurveTo方法有三组坐标参数,前面两组为两个控制点位置,利用这两个控制点可以完美的画出半圆、椭圆甚至是圆角,最后一组为曲线终点的位置
-    ctx.bezierCurveTo(12, 16, 15, 14, 19, 14);
-    //绘制直线至画布的(129, 14)坐标
-    ctx.lineTo(129, 14);
-    //继续使用贝塞尔曲线绘制圆角
-    ctx.bezierCurveTo(133, 14, 136, 16, 136, 20);
-    //绘制直线至画布的(136, 45)坐标
-    ctx.lineTo(136, 45);
-    //继续使用贝塞尔曲线绘制圆角
-    ctx.bezierCurveTo(136, 49, 133, 51, 129, 51);
-    //绘制直线至画布的(19, 51)坐标
-    ctx.lineTo(19, 51);
-    //继续使用贝塞尔曲线绘制圆角
-    ctx.bezierCurveTo(15, 51, 12, 49, 12, 45);
-    //绘制直线至画布的(12, 20)坐标
-    ctx.lineTo(12, 20);
-    //绘制画布结束绘制路径
-    ctx.closePath();
-    //设置画布路径的填充样式为: rgba(255, 255, 0, 0.8)
-    ctx.fillStyle = &quot;rgba(255, 255, 0, 0.8)&quot;;
-    //进行画布填充
-    ctx.fill();
-    //设置画布路径的color样式为: rgba(255, 0, 0, 0.5) 
-    ctx.strokeStyle = &quot;rgba(255, 0, 0, 0.5)&quot;;
-    //画布路径绘制完毕,实现绘制模型
-    ctx.stroke();
-    //将canvas元素节点添加到home元素节点里面,作为home元素节点的子节点    
-    home.appendChild(canvas);
-};
+<h1 id="人生"><a href="#人生" class="headerlink" title="人生"></a>人生</h1><p>人们总是容易记得自己是在一条船上,人们总是容易忘记自己是在一条河上。  ——马东</p><br><p>苟利国家生死以, 岂因祸福避趋之。  ——林则徐</p><br><p>有时候谈理想,在社会上普遍认知是冒傻气,所以我们不要谈理想,而心中有理想,我们需要不谈理想的理想。  ——许子东</p>
 
-addEvent(canvasRadiusButton);
-</code></pre>]]></content>
+<h1 id="文学"><a href="#文学" class="headerlink" title="文学"></a>文学</h1><p>我们正在培养一批绝对的、精致的利己主义者。  ——钱理群</p><br><p>我怕不再有人相信规则能战胜潜规则,我怕不再有人相信学场有别于官场,我怕不再有人相信学术不等于权术,我怕不再有人相信风骨远胜于媚骨。  ——卢新宁</p> 
+
+<h1 id="军事与管理"><a href="#军事与管理" class="headerlink" title="军事与管理"></a>军事与管理</h1><p>孙子兵法要旨: 五事七计</p><br><p>五事: 道天地将法</p><br><p>将: 智信仁勇严</p><br><p>七计: 主孰有道?将孰有能?天地孰得?法令孰行?兵众孰强?士卒孰练?奖罚孰明?</p><br><p>讲究先胜于庙算,后胜于实战,庙算多算胜则胜,多算败则败。而后战,兵者诡道也。</p>
+]]></content>
       <categories>
-        <category>Canvas</category>
+        <category>世界观</category>
       </categories>
       <tags>
-        <tag>Canvas</tag>
+        <tag>世界观</tag>
+        <tag>历史</tag>
+        <tag>军事</tag>
+        <tag>经济</tag>
+        <tag>文学</tag>
+        <tag>人生</tag>
       </tags>
   </entry>
   <entry>
@@ -3166,42 +3122,6 @@ reverseEach([10, 88, 66, 99, 101], function (index, item) {
       </tags>
   </entry>
   <entry>
-    <title>2019-02-03 关于该不该让女伴侣在自己房本上加名字的理解</title>
-    <url>/2019/02/03/%E5%85%B3%E4%BA%8E%E8%AF%A5%E4%B8%8D%E8%AF%A5%E8%AE%A9%E4%BC%B4%E4%BE%A3%E5%9C%A8%E8%87%AA%E5%B7%B1%E6%88%BF%E6%9C%AC%E4%B8%8A%E5%8A%A0%E5%90%8D%E5%AD%97%E7%9A%84%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="关于该不该让女伴侣在自己房本上加名字的理解"><a href="#关于该不该让女伴侣在自己房本上加名字的理解" class="headerlink" title="关于该不该让女伴侣在自己房本上加名字的理解"></a>关于该不该让女伴侣在自己房本上加名字的理解</h1><p>关于这个问题,我认为男女双方结婚,就是在开一家公司,经营一家公司的业务,开公司,为了公司可以按照双方一致的目标前行,就要有保障弱势、先付出一方的制度在。很明显,在一段婚姻中,是女方先付出,男方后付出,包括女方的青春、生孩子、照顾家庭。而在现有的社会大体制度下,还远远没有形成男女平等的形势,女性还是处于劣势的,所以在婚姻中,女方也自然而然的是劣势的,所以既然男女双方要共同经营一个家庭、一个共同体,需要首先保障劣势和先付出的一方。所以我认为是该让女伴侣在自己房本上加名字的。</p>
-]]></content>
-      <categories>
-        <category>经济学改变世界观</category>
-      </categories>
-      <tags>
-        <tag>经济学</tag>
-        <tag>世界观</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2019-02-03 名言名句</title>
-    <url>/2019/02/03/%E5%90%8D%E8%A8%80%E5%90%8D%E5%8F%A5/</url>
-    <content><![CDATA[<h1 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h1><p>不懂得改变主意的人,什么都改变不了。  —— 温斯顿 丘吉尔</p><br><p>上帝要毁灭一个人,必先使其发狂。  —— 西方谚语</p><br><p>如果你问丘吉尔,为什么要做议员,他一定会说,”因为我要做大臣”;如果你再问丘吉尔,为什么要做大臣,他会斩钉截铁的说,”因为我要做首相”。  ——英国媒体,大概是《泰晤士报》</p>
-
-<h1 id="人生"><a href="#人生" class="headerlink" title="人生"></a>人生</h1><p>人们总是容易记得自己是在一条船上,人们总是容易忘记自己是在一条河上。  ——马东</p><br><p>苟利国家生死以, 岂因祸福避趋之。  ——林则徐</p><br><p>有时候谈理想,在社会上普遍认知是冒傻气,所以我们不要谈理想,而心中有理想,我们需要不谈理想的理想。  ——许子东</p>
-
-<h1 id="文学"><a href="#文学" class="headerlink" title="文学"></a>文学</h1><p>我们正在培养一批绝对的、精致的利己主义者。  ——钱理群</p><br><p>我怕不再有人相信规则能战胜潜规则,我怕不再有人相信学场有别于官场,我怕不再有人相信学术不等于权术,我怕不再有人相信风骨远胜于媚骨。  ——卢新宁</p> 
-
-<h1 id="军事与管理"><a href="#军事与管理" class="headerlink" title="军事与管理"></a>军事与管理</h1><p>孙子兵法要旨: 五事七计</p><br><p>五事: 道天地将法</p><br><p>将: 智信仁勇严</p><br><p>七计: 主孰有道?将孰有能?天地孰得?法令孰行?兵众孰强?士卒孰练?奖罚孰明?</p><br><p>讲究先胜于庙算,后胜于实战,庙算多算胜则胜,多算败则败。而后战,兵者诡道也。</p>
-]]></content>
-      <categories>
-        <category>世界观</category>
-      </categories>
-      <tags>
-        <tag>世界观</tag>
-        <tag>历史</tag>
-        <tag>军事</tag>
-        <tag>经济</tag>
-        <tag>文学</tag>
-        <tag>人生</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>学习图解HTTP一书笔记</title>
     <url>/2019/02/03/%E5%AD%A6%E4%B9%A0%E5%9B%BE%E8%A7%A3HTTP%E4%B8%80%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>HTTP协议: 超文本传输协议<br>URI:统一资源标识符<br>URL:统一资源定位符<br>从客户端应用层传输到服务器段应用层的过程:</p>
@@ -3218,6 +3138,112 @@ IP根据地址,进行查询并加上网络层的首部发送至服务器端的�
       <tags>
         <tag>HTTP</tag>
         <tag>图解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2018-05-21 使用Canvas绘制圆角按钮</title>
+    <url>/2018/05/21/%E4%BD%BF%E7%94%A8Canvas%E7%BB%98%E5%88%B6%E5%9C%86%E8%A7%92%E6%8C%89%E9%92%AE/</url>
+    <content><![CDATA[<h1 id="使用Canvas可视化工具绘制圆角按钮"><a href="#使用Canvas可视化工具绘制圆角按钮" class="headerlink" title="使用Canvas可视化工具绘制圆角按钮"></a>使用Canvas可视化工具绘制圆角按钮</h1><blockquote>
+<p>最近刚接触了Canvas可视化工具,下面通过一个使用Canvas绘制的圆角按钮的例子,来实践学到的Canvas经验</p>
+</blockquote>
+<pre><code>//对加载完成事件的封装,在本人写的日志2018-05-06-封装的一些小工具中有详细描述,在这里不再做更多的赘述
+let addEvent = (eventLoad) =&gt; {
+    let load = window.onload;
+    if(typeof load !== &quot;function&quot;) {
+        window.onload = eventLoad;
+    } else {
+        window.onload = function() {
+            load();
+            eventLoad();
+        };
+    }
+};
+
+//Canvas绘制圆角按钮的函数
+let canvasRadiusButton = () =&gt; {
+    //假如DOM-Core中不存在getElementById方法,则返回false,退出函数
+    if(!document.getElementById) return false;
+    //假如DOM-Core中不存在createElement方法,则返回false,退出函数
+    if(!document.createElement) return false;
+    //假如DOM中不存在id名为home的元素节点,则返回false,退出函数
+    if(!document.getElementById(&quot;home&quot;)) return false;
+    //获取id名为home的元素节点
+    let home = document.getElementById(&quot;home&quot;),
+        //创造出canvas元素节点标签
+        canvas = document.createElement(&quot;canvas&quot;);
+    //设置canvas元素节点标签的宽度和高度都为200px    
+    canvas.width = 200;
+    canvas.height = 200;
+    //设置canvas绘制画布的类型为: 2d(平面画布)
+    let ctx = canvas.getContext(&quot;2d&quot;);
+    //绘制画布开始绘制路径
+    ctx.beginPath();
+    //设置绘制画布的起点坐标为: (12, 20)
+    ctx.moveTo(12, 20);
+    //使用贝塞尔曲线去绘制圆角
+    //bezierCurveTo方法有三组坐标参数,前面两组为两个控制点位置,利用这两个控制点可以完美的画出半圆、椭圆甚至是圆角,最后一组为曲线终点的位置
+    ctx.bezierCurveTo(12, 16, 15, 14, 19, 14);
+    //绘制直线至画布的(129, 14)坐标
+    ctx.lineTo(129, 14);
+    //继续使用贝塞尔曲线绘制圆角
+    ctx.bezierCurveTo(133, 14, 136, 16, 136, 20);
+    //绘制直线至画布的(136, 45)坐标
+    ctx.lineTo(136, 45);
+    //继续使用贝塞尔曲线绘制圆角
+    ctx.bezierCurveTo(136, 49, 133, 51, 129, 51);
+    //绘制直线至画布的(19, 51)坐标
+    ctx.lineTo(19, 51);
+    //继续使用贝塞尔曲线绘制圆角
+    ctx.bezierCurveTo(15, 51, 12, 49, 12, 45);
+    //绘制直线至画布的(12, 20)坐标
+    ctx.lineTo(12, 20);
+    //绘制画布结束绘制路径
+    ctx.closePath();
+    //设置画布路径的填充样式为: rgba(255, 255, 0, 0.8)
+    ctx.fillStyle = &quot;rgba(255, 255, 0, 0.8)&quot;;
+    //进行画布填充
+    ctx.fill();
+    //设置画布路径的color样式为: rgba(255, 0, 0, 0.5) 
+    ctx.strokeStyle = &quot;rgba(255, 0, 0, 0.5)&quot;;
+    //画布路径绘制完毕,实现绘制模型
+    ctx.stroke();
+    //将canvas元素节点添加到home元素节点里面,作为home元素节点的子节点    
+    home.appendChild(canvas);
+};
+
+addEvent(canvasRadiusButton);
+</code></pre>]]></content>
+      <categories>
+        <category>Canvas</category>
+      </categories>
+      <tags>
+        <tag>Canvas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比木白-Git</title>
+    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-Git/</url>
+    <content><![CDATA[<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h2 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  昨天在配置我们这个博客项目系统的时候,配置主题时,发现主题大多数都是从外部的github项目里面clone到本地的themes目录下的,导致我上传到远程github时,没办法做到将外部的github项目一起推上去,而此系统固定的主题又想一键生成,不需要团队成员自己麻烦的手动配置。<br>  于是经过和同事的讨论（这里感谢我的同事——鹏辉[小灰灰]）,通过git子模块的形式,做到了一键hexo主题生成的方案。</p>
+<blockquote>
+<p>详情</p>
+</blockquote>
+<p>  首先将外部github hexo主题项目fork到自己的账号下，然后拉取自己账号下的项目，配置好主题的一些属性以及方法，push到远程，这样一个配置好的hexo主题项目就完成了。</p>
+<p>  接着使用git submodule add @git/… themes/next将自己账号下刚刚fork的项目放到hexo主题目录下，这时候就会生成一个.gitmodules文件与子模块建立关系。</p>
+<p>  最后编写bash文件，形成一个命令，这里我在package.json里面写一句命令语，也就是yarn run themes 或者 npm run themes，下面是bash文件的详情:</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! bin/bash</span></span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>拉取并生成主题</p>
+</blockquote>
+<p>  完成之后，开发者就可以直接从远程git clone @git/…拉取项目，之后输入命令yarn run themes 或者 npm run themes，就可一键生成固定的主题啦!</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -3317,32 +3343,6 @@ IP根据地址,进行查询并加上网络层的首部发送至服务器端的�
         <tag>Git</tag>
         <tag>Nginx</tag>
         <tag>moment</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>比木白-Git</title>
-    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-Git/</url>
-    <content><![CDATA[<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h2 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  昨天在配置我们这个博客项目系统的时候,配置主题时,发现主题大多数都是从外部的github项目里面clone到本地的themes目录下的,导致我上传到远程github时,没办法做到将外部的github项目一起推上去,而此系统固定的主题又想一键生成,不需要团队成员自己麻烦的手动配置。<br>  于是经过和同事的讨论（这里感谢我的同事——鹏辉[小灰灰]）,通过git子模块的形式,做到了一键hexo主题生成的方案。</p>
-<blockquote>
-<p>详情</p>
-</blockquote>
-<p>  首先将外部github hexo主题项目fork到自己的账号下，然后拉取自己账号下的项目，配置好主题的一些属性以及方法，push到远程，这样一个配置好的hexo主题项目就完成了。</p>
-<p>  接着使用git submodule add @git/… themes/next将自己账号下刚刚fork的项目放到hexo主题目录下，这时候就会生成一个.gitmodules文件与子模块建立关系。</p>
-<p>  最后编写bash文件，形成一个命令，这里我在package.json里面写一句命令语，也就是yarn run themes 或者 npm run themes，下面是bash文件的详情:</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! bin/bash</span></span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>拉取并生成主题</p>
-</blockquote>
-<p>  完成之后，开发者就可以直接从远程git clone @git/…拉取项目，之后输入命令yarn run themes 或者 npm run themes，就可一键生成固定的主题啦!</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -3461,50 +3461,6 @@ http {
       </tags>
   </entry>
   <entry>
-    <title>比木白-React</title>
-    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-React/</url>
-    <content><![CDATA[<h1 id="React"><a href="#React" class="headerlink" title="React"></a>React</h1><h2 id="List-List-Item"><a href="#List-List-Item" class="headerlink" title="List List.Item"></a>List List.Item</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  最近在搞CBA m站适配时,尝试写了一把JS 基础组件,首当其冲的就是List List.Item列表组件,在我们m站适配中随处可见,其关键点就在于,怎么将某些在List列表组件中的属性,放到Item列表项组件里面,至此就想到了使用HOC高阶组件。</p>
-<blockquote>
-<p>详情</p>
-</blockquote>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//List组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> cns <span class="keyword">from</span> <span class="string">'classnames'</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">'./item'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        className: PropTypes.string,</span><br><span class="line">        onClick: PropTypes.func</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Item = Item;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Item高阶组件</span></span><br><span class="line">    itemHOC = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;children, onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> <span class="function">(<span class="params">children &amp;&amp; children.length &gt; <span class="number">0</span></span>) ? <span class="params">React</span>.<span class="params">Children</span>.<span class="params">map</span>(<span class="params">children, (child = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123;<span class="attr">type</span>: Child, props = &#123;&#125;&#125; = child;</span><br><span class="line">            <span class="keyword">if</span>(Child !== Item) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'List component must be an Item component inside~'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> &lt;Child &#123;...props&#125; onClick=&#123;onClick&#125;/&gt;;</span><br><span class="line">        &#125;) : <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;className = <span class="string">''</span>&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123;itemHOC = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;section className=&#123;cns(</span><br><span class="line">                <span class="string">'list'</span>,</span><br><span class="line">                className</span><br><span class="line">            )&#125;&gt;</span><br><span class="line">                &#123;itemHOC()&#125;</span><br><span class="line">            &lt;<span class="regexp">/section&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default List;</span></span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//Item组件  </span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> cns <span class="keyword">from</span> <span class="string">'classnames'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.less'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        className: PropTypes.string,</span><br><span class="line">        onClick: PropTypes.func,</span><br><span class="line">        value: PropTypes.any</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;</span><br><span class="line">            className = <span class="string">''</span>, </span><br><span class="line">            value,</span><br><span class="line">            onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;, </span><br><span class="line">            children</span><br><span class="line">        &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div className=&#123;cns(<span class="string">'list-item'</span>, className)&#125;</span><br><span class="line">                 onClick=&#123;(e) =&gt; onClick(value, e)&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;children&#125;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )   </span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Item;</span></span><br></pre></td></tr></table></figure>
-  <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Item组件样式*/</span></span><br><span class="line"><span class="selector-class">.list-item</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">14px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  这样就完成了List列表组件 List.Item列表项的基础组件的基础搭建,使用起来也是很简单的…</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">'./components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Item = List.Item;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">            </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> list = <span class="built_in">Array</span>.from(<span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123;<span class="attr">length</span>: <span class="number">10</span>&#125;), (item, index) =&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;[index]: (index + <span class="number">1</span>)&#125;;        </span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">            &lt;List className=<span class="string">'demo-list'</span></span><br><span class="line">                  onClick=&#123;(item, e) =&gt; &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(item);</span><br><span class="line">                  &#125;&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;</span><br><span class="line">                    list &amp;&amp; list.length &gt; <span class="number">0</span> &amp;&amp; list.map(<span class="function">(<span class="params">listItem, index</span>) =&gt;</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> &lt;Item className='demo-list-item'</span><br><span class="line">                                     value=&#123;listItem&#125;</span><br><span class="line">                                     key=&#123;index&#125;</span><br><span class="line">                        &gt;</span><br><span class="line">                            &#123;JSON.stringify(listItem)&#125;</span><br><span class="line">                        &lt;/Item&gt;</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &lt;<span class="regexp">/List&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="react-router路由多层嵌套"><a href="#react-router路由多层嵌套" class="headerlink" title="react-router路由多层嵌套"></a>react-router路由多层嵌套</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  最近在搞拓海官网的后台管理时,使用了react-router 4的路由多层嵌套配合继承、装饰器搞了一套路由页面,自我感觉还是不错的,所以我分享这一套嵌套路由配置。</p>
-<p>  PS: 此页面只适用于嵌套路由,嵌套路由指的是在某一父路由下的子路由只能在此父路由下使用,其余页面不可使用。</p>
-<blockquote>
-<p>使用</p>
-</blockquote>
-<p>  首先当然是安装依赖,配置打包、编译、缓存、压缩、分割chunks入口、404重定向、开发环境热更新、生产环境抽取、本地Node服务器和多核处理等等这些,这些属于搭建前端项目生态部分,我在之前的博客当中分享过的’多种方式搭建前端项目’中提到过了,下面我们就直接上干货好了。</p>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//入口</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;render&#125; <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> Layouts <span class="keyword">from</span> <span class="string">'./layouts'</span>;</span><br><span class="line"></span><br><span class="line">render(&lt;Layouts /&gt;, <span class="built_in">document</span>.querySelector(<span class="string">'#root'</span>));</span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//基类,用于嵌套路由的继承,以及各级路由承接使用</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Route&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> DocumentTitle <span class="keyword">from</span> <span class="string">'react-document-title'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseLayout</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    state = &#123;</span><br><span class="line">        <span class="comment">//扁平化处理之后的路由</span></span><br><span class="line">        routersTransform: []</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        对路由进行扁平化处理</span></span><br><span class="line"><span class="comment">    */</span>    </span><br><span class="line">    transformRouters = <span class="function">(<span class="params">routers = [], path = <span class="string">'/'</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;transformRouters = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">let</span> &#123;routersTransform = []&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        routers.forEach(<span class="function">(<span class="params">routerItem, routerIndex</span>) =&gt;</span> &#123;</span><br><span class="line">            routerItem.path = <span class="string">`<span class="subst">$&#123;path&#125;</span>/<span class="subst">$&#123;routerItem.path&#125;</span>`</span>.replace(<span class="regexp">/[\/]+/g</span>, <span class="string">'/'</span>);</span><br><span class="line">            routersTransform = [...routersTransform, routerItem];</span><br><span class="line">            routerItem.children &amp;&amp; routerItem.children.length &gt; <span class="number">0</span> &amp;&amp; transformRouters(routerItem.children, routerItem.path);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> routersTransform;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        查找当前页面路径,并返回地址</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    searchMatch = <span class="function">(<span class="params">routers = [], pathname = <span class="string">'/'</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;searchMatch = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> routers) &#123;</span><br><span class="line">            <span class="keyword">if</span>(item.path.includes(pathname)) &#123;</span><br><span class="line">                <span class="keyword">return</span> item.title;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> item.children &amp;&amp; item.children.length &gt; <span class="number">0</span> &amp;&amp; searchMatch(item.children, pathname);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        获取页面的标题</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    getPageTitle = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123;<span class="attr">history</span>: &#123;<span class="attr">location</span>: &#123;pathname = <span class="string">''</span>&#125;&#125;&#125; = props;</span><br><span class="line">        <span class="keyword">const</span> &#123;searchMatch = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> searchMatch(routers, pathname);</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="comment">//这里用于不嵌套路由时使用</span></span><br><span class="line">        <span class="comment">// _routers = [];</span></span><br><span class="line">        <span class="comment">// const &#123;transformRouters = () =&gt; &#123;&#125;&#125; = this;</span></span><br><span class="line">        <span class="comment">// _routers = transformRouters([...routers]);</span></span><br><span class="line">        <span class="comment">// return _routers &amp;&amp; _routers.length &gt; 0 &amp;&amp; _routers.map(routerItem =&gt; &#123;</span></span><br><span class="line">        <span class="keyword">return</span> routers &amp;&amp; routers.length &gt; <span class="number">0</span> &amp;&amp; routers.map(<span class="function"><span class="params">routerItem</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &lt;Route </span><br><span class="line">                key=&#123;routerItem.key&#125;</span><br><span class="line">                path=&#123;routerItem.path&#125;</span><br><span class="line">                exact=&#123;routerItem.exact&#125;</span><br><span class="line">                component=&#123;(props)=&gt; &#123;</span><br><span class="line">                    const Component = routerItem.component;</span><br><span class="line">                    return &lt;DocumentTitle&gt;</span><br><span class="line">                        &lt;Component &#123;...props&#125; routers=&#123;routerItem.children&#125; /&gt;</span><br><span class="line">                    &lt;/DocumentTitle&gt;</span><br><span class="line">                &#125;&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> BaseLayout;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'../pages/home'</span>;</span><br><span class="line"><span class="keyword">import</span> Master <span class="keyword">from</span> <span class="string">'../pages/master'</span>;</span><br><span class="line"><span class="comment">//路由静态配置</span></span><br><span class="line"><span class="keyword">const</span> routers = [&#123;</span><br><span class="line">    key: <span class="string">'home'</span>,</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    title: <span class="string">'拓海官网 - 首页'</span>,</span><br><span class="line">    name: <span class="string">'首页'</span>,</span><br><span class="line">    component: Home</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    key: <span class="string">'master'</span>,</span><br><span class="line">    path: <span class="string">'/master'</span>,</span><br><span class="line">    title: <span class="string">'拓海官网 - 主子'</span>,</span><br><span class="line">    name: <span class="string">'主子'</span>,</span><br><span class="line">    component: Master</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    routers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Layout&#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;BrowserRouter&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> BaseLayout <span class="keyword">from</span> <span class="string">'./base'</span>;</span><br><span class="line"><span class="keyword">import</span> Headers <span class="keyword">from</span> <span class="string">'./header'</span>;</span><br><span class="line"><span class="keyword">import</span> routers <span class="keyword">from</span> <span class="string">'../routers'</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> utils <span class="keyword">from</span> <span class="string">'../utils'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;Header, Content&#125; = Layout;</span><br><span class="line"></span><br><span class="line"><span class="comment">//入口处,使用class继承方式</span></span><br><span class="line"><span class="comment">//装饰器导入路由配置</span></span><br><span class="line">@utils.packageApi.decorators.getRouters(&#123;routers&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Layouts</span> <span class="keyword">extends</span> <span class="title">BaseLayout</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">let</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="comment">//这里用于不嵌套路由时使用</span></span><br><span class="line">        <span class="comment">// _routers = [];</span></span><br><span class="line">        <span class="comment">// const &#123;transformRouters = () =&gt; &#123;&#125;&#125; = this;</span></span><br><span class="line">        <span class="comment">// _routers = transformRouters([...routers]);</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Layout&gt;</span><br><span class="line">                &lt;Header&gt;</span><br><span class="line">                    &#123;<span class="comment">/*&lt;Headers routers=&#123;_routers&#125; /&gt;*/</span>&#125;</span><br><span class="line">                    &lt;Headers routers=&#123;routers&#125; /&gt;</span><br><span class="line">                &lt;<span class="regexp">/Header&gt;</span></span><br><span class="line"><span class="regexp">                &lt;Content&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;BrowserRouter&gt;</span></span><br><span class="line"><span class="regexp">                        &#123;super.render()&#125;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>BrowserRouter&gt;</span><br><span class="line">                &lt;<span class="regexp">/Content&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Layout&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Layouts;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="comment">//decorators 装饰器</span></span><br><span class="line"><span class="comment">//高阶函数 属性代理</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRouters</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">WrapperComponent</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">            <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">            state = &#123;</span><br><span class="line">                innerParams: &#123;&#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            </span><br><span class="line">            componentDidMount() &#123;</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                    innerParams: &#123;...params&#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;   </span><br><span class="line">                </span><br><span class="line">            render() &#123;</span><br><span class="line">                <span class="keyword">const</span> &#123;innerParams&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">                <span class="keyword">return</span> (</span><br><span class="line">                    &lt;WrapperComponent &#123;...innerParams&#125; /&gt;</span><br><span class="line">                );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    getRouters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Menu&#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;NavLink&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;Item&#125; = Menu;</span><br><span class="line"></span><br><span class="line"><span class="comment">//头部路由导航</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Headers</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired</span><br><span class="line">    &#125;;</span><br><span class="line">        </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Menu&gt;</span><br><span class="line">                &#123;routers &amp;&amp; routers.length &gt; <span class="number">0</span> &amp;&amp; routers.map(<span class="function">(<span class="params">routerItem</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> (&lt;Item key=&#123;routerItem.key&#125;&gt;</span><br><span class="line">                        &lt;NavLink to=&#123;routerItem.path&#125;&gt;</span><br><span class="line">                            &#123;routerItem.name&#125;</span><br><span class="line">                        &lt;/NavLink&gt;</span><br><span class="line">                    &lt;/Item&gt;)</span><br><span class="line">                &#125;)&#125;</span><br><span class="line">            &lt;<span class="regexp">/Menu&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Headers;</span></span><br></pre></td></tr></table></figure>
-<p>  自此react-router路由多层嵌套配置完成,如果想要只在某一路由下使用子路由,重复第2、4、6步即可。</p>
-<p>  PS:附上我的目录结构图</p>
-<p>  <img src="/images/routersConfig.png" alt></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>比木白-Taro</title>
     <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-Taro/</url>
     <content><![CDATA[<h1 id="微信小程序框架Taro"><a href="#微信小程序框架Taro" class="headerlink" title="微信小程序框架Taro"></a>微信小程序框架Taro</h1><h2 id="2-0升级压缩微信小程序包体积增大比较多"><a href="#2-0升级压缩微信小程序包体积增大比较多" class="headerlink" title="2.0升级压缩微信小程序包体积增大比较多"></a>2.0升级压缩微信小程序包体积增大比较多</h2><blockquote>
@@ -3562,6 +3518,72 @@ http {
       </categories>
       <tags>
         <tag>taro</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比木白-moment</title>
+    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-moment/</url>
+    <content><![CDATA[<h1 id="moment"><a href="#moment" class="headerlink" title="moment"></a>moment</h1><h2 id="将时间戳-毫秒-转化为固定格式"><a href="#将时间戳-毫秒-转化为固定格式" class="headerlink" title="将时间戳(毫秒)转化为固定格式"></a>将时间戳(毫秒)转化为固定格式</h2><blockquote>
+<p>详情</p>
+</blockquote>
+<p>   <a href="http://momentjs.cn/docs/#/displaying/" target="_blank">将时间戳转化为固定格式: 显示 format部分</a></p>
+<h2 id="计算两个时间戳-毫秒-或者是固定格式的时间之间的数量级长度"><a href="#计算两个时间戳-毫秒-或者是固定格式的时间之间的数量级长度" class="headerlink" title="计算两个时间戳(毫秒)或者是固定格式的时间之间的数量级长度"></a>计算两个时间戳(毫秒)或者是固定格式的时间之间的数量级长度</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>   在开发小程序过程中,发现使用moment来计算两个时间戳或者固定格式时间之间的长度（比如两个时间之内差了几天、几个周、几个月、几年等等）,没有具体的例子,文档里面也没有说明,所以这里记录一下我探索出来的结果。</p>
+<blockquote>
+<p>详情</p>
+</blockquote>
+   <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> startTime = <span class="number">1571414400000</span>;</span><br><span class="line"><span class="keyword">const</span> endTime = <span class="number">1598371200000</span>;</span><br><span class="line"><span class="comment">//这里就可以计算出这两个时间戳之间差了几天</span></span><br><span class="line"><span class="keyword">const</span> durationTime = moment(endTime).diff(moment(startTime), <span class="string">'days'</span>);</span><br><span class="line"><span class="comment">//如果再加一个参数,就可以精确的计算出两个时间戳之间差的天数(小数)</span></span><br><span class="line"><span class="keyword">const</span> durationTime_float = moment(endTime).diff(moment(startTime), <span class="string">'days'</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="comment">//在这里打印:</span></span><br><span class="line"><span class="comment">//312 312(有时候会出现311.6666...7,是前端对于二进制的精度浮点数计算没有那么准确的原因)</span></span><br><span class="line"><span class="built_in">console</span>.log(durationTime, durationTime_float);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>moment</category>
+      </categories>
+      <tags>
+        <tag>moment</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比木白-React</title>
+    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-React/</url>
+    <content><![CDATA[<h1 id="React"><a href="#React" class="headerlink" title="React"></a>React</h1><h2 id="List-List-Item"><a href="#List-List-Item" class="headerlink" title="List List.Item"></a>List List.Item</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  最近在搞CBA m站适配时,尝试写了一把JS 基础组件,首当其冲的就是List List.Item列表组件,在我们m站适配中随处可见,其关键点就在于,怎么将某些在List列表组件中的属性,放到Item列表项组件里面,至此就想到了使用HOC高阶组件。</p>
+<blockquote>
+<p>详情</p>
+</blockquote>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//List组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> cns <span class="keyword">from</span> <span class="string">'classnames'</span>;</span><br><span class="line"><span class="keyword">import</span> Item <span class="keyword">from</span> <span class="string">'./item'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">List</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        className: PropTypes.string,</span><br><span class="line">        onClick: PropTypes.func</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Item = Item;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Item高阶组件</span></span><br><span class="line">    itemHOC = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;children, onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> <span class="function">(<span class="params">children &amp;&amp; children.length &gt; <span class="number">0</span></span>) ? <span class="params">React</span>.<span class="params">Children</span>.<span class="params">map</span>(<span class="params">children, (child = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123;<span class="attr">type</span>: Child, props = &#123;&#125;&#125; = child;</span><br><span class="line">            <span class="keyword">if</span>(Child !== Item) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'List component must be an Item component inside~'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> &lt;Child &#123;...props&#125; onClick=&#123;onClick&#125;/&gt;;</span><br><span class="line">        &#125;) : <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;className = <span class="string">''</span>&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123;itemHOC = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;section className=&#123;cns(</span><br><span class="line">                <span class="string">'list'</span>,</span><br><span class="line">                className</span><br><span class="line">            )&#125;&gt;</span><br><span class="line">                &#123;itemHOC()&#125;</span><br><span class="line">            &lt;<span class="regexp">/section&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default List;</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//Item组件  </span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> cns <span class="keyword">from</span> <span class="string">'classnames'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./index.less'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Item</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        className: PropTypes.string,</span><br><span class="line">        onClick: PropTypes.func,</span><br><span class="line">        value: PropTypes.any</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;</span><br><span class="line">            className = <span class="string">''</span>, </span><br><span class="line">            value,</span><br><span class="line">            onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;, </span><br><span class="line">            children</span><br><span class="line">        &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div className=&#123;cns(<span class="string">'list-item'</span>, className)&#125;</span><br><span class="line">                 onClick=&#123;(e) =&gt; onClick(value, e)&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;children&#125;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )   </span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Item;</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*Item组件样式*/</span></span><br><span class="line"><span class="selector-class">.list-item</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">14px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  这样就完成了List列表组件 List.Item列表项的基础组件的基础搭建,使用起来也是很简单的…</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> List <span class="keyword">from</span> <span class="string">'./components'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Item = List.Item;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">    &#125;</span><br><span class="line">            </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> list = <span class="built_in">Array</span>.from(<span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123;<span class="attr">length</span>: <span class="number">10</span>&#125;), (item, index) =&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;[index]: (index + <span class="number">1</span>)&#125;;        </span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">            &lt;List className=<span class="string">'demo-list'</span></span><br><span class="line">                  onClick=&#123;(item, e) =&gt; &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(item);</span><br><span class="line">                  &#125;&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;</span><br><span class="line">                    list &amp;&amp; list.length &gt; <span class="number">0</span> &amp;&amp; list.map(<span class="function">(<span class="params">listItem, index</span>) =&gt;</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> &lt;Item className='demo-list-item'</span><br><span class="line">                                     value=&#123;listItem&#125;</span><br><span class="line">                                     key=&#123;index&#125;</span><br><span class="line">                        &gt;</span><br><span class="line">                            &#123;JSON.stringify(listItem)&#125;</span><br><span class="line">                        &lt;/Item&gt;</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &lt;<span class="regexp">/List&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="react-router路由多层嵌套"><a href="#react-router路由多层嵌套" class="headerlink" title="react-router路由多层嵌套"></a>react-router路由多层嵌套</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  最近在搞拓海官网的后台管理时,使用了react-router 4的路由多层嵌套配合继承、装饰器搞了一套路由页面,自我感觉还是不错的,所以我分享这一套嵌套路由配置。</p>
+<p>  PS: 此页面只适用于嵌套路由,嵌套路由指的是在某一父路由下的子路由只能在此父路由下使用,其余页面不可使用。</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>  首先当然是安装依赖,配置打包、编译、缓存、压缩、分割chunks入口、404重定向、开发环境热更新、生产环境抽取、本地Node服务器和多核处理等等这些,这些属于搭建前端项目生态部分,我在之前的博客当中分享过的’多种方式搭建前端项目’中提到过了,下面我们就直接上干货好了。</p>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//入口</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;render&#125; <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> Layouts <span class="keyword">from</span> <span class="string">'./layouts'</span>;</span><br><span class="line"></span><br><span class="line">render(&lt;Layouts /&gt;, <span class="built_in">document</span>.querySelector(<span class="string">'#root'</span>));</span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">//基类,用于嵌套路由的继承,以及各级路由承接使用</span></span><br><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Route&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> DocumentTitle <span class="keyword">from</span> <span class="string">'react-document-title'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseLayout</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    state = &#123;</span><br><span class="line">        <span class="comment">//扁平化处理之后的路由</span></span><br><span class="line">        routersTransform: []</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        对路由进行扁平化处理</span></span><br><span class="line"><span class="comment">    */</span>    </span><br><span class="line">    transformRouters = <span class="function">(<span class="params">routers = [], path = <span class="string">'/'</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;transformRouters = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">let</span> &#123;routersTransform = []&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">        routers.forEach(<span class="function">(<span class="params">routerItem, routerIndex</span>) =&gt;</span> &#123;</span><br><span class="line">            routerItem.path = <span class="string">`<span class="subst">$&#123;path&#125;</span>/<span class="subst">$&#123;routerItem.path&#125;</span>`</span>.replace(<span class="regexp">/[\/]+/g</span>, <span class="string">'/'</span>);</span><br><span class="line">            routersTransform = [...routersTransform, routerItem];</span><br><span class="line">            routerItem.children &amp;&amp; routerItem.children.length &gt; <span class="number">0</span> &amp;&amp; transformRouters(routerItem.children, routerItem.path);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> routersTransform;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        查找当前页面路径,并返回地址</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    searchMatch = <span class="function">(<span class="params">routers = [], pathname = <span class="string">'/'</span></span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;searchMatch = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> routers) &#123;</span><br><span class="line">            <span class="keyword">if</span>(item.path.includes(pathname)) &#123;</span><br><span class="line">                <span class="keyword">return</span> item.title;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> item.children &amp;&amp; item.children.length &gt; <span class="number">0</span> &amp;&amp; searchMatch(item.children, pathname);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">        获取页面的标题</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    getPageTitle = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123;<span class="attr">history</span>: &#123;<span class="attr">location</span>: &#123;pathname = <span class="string">''</span>&#125;&#125;&#125; = props;</span><br><span class="line">        <span class="keyword">const</span> &#123;searchMatch = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;&#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> searchMatch(routers, pathname);</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="comment">//这里用于不嵌套路由时使用</span></span><br><span class="line">        <span class="comment">// _routers = [];</span></span><br><span class="line">        <span class="comment">// const &#123;transformRouters = () =&gt; &#123;&#125;&#125; = this;</span></span><br><span class="line">        <span class="comment">// _routers = transformRouters([...routers]);</span></span><br><span class="line">        <span class="comment">// return _routers &amp;&amp; _routers.length &gt; 0 &amp;&amp; _routers.map(routerItem =&gt; &#123;</span></span><br><span class="line">        <span class="keyword">return</span> routers &amp;&amp; routers.length &gt; <span class="number">0</span> &amp;&amp; routers.map(<span class="function"><span class="params">routerItem</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> &lt;Route </span><br><span class="line">                key=&#123;routerItem.key&#125;</span><br><span class="line">                path=&#123;routerItem.path&#125;</span><br><span class="line">                exact=&#123;routerItem.exact&#125;</span><br><span class="line">                component=&#123;(props)=&gt; &#123;</span><br><span class="line">                    const Component = routerItem.component;</span><br><span class="line">                    return &lt;DocumentTitle&gt;</span><br><span class="line">                        &lt;Component &#123;...props&#125; routers=&#123;routerItem.children&#125; /&gt;</span><br><span class="line">                    &lt;/DocumentTitle&gt;</span><br><span class="line">                &#125;&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> BaseLayout;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'../pages/home'</span>;</span><br><span class="line"><span class="keyword">import</span> Master <span class="keyword">from</span> <span class="string">'../pages/master'</span>;</span><br><span class="line"><span class="comment">//路由静态配置</span></span><br><span class="line"><span class="keyword">const</span> routers = [&#123;</span><br><span class="line">    key: <span class="string">'home'</span>,</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    title: <span class="string">'拓海官网 - 首页'</span>,</span><br><span class="line">    name: <span class="string">'首页'</span>,</span><br><span class="line">    component: Home</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    key: <span class="string">'master'</span>,</span><br><span class="line">    path: <span class="string">'/master'</span>,</span><br><span class="line">    title: <span class="string">'拓海官网 - 主子'</span>,</span><br><span class="line">    name: <span class="string">'主子'</span>,</span><br><span class="line">    component: Master</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    routers</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Layout&#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;BrowserRouter&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> BaseLayout <span class="keyword">from</span> <span class="string">'./base'</span>;</span><br><span class="line"><span class="keyword">import</span> Headers <span class="keyword">from</span> <span class="string">'./header'</span>;</span><br><span class="line"><span class="keyword">import</span> routers <span class="keyword">from</span> <span class="string">'../routers'</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> utils <span class="keyword">from</span> <span class="string">'../utils'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;Header, Content&#125; = Layout;</span><br><span class="line"></span><br><span class="line"><span class="comment">//入口处,使用class继承方式</span></span><br><span class="line"><span class="comment">//装饰器导入路由配置</span></span><br><span class="line">@utils.packageApi.decorators.getRouters(&#123;routers&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Layouts</span> <span class="keyword">extends</span> <span class="title">BaseLayout</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">let</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="comment">//这里用于不嵌套路由时使用</span></span><br><span class="line">        <span class="comment">// _routers = [];</span></span><br><span class="line">        <span class="comment">// const &#123;transformRouters = () =&gt; &#123;&#125;&#125; = this;</span></span><br><span class="line">        <span class="comment">// _routers = transformRouters([...routers]);</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Layout&gt;</span><br><span class="line">                &lt;Header&gt;</span><br><span class="line">                    &#123;<span class="comment">/*&lt;Headers routers=&#123;_routers&#125; /&gt;*/</span>&#125;</span><br><span class="line">                    &lt;Headers routers=&#123;routers&#125; /&gt;</span><br><span class="line">                &lt;<span class="regexp">/Header&gt;</span></span><br><span class="line"><span class="regexp">                &lt;Content&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;BrowserRouter&gt;</span></span><br><span class="line"><span class="regexp">                        &#123;super.render()&#125;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>BrowserRouter&gt;</span><br><span class="line">                &lt;<span class="regexp">/Content&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Layout&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Layouts;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="comment">//decorators 装饰器</span></span><br><span class="line"><span class="comment">//高阶函数 属性代理</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRouters</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">WrapperComponent</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">            <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">            state = &#123;</span><br><span class="line">                innerParams: &#123;&#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            </span><br><span class="line">            componentDidMount() &#123;</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                    innerParams: &#123;...params&#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;   </span><br><span class="line">                </span><br><span class="line">            render() &#123;</span><br><span class="line">                <span class="keyword">const</span> &#123;innerParams&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">                <span class="keyword">return</span> (</span><br><span class="line">                    &lt;WrapperComponent &#123;...innerParams&#125; /&gt;</span><br><span class="line">                );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    getRouters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;PureComponent&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Menu&#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;NavLink&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;Item&#125; = Menu;</span><br><span class="line"></span><br><span class="line"><span class="comment">//头部路由导航</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Headers</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;<span class="keyword">super</span>(props);&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">        <span class="comment">//路由列表</span></span><br><span class="line">        routers: PropTypes.array.isRequired</span><br><span class="line">    &#125;;</span><br><span class="line">        </span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;routers = []&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Menu&gt;</span><br><span class="line">                &#123;routers &amp;&amp; routers.length &gt; <span class="number">0</span> &amp;&amp; routers.map(<span class="function">(<span class="params">routerItem</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> (&lt;Item key=&#123;routerItem.key&#125;&gt;</span><br><span class="line">                        &lt;NavLink to=&#123;routerItem.path&#125;&gt;</span><br><span class="line">                            &#123;routerItem.name&#125;</span><br><span class="line">                        &lt;/NavLink&gt;</span><br><span class="line">                    &lt;/Item&gt;)</span><br><span class="line">                &#125;)&#125;</span><br><span class="line">            &lt;<span class="regexp">/Menu&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Headers;</span></span><br></pre></td></tr></table></figure>
+<p>  自此react-router路由多层嵌套配置完成,如果想要只在某一路由下使用子路由,重复第2、4、6步即可。</p>
+<p>  PS:附上我的目录结构图</p>
+<p>  <img src="/images/routersConfig.png" alt></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
       </tags>
   </entry>
   <entry>
@@ -3625,28 +3647,6 @@ http {
       </tags>
   </entry>
   <entry>
-    <title>比木白-moment</title>
-    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-moment/</url>
-    <content><![CDATA[<h1 id="moment"><a href="#moment" class="headerlink" title="moment"></a>moment</h1><h2 id="将时间戳-毫秒-转化为固定格式"><a href="#将时间戳-毫秒-转化为固定格式" class="headerlink" title="将时间戳(毫秒)转化为固定格式"></a>将时间戳(毫秒)转化为固定格式</h2><blockquote>
-<p>详情</p>
-</blockquote>
-<p>   <a href="http://momentjs.cn/docs/#/displaying/" target="_blank">将时间戳转化为固定格式: 显示 format部分</a></p>
-<h2 id="计算两个时间戳-毫秒-或者是固定格式的时间之间的数量级长度"><a href="#计算两个时间戳-毫秒-或者是固定格式的时间之间的数量级长度" class="headerlink" title="计算两个时间戳(毫秒)或者是固定格式的时间之间的数量级长度"></a>计算两个时间戳(毫秒)或者是固定格式的时间之间的数量级长度</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>   在开发小程序过程中,发现使用moment来计算两个时间戳或者固定格式时间之间的长度（比如两个时间之内差了几天、几个周、几个月、几年等等）,没有具体的例子,文档里面也没有说明,所以这里记录一下我探索出来的结果。</p>
-<blockquote>
-<p>详情</p>
-</blockquote>
-   <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> startTime = <span class="number">1571414400000</span>;</span><br><span class="line"><span class="keyword">const</span> endTime = <span class="number">1598371200000</span>;</span><br><span class="line"><span class="comment">//这里就可以计算出这两个时间戳之间差了几天</span></span><br><span class="line"><span class="keyword">const</span> durationTime = moment(endTime).diff(moment(startTime), <span class="string">'days'</span>);</span><br><span class="line"><span class="comment">//如果再加一个参数,就可以精确的计算出两个时间戳之间差的天数(小数)</span></span><br><span class="line"><span class="keyword">const</span> durationTime_float = moment(endTime).diff(moment(startTime), <span class="string">'days'</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="comment">//在这里打印:</span></span><br><span class="line"><span class="comment">//312 312(有时候会出现311.6666...7,是前端对于二进制的精度浮点数计算没有那么准确的原因)</span></span><br><span class="line"><span class="built_in">console</span>.log(durationTime, durationTime_float);</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>moment</category>
-      </categories>
-      <tags>
-        <tag>moment</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>比木白-web</title>
     <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-web/</url>
     <content><![CDATA[<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="如何添加微信朋友圈分享网站页面的小图标"><a href="#如何添加微信朋友圈分享网站页面的小图标" class="headerlink" title="如何添加微信朋友圈分享网站页面的小图标"></a>如何添加微信朋友圈分享网站页面的小图标</h2><blockquote>
@@ -3698,51 +3698,6 @@ http {
       </tags>
   </entry>
   <entry>
-    <title>比木白-微信小程序</title>
-    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h1><h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  在开发虎芽足球小程序的过程中,发现有一些布局会造成页面闪动,比如有一张图片和一段文字需要上下左右居中,由于图片需要请求,无论是本地加载还是线上加载,所以用flex布局时,在图片还在请求加载时,文字是上下左右居中的,而图片请求加载成功时,图片会显示出来,文案会不再在原来的位置,所以会有这么一个闪动的bug。</p>
-<blockquote>
-<p>方案</p>
-</blockquote>
-<p>  使用一个开关变量,控制除了图片之外的段落、文案或者是整块儿内容,开始隐藏,使用Image标签的onload事件,等待图片加载完成显示之后,再将图片之外的段落、文案或者是整块儿内容显示出来。</p>
-<h2 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  在开发虎芽足球小程序的过程中,发现当图片体积过大时,比如3M或者4M的图片,电脑开发者工具不会出现任何问题,但是在手机预览的小程序加载过程中,会造成页面白屏,甚至是闪退;</p>
-<p>  后来发现是因为图片占据了小程序甚至是微信大量的内存,导致页面闪屏,最后微信也承受不住,导致闪退;</p>
-<p>  最后发现小程序最多能承受图片体积的大小为500kb。</p>
-<blockquote>
-<p>方案</p>
-</blockquote>
-<ol>
-<li>后台系统上传图片体积大小做限制,图片最大只能传500kb</li>
-<li>前端小程序图片压缩做处理,添加阿里OSS后缀进行图片的缩放、剪切以及像素的压缩</li>
-</ol>
-<h2 id="登录-并与后端服务器接口建立会话"><a href="#登录-并与后端服务器接口建立会话" class="headerlink" title="登录,并与后端服务器接口建立会话"></a>登录,并与后端服务器接口建立会话</h2><blockquote>
-<p>原因</p>
-</blockquote>
-<p>  最近发现不少的小程序项目都存在入口app.js使用storage本地存储后端服务器接口返回的set-cookie建立用户会话,由于大部分用的都是异步storage本地存储(setStorageSync getStorageSync),导致当进入页面时,去请求接口获取存储的cookie时,发现并不能获取到。因为实际上这时候异步本地存储并没有存储下来,且项目和页面的渲染生命周期又是同步的,所以导致了此问题。</p>
-<blockquote>
-<p>方案</p>
-</blockquote>
-<p>  我之前也遇到这种问题,不论是在原生的微信小程序还是taro 微信小程序框架里面,我总体的方案是,将登录以及与后端服务器建立会话的接口放在页面的入口做,比如小程序在普通编译时,默认进入的页面(就是入口)放入登录和会话接口,这时候既将set-cookie值放入异步storage本地存储中,又将set-cookie值放入当前入口页面的某一个状态中,并做同步处理(这时候你应该懂了)。</p>
-<p>  在Taro中,我们既可以放入state状态中,并将下一步调用的接口放入setState方法的第二个同步方法参数中;又可以放入redux store页面状态中,并做async await或者yield *同步处理。</p>
-<h2 id="获取手机号"><a href="#获取手机号" class="headerlink" title="获取手机号"></a>获取手机号</h2><blockquote>
-<p>详情</p>
-</blockquote>
-<p>  最近在开发虎芽小程序时,有获取用户手机号的需求,原以为和获取用户信息一样,只要通过按钮getUserInfo授权,并存入数据库,就可一劳永逸,后来发现getUserInfo授权并不能获取用户的手机号,还需要通过按钮getPhoneNumber授权,且还需要与后台配合解密,才能获取真正的手机号。</p>
-]]></content>
-      <categories>
-        <category>微信小程序</category>
-      </categories>
-      <tags>
-        <tag>微信小程序</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>比木白-css</title>
     <url>/2020/03/02/%E6%AF%94%E6%9C%A8%E7%99%BD-css/</url>
     <content><![CDATA[<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><h2 id="文字两端对齐"><a href="#文字两端对齐" class="headerlink" title="文字两端对齐"></a>文字两端对齐</h2>  <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.demo</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: justify;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -3791,6 +3746,51 @@ http {
       </categories>
       <tags>
         <tag>可视化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比木白-微信小程序</title>
+    <url>/2020/02/27/%E6%AF%94%E6%9C%A8%E7%99%BD-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h1><h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  在开发虎芽足球小程序的过程中,发现有一些布局会造成页面闪动,比如有一张图片和一段文字需要上下左右居中,由于图片需要请求,无论是本地加载还是线上加载,所以用flex布局时,在图片还在请求加载时,文字是上下左右居中的,而图片请求加载成功时,图片会显示出来,文案会不再在原来的位置,所以会有这么一个闪动的bug。</p>
+<blockquote>
+<p>方案</p>
+</blockquote>
+<p>  使用一个开关变量,控制除了图片之外的段落、文案或者是整块儿内容,开始隐藏,使用Image标签的onload事件,等待图片加载完成显示之后,再将图片之外的段落、文案或者是整块儿内容显示出来。</p>
+<h2 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  在开发虎芽足球小程序的过程中,发现当图片体积过大时,比如3M或者4M的图片,电脑开发者工具不会出现任何问题,但是在手机预览的小程序加载过程中,会造成页面白屏,甚至是闪退;</p>
+<p>  后来发现是因为图片占据了小程序甚至是微信大量的内存,导致页面闪屏,最后微信也承受不住,导致闪退;</p>
+<p>  最后发现小程序最多能承受图片体积的大小为500kb。</p>
+<blockquote>
+<p>方案</p>
+</blockquote>
+<ol>
+<li>后台系统上传图片体积大小做限制,图片最大只能传500kb</li>
+<li>前端小程序图片压缩做处理,添加阿里OSS后缀进行图片的缩放、剪切以及像素的压缩</li>
+</ol>
+<h2 id="登录-并与后端服务器接口建立会话"><a href="#登录-并与后端服务器接口建立会话" class="headerlink" title="登录,并与后端服务器接口建立会话"></a>登录,并与后端服务器接口建立会话</h2><blockquote>
+<p>原因</p>
+</blockquote>
+<p>  最近发现不少的小程序项目都存在入口app.js使用storage本地存储后端服务器接口返回的set-cookie建立用户会话,由于大部分用的都是异步storage本地存储(setStorageSync getStorageSync),导致当进入页面时,去请求接口获取存储的cookie时,发现并不能获取到。因为实际上这时候异步本地存储并没有存储下来,且项目和页面的渲染生命周期又是同步的,所以导致了此问题。</p>
+<blockquote>
+<p>方案</p>
+</blockquote>
+<p>  我之前也遇到这种问题,不论是在原生的微信小程序还是taro 微信小程序框架里面,我总体的方案是,将登录以及与后端服务器建立会话的接口放在页面的入口做,比如小程序在普通编译时,默认进入的页面(就是入口)放入登录和会话接口,这时候既将set-cookie值放入异步storage本地存储中,又将set-cookie值放入当前入口页面的某一个状态中,并做同步处理(这时候你应该懂了)。</p>
+<p>  在Taro中,我们既可以放入state状态中,并将下一步调用的接口放入setState方法的第二个同步方法参数中;又可以放入redux store页面状态中,并做async await或者yield *同步处理。</p>
+<h2 id="获取手机号"><a href="#获取手机号" class="headerlink" title="获取手机号"></a>获取手机号</h2><blockquote>
+<p>详情</p>
+</blockquote>
+<p>  最近在开发虎芽小程序时,有获取用户手机号的需求,原以为和获取用户信息一样,只要通过按钮getUserInfo授权,并存入数据库,就可一劳永逸,后来发现getUserInfo授权并不能获取用户的手机号,还需要通过按钮getPhoneNumber授权,且还需要与后台配合解密,才能获取真正的手机号。</p>
+]]></content>
+      <categories>
+        <category>微信小程序</category>
+      </categories>
+      <tags>
+        <tag>微信小程序</tag>
       </tags>
   </entry>
   <entry>
@@ -4021,167 +4021,6 @@ http {
         <tag>ECMAScript 2015</tag>
         <tag>ES6</tag>
         <tag>javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>browserstack screenshots</title>
-    <url>/2022/06/07/browserstackscreenshots/</url>
-    <content><![CDATA[<h1 id="实现browserstack-screenshots"><a href="#实现browserstack-screenshots" class="headerlink" title="实现browserstack screenshots"></a>实现browserstack screenshots</h1><h2 id="browserstack-screenshots-api"><a href="#browserstack-screenshots-api" class="headerlink" title="browserstack screenshots api"></a>browserstack screenshots api</h2><p>   <a hef="https://www.browserstack.com/screenshots/api">Screenshots API</a>，通过调用 Screenshots API 的例子<a href="https://github.com/scottgonzalez/node-browserstack/blob/master/lib/screenshot.js" target="_blank" rel="noopener">node-browserstack screenshots</a>就可以得知，通过 http 请求 <a href="https://www.browserstack.com/screenshots" target="_blank" rel="noopener">https://www.browserstack.com/screenshots</a> 接口:</p>
-<ul>
-<li>url(需要测试截图的url);</li>
-<li>os(测试环境: 操作系统);</li>
-<li>os_version(测试环境: 操作系统版本);</li>
-<li>browser(测试环境: 浏览器类型);</li>
-<li>browser_version(测试环境: 浏览器版本);</li>
-<li>device(测试环境: 若需要移动设备,设备类型);</li>
-<li>orientation(测试环境: 设备的屏幕方向);</li>
-<li>mac_res(测试环境: mac浏览器屏幕分辨率);</li>
-<li>win_res(测试环境: windows浏览器屏幕分辨率);</li>
-<li>quality(测试环境: 截图是否压缩);</li>
-<li>local(测试环境: 是否建立本地测试连接);</li>
-<li>wait_time(测试环境: 截图前等待的时间);</li>
-<li>callback_url(测试环境: 回调网址);</li>
-</ul>
-<p>选择性带入上述参数就可生成截图列表极其状态，并回调到对应的url页面上。类似的，lambdaTest 上面也是有一套 Screenshots API 实现逻辑，<a href="https://www.lambdatest.com/support/api-doc/" target="_blank" rel="noopener">AUTOMATED SCREENSHOTS API</a>，其例子请求方式相同，都是通过 http 请求。</p>
-<h2 id="browserstack-Screenshots-API背后所实现的原理"><a href="#browserstack-Screenshots-API背后所实现的原理" class="headerlink" title="browserstack Screenshots API背后所实现的原理"></a>browserstack Screenshots API背后所实现的原理</h2><p>辗转反侧的通过 Google、询问平台技术支持人员，最后得到的结论是: Screenshots API背后使用了多个自动化测试脚本和不同的框架来捕获屏幕截图，其中包含了selenium webdriver，也就是说基本上为了捕获截图，browserstack 使用了 selenium webdriver 技术，但 selenium webdriver 只限于针对PC端/移动端的浏览器。</p>
-<h2 id="哪些方式可以实现跨终端自动化截图？"><a href="#哪些方式可以实现跨终端自动化截图？" class="headerlink" title="哪些方式可以实现跨终端自动化截图？"></a>哪些方式可以实现跨终端自动化截图？</h2><ul>
-<li><p>Selenium WebDriver</p>
-<ul>
-<li><p>Selenium 是什么?</p>
-<p>Selenium 是一套基于浏览器的自动化工具，它提供了一种跨平台、跨浏览器的端到端的 web 自动化解决方案。</p>
-<p>Selenium 主要包括三部分:</p>
-<ul>
-<li>Selenium IDE：它可以进行录制回放用户操作，并且可以把录制的操作以多种语言（如JAVA、Python、C#等）的形式导出成测试用例。</li>
-<li>Selenium WebDriver：提供 Web 自动化所需的 API，主要用作浏览器控制、页面元素选择和调试，通常也被成为WebDriver。不同的浏览器需要不同的 WebDriver，例如针对Chrome使用的chromedriver。</li>
-<li>Selenium Grid：提供了在不同机器的不同浏览器上运行 selenium 测试的能力，一个分布式运行用例时的工具。</li>
-</ul>
-</li>
-<li><p>Selenium WebDriver 的工作原理</p>
-<p>简单来说: 自动化 Selenium WebDriver API 测试脚本发送请求给浏览器的驱动，驱动将测试脚本解析后的结果发送给浏览器，浏览器执行驱动发来的指令，并最终完成想要的操作。</p>
-</li>
-<li><p>Selenium WebDriver 的结构</p>
-<p>典型的 C/S 结构，Selenium WebDriver API 相当于是客户端，而浏览器驱动才是服务器端。</p>
-</li>
-<li><p>浏览器的驱动兼容多个测试脚本的原因</p>
-<p>WebDriver基于的协议：JSON Wire protocol，这个协议规范在WebDriver中数据都是以JSON的形式存在并进行传送的，所以在 client 和 server 之间，只要是基于JSON Wire Protocol来传递数据，与具体的脚本语言无关。</p>
-</li>
-<li><p>WebDriver协议 - JSON Wire protocol</p>
-<p><a href="https://www.selenium.dev/documentation/legacy/json_wire_protocol/" target="_blank" rel="noopener">JSON Wire protocol 官方文档</a>，是<a href="https://w3c.github.io/webdriver/" target="_blank" rel="noopener">W3C WebDriver协议</a>的前身，是在http协议基础上，对http请求及响应的body部分的数据的进一步规范，必须以JSON的形式存在并进行传送，提供了操作浏览器<a href="https://w3c.github.io/webdriver/#endpoints" target="_blank" rel="noopener">命令的方法以及所对应的 URI 模板。<a></a></a></p>
-</li>
-<li><p>深析 Selenium WebDriver 的工作原理</p>
-<ol>
-<li>对于每一条转换为 JSON 之后的 Selenium WebDriver API 测试脚本,会通过 CommandExecutor 发送 http 请求给浏览器的驱动。</li>
-<li>浏览器驱动中包含了一个 WebDriver remote server，通过监听端口用来接收 http 请求。</li>
-<li>WebDriver remote server 接收到请求后根据请求来具体操控对应的浏览器。</li>
-<li>浏览器执行具体的测试脚本步骤。</li>
-<li>浏览器将执行结果返回给 WebDriver remote server。</li>
-<li>WebDriver remote server 又将结果返回给 Selenium WebDriver API client 端。</li>
-</ol>
-<p><img src="/images/basic_comms.png" alt></p>
-</li>
-<li><p>自动化截图</p>
-<p>可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的屏幕截图，会返回以 Base64 格式编码的 PNG 图片。</p>
-<p><a href="https://www.selenium.dev/documentation/webdriver/browser/windows/#takescreenshot" target="_blank" rel="noopener">TakeScreenshot(屏幕截图)</a></p>
-<p>也可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的元素内的屏幕截图，会返回以 Base64 格式编码的 PNG 图片。</p>
-<p><a href="https://www.selenium.dev/documentation/webdriver/browser/windows/#takeelementscreenshot" target="_blank" rel="noopener">TakeElementScreenshot(元素内屏幕截图)</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>Appium</p>
-<ul>
-<li><p>Appium 是什么?</p>
-<p>Appium 是一个开源的移动端自动化测试工具，用于自动化 iOS设备、 Android设备 和 Windows 桌面系统上的原生、移动 Web 和混合应用，通过 Node.js 编写，用于启动 Appium HTTP Server。</p>
-<ul>
-<li>[原生应用]指那些用 iOS、 Android 或者 Windows SDKs 编写的应用。</li>
-<li>[移动 Web 应用]是用移动端浏览器访问的应用(Appium 支持 iOS 上的 Safari、Chrome 和 Android 上的内置浏览器）。</li>
-<li>[混合应用]带有一个[ webview ]的包装器——用来和 Web 内容交互的原生控件。</li>
-</ul>
-</li>
-<li><p>安装</p>
-<p>可以通过 NPM 安装。</p>
-<pre><code>npm install -g appium
-</code></pre><p>也可以通过 <a href="https://github.com/appium/appium-desktop/releases" target="_blank" rel="noopener">Appium Desktop</a> 桌面应用程序安装。</p>
-<p>PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href="https://appium.io/docs/en/about-appium/appium-clients/index.html" target="_blank" rel="noopener"> Appium 服务器的客户端程序库</a>，它是基于 WebDriver 协议: JSON Wire protocol 扩展实现了 <a href="https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md" target="_blank" rel="noopener">Mobile JSON Wire Protocol</a> 协议，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。</p>
-<p>配置驱动，<a href="https://appium.io/docs/en/about-appium/getting-started/?lang=zh#driver-specific-setup" target="_blank" rel="noopener">Driver-Specific Setup</a>。</p>
-<p>PS: 驱动是包含在 Appium server 的工作范围内的。</p>
-</li>
-<li><p>Appium 的结构</p>
-<p>典型的 C/S 结构，Appium client 相当于是客户端，Appium server 是服务器端。</p>
-</li>
-<li><p>深析 Appium 的工作原理</p>
-<ol>
-<li>测试人员执行测试脚本(java,python等脚本)通过 Appium client 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。</li>
-<li><p>之后，Appium server 需要与移动端 App 依赖的自动化测试框架进行通信。</p>
-<p><img src="/images/automate_test.png" alt></p>
-<p>Appium server 会通过 TCP/IP 协议转发请求并转化成移动设备可以识别的命令（command）给不同设备的中间件，在转发请求的同时，会在 PC 端开启一个监听端口 4724，来接收设备返回的结果。</p>
-</li>
-<li><p>Appium server with Android</p>
-<p>以 UIAutomator 的自动化测试框架为例。</p>
-<p><img src="/images/appium_android.png" alt></p>
-<p>命令（command）由中间件 bootstrap.jar 通过监听设备的4724端口来获得，经过其解释，将它们转换为 Android 设备可理解的 UIAutomator 格式，Android 设备通过 UIAutomator 命令调用其提供的 API 去做一些实际的操作；接着，Android 设备通过 bootstrap.jar 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。</p>
-</li>
-<li><p>Appium server with IOS</p>
-<p>以 XCUITest 的自动化测试框架为例。</p>
-<p><img src="/images/appium_ios.png" alt></p>
-<p>命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过其解释，通过调用 IOS 设备的 XCUITest API 将它们转换为 IOS 设备可理解的格式，IOS 设备通过转换后的命令去做一些实际的操作；接着，IOS 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。</p>
-</li>
-</ol>
-</li>
-<li><p>DesiredCapabilities</p>
-<p>用于配置 Appium C/S 会话，告诉 Appium Server 您想要自动化的平台、应用程序等一系列信息。其是一组设置的键值对的集合，其中键对应设置的名称，而值对应设置的值。其通过 Mobile JSON Wire Protocol 协议以 JSON 格式发送测试设备信息给 Appium server。</p>
-</li>
-<li><p>自动化截图</p>
-<p>可以通过 Appium Commands API 用于截取当前视口/窗口/页面的图片，会返回以 Base64 格式编码的 PNG 图片。</p>
-<p><a href="https://appium.io/docs/en/commands/session/screenshot/#take-screenshot" target="_blank" rel="noopener">TakeScreenshot(屏幕截图)</a></p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>testing</category>
-      </categories>
-      <tags>
-        <tag>testing</tag>
-        <tag>browserstack</tag>
-        <tag>screenshots</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>日常开发难点</title>
-    <url>/2022/06/12/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E9%9A%BE%E7%82%B9/</url>
-    <content><![CDATA[<h1 id="列表项上下键选中使用-scrollIntoView-behavior-‘smooth’-抖动问题"><a href="#列表项上下键选中使用-scrollIntoView-behavior-‘smooth’-抖动问题" class="headerlink" title="列表项上下键选中使用 scrollIntoView behavior: ‘smooth’ 抖动问题"></a>列表项上下键选中使用 scrollIntoView behavior: ‘smooth’ 抖动问题</h1><blockquote>
-<p>原理分析</p>
-</blockquote>
-<p>  放弃计算DOM getBoundingClientRect的方式，也不使用原版每次选中都进行 scrollIntoView 自适应 ‘smooth’ 滚动，而是采用底层 API <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API" target="_blank" rel="noopener">Intersection Observer API</a> 来计算列表项(list-item)是否存在于可视的列表范围(list-container)之内，底层 API 性能、效率、效果都比前面两种方式高的多。</p>
-<p>  Intersection Observer 从用法上还是蛮简单的，那理解上来说呢，简单来讲：是一个观察者模式，目标元素与视口会产生一个是否可见交叉区，通过观察视口与目标元素的交叉关系，可以在 callback 回调中获取目标元素与视口的交叉关系信息，产生”交叉观察器”的效果。</p>
-<p>  <img src="https://image.white-than-wood.zone/difficult/intersection.gif" alt></p>
-<p>  特性: callback 一般只会触发两次，一次是目标元素开始可见，另一次是开始不可见。</p>
-<blockquote>
-<p>可行性分析</p>
-</blockquote>
-<p>  那在个人的项目例子中呢，所有的 list-item 都是目标元素，通过观察完全超出视口范围的第一个 list-item 开始可见的时间点来引起 scrollIntoView 平滑动画过渡的 ‘smooth’ 滚动，在滚动之后视口有新的一批 list-item 的情况下，重建 IntersectionObserver，重置 IntersectionObserver 实例，以此来循环。</p>
-<p>  可以这么想，”交叉观察器”观察的永远是新的一批 list-item 与视口的交叉关系，而老一批 list-item 在 scrollIntoView 滚动之后，因”交叉观察器”特性(只会触发两次)应当重建”交叉观察器”重新观察。</p>
-<p>  在这时候可能想问，有没有可能存在一种情况，scrollIntoView 平滑动画过渡的 ‘smooth’ 滚动的时间会慢于按键的速度，通过完全超出视口范围的第二个、第三个等 list-item 开始可见的时间点再次引起滚动，从而产生抖动的问题呢？答案是理论上存在这种可能性，而在实际操作上，极端操作极速按键按住不放的情况下存在，而在比较快按键的节奏下，是不存在这种可能性的。</p>
-<ul>
-<li>首先，在第一次滚动之后，第一时间就对 IntersectionObserver 实行重建，IntersectionObserver 实例实行重置，将源实例置为null并停止对所有目标元素可见性变化的观察，虽然观察者本身仍然处于活动状态，在 disconnect() 之后，目标元素仍然可以通过 observe() 传递给观察者，但没有目标，在实例置为null后，会很快被垃圾回收机制处理，所以这时候是不会存在的。</li>
-<li>其次，即使按键按住不放极速实行选中，也可以通过节流来解决，因为按键按住不放这种操作，本身就是一种非常规且触及极端边界的操作，不必实时且完全满足这种极端操作。</li>
-</ul>
-<p>PS: 这种重建 IntersectionObserver，重置 IntersectionObserver 实例的方式确实有一些不是很优雅，但官方并没有提供动态修改的方法，不可能把希望寄托在官方修改api上，了解ECMA的提案流程的同学肯定知道，那将是个十分漫长的过程，所以眼下就只能找到这种比较切实的办法来解决这个问题。</p>
-<p>Attention: 原生事件的监听会阻断 scrollIntoView ‘smooth’ 滚动动画的执行，产生滑动卡顿，所以必须取消默认事件的执行( e.preventDefault() )或者直接取消监听事件。</p>
-<blockquote>
-<p>实际演示</p>
-</blockquote>
-  <video muted controls="controls" autoplay="autoplay" loop="loop"><br>    <source src="https://image.white-than-wood.zone/difficult/point.mp4" type="video/mp4"><br>  </video>
-]]></content>
-      <categories>
-        <category>难点</category>
-      </categories>
-      <tags>
-        <tag>难点</tag>
-        <tag>日常开发</tag>
       </tags>
   </entry>
   <entry>
@@ -4613,88 +4452,129 @@ http {
       </tags>
   </entry>
   <entry>
-    <title>这样的我，终究也熟了</title>
-    <url>/2022/06/20/%E8%BF%99%E6%A0%B7%E7%9A%84%E6%88%91%E7%BB%88%E7%A9%B6%E4%B9%9F%E7%86%9F%E4%BA%86/</url>
-    <content><![CDATA[<h1 id="我"><a href="#我" class="headerlink" title="我"></a>我</h1><p>本人29岁，独生子，从小属于那种父母捧在手里怕掉了，含在嘴里怕化了的典型，简称小皇帝；自主动手思考能力差，计划能力差，唯一的特长就是没有特长(哦，不对，我小时候特能跑，小学初中校级赛跑都得过奖，按照这样来说，应该是头脑简单，四肢发达)，成绩从小学到高中基本上是中等，大学考的也是不上不下，要不是选了一个好专业，肯定就得啃老；工作以后，自以为可以开拓一片天地，还找了一位红颜，可惜自己不珍惜，能力也有限: 头脑僵化、不知变通、思维迟钝、逻辑混乱、投机取巧、笨嘴笨舌、百无聊赖、词不达意，到现在工作地位也是不上不下，红颜也因为自己的原因给弄丢了，但就是这样，我竟然还活到了29岁，感觉是平平无奇的29年。不过终于有一天，天灵盖开光，这样的我，终究也熟了🐶。</p>
-<p>在这’瓜’29年时间最终瓜熟蒂落之际，对自我成长、职业方面设定一个清晰的小目标，在一年时间内，使自身综合能力、技术水平、生活水准以及精神涵养方面有一些小进步，在这无人问津的博客上隆重做自己的成人礼!!!(是的，你没有看错，29岁做成人礼，走过路过不要错过🐶没见过活了29年还没活明白的男生吧🐶)</p>
-<h1 id="自我成长"><a href="#自我成长" class="headerlink" title="自我成长"></a>自我成长</h1><ol>
-<li><p>让自己变得有一些基本思想、有一些基本逻辑。</p>
+    <title>browserstack screenshots</title>
+    <url>/2022/06/07/browserstackscreenshots/</url>
+    <content><![CDATA[<h1 id="实现browserstack-screenshots"><a href="#实现browserstack-screenshots" class="headerlink" title="实现browserstack screenshots"></a>实现browserstack screenshots</h1><h2 id="browserstack-screenshots-api"><a href="#browserstack-screenshots-api" class="headerlink" title="browserstack screenshots api"></a>browserstack screenshots api</h2><p>   <a hef="https://www.browserstack.com/screenshots/api">Screenshots API</a>，通过调用 Screenshots API 的例子<a href="https://github.com/scottgonzalez/node-browserstack/blob/master/lib/screenshot.js" target="_blank" rel="noopener">node-browserstack screenshots</a>就可以得知，通过 http 请求 <a href="https://www.browserstack.com/screenshots" target="_blank" rel="noopener">https://www.browserstack.com/screenshots</a> 接口:</p>
 <ul>
-<li>方法及目标: 三个月内不断勤奋的学习、思考，能理解方法论，形成自己的基础思维观念。</li>
-<li>工具: 《如何变得有思想》 —— 阮一峰，《逻辑表达力》 —— 刘琳，《简单的逻辑学》 —— D.Q.麦克伦尼，《系统思考》 —— 丹尼斯.舍伍娜</li>
-<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+<li>url(需要测试截图的url);</li>
+<li>os(测试环境: 操作系统);</li>
+<li>os_version(测试环境: 操作系统版本);</li>
+<li>browser(测试环境: 浏览器类型);</li>
+<li>browser_version(测试环境: 浏览器版本);</li>
+<li>device(测试环境: 若需要移动设备,设备类型);</li>
+<li>orientation(测试环境: 设备的屏幕方向);</li>
+<li>mac_res(测试环境: mac浏览器屏幕分辨率);</li>
+<li>win_res(测试环境: windows浏览器屏幕分辨率);</li>
+<li>quality(测试环境: 截图是否压缩);</li>
+<li>local(测试环境: 是否建立本地测试连接);</li>
+<li>wait_time(测试环境: 截图前等待的时间);</li>
+<li>callback_url(测试环境: 回调网址);</li>
+</ul>
+<p>选择性带入上述参数就可生成截图列表极其状态，并回调到对应的url页面上。类似的，lambdaTest 上面也是有一套 Screenshots API 实现逻辑，<a href="https://www.lambdatest.com/support/api-doc/" target="_blank" rel="noopener">AUTOMATED SCREENSHOTS API</a>，其例子请求方式相同，都是通过 http 请求。</p>
+<h2 id="browserstack-Screenshots-API背后所实现的原理"><a href="#browserstack-Screenshots-API背后所实现的原理" class="headerlink" title="browserstack Screenshots API背后所实现的原理"></a>browserstack Screenshots API背后所实现的原理</h2><p>辗转反侧的通过 Google、询问平台技术支持人员，最后得到的结论是: Screenshots API背后使用了多个自动化测试脚本和不同的框架来捕获屏幕截图，其中包含了selenium webdriver，也就是说基本上为了捕获截图，browserstack 使用了 selenium webdriver 技术，但 selenium webdriver 只限于针对PC端/移动端的浏览器。</p>
+<h2 id="哪些方式可以实现跨终端自动化截图？"><a href="#哪些方式可以实现跨终端自动化截图？" class="headerlink" title="哪些方式可以实现跨终端自动化截图？"></a>哪些方式可以实现跨终端自动化截图？</h2><ul>
+<li><p>Selenium WebDriver</p>
+<ul>
+<li><p>Selenium 是什么?</p>
+<p>Selenium 是一套基于浏览器的自动化工具，它提供了一种跨平台、跨浏览器的端到端的 web 自动化解决方案。</p>
+<p>Selenium 主要包括三部分:</p>
+<ul>
+<li>Selenium IDE：它可以进行录制回放用户操作，并且可以把录制的操作以多种语言（如JAVA、Python、C#等）的形式导出成测试用例。</li>
+<li>Selenium WebDriver：提供 Web 自动化所需的 API，主要用作浏览器控制、页面元素选择和调试，通常也被成为WebDriver。不同的浏览器需要不同的 WebDriver，例如针对Chrome使用的chromedriver。</li>
+<li>Selenium Grid：提供了在不同机器的不同浏览器上运行 selenium 测试的能力，一个分布式运行用例时的工具。</li>
 </ul>
 </li>
+<li><p>Selenium WebDriver 的工作原理</p>
+<p>简单来说: 自动化 Selenium WebDriver API 测试脚本发送请求给浏览器的驱动，驱动将测试脚本解析后的结果发送给浏览器，浏览器执行驱动发来的指令，并最终完成想要的操作。</p>
+</li>
+<li><p>Selenium WebDriver 的结构</p>
+<p>典型的 C/S 结构，Selenium WebDriver API 相当于是客户端，而浏览器驱动才是服务器端。</p>
+</li>
+<li><p>浏览器的驱动兼容多个测试脚本的原因</p>
+<p>WebDriver基于的协议：JSON Wire protocol，这个协议规范在WebDriver中数据都是以JSON的形式存在并进行传送的，所以在 client 和 server 之间，只要是基于JSON Wire Protocol来传递数据，与具体的脚本语言无关。</p>
+</li>
+<li><p>WebDriver协议 - JSON Wire protocol</p>
+<p><a href="https://www.selenium.dev/documentation/legacy/json_wire_protocol/" target="_blank" rel="noopener">JSON Wire protocol 官方文档</a>，是<a href="https://w3c.github.io/webdriver/" target="_blank" rel="noopener">W3C WebDriver协议</a>的前身，是在http协议基础上，对http请求及响应的body部分的数据的进一步规范，必须以JSON的形式存在并进行传送，提供了操作浏览器<a href="https://w3c.github.io/webdriver/#endpoints" target="_blank" rel="noopener">命令的方法以及所对应的 URI 模板。<a></a></a></p>
+</li>
+<li><p>深析 Selenium WebDriver 的工作原理</p>
+<ol>
+<li>对于每一条转换为 JSON 之后的 Selenium WebDriver API 测试脚本,会通过 CommandExecutor 发送 http 请求给浏览器的驱动。</li>
+<li>浏览器驱动中包含了一个 WebDriver remote server，通过监听端口用来接收 http 请求。</li>
+<li>WebDriver remote server 接收到请求后根据请求来具体操控对应的浏览器。</li>
+<li>浏览器执行具体的测试脚本步骤。</li>
+<li>浏览器将执行结果返回给 WebDriver remote server。</li>
+<li>WebDriver remote server 又将结果返回给 Selenium WebDriver API client 端。</li>
 </ol>
-<ol start="2">
-<li><p>让自己变得有趣，提高自己的情商，让自己会说话并不再害怕说话，升级自己的表达能力。</p>
-<ul>
-<li>方法及目标: 半年内通过持续观察、学习、积累和实践，能形成自己的一套说话方式。</li>
-<li>工具: 《蔡康永的情商课》 —— 蔡康永，《所谓情商高就是会说话》 —— 佐佐木圭一，《说话的艺术》—— 罗莎莉.马吉欧，《特别会说话的人都这样说话》 —— 大野萌子</li>
-<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+<p><img src="/images/basic_comms.png" alt></p>
+</li>
+<li><p>自动化截图</p>
+<p>可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的屏幕截图，会返回以 Base64 格式编码的 PNG 图片。</p>
+<p><a href="https://www.selenium.dev/documentation/webdriver/browser/windows/#takescreenshot" target="_blank" rel="noopener">TakeScreenshot(屏幕截图)</a></p>
+<p>也可以通过 Selenium WebDriver API 用于捕获当前浏览上下文的元素内的屏幕截图，会返回以 Base64 格式编码的 PNG 图片。</p>
+<p><a href="https://www.selenium.dev/documentation/webdriver/browser/windows/#takeelementscreenshot" target="_blank" rel="noopener">TakeElementScreenshot(元素内屏幕截图)</a></p>
+</li>
 </ul>
 </li>
-</ol>
-<p>半年内的终极目标: 思想逻辑、情商以及表达能力能与阿里蚂蚁金服P6+工程师 *悦 并驾齐驱。</p>
-<h1 id="职业规划"><a href="#职业规划" class="headerlink" title="职业规划"></a>职业规划</h1><ol>
-<li><p>webpack构建打包方面的专家。</p>
+</ul>
 <ul>
-<li>目标: 一个月内在webpack打包方面可以做到问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
-<li>工具: 《深入浅出Webpack》—— 吴浩麟，《Webpack实战》—— 居玉浩，《玩转 webpack》(视频) —— 程柳锋，GitHub -&gt; Webpack，Webpack官网</li>
-<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+<li><p>Appium</p>
+<ul>
+<li><p>Appium 是什么?</p>
+<p>Appium 是一个开源的移动端自动化测试工具，用于自动化 iOS设备、 Android设备 和 Windows 桌面系统上的原生、移动 Web 和混合应用，通过 Node.js 编写，用于启动 Appium HTTP Server。</p>
+<ul>
+<li>[原生应用]指那些用 iOS、 Android 或者 Windows SDKs 编写的应用。</li>
+<li>[移动 Web 应用]是用移动端浏览器访问的应用(Appium 支持 iOS 上的 Safari、Chrome 和 Android 上的内置浏览器）。</li>
+<li>[混合应用]带有一个[ webview ]的包装器——用来和 Web 内容交互的原生控件。</li>
 </ul>
 </li>
-</ol>
-<ol start="2">
-<li><p>能够精通、理解以及使用NodeJS。</p>
-<ul>
-<li>目标: 半年内在NodeJS方面做到精通，理解其设计模式，明确其C++扩展，实践其常用框架工具，尽量做到在一年内成为问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
-<li>工具: 《node.js 入门指南》—— 司明岳，《了不起的Node.js》—— Rauch，《深入浅出Node.js》—— 朴灵，《Koa与Node.js实战》—— iKcamp，《Node.js实战》—— 图灵团队，《Node与Express开发》—— Ethan.Brown，《Node.js设计模式》—— 卢西安诺.马米诺 马里奥.卡西罗，《Node.js来一打C++扩展》—— 死月，《Node.js开发实战》(视频) —— 杨浩，NodeJS官网，GitHub -&gt; NodeJS 扩展</li>
-<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
-</ul>
+<li><p>安装</p>
+<p>可以通过 NPM 安装。</p>
+<pre><code>npm install -g appium
+</code></pre><p>也可以通过 <a href="https://github.com/appium/appium-desktop/releases" target="_blank" rel="noopener">Appium Desktop</a> 桌面应用程序安装。</p>
+<p>PS: 安装的 Appium 实际上只是用于启动 Appium HTTP Server 的。要想建立连接，还需要<a href="https://appium.io/docs/en/about-appium/appium-clients/index.html" target="_blank" rel="noopener"> Appium 服务器的客户端程序库</a>，它是基于 WebDriver 协议: JSON Wire protocol 扩展实现了 <a href="https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md" target="_blank" rel="noopener">Mobile JSON Wire Protocol</a> 协议，它负责与Appium服务器建立连接，并将测试脚本的指令发送到Appium HTTP Server。</p>
+<p>配置驱动，<a href="https://appium.io/docs/en/about-appium/getting-started/?lang=zh#driver-specific-setup" target="_blank" rel="noopener">Driver-Specific Setup</a>。</p>
+<p>PS: 驱动是包含在 Appium server 的工作范围内的。</p>
+</li>
+<li><p>Appium 的结构</p>
+<p>典型的 C/S 结构，Appium client 相当于是客户端，Appium server 是服务器端。</p>
+</li>
+<li><p>深析 Appium 的工作原理</p>
+<ol>
+<li>测试人员执行测试脚本(java,python等脚本)通过 Appium client 转换为 JSON 数据，通过CommandExecutor 发送 http 请求传递给 Appium server，Appium server默认监听4723端口，这和 Selenium WebDriver 工作原理的前两步是一致的。</li>
+<li><p>之后，Appium server 需要与移动端 App 依赖的自动化测试框架进行通信。</p>
+<p><img src="/images/automate_test.png" alt></p>
+<p>Appium server 会通过 TCP/IP 协议转发请求并转化成移动设备可以识别的命令（command）给不同设备的中间件，在转发请求的同时，会在 PC 端开启一个监听端口 4724，来接收设备返回的结果。</p>
+</li>
+<li><p>Appium server with Android</p>
+<p>以 UIAutomator 的自动化测试框架为例。</p>
+<p><img src="/images/appium_android.png" alt></p>
+<p>命令（command）由中间件 bootstrap.jar 通过监听设备的4724端口来获得，经过其解释，将它们转换为 Android 设备可理解的 UIAutomator 格式，Android 设备通过 UIAutomator 命令调用其提供的 API 去做一些实际的操作；接着，Android 设备通过 bootstrap.jar 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。</p>
+</li>
+<li><p>Appium server with IOS</p>
+<p>以 XCUITest 的自动化测试框架为例。</p>
+<p><img src="/images/appium_ios.png" alt></p>
+<p>命令（command）由中间件 WebDriverAgent.app 通过监听设备的4724端口来获得，经过其解释，通过调用 IOS 设备的 XCUITest API 将它们转换为 IOS 设备可理解的格式，IOS 设备通过转换后的命令去做一些实际的操作；接着，IOS 设备通过 WebDriverAgent.app 将执行命令的结果返回到 Appium server；最后，Appium server 将此结果响应给 Appium client。</p>
 </li>
 </ol>
-<ol start="3">
-<li><p>Typescript方面的专家。</p>
-<ul>
-<li>目标: 三个月内在Typescript方面可以做到问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
-<li>工具: 《深入理解 TypeScript》 —— Basarat.Ali.Syed，《TypeScript 编程》—— Boris.Cherny，《TypeScript开发实战》(视频) —— 梁宵，Typescript官网，GitHub -&gt; TypeScript</li>
-<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+</li>
+<li><p>DesiredCapabilities</p>
+<p>用于配置 Appium C/S 会话，告诉 Appium Server 您想要自动化的平台、应用程序等一系列信息。其是一组设置的键值对的集合，其中键对应设置的名称，而值对应设置的值。其通过 Mobile JSON Wire Protocol 协议以 JSON 格式发送测试设备信息给 Appium server。</p>
+</li>
+<li><p>自动化截图</p>
+<p>可以通过 Appium Commands API 用于截取当前视口/窗口/页面的图片，会返回以 Base64 格式编码的 PNG 图片。</p>
+<p><a href="https://appium.io/docs/en/commands/session/screenshot/#take-screenshot" target="_blank" rel="noopener">TakeScreenshot(屏幕截图)</a></p>
+</li>
 </ul>
 </li>
-</ol>
-<ol start="4">
-<li><p>能够精通、理解以及使用Electron。</p>
-<ul>
-<li>目标: 半年内在Electron方面做到精通，明确其内部原理和工程，并做到开发实践，尽量做到在一年内成为问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
-<li>工具: 《深入浅出Electron》 —— 刘晓伦，《Electron实战》—— 刘晓伦，《Electron开发实战》(视频) —— 邓耀龙，Electron官网，GitHub -&gt; Electron</li>
-<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
 </ul>
-</li>
-</ol>
-<ol start="5">
-<li><p>React方面的专家。</p>
-<ul>
-<li>目标: 三个月内在React方面可以做到问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
-<li>工具: 《深入React技术栈》 —— 陈屹，《React - 引领未来的用户界面开发框架》—— League of Extraordinary Developers，《深入理解React Router》 —— 李杨韬，《React实战进阶45讲》(视频) —— 王沛，《React Hooks 核心原理与实战》(语音) —— 王沛，React官网，GitHub -&gt; React</li>
-<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
-</ul>
-</li>
-</ol>
-<ol start="6">
-<li><p>JS、ES6等基础方面做到权威专家。</p>
-<ul>
-<li>一年之内，不断的扩充自己的知识面，在基础背景方面深度挖掘，查漏补缺，尽量做到在前端基础理论和实践方面百科全书 —— 江湖百晓生。</li>
-</ul>
-</li>
-</ol>
-<p>一年内的终极目标: 阿里蚂蚁金服P7级别的专家，技术、眼界和能力上都远超过阿里蚂蚁金服P6+工程师 *悦，普通互联网企业技术/业务部门的架构师。</p>
 ]]></content>
       <categories>
-        <category>成长</category>
+        <category>testing</category>
       </categories>
       <tags>
-        <tag>成长</tag>
+        <tag>testing</tag>
+        <tag>browserstack</tag>
+        <tag>screenshots</tag>
       </tags>
   </entry>
   <entry>
@@ -4868,6 +4748,126 @@ http-server -p 8000
       </tags>
   </entry>
   <entry>
+    <title>日常开发难点</title>
+    <url>/2022/06/12/%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E9%9A%BE%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="列表项上下键选中使用-scrollIntoView-behavior-‘smooth’-抖动问题"><a href="#列表项上下键选中使用-scrollIntoView-behavior-‘smooth’-抖动问题" class="headerlink" title="列表项上下键选中使用 scrollIntoView behavior: ‘smooth’ 抖动问题"></a>列表项上下键选中使用 scrollIntoView behavior: ‘smooth’ 抖动问题</h1><blockquote>
+<p>原理分析</p>
+</blockquote>
+<p>  放弃计算DOM getBoundingClientRect的方式，也不使用原版每次选中都进行 scrollIntoView 自适应 ‘smooth’ 滚动，而是采用底层 API <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API" target="_blank" rel="noopener">Intersection Observer API</a> 来计算列表项(list-item)是否存在于可视的列表范围(list-container)之内，底层 API 性能、效率、效果都比前面两种方式高的多。</p>
+<p>  Intersection Observer 从用法上还是蛮简单的，那理解上来说呢，简单来讲：是一个观察者模式，目标元素与视口会产生一个是否可见交叉区，通过观察视口与目标元素的交叉关系，可以在 callback 回调中获取目标元素与视口的交叉关系信息，产生”交叉观察器”的效果。</p>
+<p>  <img src="https://image.white-than-wood.zone/difficult/intersection.gif" alt></p>
+<p>  特性: callback 一般只会触发两次，一次是目标元素开始可见，另一次是开始不可见。</p>
+<blockquote>
+<p>可行性分析</p>
+</blockquote>
+<p>  那在个人的项目例子中呢，所有的 list-item 都是目标元素，通过观察完全超出视口范围的第一个 list-item 开始可见的时间点来引起 scrollIntoView 平滑动画过渡的 ‘smooth’ 滚动，在滚动之后视口有新的一批 list-item 的情况下，重建 IntersectionObserver，重置 IntersectionObserver 实例，以此来循环。</p>
+<p>  可以这么想，”交叉观察器”观察的永远是新的一批 list-item 与视口的交叉关系，而老一批 list-item 在 scrollIntoView 滚动之后，因”交叉观察器”特性(只会触发两次)应当重建”交叉观察器”重新观察。</p>
+<p>  在这时候可能想问，有没有可能存在一种情况，scrollIntoView 平滑动画过渡的 ‘smooth’ 滚动的时间会慢于按键的速度，通过完全超出视口范围的第二个、第三个等 list-item 开始可见的时间点再次引起滚动，从而产生抖动的问题呢？答案是理论上存在这种可能性，而在实际操作上，极端操作极速按键按住不放的情况下存在，而在比较快按键的节奏下，是不存在这种可能性的。</p>
+<ul>
+<li>首先，在第一次滚动之后，第一时间就对 IntersectionObserver 实行重建，IntersectionObserver 实例实行重置，将源实例置为null并停止对所有目标元素可见性变化的观察，虽然观察者本身仍然处于活动状态，在 disconnect() 之后，目标元素仍然可以通过 observe() 传递给观察者，但没有目标，在实例置为null后，会很快被垃圾回收机制处理，所以这时候是不会存在的。</li>
+<li>其次，即使按键按住不放极速实行选中，也可以通过节流来解决，因为按键按住不放这种操作，本身就是一种非常规且触及极端边界的操作，不必实时且完全满足这种极端操作。</li>
+</ul>
+<p>PS: 这种重建 IntersectionObserver，重置 IntersectionObserver 实例的方式确实有一些不是很优雅，但官方并没有提供动态修改的方法，不可能把希望寄托在官方修改api上，了解ECMA的提案流程的同学肯定知道，那将是个十分漫长的过程，所以眼下就只能找到这种比较切实的办法来解决这个问题。</p>
+<p>Attention: 原生事件的监听会阻断 scrollIntoView ‘smooth’ 滚动动画的执行，产生滑动卡顿，所以必须取消默认事件的执行( e.preventDefault() )或者直接取消监听事件。</p>
+<blockquote>
+<p>实际演示</p>
+</blockquote>
+  <video muted controls="controls" autoplay="autoplay" loop="loop"><br>    <source src="https://image.white-than-wood.zone/difficult/point.mp4" type="video/mp4"><br>  </video>
+]]></content>
+      <categories>
+        <category>难点</category>
+      </categories>
+      <tags>
+        <tag>难点</tag>
+        <tag>日常开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>这样的我，终究也熟了</title>
+    <url>/2022/06/20/%E8%BF%99%E6%A0%B7%E7%9A%84%E6%88%91%E7%BB%88%E7%A9%B6%E4%B9%9F%E7%86%9F%E4%BA%86/</url>
+    <content><![CDATA[<h1 id="我"><a href="#我" class="headerlink" title="我"></a>我</h1><p>本人29岁，独生子，从小属于那种父母捧在手里怕掉了，含在嘴里怕化了的典型，简称小皇帝；自主动手思考能力差，计划能力差，唯一的特长就是没有特长(哦，不对，我小时候特能跑，小学初中校级赛跑都得过奖，按照这样来说，应该是头脑简单，四肢发达)，成绩从小学到高中基本上是中等，大学考的也是不上不下，要不是选了一个好专业，肯定就得啃老；工作以后，自以为可以开拓一片天地，还找了一位红颜，可惜自己不珍惜，能力也有限: 头脑僵化、不知变通、思维迟钝、逻辑混乱、投机取巧、笨嘴笨舌、百无聊赖、词不达意，到现在工作地位也是不上不下，红颜也因为自己的原因给弄丢了，但就是这样，我竟然还活到了29岁，感觉是平平无奇的29年。不过终于有一天，天灵盖开光，这样的我，终究也熟了🐶。</p>
+<p>在这’瓜’29年时间最终瓜熟蒂落之际，对自我成长、职业方面设定一个清晰的小目标，在一年时间内，使自身综合能力、技术水平、生活水准以及精神涵养方面有一些小进步，在这无人问津的博客上隆重做自己的成人礼!!!(是的，你没有看错，29岁做成人礼，走过路过不要错过🐶没见过活了29年还没活明白的男生吧🐶)</p>
+<h1 id="自我成长"><a href="#自我成长" class="headerlink" title="自我成长"></a>自我成长</h1><ol>
+<li><p>让自己变得有一些基本思想、有一些基本逻辑。</p>
+<ul>
+<li>方法及目标: 三个月内不断勤奋的学习、思考，能理解方法论，形成自己的基础思维观念。</li>
+<li>工具: 《如何变得有思想》 —— 阮一峰，《逻辑表达力》 —— 刘琳，《简单的逻辑学》 —— D.Q.麦克伦尼，《系统思考》 —— 丹尼斯.舍伍娜</li>
+<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>让自己变得有趣，提高自己的情商，让自己会说话并不再害怕说话，升级自己的表达能力。</p>
+<ul>
+<li>方法及目标: 半年内通过持续观察、学习、积累和实践，能形成自己的一套说话方式。</li>
+<li>工具: 《蔡康永的情商课》 —— 蔡康永，《所谓情商高就是会说话》 —— 佐佐木圭一，《说话的艺术》—— 罗莎莉.马吉欧，《特别会说话的人都这样说话》 —— 大野萌子</li>
+<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+</ul>
+</li>
+</ol>
+<p>半年内的终极目标: 思想逻辑、情商以及表达能力能与阿里蚂蚁金服P6+工程师 *悦 并驾齐驱。</p>
+<h1 id="职业规划"><a href="#职业规划" class="headerlink" title="职业规划"></a>职业规划</h1><ol>
+<li><p>webpack构建打包方面的专家。</p>
+<ul>
+<li>目标: 一个月内在webpack打包方面可以做到问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
+<li>工具: 《深入浅出Webpack》—— 吴浩麟，《Webpack实战》—— 居玉浩，《玩转 webpack》(视频) —— 程柳锋，GitHub -&gt; Webpack，Webpack官网</li>
+<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>能够精通、理解以及使用NodeJS。</p>
+<ul>
+<li>目标: 半年内在NodeJS方面做到精通，理解其设计模式，明确其C++扩展，实践其常用框架工具，尽量做到在一年内成为问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
+<li>工具: 《node.js 入门指南》—— 司明岳，《了不起的Node.js》—— Rauch，《深入浅出Node.js》—— 朴灵，《Koa与Node.js实战》—— iKcamp，《Node.js实战》—— 图灵团队，《Node与Express开发》—— Ethan.Brown，《Node.js设计模式》—— 卢西安诺.马米诺 马里奥.卡西罗，《Node.js来一打C++扩展》—— 死月，《Node.js开发实战》(视频) —— 杨浩，NodeJS官网，GitHub -&gt; NodeJS 扩展</li>
+<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>Typescript方面的专家。</p>
+<ul>
+<li>目标: 三个月内在Typescript方面可以做到问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
+<li>工具: 《深入理解 TypeScript》 —— Basarat.Ali.Syed，《TypeScript 编程》—— Boris.Cherny，《TypeScript开发实战》(视频) —— 梁宵，Typescript官网，GitHub -&gt; TypeScript</li>
+<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li><p>能够精通、理解以及使用Electron。</p>
+<ul>
+<li>目标: 半年内在Electron方面做到精通，明确其内部原理和工程，并做到开发实践，尽量做到在一年内成为问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
+<li>工具: 《深入浅出Electron》 —— 刘晓伦，《Electron实战》—— 刘晓伦，《Electron开发实战》(视频) —— 邓耀龙，Electron官网，GitHub -&gt; Electron</li>
+<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+</ul>
+</li>
+</ol>
+<ol start="5">
+<li><p>React方面的专家。</p>
+<ul>
+<li>目标: 三个月内在React方面可以做到问题终结者，独挡一面，并能延伸和指导前端团队人员。</li>
+<li>工具: 《深入React技术栈》 —— 陈屹，《React - 引领未来的用户界面开发框架》—— League of Extraordinary Developers，《深入理解React Router》 —— 李杨韬，《React实战进阶45讲》(视频) —— 王沛，《React Hooks 核心原理与实战》(语音) —— 王沛，React官网，GitHub -&gt; React</li>
+<li>PS: 如果还有其他时间则阅读其他有关书籍。</li>
+</ul>
+</li>
+</ol>
+<ol start="6">
+<li><p>JS、ES6等基础方面做到权威专家。</p>
+<ul>
+<li>一年之内，不断的扩充自己的知识面，在基础背景方面深度挖掘，查漏补缺，尽量做到在前端基础理论和实践方面百科全书 —— 江湖百晓生。</li>
+</ul>
+</li>
+</ol>
+<p>一年内的终极目标: 阿里蚂蚁金服P7级别的专家，技术、眼界和能力上都远超过阿里蚂蚁金服P6+工程师 *悦，普通互联网企业技术/业务部门的架构师。</p>
+]]></content>
+      <categories>
+        <category>成长</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ios 16 体验分享</title>
     <url>/2022/07/17/ios16beta%E4%BD%93%E9%AA%8C/</url>
     <content><![CDATA[<h1 id="ios-16-beta-3"><a href="#ios-16-beta-3" class="headerlink" title="ios 16 beta 3"></a>ios 16 beta 3</h1><p>现阶段 ios 16 内测版本已经出了 3 个版本,而今天要体验的 ios 16 就是最新的版本 —— ios 16 beta 3,在此可以直接通过 xcode beta ios 模拟器的方式直接体验.</p>
@@ -5006,7 +5006,7 @@ http-server -p 8000
 <p>对于那些势必保持相同外观与追求’UI像素完美’的开发者来说,苹果的开发者论坛给出了一些可实行的方案,可以尝试一下.</p>
 <p><img src="https://image.white-than-wood.zone/ios16/textview/resolve.png" style="width:100%;"></p>
 </li>
-<li><p>OpenGL 崩溃</p>
+<li><p>调用 OpenGL API 崩溃</p>
 <p>根据苹果开发者论坛 <a href="https://developer.apple.com/forums/thread/707644" target="_blank" rel="noopener">OpenGL crashes (iOS 16)</a>,当在 ios 16 beta simulator 模拟器中调用 presentRenderBuffer 时,OpenGL 崩溃,在 iOS 15 或更低版本运行正常.</p>
 <ul>
 <li><p>解决方案:</p>
